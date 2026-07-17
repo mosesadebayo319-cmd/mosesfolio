@@ -1,53 +1,29 @@
-import createNextIntlPlugin from 'next-intl/plugin'
-
-// for internationalization we need to wrap our next config with it at the bottom
-const withNextIntl = createNextIntlPlugin()
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack(config) {
-    // Grab the existing rule that handles SVG imports
-    const fileLoaderRule = config.module.rules.find((rule) =>
-      rule.test?.test?.('.svg')
-    )
-
-    config.module.rules.push(
-      // Reapply the existing rule, but only for svg imports ending in ?url
+  images: {
+    remotePatterns: [
       {
-        ...fileLoaderRule,
-        test: /\.svg$/i,
-        resourceQuery: /url/, // *.svg?url
+        protocol: 'https',
+        hostname: 'mecuryx.com',
       },
-      // Convert all other *.svg imports to React components
       {
-        test: /\.svg$/i,
-        issuer: fileLoaderRule.issuer,
-        resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
-        use: {
-          loader: '@svgr/webpack',
-          options: {
-            svgoConfig: {
-              plugins: [
-                {
-                  name: 'preset-default',
-                  params: {
-                    overrides: {
-                      removeViewBox: false,
-                    },
-                  },
-                },
-              ],
-            },
-          },
-        },
-      }
-    )
-
-    // Modify the file loader rule to ignore *.svg, since we have it handled now.
-    fileLoaderRule.exclude = /\.svg$/i
-
-    return config
+        protocol: 'https',
+        hostname: 'sgsministry.org',
+      },
+      {
+        protocol: 'https',
+        hostname: 'media.licdn.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'd2xsxph8kpxj0f.cloudfront.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'pub-1407f82391df4ab1951418d04be76914.r2.dev',
+      },
+    ],
   },
 }
 
-export default withNextIntl(nextConfig)
+export default nextConfig

@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0f172a;
+  --foreground: #f8f9fa;
+  --card: #1e293b;
+  --card-foreground: #f8f9fa;
+  --muted: #475569;
+  --muted-foreground: #cbd5e1;
+  --accent: #14b8a6;
+  --accent-foreground: #0f172a;
+  --border: #334155;
+  --radius: 0.65rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.accent-line {
+  height: 4px;
+  width: 4rem;
+  border-radius: 9999px;
+  background: linear-gradient(to right, var(--accent), var(--accent));
+}
+
+.section-heading {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--foreground);
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-heading {
+    font-size: 3rem;
+  }
+}
+
+.section-subtitle {
+  font-size: 1.125rem;
+  color: var(--muted-foreground);
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+  font-weight: 600;
+  padding: 1rem 2rem;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--foreground);
+  font-weight: 600;
+  padding: 1rem 2rem;
+  transition: all 0.3s ease;
+}
+
+.secondary-button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(20, 184, 166, 0.12);
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+.font-heading {
+  font-family: var(--font-heading), system-ui, sans-serif;
+}
+
+.bg-background {
+  background-color: var(--background);
+}
+.bg-card {
+  background-color: var(--card);
+}
+.text-foreground {
+  color: var(--foreground);
+}
+.text-muted-foreground {
+  color: var(--muted-foreground);
+}
+.text-accent {
+  color: var(--accent);
+}
+.border-border {
+  border-color: var(--border);
+}
+.border-accent {
+  border-color: var(--accent);
+}
+.hover\:border-accent:hover {
+  border-color: var(--accent);
+}
+.hover\:text-accent:hover {
+  color: var(--accent);
+}
+.fill-accent {
+  fill: var(--accent);
+}
