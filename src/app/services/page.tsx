@@ -2,9 +2,9 @@ import Link from 'next/link'
 import {
   processSteps,
   servicePackages,
-  services,
   whatsappHireUrl,
 } from '@/src/data/content'
+import { getPublicServices } from '@/src/lib/content-loader'
 
 export const metadata = {
   title: 'Services',
@@ -12,7 +12,11 @@ export const metadata = {
     'Growth marketing, web presence, SEO, social, ads, and consulting for Nigerian brands and founders.',
 }
 
-export default function ServicesPage() {
+export const dynamic = 'force-dynamic'
+
+export default async function ServicesPage() {
+  const services = await getPublicServices()
+
   return (
     <div className="min-h-screen">
       <section className="py-20 md:py-28 bg-card">
@@ -28,7 +32,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Packages */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container">
           <div className="text-center mb-12">
@@ -69,14 +72,7 @@ export default function ServicesPage() {
                   {pkg.pricing}
                 </p>
                 <a
-                  href={`${whatsappHireUrl.replace(
-                    encodeURIComponent(
-                      "Hi Moses, I'd like to discuss a digital marketing / web project."
-                    ),
-                    encodeURIComponent(
-                      `Hi Moses, I'm interested in the ${pkg.title} package.`
-                    )
-                  )}`}
+                  href={whatsappHireUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="secondary-button text-sm !py-2.5 w-full"
@@ -89,7 +85,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Detailed services */}
       <section className="py-16 md:py-24 bg-card">
         <div className="container">
           <div className="text-center mb-12">
@@ -116,38 +111,44 @@ export default function ServicesPage() {
                 <p className="text-muted-foreground mb-5 text-sm leading-relaxed">
                   {service.description}
                 </p>
-                <p className="text-xs text-muted-foreground mb-4">
-                  <strong className="text-foreground">Best for:</strong>{' '}
-                  {service.bestFor}
-                </p>
-                <div className="mb-5">
-                  <h4 className="font-semibold text-sm mb-2">Key benefits</h4>
-                  <ul className="space-y-1.5">
-                    {service.benefits.map((b) => (
-                      <li
-                        key={b}
-                        className="flex gap-2 text-muted-foreground text-sm"
-                      >
-                        <span className="text-accent">✓</span>
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="mb-5 pb-5 border-b border-border">
-                  <h4 className="font-semibold text-sm mb-2">Deliverables</h4>
-                  <ul className="space-y-1.5">
-                    {service.deliverables.map((d) => (
-                      <li
-                        key={d}
-                        className="flex gap-2 text-muted-foreground text-sm"
-                      >
-                        <span className="text-accent">•</span>
-                        {d}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {service.bestFor && (
+                  <p className="text-xs text-muted-foreground mb-4">
+                    <strong className="text-foreground">Best for:</strong>{' '}
+                    {service.bestFor}
+                  </p>
+                )}
+                {!!service.benefits.length && (
+                  <div className="mb-5">
+                    <h4 className="font-semibold text-sm mb-2">Key benefits</h4>
+                    <ul className="space-y-1.5">
+                      {service.benefits.map((b) => (
+                        <li
+                          key={b}
+                          className="flex gap-2 text-muted-foreground text-sm"
+                        >
+                          <span className="text-accent">✓</span>
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {!!service.deliverables.length && (
+                  <div className="mb-5 pb-5 border-b border-border">
+                    <h4 className="font-semibold text-sm mb-2">Deliverables</h4>
+                    <ul className="space-y-1.5">
+                      {service.deliverables.map((d) => (
+                        <li
+                          key={d}
+                          className="flex gap-2 text-muted-foreground text-sm"
+                        >
+                          <span className="text-accent">•</span>
+                          {d}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
                 <p className="text-accent font-semibold text-sm mb-4">
                   {service.pricing}
                 </p>

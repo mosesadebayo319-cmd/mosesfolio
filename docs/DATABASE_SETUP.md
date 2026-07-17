@@ -27,11 +27,21 @@ Apply to **Production** (and Preview if you want).
 Deployments → **Redeploy** the latest production deployment  
 (or push a small commit so Vercel rebuilds).
 
-## 4. View messages
+## 4. Admin dashboard
 
 1. Open: `https://mosesfolio.online/admin`
-2. Enter your `ADMIN_SECRET`
-3. Click **Load messages**
+2. Enter your `ADMIN_SECRET` and sign in
+3. Use tabs:
+   - **Projects** — add case studies (title, story, metrics, image upload)
+   - **Services** — add/edit services shown on `/services`
+   - **Messages** — contact form submissions
+
+### Notes on projects & services
+
+- Until you add items in Admin, the public site shows the **default built-in** content.
+- After you save at least one **published** project or service in the database, those replace the defaults for that section.
+- Project images: upload a file (under ~1.4MB) or paste an image URL.
+- Mark **Featured** to show a project on the homepage “Selected work” section.
 
 ## 5. How data flows
 

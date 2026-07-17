@@ -45,7 +45,10 @@ ADMIN_SECRET=your-secret        # password for /admin
    Free setup guide: [docs/DATABASE_SETUP.md](./docs/DATABASE_SETUP.md) (Neon + Vercel).
 2. **Email** — a copy is still sent to `mosesadebayo319@gmail.com` via FormSubmit.  
    Confirm FormSubmit once via the activation email if needed.
-3. **View messages** — open `/admin` and enter `ADMIN_SECRET`.
+3. **Admin dashboard** — open `/admin` and enter `ADMIN_SECRET`:
+   - **Projects** — upload case studies + images  
+   - **Services** — add/edit services  
+   - **Messages** — contact form inbox
 
 ## Deploy (Vercel)
 

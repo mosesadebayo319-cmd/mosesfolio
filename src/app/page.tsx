@@ -3,7 +3,6 @@ import Image from 'next/image'
 import {
   clients,
   coreExpertise,
-  featuredProjects,
   homeTestimonials,
   processSteps,
   site,
@@ -12,8 +11,13 @@ import {
 } from '@/src/data/content'
 import { ServiceIcon } from '@/src/components/Icons'
 import ScrollReveal from '@/src/components/ScrollReveal'
+import { getFeaturedProjects } from '@/src/lib/content-loader'
 
-export default function HomePage() {
+export const dynamic = 'force-dynamic'
+
+export default async function HomePage() {
+  const featuredProjects = await getFeaturedProjects()
+
   return (
     <div className="min-h-screen">
       {/* Hero */}
@@ -174,14 +178,24 @@ export default function HomePage() {
             {featuredProjects.map((project, i) => (
               <ScrollReveal key={project.title} delay={i * 80}>
                 <article className="group overflow-hidden rounded-xl border border-border hover:border-accent card-hover bg-card h-full flex flex-col">
-                  <div className="relative h-52 overflow-hidden">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      sizes="(max-width:768px) 100vw, 33vw"
-                    />
+                  <div className="relative h-52 overflow-hidden bg-card">
+                    {project.image.startsWith('data:') ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : (
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        sizes="(max-width:768px) 100vw, 33vw"
+                        unoptimized={project.image.startsWith('http')}
+                      />
+                    )}
                   </div>
                   <div className="p-6 flex flex-col flex-1">
                     <p className="text-accent text-sm font-semibold mb-2">
