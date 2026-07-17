@@ -118,7 +118,11 @@
       "email": "Email",
       "message": "Nachricht",
       "send": "Senden",
-      "sending": "Sendet..."
+      "sending": "Sendet...",
+      "emailError": "Bitte gib eine gültige E-Mail-Adresse ein.",
+      "messageError": "Die Nachricht muss mindestens 20 Zeichen lang sein.",
+      "successMessage": "Deine Nachricht wurde erfolgreich gesendet!",
+      "errorMessage": "Nachricht konnte nicht gesendet werden. Bitte versuche es erneut."
     }
   },
   "Footer": {

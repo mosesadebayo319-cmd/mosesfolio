@@ -3,16 +3,19 @@ import React, { useState } from 'react'
 import { send } from '@emailjs/browser'
 import { useTranslations } from 'next-intl'
 
+const MIN_MESSAGE_LENGTH = 20
+
 const ContactForm: React.FC = () => {
   const t = useTranslations('Contact.contactForm')
-  //  form data which handleChange sets on change (change event) for all form inputs
+  // form data which handleChange sets on change (change event) for all form inputs
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   })
-  const [isSubmitting, setIsSubmitting] = useState(false) // State to track sumitting to avoid double sumbissions
-  const [successMessage, setSuccessMessage] = useState('') //
+  const [isSubmitting, setIsSubmitting] = useState(false) // State to track submitting to avoid double submissions
+  const [statusMessage, setStatusMessage] = useState('')
+  const [statusType, setStatusType] = useState<'success' | 'error' | null>(null)
   const [emailError, setEmailError] = useState('') // State to track email validation error
   const [messageError, setMessageError] = useState('') // State to track message validation error
 
@@ -24,7 +27,7 @@ const ContactForm: React.FC = () => {
 
   // Message validation function
   const isValidMessage = (message: string): boolean => {
-    return message.trim().length >= 20 // Minimum 20 characters
+    return message.trim().length >= MIN_MESSAGE_LENGTH
   }
 
   const handleChange = (
@@ -35,7 +38,7 @@ const ContactForm: React.FC = () => {
     if (e.target.name === 'email') {
       // Validate email as user types
       if (!isValidEmail(e.target.value)) {
-        setEmailError('Please enter a valid email address.')
+        setEmailError(t('emailError'))
       } else {
         setEmailError('')
       }
@@ -44,7 +47,7 @@ const ContactForm: React.FC = () => {
     if (e.target.name === 'message') {
       // Validate message as user types
       if (!isValidMessage(e.target.value)) {
-        setMessageError('Message must be at least 14 characters long.')
+        setMessageError(t('messageError'))
       } else {
         setMessageError('')
       }
@@ -54,17 +57,18 @@ const ContactForm: React.FC = () => {
   // final form data api request to emailjs
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSuccessMessage('')
+    setStatusMessage('')
+    setStatusType(null)
     setEmailError('') // Clear email error before submitting
     setMessageError('') // Clear message error before submitting
 
     if (!isValidEmail(formData.email)) {
-      setEmailError('Please enter a valid email address.')
+      setEmailError(t('emailError'))
       return
     }
 
     if (!isValidMessage(formData.message)) {
-      setMessageError('Message must be at least 14 characters long.')
+      setMessageError(t('messageError'))
       return
     }
 
@@ -77,11 +81,13 @@ const ContactForm: React.FC = () => {
 
       await send(serviceId, templateId, formData, publicKey)
 
-      setSuccessMessage('Your message has been sent successfully!')
+      setStatusMessage(t('successMessage'))
+      setStatusType('success')
       setFormData({ name: '', email: '', message: '' }) // Reset form
     } catch (error) {
       console.error('Failed to send email:', error)
-      setSuccessMessage('Failed to send message. Please try again.')
+      setStatusMessage(t('errorMessage'))
+      setStatusType('error')
     } finally {
       setIsSubmitting(false)
     }
@@ -172,8 +178,14 @@ const ContactForm: React.FC = () => {
         >
           {isSubmitting ? t('sending') : t('send')}
         </button>
-        {successMessage && (
-          <p className="mt-4 text-center text-emerald-400">{successMessage}</p>
+        {statusMessage && (
+          <p
+            className={`mt-4 text-center ${
+              statusType === 'error' ? 'text-red-500' : 'text-emerald-400'
+            }`}
+          >
+            {statusMessage}
+          </p>
         )}
       </div>
     </form>
