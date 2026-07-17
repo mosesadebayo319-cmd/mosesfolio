@@ -4,10 +4,10 @@ export const site = {
   title:
     'Moses Adebayo | Digital Marketing & Web Growth for African Brands',
   description:
-    'I help Nigerian founders and organisations get more leads with SEO, social media, paid campaigns, and conversion-focused websites. Based in Lagos.',
+    'I help Nigerian founders and organisations get more leads with SEO, social media, paid campaigns, and conversion-focused websites. Based in Abuja.',
   jobTitle: 'Digital Marketing Specialist & Web Growth Partner',
   tagline: 'More leads. Clearer brand. Measurable growth.',
-  location: 'Lagos, Nigeria',
+  location: 'Abuja, Nigeria',
   email: 'mosesadebayo319@gmail.com',
   phone: '+234 812 432 8229',
   phoneRaw: '2348124328229',

@@ -23,7 +23,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1">
               <p className="text-accent font-semibold text-sm uppercase tracking-wider mb-4">
-                Lagos · Digital growth partner
+                Abuja · Digital growth partner
               </p>
               <div className="accent-line mb-8" />
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold mb-6 leading-tight">

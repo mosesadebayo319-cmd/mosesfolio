@@ -10,7 +10,7 @@ import {
 export const metadata = {
   title: 'About',
   description:
-    'Moses Oluwashina Adebayo — digital marketer, project leader, and web growth partner based in Lagos, Nigeria.',
+    'Moses Oluwashina Adebayo — digital marketer, project leader, and web growth partner based in Abuja, Nigeria.',
 }
 
 export default function AboutPage() {

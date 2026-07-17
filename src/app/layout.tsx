@@ -63,7 +63,7 @@ const jsonLd = {
       telephone: site.phone,
       address: {
         '@type': 'PostalAddress',
-        addressLocality: 'Lagos',
+        addressLocality: 'Abuja',
         addressCountry: 'NG',
       },
       sameAs: [
