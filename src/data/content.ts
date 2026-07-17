@@ -85,7 +85,7 @@ export const featuredProjects = [
     title: 'Heroes Help Social Growth',
     category: 'Social Media Management',
     result: '+150% engagement · 50K+ community growth',
-    image: '/case-studies/social-media.jpg',
+    image: '/case-studies/heroes-help-social.jpg',
     href: '/case-studies#heroes-help-social',
   },
   {
@@ -443,7 +443,7 @@ export const caseStudies = [
     industry: 'Non-profit · Military support & advocacy · Nigeria',
     timeframe: 'Ongoing multi-platform programme',
     category: 'Social Media Management',
-    image: '/case-studies/social-media.jpg',
+    image: '/case-studies/heroes-help-social.jpg',
     problem:
       'Limited digital structure and inconsistent storytelling weakened community engagement for a mission-led NGO. Platforms lacked a clear content system and advocacy narrative.',
     strategy:
