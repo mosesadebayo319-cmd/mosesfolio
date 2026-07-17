@@ -1,12 +1,17 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { whatsappHireUrl } from '@/src/data/content'
+import { pageSeo, whatsappHireUrl } from '@/src/data/content'
 import { getPublicProjects } from '@/src/lib/content-loader'
 
-export const metadata = {
-  title: 'Case Studies',
-  description:
-    'Real marketing and growth case studies: social, SEO, ads, and content—with measurable outcomes.',
+export const metadata: Metadata = {
+  title: pageSeo.caseStudies.title,
+  description: pageSeo.caseStudies.description,
+  alternates: { canonical: '/case-studies' },
+  openGraph: {
+    title: pageSeo.caseStudies.title,
+    description: pageSeo.caseStudies.description,
+  },
 }
 
 export const dynamic = 'force-dynamic'
@@ -20,11 +25,13 @@ export default async function CaseStudiesPage() {
         <div className="container">
           <div className="max-w-3xl mx-auto">
             <div className="accent-line mb-6" />
-            <h1 className="section-heading mb-6">Case Studies</h1>
+            <h1 className="section-heading mb-6">
+              Digital marketing case studies
+            </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Challenge, strategy, execution, and results. Where possible,
-              clients are named; some commercial projects stay confidential by
-              request.
+              Real campaigns and growth projects: the challenge, the strategy,
+              the execution, and the results. Proof that marketing can be
+              measured—not just posted.
             </p>
           </div>
         </div>

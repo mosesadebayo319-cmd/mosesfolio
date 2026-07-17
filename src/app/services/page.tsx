@@ -1,14 +1,19 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
-import { processSteps, whatsappHireUrl } from '@/src/data/content'
+import { pageSeo, processSteps, whatsappHireUrl } from '@/src/data/content'
 import {
   getPublicPackages,
   getPublicServices,
 } from '@/src/lib/content-loader'
 
-export const metadata = {
-  title: 'Services',
-  description:
-    'Growth marketing, web presence, SEO, social, ads, and consulting for Nigerian brands and founders.',
+export const metadata: Metadata = {
+  title: pageSeo.services.title,
+  description: pageSeo.services.description,
+  alternates: { canonical: '/services' },
+  openGraph: {
+    title: pageSeo.services.title,
+    description: pageSeo.services.description,
+  },
 }
 
 export const dynamic = 'force-dynamic'
@@ -25,10 +30,13 @@ export default async function ServicesPage() {
         <div className="container">
           <div className="max-w-3xl mx-auto">
             <div className="accent-line mb-6" />
-            <h1 className="section-heading mb-6">Services</h1>
+            <h1 className="section-heading mb-6">
+              Digital marketing services in Abuja
+            </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Clear packages for growth—and detailed services when you know
-              exactly what you need. Flagship offers are marked below.
+              SEO, social media, paid ads, content, and websites for Nigerian
+              SMEs, NGOs, and founders. Choose a growth package—or a single
+              service when you know exactly what you need.
             </p>
           </div>
         </div>

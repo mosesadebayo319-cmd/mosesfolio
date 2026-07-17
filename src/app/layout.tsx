@@ -25,17 +25,30 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
     default: site.title,
-    template: '%s | Moses Adebayo',
+    template: '%s | Moses Adebayo — Abuja',
   },
   description: site.description,
+  keywords: [
+    'digital marketing Abuja',
+    'SEO specialist Nigeria',
+    'social media manager Abuja',
+    'digital marketer Nigeria',
+    'website designer for SMEs Nigeria',
+    'Google ads Nigeria',
+    'Meta ads manager',
+    'Moses Adebayo',
+    'mosesfolio',
+  ],
   authors: [{ name: site.name }],
   creator: site.name,
+  publisher: site.name,
+  category: 'Digital Marketing',
   openGraph: {
     title: site.title,
     description: site.description,
     type: 'website',
     locale: 'en_NG',
-    siteName: 'Moses Adebayo',
+    siteName: 'Moses Adebayo | mosesfolio.online',
     url: site.url,
   },
   twitter: {
@@ -46,9 +59,18 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   alternates: {
     canonical: '/',
+  },
+  verification: {
+    // Add later: google: 'your-search-console-code',
   },
 }
 
@@ -57,16 +79,30 @@ const jsonLd = {
   '@graph': [
     {
       '@type': 'Person',
+      '@id': `${site.url}/#person`,
       name: site.name,
+      alternateName: ['Moses Adebayo', 'Moses Oluwashina Adebayo'],
       url: site.url,
+      image: `${site.url}/hero/hero.jpg`,
       jobTitle: site.jobTitle,
+      description: site.description,
       email: site.email,
       telephone: site.phone,
       address: {
         '@type': 'PostalAddress',
         addressLocality: 'Abuja',
+        addressRegion: 'FCT',
         addressCountry: 'NG',
       },
+      knowsAbout: [
+        'Digital Marketing',
+        'Search Engine Optimization',
+        'Social Media Marketing',
+        'Google Ads',
+        'Meta Ads',
+        'Web Development',
+        'Content Strategy',
+      ],
       sameAs: [
         site.social.linkedin,
         site.social.instagram,
@@ -75,11 +111,41 @@ const jsonLd = {
     },
     {
       '@type': 'ProfessionalService',
-      name: 'Moses Adebayo Digital Growth',
+      '@id': `${site.url}/#business`,
+      name: 'Moses Adebayo Digital Marketing',
+      alternateName: 'mosesfolio',
       description: site.description,
       url: site.url,
-      areaServed: 'Nigeria',
-      provider: { '@type': 'Person', name: site.name },
+      image: `${site.url}/hero/hero.jpg`,
+      telephone: site.phone,
+      email: site.email,
+      priceRange: '$$',
+      areaServed: [
+        { '@type': 'City', name: 'Abuja' },
+        { '@type': 'Country', name: 'Nigeria' },
+      ],
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Abuja',
+        addressCountry: 'NG',
+      },
+      provider: { '@id': `${site.url}/#person` },
+      serviceType: [
+        'SEO',
+        'Social Media Management',
+        'Paid Advertising',
+        'Web Development',
+        'Content Strategy',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${site.url}/#website`,
+      url: site.url,
+      name: 'mosesfolio — Moses Adebayo',
+      description: site.description,
+      publisher: { '@id': `${site.url}/#person` },
+      inLanguage: 'en-NG',
     },
   ],
 }

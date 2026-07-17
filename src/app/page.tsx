@@ -1,8 +1,12 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import Image from 'next/image'
 import {
   clients,
   coreExpertise,
+  pageSeo,
   processSteps,
   site,
   stats,
@@ -16,6 +20,17 @@ import {
 } from '@/src/lib/content-loader'
 
 export const dynamic = 'force-dynamic'
+
+export const metadata: Metadata = {
+  title: { absolute: pageSeo.home.title },
+  description: pageSeo.home.description,
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: pageSeo.home.title,
+    description: pageSeo.home.description,
+    url: site.url,
+  },
+}
 
 export default async function HomePage() {
   const [featuredProjects, homeTestimonials] = await Promise.all([
@@ -32,17 +47,17 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1">
               <p className="text-accent font-semibold text-sm uppercase tracking-wider mb-4">
-                Abuja · Digital growth partner
+                Digital marketing expert · Abuja, Nigeria
               </p>
               <div className="accent-line mb-8" />
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold mb-6 leading-tight">
-                I help Nigerian brands get more leads with marketing that
-                measures up.
+                Digital marketing that gets Nigerian brands more qualified
+                leads.
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground mb-4 leading-relaxed">
-                SEO, social media, paid campaigns, and conversion-focused
-                websites—planned and executed so founders see clear results, not
-                vanity metrics.
+                I help SMEs, NGOs, and founders in Abuja and across Nigeria grow
+                with SEO, social media, paid ads, and websites built to convert—
+                not just look busy online.
               </p>
               <p className="text-accent font-medium mb-8">{site.tagline}</p>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -52,12 +67,15 @@ export default async function HomePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Chat on WhatsApp
+                  Free strategy chat on WhatsApp
                 </a>
                 <Link href="/case-studies" className="secondary-button">
-                  See the work
+                  See case studies
                 </Link>
               </div>
+              <p className="text-xs text-muted-foreground mt-4">
+                SEO · Social media · Meta & Google Ads · Websites · Abuja-based
+              </p>
             </div>
 
             <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
@@ -66,7 +84,7 @@ export default async function HomePage() {
                 <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-accent/40 shadow-2xl shadow-accent/10">
                   <Image
                     src="/hero/hero.jpg"
-                    alt={`${site.name} — Digital Marketing Specialist`}
+                    alt="Moses Oluwashina Adebayo, digital marketing specialist in Abuja Nigeria"
                     fill
                     priority
                     sizes="(max-width:768px) 320px, 384px"
@@ -100,10 +118,10 @@ export default async function HomePage() {
         <div className="container">
           <div className="text-center mb-14">
             <div className="accent-line mx-auto mb-6" />
-            <h2 className="section-heading">How I help you grow</h2>
+            <h2 className="section-heading">Digital marketing services</h2>
             <p className="section-subtitle">
-              Three flagship offers—plus leadership when you need someone to own
-              delivery end-to-end.
+              Practical growth support for Nigerian brands—from visibility and
+              content to ads and websites that turn traffic into enquiries.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -310,11 +328,12 @@ export default async function HomePage() {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="section-heading mb-6">
-              Ready for growth you can measure?
+              Ready to grow your brand in Nigeria?
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Tell me your goal—leads, visibility, or a site that converts. I
-              usually reply within {site.responseTime.toLowerCase()}.
+              Whether you need SEO, social media, ads, or a new website—tell me
+              your goal. {site.responseTime}. Serving clients from Abuja
+              nationwide.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -323,10 +342,10 @@ export default async function HomePage() {
                 rel="noopener noreferrer"
                 className="cta-button"
               >
-                WhatsApp me
+                WhatsApp Moses
               </a>
               <Link href="/contact" className="secondary-button">
-                Send a brief
+                Send a project brief
               </Link>
             </div>
           </div>

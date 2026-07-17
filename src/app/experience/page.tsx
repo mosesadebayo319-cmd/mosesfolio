@@ -1,15 +1,17 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import {
   coreCompetencies,
   experienceRoles,
   leadershipTraits,
+  pageSeo,
   whatsappHireUrl,
 } from '@/src/data/content'
 
-export const metadata = {
-  title: 'Experience',
-  description:
-    'Professional experience in digital marketing, mentoring, and project leadership.',
+export const metadata: Metadata = {
+  title: pageSeo.experience.title,
+  description: pageSeo.experience.description,
+  alternates: { canonical: '/experience' },
 }
 
 export default function ExperiencePage() {
@@ -19,7 +21,9 @@ export default function ExperiencePage() {
         <div className="container">
           <div className="max-w-3xl mx-auto">
             <div className="accent-line mb-6" />
-            <h1 className="section-heading mb-6">Experience</h1>
+            <h1 className="section-heading mb-6">
+              Digital marketing experience
+            </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
               Digital transformation, team leadership, and measurable growth
               across education, non-profit, and service businesses.

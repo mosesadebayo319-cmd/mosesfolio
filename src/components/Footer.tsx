@@ -13,11 +13,11 @@ export default function Footer() {
               {site.shortName}
             </h3>
             <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-              Digital marketing and web growth for Nigerian brands and founders.
-              SEO, social, ads, and websites that convert.
+              Digital marketing expert in Abuja, Nigeria—SEO, social media, paid
+              ads, and websites that convert for SMEs, NGOs, and founders.
             </p>
             <a href={whatsappHireUrl} className="text-accent text-sm font-semibold hover:underline">
-              Chat on WhatsApp →
+              WhatsApp for a free strategy chat →
             </a>
           </div>
 

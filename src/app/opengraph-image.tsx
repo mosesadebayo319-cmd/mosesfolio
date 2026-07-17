@@ -1,7 +1,8 @@
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
-export const alt = 'Moses Adebayo — Digital Marketing & Web Growth'
+export const alt =
+  'Moses Adebayo — Digital Marketing Expert in Abuja, Nigeria'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -48,7 +49,7 @@ export default function OgImage() {
             fontWeight: 600,
           }}
         >
-          Digital Marketing & Web Growth
+          Digital Marketing Expert · Abuja
         </div>
         <div
           style={{
@@ -58,7 +59,7 @@ export default function OgImage() {
             maxWidth: 800,
           }}
         >
-          SEO · Social · Ads · Websites for Nigerian brands & founders
+          SEO · Social Media · Ads · Websites · mosesfolio.online
         </div>
       </div>
     ),

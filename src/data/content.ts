@@ -1,19 +1,20 @@
 export const site = {
   name: 'Moses Oluwashina Adebayo',
   shortName: 'Moses',
+  // Primary SEO title (homepage / default)
   title:
-    'Moses Adebayo | Digital Marketing & Web Growth for African Brands',
+    'Moses Adebayo | Digital Marketing Expert in Abuja — SEO, Social Media & Websites',
   description:
-    'I help Nigerian founders and organisations get more leads with SEO, social media, paid campaigns, and conversion-focused websites. Based in Abuja.',
+    'Hire Moses Adebayo, a digital marketing specialist in Abuja, Nigeria. SEO, social media management, paid ads, content strategy, and conversion-focused websites that generate leads for SMEs, NGOs, and founders.',
   jobTitle: 'Digital Marketing Specialist & Web Growth Partner',
-  tagline: 'More leads. Clearer brand. Measurable growth.',
+  tagline: 'Leads you can measure. Brands people remember.',
   location: 'Abuja, Nigeria',
   email: 'mosesadebayo319@gmail.com',
   phone: '+234 812 432 8229',
   phoneRaw: '2348124328229',
   hours: 'Monday – Friday, 9:00 AM – 6:00 PM WAT',
-  responseTime: 'Usually within 2 hours during business hours',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://mosesfolio.vercel.app',
+  responseTime: 'Usually within 2 hours on business days',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://mosesfolio.online',
   social: {
     facebook: 'https://www.facebook.com/profile.php?id=61583181652994',
     instagram: 'https://www.instagram.com/mosesadebayo46',
@@ -22,8 +23,48 @@ export const site = {
   },
 }
 
+/** Page-level SEO titles & meta descriptions */
+export const pageSeo = {
+  home: {
+    title:
+      'Moses Adebayo | Digital Marketing Expert in Abuja — SEO, Social Media & Websites',
+    description:
+      'Digital marketing expert in Abuja helping Nigerian brands get more leads through SEO, social media, paid ads, and high-converting websites. Book a free strategy chat on WhatsApp.',
+  },
+  services: {
+    title: 'Digital Marketing Services in Abuja | SEO, Social, Ads & Web',
+    description:
+      'Digital marketing services for Nigerian SMEs and NGOs: SEO optimization, social media management, Meta & Google ads, content strategy, and web development. Custom quotes. Abuja-based.',
+  },
+  caseStudies: {
+    title: 'Case Studies | Digital Marketing Results by Moses Adebayo',
+    description:
+      'Real digital marketing case studies: social growth, SEO transformations, and paid campaigns with measurable ROI. See how Moses Adebayo helps brands grow in Nigeria.',
+  },
+  about: {
+    title: 'About Moses Adebayo | Digital Marketer & Growth Partner, Abuja',
+    description:
+      'Meet Moses Oluwashina Adebayo — digital marketing specialist, project leader, and coding mentor based in Abuja. Partner to NGOs, education brands, and service businesses across Nigeria.',
+  },
+  contact: {
+    title: 'Contact Moses Adebayo | Hire a Digital Marketer in Abuja',
+    description:
+      'Contact Moses Adebayo for SEO, social media, ads, or website projects. WhatsApp +234 812 432 8229 or send a brief. Based in Abuja, serving clients nationwide.',
+  },
+  experience: {
+    title: 'Experience | Moses Adebayo Digital Marketing Career',
+    description:
+      'Professional experience in digital marketing leadership, social media, paid campaigns, and coding mentorship — MecuryX, Heroes Help, Learn2Earn, and more.',
+  },
+  testimonials: {
+    title: 'Client Testimonials | Moses Adebayo Digital Marketing',
+    description:
+      'What clients say about working with Moses Adebayo on digital marketing, social media, and brand growth across Nigeria.',
+  },
+}
+
 export const whatsappHireUrl = `https://wa.me/${site.phoneRaw}?text=${encodeURIComponent(
-  "Hi Moses, I'd like to discuss a digital marketing / web project."
+  "Hi Moses, I found your portfolio (mosesfolio.online). I'd like help with digital marketing / a website. Are you available for a quick chat?"
 )}`
 
 export const navLinks = [
@@ -44,38 +85,38 @@ export const stats = [
 export const coreExpertise = [
   {
     id: 'seo',
-    title: 'SEO Optimization',
-    desc: 'Rank higher and earn organic leads with technical and content SEO.',
+    title: 'SEO for Nigerian businesses',
+    desc: 'Rank on Google for the searches your customers already make—and turn visits into enquiries.',
     icon: 'search',
   },
   {
     id: 'social',
-    title: 'Social Media',
-    desc: 'Grow engaged communities across Instagram, Facebook, LinkedIn & more.',
+    title: 'Social media that builds trust',
+    desc: 'Consistent content and community management on Instagram, Facebook, LinkedIn, and more.',
     icon: 'megaphone',
   },
   {
     id: 'content',
-    title: 'Content Strategy',
-    desc: 'Story-led content that builds trust and moves buyers to act.',
+    title: 'Content that converts',
+    desc: 'Clear messaging and storytelling so people understand your offer and take action.',
     icon: 'pen',
   },
   {
     id: 'campaigns',
-    title: 'Paid Campaigns',
-    desc: 'Meta & Google ads with clear tracking and measurable ROI.',
+    title: 'Paid ads with ROI focus',
+    desc: 'Meta and Google campaigns with tracking, testing, and reporting you can understand.',
     icon: 'target',
   },
   {
     id: 'web',
-    title: 'Web Development',
-    desc: 'Fast, mobile-first sites and landing pages built to convert.',
+    title: 'Websites built to sell',
+    desc: 'Fast, mobile-first sites and landing pages designed for leads—not just “looking nice.”',
     icon: 'code',
   },
   {
     id: 'pm',
-    title: 'Project Leadership',
-    desc: 'Clear plans, team coordination, and on-time delivery.',
+    title: 'Project leadership',
+    desc: 'Someone accountable for timelines, quality, and delivery when growth work gets busy.',
     icon: 'briefcase',
   },
 ]

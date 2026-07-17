@@ -1,11 +1,16 @@
+import type { Metadata } from 'next'
 import ContactForm from '@/src/components/ContactForm'
 import { IconWhatsApp } from '@/src/components/Icons'
-import { site, whatsappHireUrl } from '@/src/data/content'
+import { pageSeo, site, whatsappHireUrl } from '@/src/data/content'
 
-export const metadata = {
-  title: 'Contact',
-  description:
-    'Hire Moses Adebayo for digital marketing, SEO, social, ads, or web projects. WhatsApp or contact form.',
+export const metadata: Metadata = {
+  title: pageSeo.contact.title,
+  description: pageSeo.contact.description,
+  alternates: { canonical: '/contact' },
+  openGraph: {
+    title: pageSeo.contact.title,
+    description: pageSeo.contact.description,
+  },
 }
 
 export default function ContactPage() {
@@ -15,10 +20,13 @@ export default function ContactPage() {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <div className="accent-line mx-auto mb-6" />
-            <h1 className="section-heading mb-6">Let&apos;s talk growth</h1>
+            <h1 className="section-heading mb-6">
+              Hire a digital marketer in Abuja
+            </h1>
             <p className="text-xl text-muted-foreground leading-relaxed mb-8">
-              Prefer chat? WhatsApp is fastest for Nigerian clients—I usually
-              reply within 2 hours on business days.
+              Ready for SEO, social media, ads, or a website that converts?
+              WhatsApp is fastest—I usually reply within 2 hours on business
+              days. Serving clients from Abuja across Nigeria.
             </p>
             <a
               href={whatsappHireUrl}

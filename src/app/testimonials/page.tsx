@@ -1,10 +1,12 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
-import { whatsappHireUrl } from '@/src/data/content'
+import { pageSeo, whatsappHireUrl } from '@/src/data/content'
 import { getPublicTestimonials } from '@/src/lib/content-loader'
 
-export const metadata = {
-  title: 'Testimonials',
-  description: 'Client feedback for Moses Adebayo digital marketing work.',
+export const metadata: Metadata = {
+  title: pageSeo.testimonials.title,
+  description: pageSeo.testimonials.description,
+  alternates: { canonical: '/testimonials' },
 }
 
 export const dynamic = 'force-dynamic'

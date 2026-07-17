@@ -1,16 +1,22 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import {
   aboutValues,
   experienceRoles,
+  pageSeo,
   skillCategories,
   whatsappHireUrl,
 } from '@/src/data/content'
 
-export const metadata = {
-  title: 'About',
-  description:
-    'Moses Oluwashina Adebayo — digital marketer, project leader, and web growth partner based in Abuja, Nigeria.',
+export const metadata: Metadata = {
+  title: pageSeo.about.title,
+  description: pageSeo.about.description,
+  alternates: { canonical: '/about' },
+  openGraph: {
+    title: pageSeo.about.title,
+    description: pageSeo.about.description,
+  },
 }
 
 export default function AboutPage() {
@@ -22,11 +28,14 @@ export default function AboutPage() {
         <div className="container">
           <div className="max-w-3xl mx-auto">
             <div className="accent-line mb-6" />
-            <h1 className="section-heading mb-6">About Moses</h1>
+            <h1 className="section-heading mb-6">
+              About Moses Adebayo
+            </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Digital marketing specialist, project leader, and coding mentor
-              helping Nigerian organisations turn attention into measurable
-              growth.
+              Digital marketing specialist and growth partner based in{' '}
+              <strong className="text-foreground">Abuja, Nigeria</strong>—helping
+              SMEs, NGOs, and founders turn online attention into enquiries,
+              sales, and stronger brands.
             </p>
           </div>
         </div>
@@ -39,20 +48,20 @@ export default function AboutPage() {
               <h2 className="section-heading mb-6">My journey</h2>
               <p className="text-muted-foreground mb-4 leading-relaxed">
                 I started in operations and project coordination—learning how
-                teams actually deliver under pressure. That foundation still
-                shapes how I run campaigns: clear owners, clear deadlines, clear
-                numbers.
+                teams deliver under pressure. That still shapes my marketing
+                work: clear owners, clear deadlines, and clear numbers—not
+                guesswork.
               </p>
               <p className="text-muted-foreground mb-4 leading-relaxed">
-                Over the years I&apos;ve partnered with NGOs, ministries,
-                education brands, and service businesses. One pattern always
-                wins: understand the audience, pick a few channels, execute
-                consistently, and report what moved the needle.
+                I&apos;ve partnered with NGOs, ministries, education brands, and
+                service businesses across Nigeria. The pattern that works is
+                simple: know the audience, choose a few channels, show up
+                consistently, and report what actually moved the needle.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Today I focus on SEO, social, paid campaigns, and websites that
-                convert—plus mentoring the next wave of builders. Available for
-                projects, retainers, and hands-on growth partnerships.
+                Today I offer SEO, social media management, paid campaigns, and
+                conversion-focused websites—plus coding mentorship. Available
+                for projects, monthly retainers, and hands-on growth partnerships.
               </p>
               <div className="flex flex-wrap gap-2 mt-6">
                 {['Projects', 'Retainers', 'Mentoring'].map((b) => (
