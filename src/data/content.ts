@@ -23,10 +23,9 @@ export const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Services', href: '/services' },
-  { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Case Studies', href: '/portfolio' },
   { label: 'Experience', href: '/experience' },
   { label: 'Testimonials', href: '/testimonials' },
-  { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
 ]
 
@@ -35,7 +34,7 @@ export const coreExpertise = [
   { icon: '📱', title: 'Social Media', desc: 'Engage audiences across all platforms' },
   { icon: '✍️', title: 'Content Strategy', desc: 'Compelling narratives that convert' },
   { icon: '🎯', title: 'Digital Campaigns', desc: 'Results-driven advertising & marketing' },
-  { icon: '📈', title: 'Analytics', desc: 'Measure, analyze, optimize continuously' },
+  { icon: '💻', title: 'Web Development', desc: 'Modern websites and landing pages that convert' },
   { icon: '💼', title: 'Project Management', desc: 'Lead teams with precision and clarity' },
 ]
 
@@ -44,19 +43,19 @@ export const featuredProjects = [
     title: 'Social Media Growth Campaign',
     category: 'Social Media Management',
     result: '+150% engagement increase',
-    image: '/manus-storage/social-media-campaign_7d0b16b1.jpg',
+    image: '/case-studies/social-media.jpg',
   },
   {
     title: 'SEO Transformation Project',
     category: 'SEO & Content',
     result: '1st page rankings achieved',
-    image: '/manus-storage/seo-optimization_ff6d3d47.jpg',
+    image: '/case-studies/seo.jpg',
   },
   {
     title: 'Digital Campaign Launch',
     category: 'Digital Marketing',
     result: '3x ROI in 90 days',
-    image: '/manus-storage/digital-marketing-roi_f96483b8.png',
+    image: '/case-studies/digital-campaigns.jpg',
   },
 ]
 
@@ -126,39 +125,6 @@ export const aboutValues = [
   },
 ]
 
-export const aboutExperience = [
-  {
-    role: 'Digital Marketing Specialist',
-    company: 'Self-Employed',
-    period: '2020 - Present',
-    highlights: [
-      'Managed SEO, social media, and content strategies for 15+ clients',
-      'Achieved average 150% engagement growth across campaigns',
-      'Built and mentored a team of junior digital marketers',
-    ],
-  },
-  {
-    role: 'Social Media Manager',
-    company: 'Heroes Help (NGO)',
-    period: '2018 - 2020',
-    highlights: [
-      'Grew social media following from 5K to 50K+ followers',
-      'Coordinated content strategy across all platforms',
-      'Led fundraising campaigns that exceeded targets by 40%',
-    ],
-  },
-  {
-    role: 'Administrative Officer & Project Coordinator',
-    company: 'KayStar Global Projects',
-    period: '2016 - 2018',
-    highlights: [
-      'Managed operations for construction and procurement projects',
-      'Coordinated cross-functional teams of 20+ members',
-      'Improved project delivery time by 25% through process optimization',
-    ],
-  },
-]
-
 export const skillCategories = [
   {
     category: 'Digital Marketing',
@@ -192,6 +158,17 @@ export const skillCategories = [
       'HubSpot',
       'WordPress',
       'Basic HTML/CSS',
+    ],
+  },
+  {
+    category: 'Web Development',
+    items: [
+      'HTML & CSS',
+      'JavaScript',
+      'React',
+      'Next.js',
+      'Responsive Design',
+      'Landing Pages',
     ],
   },
 ]
@@ -305,6 +282,24 @@ export const services = [
     ],
     price: 'Custom Quote',
   },
+  {
+    title: 'Web Development',
+    description:
+      'Build fast, modern websites and landing pages that convert visitors into customers.',
+    benefits: [
+      'Professional online presence that builds trust',
+      'Mobile-responsive design for every device',
+      'Faster load times and better SEO foundations',
+      'Clear conversion paths for leads and sales',
+    ],
+    deliverables: [
+      'Custom website or landing page design',
+      'Responsive front-end development',
+      'Performance and basic SEO setup',
+      'Launch support and handover documentation',
+    ],
+    price: 'Custom Quote',
+  },
 ]
 
 export const processSteps = [
@@ -339,7 +334,7 @@ export const caseStudies = [
     id: 1,
     title: 'Social Media Growth Campaign',
     category: 'Social Media Management',
-    image: '/manus-storage/social-media-campaign_7d0b16b1.jpg',
+    image: '/case-studies/social-media.jpg',
     problem:
       'E-commerce startup struggling with low social media engagement and limited brand awareness. Only 5K followers across platforms with minimal interaction.',
     strategy:
@@ -362,7 +357,7 @@ export const caseStudies = [
     id: 2,
     title: 'SEO Transformation Project',
     category: 'SEO & Content',
-    image: '/manus-storage/seo-optimization_ff6d3d47.jpg',
+    image: '/case-studies/seo.jpg',
     problem:
       'B2B SaaS company ranking on page 5+ for target keywords. Organic traffic declining despite increased competition. No structured SEO strategy in place.',
     strategy:
@@ -385,7 +380,7 @@ export const caseStudies = [
     id: 3,
     title: 'Digital Campaign Launch',
     category: 'Digital Marketing',
-    image: '/manus-storage/digital-marketing-roi_f96483b8.png',
+    image: '/case-studies/digital-campaigns.jpg',
     problem:
       'Service-based business launching new product line with limited budget and no previous digital advertising experience. Needed to reach target audience quickly.',
     strategy:
@@ -408,7 +403,7 @@ export const caseStudies = [
     id: 4,
     title: 'Content Marketing Strategy',
     category: 'Content Strategy',
-    image: '/manus-storage/content-marketing-strategy_fb5a6961.jpg',
+    image: '/case-studies/content-marketing.jpg',
     problem:
       'Educational platform struggling to establish thought leadership and attract quality leads. Content scattered across channels with no cohesive strategy.',
     strategy:
@@ -595,42 +590,6 @@ export const fullTestimonials = [
   },
 ]
 
-export const blogPosts = [
-  {
-    id: 1,
-    title: 'Proven Social Media Strategies That Drive Real Growth',
-    excerpt:
-      'Discover actionable social media strategies that deliver measurable results for brands and businesses of every size.',
-    category: 'Social Media',
-    date: 'March 15, 2024',
-    author: 'Moses Adebayo',
-    readTime: '8 min read',
-    image: '/manus-storage/social-media-campaign_7d0b16b1.jpg',
-  },
-  {
-    id: 2,
-    title: 'Digital Marketing Strategy: A Step-by-Step Framework',
-    excerpt:
-      'Learn how to develop a comprehensive digital marketing strategy that aligns with your business goals and drives measurable growth.',
-    category: 'Digital Marketing',
-    date: 'March 8, 2024',
-    author: 'Moses Adebayo',
-    readTime: '10 min read',
-    image: '/abstract-digital-marketing.webp',
-  },
-  {
-    id: 3,
-    title: 'Project Management Best Practices for Digital Teams',
-    excerpt:
-      'Essential project management techniques for leading digital teams, managing timelines, and delivering projects on schedule.',
-    category: 'Project Management',
-    date: 'February 28, 2024',
-    author: 'Moses Adebayo',
-    readTime: '7 min read',
-    image: '/manus-storage/digital-marketing-roi_f96483b8.png',
-  },
-]
-
 export const footerServices = [
   'SEO Optimization',
   'Social Media Management',
@@ -638,6 +597,7 @@ export const footerServices = [
   'Digital Campaigns',
   'Email Marketing',
   'Consulting & Strategy',
+  'Web Development',
 ]
 
 export const contactSubjects = [
@@ -645,6 +605,7 @@ export const contactSubjects = [
   'Social Media Management',
   'Content Strategy',
   'Digital Campaigns',
+  'Web Development',
   'Project Management',
   'Consulting',
   'Other',

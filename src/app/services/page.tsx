@@ -4,7 +4,7 @@ import { processSteps, services } from '@/src/data/content'
 export const metadata = {
   title: 'Services | Moses Oluwashina Adebayo',
   description:
-    'Comprehensive digital marketing solutions: SEO, social media, content, campaigns, email, and consulting.',
+    'Digital marketing and web development solutions: SEO, social media, content, campaigns, email, consulting, and websites.',
 }
 
 export default function ServicesPage() {
@@ -16,9 +16,9 @@ export default function ServicesPage() {
             <div className="accent-line mb-6" />
             <h1 className="section-heading mb-6">Services</h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Comprehensive digital marketing solutions designed to grow your
-              business. From SEO to social media management, I provide the
-              expertise you need to succeed.
+              Comprehensive digital marketing and web development solutions
+              designed to grow your business. From SEO and social media to
+              modern websites, I provide the expertise you need to succeed.
             </p>
           </div>
         </div>

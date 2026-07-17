@@ -15,11 +15,10 @@ Cloned and rebuilt from the original Manus site: [mosesfolio-8hhn7ctm.manus.spac
 
 - `/` — Home (hero, expertise, clients, projects, testimonials)
 - `/about` — About, values, skills
-- `/services` — Service packages & process
-- `/portfolio` — Full case studies
+- `/services` — Service packages & process (incl. web development)
+- `/portfolio` — Case studies
 - `/experience` — Professional roles
 - `/testimonials` — Client feedback
-- `/blog` — Insights
 - `/contact` — Contact form & details
 
 ## Getting Started

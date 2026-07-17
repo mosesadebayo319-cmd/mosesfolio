@@ -1,10 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import {
-  aboutExperience,
-  aboutValues,
-  skillCategories,
-} from '@/src/data/content'
+import { aboutValues, skillCategories } from '@/src/data/content'
 
 export const metadata = {
   title: 'About | Moses Oluwashina Adebayo',
@@ -49,9 +45,9 @@ export default function AboutPage() {
               </p>
               <p className="text-muted-foreground leading-relaxed">
                 Today, I specialize in helping businesses grow through SEO,
-                social media management, content strategy, and expert project
-                leadership. My mission is simple: deliver measurable results
-                that transform businesses.
+                social media management, content strategy, web development, and
+                expert project leadership. My mission is simple: deliver
+                measurable results that transform businesses.
               </p>
             </div>
             <div className="bg-card rounded-xl p-8 border border-border">
@@ -95,49 +91,6 @@ export default function AboutPage() {
         <div className="container">
           <div className="text-center mb-16">
             <div className="accent-line mx-auto mb-6" />
-            <h2 className="section-heading">Professional Experience</h2>
-            <p className="section-subtitle">
-              A track record of success and growth
-            </p>
-          </div>
-          <div className="max-w-3xl mx-auto space-y-8">
-            {aboutExperience.map((job) => (
-              <div
-                key={job.role + job.company}
-                className="p-8 bg-card rounded-xl border border-border hover:border-accent transition-all duration-300"
-              >
-                <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
-                  <div>
-                    <h3 className="text-2xl font-heading font-semibold text-accent mb-1">
-                      {job.role}
-                    </h3>
-                    <p className="text-lg font-medium">{job.company}</p>
-                  </div>
-                  <p className="text-muted-foreground text-sm mt-2 md:mt-0">
-                    {job.period}
-                  </p>
-                </div>
-                <ul className="space-y-2">
-                  {job.highlights.map((h) => (
-                    <li
-                      key={h}
-                      className="flex gap-3 text-muted-foreground"
-                    >
-                      <span className="text-accent mt-0.5">✓</span>
-                      <span>{h}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 md:py-32 bg-card">
-        <div className="container">
-          <div className="text-center mb-16">
-            <div className="accent-line mx-auto mb-6" />
             <h2 className="section-heading">Skills & Expertise</h2>
             <p className="section-subtitle">
               A comprehensive toolkit for digital success
@@ -147,7 +100,7 @@ export default function AboutPage() {
             {skillCategories.map((cat) => (
               <div
                 key={cat.category}
-                className="p-8 bg-background rounded-xl border border-border"
+                className="p-8 bg-card rounded-xl border border-border hover:border-accent transition-all duration-300"
               >
                 <h3 className="text-xl font-heading font-semibold mb-4 text-accent">
                   {cat.category}
@@ -156,7 +109,7 @@ export default function AboutPage() {
                   {cat.items.map((item) => (
                     <span
                       key={item}
-                      className="px-4 py-2 bg-card border border-border rounded-lg text-sm font-medium hover:border-accent transition-colors"
+                      className="px-4 py-2 bg-background border border-border rounded-lg text-sm font-medium hover:border-accent transition-colors"
                     >
                       {item}
                     </span>
@@ -168,7 +121,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-32 bg-background">
+      <section className="py-20 md:py-32 bg-card">
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="section-heading mb-6">Let&apos;s Work Together</h2>

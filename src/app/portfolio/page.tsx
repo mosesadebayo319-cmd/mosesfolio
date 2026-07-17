@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { caseStudies } from '@/src/data/content'
 
 export const metadata = {
-  title: 'Portfolio | Moses Oluwashina Adebayo',
+  title: 'Case Studies | Moses Oluwashina Adebayo',
   description:
     'Case studies and real results from digital marketing and project work.',
 }
@@ -15,7 +15,7 @@ export default function PortfolioPage() {
         <div className="container">
           <div className="max-w-3xl mx-auto">
             <div className="accent-line mb-6" />
-            <h1 className="section-heading mb-6">Portfolio & Case Studies</h1>
+            <h1 className="section-heading mb-6">Case Studies</h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
               Real projects, real results. Explore how I&apos;ve helped
               businesses achieve their digital marketing goals through strategic
