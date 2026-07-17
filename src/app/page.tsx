@@ -3,7 +3,6 @@ import Image from 'next/image'
 import {
   clients,
   coreExpertise,
-  homeTestimonials,
   processSteps,
   site,
   stats,
@@ -11,12 +10,18 @@ import {
 } from '@/src/data/content'
 import { ServiceIcon } from '@/src/components/Icons'
 import ScrollReveal from '@/src/components/ScrollReveal'
-import { getFeaturedProjects } from '@/src/lib/content-loader'
+import {
+  getFeaturedProjects,
+  getPublicTestimonials,
+} from '@/src/lib/content-loader'
 
 export const dynamic = 'force-dynamic'
 
 export default async function HomePage() {
-  const featuredProjects = await getFeaturedProjects()
+  const [featuredProjects, homeTestimonials] = await Promise.all([
+    getFeaturedProjects(),
+    getPublicTestimonials(),
+  ])
 
   return (
     <div className="min-h-screen">
@@ -261,7 +266,7 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {homeTestimonials.map((t) => (
               <blockquote
-                key={t.name}
+                key={t.name + t.company}
                 className="p-8 bg-card rounded-xl border border-border hover:border-accent transition-all flex flex-col"
               >
                 <div
@@ -278,15 +283,20 @@ export default async function HomePage() {
                 <footer>
                   <p className="font-semibold">{t.name}</p>
                   <p className="text-sm text-muted-foreground">
-                    {t.role} ·{' '}
-                    <a
-                      href={t.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-accent hover:underline"
-                    >
-                      {t.company}
-                    </a>
+                    {[t.role, t.company].filter(Boolean).join(' · ')}
+                    {t.link && t.link !== '#' && (
+                      <>
+                        {' · '}
+                        <a
+                          href={t.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-accent hover:underline"
+                        >
+                          {t.company || 'Link'}
+                        </a>
+                      </>
+                    )}
                   </p>
                 </footer>
               </blockquote>

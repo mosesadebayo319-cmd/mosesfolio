@@ -1,12 +1,17 @@
 import Link from 'next/link'
-import { fullTestimonials, whatsappHireUrl } from '@/src/data/content'
+import { whatsappHireUrl } from '@/src/data/content'
+import { getPublicTestimonials } from '@/src/lib/content-loader'
 
 export const metadata = {
   title: 'Testimonials',
   description: 'Client feedback for Moses Adebayo digital marketing work.',
 }
 
-export default function TestimonialsPage() {
+export const dynamic = 'force-dynamic'
+
+export default async function TestimonialsPage() {
+  const fullTestimonials = await getPublicTestimonials()
+
   return (
     <div className="min-h-screen">
       <section className="py-20 md:py-28 bg-card">
@@ -23,7 +28,7 @@ export default function TestimonialsPage() {
         <div className="container grid grid-cols-1 md:grid-cols-3 gap-8">
           {fullTestimonials.map((t) => (
             <blockquote
-              key={t.name}
+              key={t.name + t.company + t.text.slice(0, 20)}
               className="p-8 bg-card rounded-xl border border-border flex flex-col"
             >
               <div
@@ -35,20 +40,25 @@ export default function TestimonialsPage() {
                 ))}
               </div>
               <p className="text-muted-foreground italic mb-6 flex-1 leading-relaxed">
-                &ldquo;{t.quote}&rdquo;
+                &ldquo;{t.text}&rdquo;
               </p>
               <footer>
                 <p className="font-semibold">{t.name}</p>
                 <p className="text-sm text-muted-foreground">
-                  {t.role},{' '}
-                  <a
-                    href={t.link}
-                    className="text-accent hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {t.company}
-                  </a>
+                  {[t.role, t.company].filter(Boolean).join(', ')}
+                  {t.link && t.link !== '#' && (
+                    <>
+                      {' · '}
+                      <a
+                        href={t.link}
+                        className="text-accent hover:underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Visit
+                      </a>
+                    </>
+                  )}
                 </p>
               </footer>
             </blockquote>

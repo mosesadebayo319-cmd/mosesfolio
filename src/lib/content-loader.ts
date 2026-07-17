@@ -1,9 +1,21 @@
 import {
   caseStudies as staticCaseStudies,
   featuredProjects as staticFeatured,
+  homeTestimonials as staticTestimonials,
+  servicePackages as staticPackages,
   services as staticServices,
 } from '@/src/data/content'
-import { getSql, listProjects, listServices, type DbProject, type DbService } from '@/src/lib/db'
+import {
+  getSql,
+  listPackages,
+  listProjects,
+  listServices,
+  listTestimonials,
+  type DbPackage,
+  type DbProject,
+  type DbService,
+  type DbTestimonial,
+} from '@/src/lib/db'
 
 export type PublicService = {
   id: string
@@ -38,6 +50,25 @@ export type PublicProject = {
   testimonial: string
   testimonialAuthor: string
   featured?: boolean
+}
+
+export type PublicTestimonial = {
+  name: string
+  role: string
+  company: string
+  text: string
+  link: string
+  rating: number
+}
+
+export type PublicPackage = {
+  id: string
+  title: string
+  description: string
+  includes: string[]
+  bestFor: string
+  notFor: string
+  pricing: string
 }
 
 function mapDbService(s: DbService): PublicService {
@@ -79,66 +110,130 @@ function mapDbProject(p: DbProject): PublicProject {
   }
 }
 
-function mapStaticServices(): PublicService[] {
-  return staticServices.map((s) => ({
-    id: s.id,
-    title: s.title,
-    description: s.description,
-    benefits: s.benefits,
-    deliverables: s.deliverables,
-    pricing: s.pricing,
-    bestFor: s.bestFor,
-    flagship: s.flagship,
-  }))
+function mapDbTestimonial(t: DbTestimonial): PublicTestimonial {
+  return {
+    name: t.name,
+    role: t.role || '',
+    company: t.company || '',
+    text: t.quote,
+    link: t.link || '#',
+    rating: t.rating || 5,
+  }
 }
 
-function mapStaticProjects(): PublicProject[] {
-  return staticCaseStudies.map((c) => ({
-    id: c.id,
-    title: c.title,
-    client: c.client,
-    industry: c.industry,
-    timeframe: c.timeframe,
-    category: c.category,
-    image: c.image,
-    problem: c.problem,
-    strategy: c.strategy,
-    execution: c.execution,
-    results: c.results,
-    testimonial: c.testimonial,
-    testimonialAuthor: c.testimonialAuthor,
-  }))
+function mapDbPackage(p: DbPackage): PublicPackage {
+  return {
+    id: p.slug || String(p.id),
+    title: p.title,
+    description: p.description,
+    includes: p.includes,
+    bestFor: p.best_for || '',
+    notFor: p.not_for || '',
+    pricing: p.pricing || 'Custom Quote',
+  }
 }
 
-/** Published services from DB, or static fallback */
 export async function getPublicServices(): Promise<PublicService[]> {
   try {
     const sql = getSql()
-    if (!sql) return mapStaticServices()
+    if (!sql) return staticServices.map((s) => ({
+      id: s.id,
+      title: s.title,
+      description: s.description,
+      benefits: s.benefits,
+      deliverables: s.deliverables,
+      pricing: s.pricing,
+      bestFor: s.bestFor,
+      flagship: s.flagship,
+    }))
     const rows = await listServices(sql, { publishedOnly: true })
-    if (!rows.length) return mapStaticServices()
+    if (!rows.length) {
+      return staticServices.map((s) => ({
+        id: s.id,
+        title: s.title,
+        description: s.description,
+        benefits: s.benefits,
+        deliverables: s.deliverables,
+        pricing: s.pricing,
+        bestFor: s.bestFor,
+        flagship: s.flagship,
+      }))
+    }
     return rows.map(mapDbService)
   } catch (e) {
     console.error('getPublicServices failed:', e)
-    return mapStaticServices()
+    return staticServices.map((s) => ({
+      id: s.id,
+      title: s.title,
+      description: s.description,
+      benefits: s.benefits,
+      deliverables: s.deliverables,
+      pricing: s.pricing,
+      bestFor: s.bestFor,
+      flagship: s.flagship,
+    }))
   }
 }
 
-/** Published projects from DB, or static fallback */
 export async function getPublicProjects(): Promise<PublicProject[]> {
   try {
     const sql = getSql()
-    if (!sql) return mapStaticProjects()
+    if (!sql) {
+      return staticCaseStudies.map((c) => ({
+        id: c.id,
+        title: c.title,
+        client: c.client,
+        industry: c.industry,
+        timeframe: c.timeframe,
+        category: c.category,
+        image: c.image,
+        problem: c.problem,
+        strategy: c.strategy,
+        execution: c.execution,
+        results: c.results,
+        testimonial: c.testimonial,
+        testimonialAuthor: c.testimonialAuthor,
+      }))
+    }
     const rows = await listProjects(sql, { publishedOnly: true })
-    if (!rows.length) return mapStaticProjects()
+    if (!rows.length) {
+      return staticCaseStudies.map((c) => ({
+        id: c.id,
+        title: c.title,
+        client: c.client,
+        industry: c.industry,
+        timeframe: c.timeframe,
+        category: c.category,
+        image: c.image,
+        problem: c.problem,
+        strategy: c.strategy,
+        execution: c.execution,
+        results: c.results,
+        testimonial: c.testimonial,
+        testimonialAuthor: c.testimonialAuthor,
+      }))
+    }
     return rows.map(mapDbProject)
   } catch (e) {
     console.error('getPublicProjects failed:', e)
-    return mapStaticProjects()
+    return staticCaseStudies.map((c) => ({
+      id: c.id,
+      title: c.title,
+      client: c.client,
+      industry: c.industry,
+      timeframe: c.timeframe,
+      category: c.category,
+      image: c.image,
+      problem: c.problem,
+      strategy: c.strategy,
+      execution: c.execution,
+      results: c.results,
+      testimonial: c.testimonial,
+      testimonialAuthor: c.testimonialAuthor,
+    }))
   }
 }
 
-/** Featured projects for home — DB featured, else first 3, else static */
 export async function getFeaturedProjects(): Promise<
   { title: string; category: string; result: string; image: string; href: string }[]
 > {
@@ -156,7 +251,8 @@ export async function getFeaturedProjects(): Promise<
         return rows.map((p) => ({
           title: p.title,
           category: p.category || 'Project',
-          result: [p.metric1, p.label1].filter(Boolean).join(' ') || 'View case study',
+          result:
+            [p.metric1, p.label1].filter(Boolean).join(' ') || 'View case study',
           image: p.image || '/case-studies/digital-campaigns.jpg',
           href: `/case-studies#${p.slug}`,
         }))
@@ -165,6 +261,59 @@ export async function getFeaturedProjects(): Promise<
   } catch (e) {
     console.error('getFeaturedProjects failed:', e)
   }
-
   return staticFeatured
+}
+
+export async function getPublicTestimonials(): Promise<PublicTestimonial[]> {
+  try {
+    const sql = getSql()
+    if (!sql) return staticTestimonials
+    const rows = await listTestimonials(sql, { publishedOnly: true })
+    if (!rows.length) return staticTestimonials
+    return rows.map(mapDbTestimonial)
+  } catch (e) {
+    console.error('getPublicTestimonials failed:', e)
+    return staticTestimonials
+  }
+}
+
+export async function getPublicPackages(): Promise<PublicPackage[]> {
+  try {
+    const sql = getSql()
+    if (!sql) {
+      return staticPackages.map((p) => ({
+        id: p.id,
+        title: p.title,
+        description: p.description,
+        includes: p.includes,
+        bestFor: p.bestFor,
+        notFor: p.notFor,
+        pricing: p.pricing,
+      }))
+    }
+    const rows = await listPackages(sql, { publishedOnly: true })
+    if (!rows.length) {
+      return staticPackages.map((p) => ({
+        id: p.id,
+        title: p.title,
+        description: p.description,
+        includes: p.includes,
+        bestFor: p.bestFor,
+        notFor: p.notFor,
+        pricing: p.pricing,
+      }))
+    }
+    return rows.map(mapDbPackage)
+  } catch (e) {
+    console.error('getPublicPackages failed:', e)
+    return staticPackages.map((p) => ({
+      id: p.id,
+      title: p.title,
+      description: p.description,
+      includes: p.includes,
+      bestFor: p.bestFor,
+      notFor: p.notFor,
+      pricing: p.pricing,
+    }))
+  }
 }

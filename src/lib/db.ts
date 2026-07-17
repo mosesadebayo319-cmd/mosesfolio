@@ -54,6 +54,48 @@ export type DbProject = {
   updated_at: string
 }
 
+export type DbTestimonial = {
+  id: number
+  name: string
+  role: string | null
+  company: string | null
+  quote: string
+  link: string | null
+  rating: number
+  sort_order: number
+  published: boolean
+  created_at: string
+  updated_at: string
+}
+
+export type DbPackage = {
+  id: number
+  title: string
+  description: string
+  includes: string[]
+  best_for: string | null
+  not_for: string | null
+  pricing: string | null
+  slug: string
+  sort_order: number
+  published: boolean
+  created_at: string
+  updated_at: string
+}
+
+export type DashboardStats = {
+  messagesTotal: number
+  messagesWeek: number
+  servicesPublished: number
+  servicesTotal: number
+  projectsPublished: number
+  projectsFeatured: number
+  projectsTotal: number
+  testimonialsPublished: number
+  packagesPublished: number
+  recentMessages: ContactSubmission[]
+}
+
 export function getSql(): NeonQueryFunction<false, false> | null {
   const url = process.env.DATABASE_URL
   if (!url) return null
@@ -199,6 +241,72 @@ export async function ensureAllTables(
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
   `
+
+  await sql`
+    CREATE TABLE IF NOT EXISTS site_testimonials (
+      id SERIAL PRIMARY KEY,
+      name TEXT NOT NULL,
+      role TEXT,
+      company TEXT,
+      quote TEXT NOT NULL,
+      link TEXT,
+      rating INT NOT NULL DEFAULT 5,
+      sort_order INT NOT NULL DEFAULT 0,
+      published BOOLEAN NOT NULL DEFAULT true,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `
+
+  await sql`
+    CREATE TABLE IF NOT EXISTS site_packages (
+      id SERIAL PRIMARY KEY,
+      title TEXT NOT NULL,
+      description TEXT NOT NULL DEFAULT '',
+      includes JSONB NOT NULL DEFAULT '[]'::jsonb,
+      best_for TEXT,
+      not_for TEXT,
+      pricing TEXT,
+      slug TEXT NOT NULL UNIQUE,
+      sort_order INT NOT NULL DEFAULT 0,
+      published BOOLEAN NOT NULL DEFAULT true,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `
+}
+
+function mapTestimonial(row: Record<string, unknown>): DbTestimonial {
+  return {
+    id: Number(row.id),
+    name: String(row.name),
+    role: row.role != null ? String(row.role) : null,
+    company: row.company != null ? String(row.company) : null,
+    quote: String(row.quote),
+    link: row.link != null ? String(row.link) : null,
+    rating: Number(row.rating ?? 5),
+    sort_order: Number(row.sort_order ?? 0),
+    published: Boolean(row.published),
+    created_at: String(row.created_at),
+    updated_at: String(row.updated_at),
+  }
+}
+
+function mapPackage(row: Record<string, unknown>): DbPackage {
+  return {
+    id: Number(row.id),
+    title: String(row.title),
+    description: String(row.description ?? ''),
+    includes: parseStringArray(row.includes),
+    best_for: row.best_for != null ? String(row.best_for) : null,
+    not_for: row.not_for != null ? String(row.not_for) : null,
+    pricing: row.pricing != null ? String(row.pricing) : null,
+    slug: String(row.slug),
+    sort_order: Number(row.sort_order ?? 0),
+    published: Boolean(row.published),
+    created_at: String(row.created_at),
+    updated_at: String(row.updated_at),
+  }
 }
 
 /** @deprecated use ensureAllTables */
@@ -585,3 +693,324 @@ export async function deleteProject(
   const rows = await sql`DELETE FROM site_projects WHERE id = ${id} RETURNING id`
   return rows.length > 0
 }
+
+/** Reorder projects by id list (first = sort_order 0) */
+export async function reorderProjects(
+  sql: NeonQueryFunction<false, false>,
+  orderedIds: number[]
+): Promise<void> {
+  await ensureAllTables(sql)
+  for (let i = 0; i < orderedIds.length; i++) {
+    await sql`
+      UPDATE site_projects SET sort_order = ${i}, updated_at = NOW()
+      WHERE id = ${orderedIds[i]}
+    `
+  }
+}
+
+export async function reorderServices(
+  sql: NeonQueryFunction<false, false>,
+  orderedIds: number[]
+): Promise<void> {
+  await ensureAllTables(sql)
+  for (let i = 0; i < orderedIds.length; i++) {
+    await sql`
+      UPDATE site_services SET sort_order = ${i}, updated_at = NOW()
+      WHERE id = ${orderedIds[i]}
+    `
+  }
+}
+
+// ─── Testimonials ───────────────────────────────────────────
+
+export async function listTestimonials(
+  sql: NeonQueryFunction<false, false>,
+  opts?: { publishedOnly?: boolean }
+): Promise<DbTestimonial[]> {
+  await ensureAllTables(sql)
+  const rows = opts?.publishedOnly
+    ? await sql`
+        SELECT * FROM site_testimonials
+        WHERE published = true
+        ORDER BY sort_order ASC, id DESC
+      `
+    : await sql`
+        SELECT * FROM site_testimonials
+        ORDER BY sort_order ASC, id DESC
+      `
+  return (rows as Record<string, unknown>[]).map(mapTestimonial)
+}
+
+export async function createTestimonial(
+  sql: NeonQueryFunction<false, false>,
+  data: {
+    name: string
+    role?: string
+    company?: string
+    quote: string
+    link?: string
+    rating?: number
+    sort_order?: number
+    published?: boolean
+  }
+): Promise<DbTestimonial> {
+  await ensureAllTables(sql)
+  const rows = await sql`
+    INSERT INTO site_testimonials (
+      name, role, company, quote, link, rating, sort_order, published
+    )
+    VALUES (
+      ${data.name},
+      ${data.role || null},
+      ${data.company || null},
+      ${data.quote},
+      ${data.link || null},
+      ${data.rating ?? 5},
+      ${data.sort_order ?? 0},
+      ${data.published ?? true}
+    )
+    RETURNING *
+  `
+  return mapTestimonial(rows[0] as Record<string, unknown>)
+}
+
+export async function updateTestimonial(
+  sql: NeonQueryFunction<false, false>,
+  id: number,
+  data: Partial<{
+    name: string
+    role: string
+    company: string
+    quote: string
+    link: string
+    rating: number
+    sort_order: number
+    published: boolean
+  }>
+): Promise<DbTestimonial | null> {
+  await ensureAllTables(sql)
+  const existing = await sql`SELECT * FROM site_testimonials WHERE id = ${id}`
+  if (!existing.length) return null
+  const cur = existing[0] as Record<string, unknown>
+
+  const name = data.name ?? String(cur.name)
+  const role =
+    data.role !== undefined
+      ? data.role || null
+      : cur.role != null
+        ? String(cur.role)
+        : null
+  const company =
+    data.company !== undefined
+      ? data.company || null
+      : cur.company != null
+        ? String(cur.company)
+        : null
+  const quote = data.quote ?? String(cur.quote)
+  const link =
+    data.link !== undefined
+      ? data.link || null
+      : cur.link != null
+        ? String(cur.link)
+        : null
+  const rating = data.rating ?? Number(cur.rating ?? 5)
+  const sort_order = data.sort_order ?? Number(cur.sort_order ?? 0)
+  const published = data.published ?? Boolean(cur.published)
+
+  const rows = await sql`
+    UPDATE site_testimonials SET
+      name = ${name},
+      role = ${role},
+      company = ${company},
+      quote = ${quote},
+      link = ${link},
+      rating = ${rating},
+      sort_order = ${sort_order},
+      published = ${published},
+      updated_at = NOW()
+    WHERE id = ${id}
+    RETURNING *
+  `
+  return mapTestimonial(rows[0] as Record<string, unknown>)
+}
+
+export async function deleteTestimonial(
+  sql: NeonQueryFunction<false, false>,
+  id: number
+): Promise<boolean> {
+  await ensureAllTables(sql)
+  const rows =
+    await sql`DELETE FROM site_testimonials WHERE id = ${id} RETURNING id`
+  return rows.length > 0
+}
+
+// ─── Packages ───────────────────────────────────────────────
+
+export async function listPackages(
+  sql: NeonQueryFunction<false, false>,
+  opts?: { publishedOnly?: boolean }
+): Promise<DbPackage[]> {
+  await ensureAllTables(sql)
+  const rows = opts?.publishedOnly
+    ? await sql`
+        SELECT * FROM site_packages
+        WHERE published = true
+        ORDER BY sort_order ASC, id DESC
+      `
+    : await sql`
+        SELECT * FROM site_packages
+        ORDER BY sort_order ASC, id DESC
+      `
+  return (rows as Record<string, unknown>[]).map(mapPackage)
+}
+
+export async function createPackage(
+  sql: NeonQueryFunction<false, false>,
+  data: {
+    title: string
+    description: string
+    includes: string[]
+    best_for?: string
+    not_for?: string
+    pricing?: string
+    slug?: string
+    sort_order?: number
+    published?: boolean
+  }
+): Promise<DbPackage> {
+  await ensureAllTables(sql)
+  const slug = data.slug || slugify(data.title) || `package-${Date.now()}`
+  const includes = JSON.stringify(data.includes || [])
+
+  const rows = await sql`
+    INSERT INTO site_packages (
+      title, description, includes, best_for, not_for, pricing, slug, sort_order, published
+    )
+    VALUES (
+      ${data.title},
+      ${data.description},
+      ${includes}::jsonb,
+      ${data.best_for || null},
+      ${data.not_for || null},
+      ${data.pricing || null},
+      ${slug},
+      ${data.sort_order ?? 0},
+      ${data.published ?? true}
+    )
+    RETURNING *
+  `
+  return mapPackage(rows[0] as Record<string, unknown>)
+}
+
+export async function updatePackage(
+  sql: NeonQueryFunction<false, false>,
+  id: number,
+  data: Partial<{
+    title: string
+    description: string
+    includes: string[]
+    best_for: string
+    not_for: string
+    pricing: string
+    slug: string
+    sort_order: number
+    published: boolean
+  }>
+): Promise<DbPackage | null> {
+  await ensureAllTables(sql)
+  const existing = await sql`SELECT * FROM site_packages WHERE id = ${id}`
+  if (!existing.length) return null
+  const cur = existing[0] as Record<string, unknown>
+
+  const title = data.title ?? String(cur.title)
+  const description = data.description ?? String(cur.description ?? '')
+  const includes = JSON.stringify(
+    data.includes ?? parseStringArray(cur.includes)
+  )
+  const best_for =
+    data.best_for !== undefined
+      ? data.best_for || null
+      : cur.best_for != null
+        ? String(cur.best_for)
+        : null
+  const not_for =
+    data.not_for !== undefined
+      ? data.not_for || null
+      : cur.not_for != null
+        ? String(cur.not_for)
+        : null
+  const pricing =
+    data.pricing !== undefined
+      ? data.pricing || null
+      : cur.pricing != null
+        ? String(cur.pricing)
+        : null
+  const slug = data.slug ?? String(cur.slug)
+  const sort_order = data.sort_order ?? Number(cur.sort_order ?? 0)
+  const published = data.published ?? Boolean(cur.published)
+
+  const rows = await sql`
+    UPDATE site_packages SET
+      title = ${title},
+      description = ${description},
+      includes = ${includes}::jsonb,
+      best_for = ${best_for},
+      not_for = ${not_for},
+      pricing = ${pricing},
+      slug = ${slug},
+      sort_order = ${sort_order},
+      published = ${published},
+      updated_at = NOW()
+    WHERE id = ${id}
+    RETURNING *
+  `
+  return mapPackage(rows[0] as Record<string, unknown>)
+}
+
+export async function deletePackage(
+  sql: NeonQueryFunction<false, false>,
+  id: number
+): Promise<boolean> {
+  await ensureAllTables(sql)
+  const rows = await sql`DELETE FROM site_packages WHERE id = ${id} RETURNING id`
+  return rows.length > 0
+}
+
+export async function getDashboardStats(
+  sql: NeonQueryFunction<false, false>
+): Promise<DashboardStats> {
+  await ensureAllTables(sql)
+
+  const [msgTotal] = await sql`SELECT COUNT(*)::int AS c FROM contact_submissions`
+  const [msgWeek] = await sql`
+    SELECT COUNT(*)::int AS c FROM contact_submissions
+    WHERE created_at >= NOW() - INTERVAL '7 days'
+  `
+  const [svcPub] = await sql`SELECT COUNT(*)::int AS c FROM site_services WHERE published = true`
+  const [svcAll] = await sql`SELECT COUNT(*)::int AS c FROM site_services`
+  const [projPub] = await sql`SELECT COUNT(*)::int AS c FROM site_projects WHERE published = true`
+  const [projFeat] = await sql`SELECT COUNT(*)::int AS c FROM site_projects WHERE featured = true AND published = true`
+  const [projAll] = await sql`SELECT COUNT(*)::int AS c FROM site_projects`
+  const [testPub] = await sql`SELECT COUNT(*)::int AS c FROM site_testimonials WHERE published = true`
+  const [pkgPub] = await sql`SELECT COUNT(*)::int AS c FROM site_packages WHERE published = true`
+  const recent = await sql`
+    SELECT id, name, email, phone, subject, budget, message, created_at
+    FROM contact_submissions
+    ORDER BY created_at DESC
+    LIMIT 5
+  `
+
+  return {
+    messagesTotal: Number((msgTotal as { c: number }).c || 0),
+    messagesWeek: Number((msgWeek as { c: number }).c || 0),
+    servicesPublished: Number((svcPub as { c: number }).c || 0),
+    servicesTotal: Number((svcAll as { c: number }).c || 0),
+    projectsPublished: Number((projPub as { c: number }).c || 0),
+    projectsFeatured: Number((projFeat as { c: number }).c || 0),
+    projectsTotal: Number((projAll as { c: number }).c || 0),
+    testimonialsPublished: Number((testPub as { c: number }).c || 0),
+    packagesPublished: Number((pkgPub as { c: number }).c || 0),
+    recentMessages: recent as ContactSubmission[],
+  }
+}
+

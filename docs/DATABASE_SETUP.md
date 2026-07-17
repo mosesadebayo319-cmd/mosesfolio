@@ -32,16 +32,19 @@ Deployments → **Redeploy** the latest production deployment
 1. Open: `https://mosesfolio.online/admin`
 2. Enter your `ADMIN_SECRET` and sign in
 3. Use tabs:
-   - **Projects** — add case studies (title, story, metrics, image upload)
-   - **Services** — add/edit services shown on `/services`
-   - **Messages** — contact form submissions
+   - **Dashboard** — stats (messages, projects, services, etc.)
+   - **Projects** — case studies, **auto-compress** image upload, **↑↓ reorder**
+   - **Services** — services list + reorder
+   - **Packages** — pricing packages on `/services`
+   - **Testimonials** — quotes on home + `/testimonials`
+   - **Messages** — contact form inbox
 
-### Notes on projects & services
+### Notes
 
-- Until you add items in Admin, the public site shows the **default built-in** content.
-- After you save at least one **published** project or service in the database, those replace the defaults for that section.
-- Project images: upload a file (under ~1.4MB) or paste an image URL.
-- Mark **Featured** to show a project on the homepage “Selected work” section.
+- Until you add published items in Admin, the public site shows **default built-in** content.
+- After you save published DB items, they replace defaults for that section.
+- Project images are **auto-compressed** in the browser before upload.
+- Use **↑ / ↓** to reorder projects and services (homepage / listing order).
 
 ## 5. How data flows
 

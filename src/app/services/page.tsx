@@ -1,10 +1,9 @@
 import Link from 'next/link'
+import { processSteps, whatsappHireUrl } from '@/src/data/content'
 import {
-  processSteps,
-  servicePackages,
-  whatsappHireUrl,
-} from '@/src/data/content'
-import { getPublicServices } from '@/src/lib/content-loader'
+  getPublicPackages,
+  getPublicServices,
+} from '@/src/lib/content-loader'
 
 export const metadata = {
   title: 'Services',
@@ -15,7 +14,10 @@ export const metadata = {
 export const dynamic = 'force-dynamic'
 
 export default async function ServicesPage() {
-  const services = await getPublicServices()
+  const [services, servicePackages] = await Promise.all([
+    getPublicServices(),
+    getPublicPackages(),
+  ])
 
   return (
     <div className="min-h-screen">
