@@ -17,39 +17,54 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        <Image
-          src="/hero/hero.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-top"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/55" />
-        <div className="container relative z-10 py-24">
-          <div className="max-w-3xl">
-            <p className="text-accent font-semibold text-sm uppercase tracking-wider mb-4">
-              Lagos · Digital growth partner
-            </p>
-            <div className="accent-line mb-8" />
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold mb-6 leading-tight">
-              I help Nigerian brands get more leads with marketing that measures
-              up.
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-4 leading-relaxed">
-              SEO, social media, paid campaigns, and conversion-focused websites—
-              planned and executed so founders see clear results, not vanity
-              metrics.
-            </p>
-            <p className="text-accent font-medium mb-8">{site.tagline}</p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a href={whatsappHireUrl} className="cta-button" target="_blank" rel="noopener noreferrer">
-                Chat on WhatsApp
-              </a>
-              <Link href="/case-studies" className="secondary-button">
-                See the work
-              </Link>
+      <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-background">
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-card to-background" />
+        <div className="container relative z-10 py-16 md:py-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="order-2 lg:order-1">
+              <p className="text-accent font-semibold text-sm uppercase tracking-wider mb-4">
+                Lagos · Digital growth partner
+              </p>
+              <div className="accent-line mb-8" />
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold mb-6 leading-tight">
+                I help Nigerian brands get more leads with marketing that
+                measures up.
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground mb-4 leading-relaxed">
+                SEO, social media, paid campaigns, and conversion-focused
+                websites—planned and executed so founders see clear results, not
+                vanity metrics.
+              </p>
+              <p className="text-accent font-medium mb-8">{site.tagline}</p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href={whatsappHireUrl}
+                  className="cta-button"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Chat on WhatsApp
+                </a>
+                <Link href="/case-studies" className="secondary-button">
+                  See the work
+                </Link>
+              </div>
+            </div>
+
+            <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+              <div className="relative">
+                <div className="absolute -inset-3 rounded-full bg-accent/20 blur-2xl" />
+                <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-accent/40 shadow-2xl shadow-accent/10">
+                  <Image
+                    src="/hero/hero.jpg"
+                    alt={`${site.name} — Digital Marketing Specialist`}
+                    fill
+                    priority
+                    sizes="(max-width:768px) 320px, 384px"
+                    className="object-cover object-center"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
