@@ -2,30 +2,45 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { navLinks, site } from '@/src/data/content'
 
 export default function Navigation() {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
 
+  useEffect(() => {
+    setOpen(false)
+  }, [pathname])
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
+
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname.startsWith(href)
+
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container flex items-center justify-between py-4">
         <Link
           href="/"
-          className="text-2xl font-display font-bold text-accent hover:text-accent/80 transition-colors"
+          className="text-2xl font-display font-bold text-accent hover:text-accent/80 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           {site.shortName}
         </Link>
 
-        <div className="hidden lg:flex items-center gap-6">
+        <div className="hidden lg:flex items-center gap-7">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-accent ${
-                pathname === link.href ? 'text-accent' : 'text-foreground'
+              className={`text-sm font-medium transition-colors hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
+                isActive(link.href) ? 'text-accent' : 'text-foreground'
               }`}
             >
               {link.label}
@@ -33,16 +48,17 @@ export default function Navigation() {
           ))}
         </div>
 
-        <div className="hidden lg:flex items-center gap-4">
+        <div className="hidden lg:block">
           <Link href="/contact" className="cta-button text-sm !py-2.5 !px-5">
-            Get In Touch
+            Hire me
           </Link>
         </div>
 
         <button
           type="button"
-          className="lg:hidden p-2 text-foreground"
-          aria-label="Toggle menu"
+          className="lg:hidden p-2 text-foreground rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -56,25 +72,30 @@ export default function Navigation() {
       </div>
 
       {open && (
-        <div className="lg:hidden border-t border-border px-4 py-4 space-y-3 bg-background">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="block text-foreground hover:text-accent transition-colors font-medium py-2"
-              onClick={() => setOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            href="/contact"
-            className="block cta-button text-center mt-4"
+        <>
+          <button
+            type="button"
+            className="lg:hidden fixed inset-0 top-[65px] bg-black/50 z-40"
+            aria-label="Close menu overlay"
             onClick={() => setOpen(false)}
-          >
-            Get In Touch
-          </Link>
-        </div>
+          />
+          <div className="lg:hidden relative z-50 border-t border-border px-4 py-4 space-y-2 bg-background">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`block font-medium py-2 ${
+                  isActive(link.href) ? 'text-accent' : 'text-foreground'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link href="/contact" className="block cta-button text-center mt-3">
+              Hire me
+            </Link>
+          </div>
+        </>
       )}
     </nav>
   )

@@ -5,106 +5,137 @@ import {
   coreExpertise,
   featuredProjects,
   homeTestimonials,
+  processSteps,
+  site,
+  stats,
+  whatsappHireUrl,
 } from '@/src/data/content'
+import { ServiceIcon } from '@/src/components/Icons'
+import ScrollReveal from '@/src/components/ScrollReveal'
 
 export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: 'url(/manus-storage/photo-output_1419f4d5.jpeg)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center top',
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/60" />
-        </div>
-        <div className="container relative z-10 py-20">
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+        <Image
+          src="/hero/hero.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-top"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/55" />
+        <div className="container relative z-10 py-24">
           <div className="max-w-3xl">
-            <div className="accent-line mb-8" />
-            <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 leading-tight">
-              Digital Marketing Expert & Project Leader
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed">
-              I help businesses grow through strategic digital marketing, expert
-              project management, and proven results. Let&apos;s transform your
-              vision into measurable success.
+            <p className="text-accent font-semibold text-sm uppercase tracking-wider mb-4">
+              Lagos · Digital growth partner
             </p>
+            <div className="accent-line mb-8" />
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold mb-6 leading-tight">
+              I help Nigerian brands get more leads with marketing that measures
+              up.
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground mb-4 leading-relaxed">
+              SEO, social media, paid campaigns, and conversion-focused websites—
+              planned and executed so founders see clear results, not vanity
+              metrics.
+            </p>
+            <p className="text-accent font-medium mb-8">{site.tagline}</p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/contact" className="cta-button group">
-                Start Your Project
-                <span className="ml-2 group-hover:translate-x-1 transition-transform">
-                  →
-                </span>
-              </Link>
-              <Link href="/portfolio" className="secondary-button">
-                View My Work
+              <a href={whatsappHireUrl} className="cta-button" target="_blank" rel="noopener noreferrer">
+                Chat on WhatsApp
+              </a>
+              <Link href="/case-studies" className="secondary-button">
+                See the work
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Core Expertise */}
-      <section className="py-20 md:py-32 bg-card">
+      {/* Stats */}
+      <section className="py-12 border-y border-border bg-card">
         <div className="container">
-          <div className="text-center mb-16">
-            <div className="accent-line mx-auto mb-6" />
-            <h2 className="section-heading">Core Expertise</h2>
-            <p className="section-subtitle">
-              A comprehensive toolkit for digital success
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {coreExpertise.map((item) => (
-              <div
-                key={item.title}
-                className="p-8 bg-background rounded-xl border border-border hover:border-accent transition-all duration-300 card-hover"
-              >
-                <div className="text-4xl mb-4">{item.icon}</div>
-                <h3 className="text-xl font-heading font-semibold mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {item.desc}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            {stats.map((s) => (
+              <div key={s.label}>
+                <p className="text-3xl md:text-4xl font-display font-bold text-accent mb-1">
+                  {s.value}
                 </p>
+                <p className="text-sm text-muted-foreground">{s.label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Clients */}
-      <section className="py-16 md:py-24 bg-background">
+      {/* Expertise */}
+      <section className="py-20 md:py-28 bg-background">
         <div className="container">
-          <div className="text-center mb-12">
-            <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">
-              Trusted By
+          <div className="text-center mb-14">
+            <div className="accent-line mx-auto mb-6" />
+            <h2 className="section-heading">How I help you grow</h2>
+            <p className="section-subtitle">
+              Three flagship offers—plus leadership when you need someone to own
+              delivery end-to-end.
             </p>
-            <h2 className="section-heading">Clients & Partners</h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {coreExpertise.map((item, i) => (
+              <ScrollReveal key={item.id} delay={i * 60}>
+                <div className="p-8 h-full bg-card rounded-xl border border-border hover:border-accent card-hover">
+                  <div className="text-accent mb-4">
+                    <ServiceIcon name={item.icon} />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm">
+                    {item.desc}
+                  </p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <Link href="/services" className="secondary-button">
+              View all services
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Clients */}
+      <section className="py-16 md:py-20 bg-card">
+        <div className="container">
+          <div className="text-center mb-10">
+            <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-2">
+              Trusted by
+            </p>
+            <h2 className="text-2xl md:text-3xl font-display font-bold">
+              Clients & partners
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
             {clients.map((client) => (
               <a
                 key={client.name}
                 href={client.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group p-6 bg-card rounded-xl border border-border hover:border-accent transition-all flex flex-col items-center"
+                className="group p-5 bg-background rounded-xl border border-border hover:border-accent transition-all flex flex-col items-center"
               >
-                <div className="w-20 h-20 mb-4 relative">
+                <div className="w-16 h-16 mb-3 relative">
                   <Image
                     src={client.logo}
-                    alt={client.name}
+                    alt={`${client.name} logo`}
                     fill
                     className="object-contain"
                     unoptimized
+                    sizes="64px"
                   />
                 </div>
-                <h3 className="font-semibold text-center group-hover:text-accent transition-colors">
+                <h3 className="font-semibold text-sm text-center group-hover:text-accent">
                   {client.name}
                 </h3>
                 <p className="text-xs text-muted-foreground text-center mt-1">
@@ -113,123 +144,150 @@ export default function HomePage() {
               </a>
             ))}
           </div>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-center mt-12 leading-relaxed">
-            I&apos;ve had the privilege of working with innovative companies
-            across tech, non-profit, ministry, and design sectors. Each
-            partnership has strengthened my expertise in delivering measurable
-            digital results.
-          </p>
         </div>
       </section>
 
-      {/* Featured Projects */}
-      <section className="py-20 md:py-32 bg-background">
+      {/* Case studies preview */}
+      <section className="py-20 md:py-28 bg-background">
         <div className="container">
-          <div className="text-center mb-16">
+          <div className="text-center mb-14">
             <div className="accent-line mx-auto mb-6" />
-            <h2 className="section-heading">Featured Projects</h2>
-            <p className="section-subtitle">Real results from real clients</p>
+            <h2 className="section-heading">Selected work</h2>
+            <p className="section-subtitle">Outcomes from real engagements</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {featuredProjects.map((project) => (
-              <div
-                key={project.title}
-                className="group overflow-hidden rounded-xl border border-border hover:border-accent transition-all duration-300 card-hover"
-              >
-                <div className="relative h-64 overflow-hidden">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-                </div>
-                <div className="p-6 bg-card">
-                  <p className="text-accent text-sm font-semibold mb-2">
-                    {project.category}
-                  </p>
-                  <h3 className="text-xl font-heading font-semibold mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm mb-4">
-                    {project.result}
-                  </p>
-                  <Link
-                    href="/portfolio"
-                    className="text-accent font-semibold text-sm inline-flex items-center gap-2 hover:underline"
-                  >
-                    View Case Study →
-                  </Link>
-                </div>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+            {featuredProjects.map((project, i) => (
+              <ScrollReveal key={project.title} delay={i * 80}>
+                <article className="group overflow-hidden rounded-xl border border-border hover:border-accent card-hover bg-card h-full flex flex-col">
+                  <div className="relative h-52 overflow-hidden">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width:768px) 100vw, 33vw"
+                    />
+                  </div>
+                  <div className="p-6 flex flex-col flex-1">
+                    <p className="text-accent text-sm font-semibold mb-2">
+                      {project.category}
+                    </p>
+                    <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                    <p className="text-muted-foreground text-sm mb-4 flex-1">
+                      {project.result}
+                    </p>
+                    <Link
+                      href={project.href}
+                      className="text-accent font-semibold text-sm hover:underline"
+                    >
+                      Read case study →
+                    </Link>
+                  </div>
+                </article>
+              </ScrollReveal>
             ))}
           </div>
           <div className="text-center">
-            <Link href="/portfolio" className="secondary-button">
-              Explore All Projects
+            <Link href="/case-studies" className="secondary-button">
+              All case studies
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20 md:py-32 bg-card">
+      {/* Process */}
+      <section className="py-20 md:py-28 bg-card">
         <div className="container">
-          <div className="text-center mb-16">
+          <div className="text-center mb-14">
             <div className="accent-line mx-auto mb-6" />
-            <h2 className="section-heading">Client Testimonials</h2>
-            <p className="section-subtitle">
-              What clients say about working with me
-            </p>
+            <h2 className="section-heading">A simple process</h2>
+            <p className="section-subtitle">From clarity to measurable growth</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {processSteps.map((step) => (
+              <div
+                key={step.step}
+                className="p-6 bg-background rounded-xl border border-border text-center"
+              >
+                <p className="text-3xl font-display font-bold text-accent mb-3">
+                  {step.step}
+                </p>
+                <h3 className="font-semibold mb-2">{step.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {step.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20 md:py-28 bg-background">
+        <div className="container">
+          <div className="text-center mb-14">
+            <div className="accent-line mx-auto mb-6" />
+            <h2 className="section-heading">What clients say</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {homeTestimonials.map((t) => (
-              <div
+              <blockquote
                 key={t.name}
-                className="p-8 bg-background rounded-xl border border-border hover:border-accent transition-all duration-300"
+                className="p-8 bg-card rounded-xl border border-border hover:border-accent transition-all flex flex-col"
               >
-                <div className="flex gap-1 mb-4 text-accent">
+                <div
+                  className="flex gap-1 mb-4 text-accent"
+                  aria-label={`${t.rating} out of 5 stars`}
+                >
                   {Array.from({ length: t.rating }).map((_, i) => (
                     <span key={i}>★</span>
                   ))}
                 </div>
-                <p className="text-muted-foreground mb-6 leading-relaxed italic">
+                <p className="text-muted-foreground mb-6 leading-relaxed italic flex-1">
                   &ldquo;{t.text}&rdquo;
                 </p>
-                <p className="font-semibold">{t.name}</p>
-                <p className="text-sm text-accent">{t.role}</p>
-              </div>
+                <footer>
+                  <p className="font-semibold">{t.name}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {t.role} ·{' '}
+                    <a
+                      href={t.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent hover:underline"
+                    >
+                      {t.company}
+                    </a>
+                  </p>
+                </footer>
+              </blockquote>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-20 md:py-32 bg-background relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: 'url(/abstract-digital-marketing.webp)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
-        <div className="container relative z-10">
+      <section className="py-20 md:py-28 bg-card border-t border-border">
+        <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="section-heading mb-6">
-              Ready to Transform Your Business?
+              Ready for growth you can measure?
             </h2>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8">
-              Let&apos;s discuss your goals and create a strategy that delivers
-              real results. Schedule a consultation today.
+            <p className="text-lg text-muted-foreground mb-8">
+              Tell me your goal—leads, visibility, or a site that converts. I
+              usually reply within {site.responseTime.toLowerCase()}.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="cta-button">
-                Get In Touch
-              </Link>
-              <Link href="/portfolio" className="secondary-button">
-                View My Work
+              <a
+                href={whatsappHireUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cta-button"
+              >
+                WhatsApp me
+              </a>
+              <Link href="/contact" className="secondary-button">
+                Send a brief
               </Link>
             </div>
           </div>

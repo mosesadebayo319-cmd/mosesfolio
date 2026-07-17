@@ -3,10 +3,11 @@ import {
   coreCompetencies,
   experienceRoles,
   leadershipTraits,
+  whatsappHireUrl,
 } from '@/src/data/content'
 
 export const metadata = {
-  title: 'Experience | Moses Oluwashina Adebayo',
+  title: 'Experience',
   description:
     'Professional experience in digital marketing, mentoring, and project leadership.',
 }
@@ -14,40 +15,36 @@ export const metadata = {
 export default function ExperiencePage() {
   return (
     <div className="min-h-screen">
-      <section className="py-20 md:py-32 bg-card">
+      <section className="py-20 md:py-28 bg-card">
         <div className="container">
           <div className="max-w-3xl mx-auto">
             <div className="accent-line mb-6" />
-            <h1 className="section-heading mb-6">Professional Experience</h1>
+            <h1 className="section-heading mb-6">Experience</h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              A comprehensive track record of driving digital transformation,
-              building high-performing teams, and delivering measurable business
-              results across diverse industries and roles.
+              Digital transformation, team leadership, and measurable growth
+              across education, non-profit, and service businesses.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="py-20 md:py-32 bg-background">
-        <div className="container">
-          <div className="max-w-4xl mx-auto space-y-10">
+      <section className="py-20 md:py-28 bg-background">
+        <div className="container max-w-3xl">
+          <div className="pl-2">
             {experienceRoles.map((role) => (
-              <div
-                key={role.role + role.company}
-                className="p-8 bg-card rounded-xl border border-border hover:border-accent transition-all duration-300"
-              >
-                <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-6">
+              <div key={role.role + role.company} className="timeline-item">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-3">
                   <div>
-                    <h2 className="text-2xl font-heading font-semibold text-accent mb-1">
+                    <h2 className="text-xl font-semibold text-accent">
                       {role.role}
                     </h2>
-                    <p className="text-lg font-medium">
+                    <p className="font-medium">
                       {role.link ? (
                         <a
                           href={role.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="hover:text-accent transition-colors"
+                          className="hover:text-accent"
                         >
                           {role.company}
                         </a>
@@ -56,35 +53,33 @@ export default function ExperiencePage() {
                       )}
                     </p>
                   </div>
-                  <p className="text-muted-foreground text-sm mt-2 md:mt-0">
-                    {role.period}
-                  </p>
+                  <p className="text-sm text-muted-foreground">{role.period}</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <h3 className="font-semibold mb-3">Responsibilities</h3>
-                    <ul className="space-y-2">
+                    <h3 className="text-sm font-semibold mb-2">Focus</h3>
+                    <ul className="space-y-1.5">
                       {role.responsibilities.map((r) => (
                         <li
                           key={r}
-                          className="flex gap-2 text-sm text-muted-foreground"
+                          className="text-sm text-muted-foreground flex gap-2"
                         >
                           <span className="text-accent">•</span>
-                          <span>{r}</span>
+                          {r}
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-3">Impact</h3>
-                    <ul className="space-y-2">
+                    <h3 className="text-sm font-semibold mb-2">Impact</h3>
+                    <ul className="space-y-1.5">
                       {role.impact.map((imp) => (
                         <li
                           key={imp}
-                          className="flex gap-2 text-sm text-muted-foreground"
+                          className="text-sm text-muted-foreground flex gap-2"
                         >
                           <span className="text-accent">✓</span>
-                          <span>{imp}</span>
+                          {imp}
                         </li>
                       ))}
                     </ul>
@@ -96,17 +91,14 @@ export default function ExperiencePage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-32 bg-card">
+      <section className="py-16 bg-card">
         <div className="container">
-          <div className="text-center mb-12">
-            <div className="accent-line mx-auto mb-6" />
-            <h2 className="section-heading">Core Competencies</h2>
-          </div>
+          <h2 className="section-heading text-center mb-8">Competencies</h2>
           <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
             {coreCompetencies.map((c) => (
               <span
                 key={c}
-                className="px-4 py-2 bg-background border border-border rounded-lg text-sm font-medium hover:border-accent transition-colors"
+                className="px-4 py-2 bg-background border border-border rounded-lg text-sm"
               >
                 {c}
               </span>
@@ -115,22 +107,19 @@ export default function ExperiencePage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-32 bg-background">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container">
-          <div className="text-center mb-16">
-            <div className="accent-line mx-auto mb-6" />
-            <h2 className="section-heading">Leadership Strengths</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <h2 className="section-heading text-center mb-12">
+            Leadership strengths
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {leadershipTraits.map((t) => (
               <div
                 key={t.title}
-                className="p-8 bg-card rounded-xl border border-border hover:border-accent transition-all"
+                className="p-6 bg-card rounded-xl border border-border"
               >
-                <h3 className="text-xl font-heading font-semibold mb-3 text-accent">
-                  {t.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed text-sm">
+                <h3 className="font-semibold text-accent mb-2">{t.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {t.description}
                 </p>
               </div>
@@ -139,16 +128,19 @@ export default function ExperiencePage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-32 bg-card">
-        <div className="container text-center">
-          <h2 className="section-heading mb-6">Let&apos;s Build Together</h2>
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Looking for a digital marketing leader or project partner? Get in
-            touch.
-          </p>
-          <Link href="/contact" className="cta-button">
-            Get In Touch
+      <section className="py-16 bg-card border-t border-border text-center">
+        <div className="container">
+          <Link href="/about" className="secondary-button mr-3 mb-3 inline-flex">
+            About Moses
           </Link>
+          <a
+            href={whatsappHireUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cta-button inline-flex"
+          >
+            Hire me
+          </a>
         </div>
       </section>
     </div>

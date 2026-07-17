@@ -1,16 +1,19 @@
 export const site = {
   name: 'Moses Oluwashina Adebayo',
   shortName: 'Moses',
-  title: 'Moses Oluwashina Adebayo - Digital Marketing & Project Management Expert',
+  title:
+    'Moses Adebayo | Digital Marketing & Web Growth for African Brands',
   description:
-    'Digital Marketing Specialist, Project Manager, and Senior Coding Mentor. Expertise in SEO, Social Media Management, Content Strategy, and Digital Campaigns.',
-  jobTitle: 'Digital Marketing Specialist',
+    'I help Nigerian founders and organisations get more leads with SEO, social media, paid campaigns, and conversion-focused websites. Based in Lagos.',
+  jobTitle: 'Digital Marketing Specialist & Web Growth Partner',
+  tagline: 'More leads. Clearer brand. Measurable growth.',
   location: 'Lagos, Nigeria',
   email: 'mosesadebayo319@gmail.com',
   phone: '+234 812 432 8229',
   phoneRaw: '2348124328229',
-  hours: 'Monday - Friday, 9:00 AM - 6:00 PM WAT',
-  responseTime: 'Within 2 hours (during business hours)',
+  hours: 'Monday – Friday, 9:00 AM – 6:00 PM WAT',
+  responseTime: 'Usually within 2 hours during business hours',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://mosesfolio.vercel.app',
   social: {
     facebook: 'https://www.facebook.com/profile.php?id=61583181652994',
     instagram: 'https://www.instagram.com/mosesadebayo46',
@@ -19,43 +22,85 @@ export const site = {
   },
 }
 
+export const whatsappHireUrl = `https://wa.me/${site.phoneRaw}?text=${encodeURIComponent(
+  "Hi Moses, I'd like to discuss a digital marketing / web project."
+)}`
+
 export const navLinks = [
   { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
   { label: 'Services', href: '/services' },
-  { label: 'Case Studies', href: '/portfolio' },
-  { label: 'Experience', href: '/experience' },
-  { label: 'Testimonials', href: '/testimonials' },
+  { label: 'Work', href: '/case-studies' },
+  { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ]
 
+export const stats = [
+  { value: '15+', label: 'Clients supported' },
+  { value: '150%', label: 'Avg. engagement lift' },
+  { value: '50K+', label: 'Followers grown' },
+  { value: '3x', label: 'Campaign ROI examples' },
+]
+
 export const coreExpertise = [
-  { icon: '📊', title: 'SEO Optimization', desc: 'Boost visibility with data-driven strategies' },
-  { icon: '📱', title: 'Social Media', desc: 'Engage audiences across all platforms' },
-  { icon: '✍️', title: 'Content Strategy', desc: 'Compelling narratives that convert' },
-  { icon: '🎯', title: 'Digital Campaigns', desc: 'Results-driven advertising & marketing' },
-  { icon: '💻', title: 'Web Development', desc: 'Modern websites and landing pages that convert' },
-  { icon: '💼', title: 'Project Management', desc: 'Lead teams with precision and clarity' },
+  {
+    id: 'seo',
+    title: 'SEO Optimization',
+    desc: 'Rank higher and earn organic leads with technical and content SEO.',
+    icon: 'search',
+  },
+  {
+    id: 'social',
+    title: 'Social Media',
+    desc: 'Grow engaged communities across Instagram, Facebook, LinkedIn & more.',
+    icon: 'megaphone',
+  },
+  {
+    id: 'content',
+    title: 'Content Strategy',
+    desc: 'Story-led content that builds trust and moves buyers to act.',
+    icon: 'pen',
+  },
+  {
+    id: 'campaigns',
+    title: 'Paid Campaigns',
+    desc: 'Meta & Google ads with clear tracking and measurable ROI.',
+    icon: 'target',
+  },
+  {
+    id: 'web',
+    title: 'Web Development',
+    desc: 'Fast, mobile-first sites and landing pages built to convert.',
+    icon: 'code',
+  },
+  {
+    id: 'pm',
+    title: 'Project Leadership',
+    desc: 'Clear plans, team coordination, and on-time delivery.',
+    icon: 'briefcase',
+  },
 ]
 
 export const featuredProjects = [
   {
-    title: 'Social Media Growth Campaign',
+    title: 'Heroes Help Social Growth',
     category: 'Social Media Management',
-    result: '+150% engagement increase',
+    result: '+150% engagement · 50K+ community growth',
     image: '/case-studies/social-media.jpg',
+    href: '/case-studies#heroes-help-social',
   },
   {
-    title: 'SEO Transformation Project',
+    title: 'B2B SEO Transformation',
     category: 'SEO & Content',
-    result: '1st page rankings achieved',
+    result: 'Page-1 rankings · +280% organic traffic',
     image: '/case-studies/seo.jpg',
+    href: '/case-studies#seo-transformation',
   },
   {
-    title: 'Digital Campaign Launch',
+    title: 'Product Launch Campaign',
     category: 'Digital Marketing',
-    result: '3x ROI in 90 days',
+    result: '3x ROI in 90 days · 250+ qualified leads',
     image: '/case-studies/digital-campaigns.jpg',
+    href: '/case-studies#digital-campaign-launch',
   },
 ]
 
@@ -65,6 +110,7 @@ export const homeTestimonials = [
     role: 'CEO, MecuryX',
     text: 'Moses demonstrated exceptional expertise in digital marketing and campaign execution. His ability to translate strategy into measurable results significantly improved our visibility and engagement.',
     link: 'https://www.mercuryx.com',
+    company: 'MecuryX',
     rating: 5,
   },
   {
@@ -72,6 +118,7 @@ export const homeTestimonials = [
     role: 'President, Heroes Help',
     text: 'Moses brought structure, creativity, and consistency to our digital presence. His work elevated how we communicate and connect with our audience.',
     link: 'https://www.heroeshelp.org.ng',
+    company: 'Heroes Help',
     rating: 5,
   },
   {
@@ -79,6 +126,7 @@ export const homeTestimonials = [
     role: 'CEO, Print Mode',
     text: 'Working with Moses was impactful. His approach to digital marketing is strategic, intentional, and results-oriented. He played a key role in improving our brand visibility.',
     link: 'https://www.printmode.com',
+    company: 'Print Mode',
     rating: 5,
   },
 ]
@@ -92,7 +140,7 @@ export const clients = [
   },
   {
     name: 'Heroes Help',
-    logo: '/manus-storage/da82fbcf-e26c-437e-a864-29af46fb0415_a6c06998.jpg',
+    logo: '/clients/heroes-help.jpg',
     url: 'https://heroeshelp.org.ng',
     description: 'Military Support & Advocacy',
   },
@@ -113,15 +161,15 @@ export const clients = [
 export const aboutValues = [
   {
     title: 'Excellence',
-    desc: 'Commitment to delivering exceptional results in every project',
+    desc: 'Every campaign, page, and plan is built to a professional standard—not “good enough.”',
   },
   {
-    title: 'Innovation',
-    desc: 'Staying ahead of digital trends and best practices',
+    title: 'Clarity',
+    desc: 'Simple strategy, honest reporting, and language non-technical founders can act on.',
   },
   {
     title: 'Impact',
-    desc: 'Focused on measurable outcomes and business growth',
+    desc: 'Focused on leads, visibility, and systems you can measure—not vanity metrics alone.',
   },
 ]
 
@@ -157,7 +205,7 @@ export const skillCategories = [
       'SEMrush',
       'HubSpot',
       'WordPress',
-      'Basic HTML/CSS',
+      'HTML/CSS',
     ],
   },
   {
@@ -173,9 +221,48 @@ export const skillCategories = [
   },
 ]
 
+export const servicePackages = [
+  {
+    id: 'growth-marketing',
+    title: 'Growth Marketing',
+    description:
+      'For brands that need consistent visibility and leads from search, social, and ads.',
+    includes: ['SEO Optimization', 'Social Media Management', 'Digital Campaigns'],
+    bestFor: 'SMEs, NGOs, and founders ready to grow demand monthly.',
+    notFor: 'One-off logo-only or pure graphic design requests.',
+    pricing: 'Monthly retainer · Custom quote',
+  },
+  {
+    id: 'web-presence',
+    title: 'Web Presence',
+    description:
+      'For teams that need a fast, trustworthy site or landing page that converts traffic.',
+    includes: ['Web Development', 'Content Strategy', 'Basic SEO setup'],
+    bestFor: 'Product launches, service businesses, training offers.',
+    notFor: 'Complex enterprise software builds.',
+    pricing: 'Project-based · Custom quote',
+  },
+  {
+    id: 'full-partner',
+    title: 'Full Growth Partner',
+    description:
+      'Strategy + execution + leadership when you want one accountable partner.',
+    includes: [
+      'Consulting & Strategy',
+      'Campaigns + SEO + Social',
+      'Project leadership',
+    ],
+    bestFor: 'Organisations scaling multi-channel growth.',
+    notFor: 'Clients seeking the lowest possible hourly rate only.',
+    pricing: 'Retainer · Custom quote',
+  },
+]
+
 export const services = [
   {
+    id: 'seo-optimization',
     title: 'SEO Optimization',
+    flagship: true,
     description:
       'Boost your online visibility and drive organic traffic with data-driven SEO strategies.',
     benefits: [
@@ -190,12 +277,15 @@ export const services = [
       'On-page and technical optimization',
       'Monthly performance reports',
     ],
-    price: 'Custom Quote',
+    pricing: 'Project or monthly · Custom quote',
+    bestFor: 'Sites with traffic potential but weak rankings.',
   },
   {
+    id: 'social-media-management',
     title: 'Social Media Management',
+    flagship: true,
     description:
-      'Build engaged communities and amplify your brand message across all social platforms.',
+      'Build engaged communities and amplify your brand across social platforms.',
     benefits: [
       'Increased brand awareness and reach',
       'Higher engagement and follower growth',
@@ -204,32 +294,59 @@ export const services = [
     ],
     deliverables: [
       'Content calendar and strategy',
-      'Daily content creation and posting',
-      'Community management and engagement',
+      'Content creation and posting',
+      'Community management',
       'Monthly analytics and insights',
     ],
-    price: 'Custom Quote',
+    pricing: 'Monthly retainer · Custom quote',
+    bestFor: 'Brands that need consistent presence, not random posts.',
   },
   {
+    id: 'web-development',
+    title: 'Web Development',
+    flagship: true,
+    description:
+      'Build fast, modern websites and landing pages that convert visitors into customers.',
+    benefits: [
+      'Professional presence that builds trust',
+      'Mobile-responsive on every device',
+      'Better speed and SEO foundations',
+      'Clear conversion paths for leads',
+    ],
+    deliverables: [
+      'Website or landing page build',
+      'Responsive front-end development',
+      'Performance and basic SEO setup',
+      'Launch support and handover',
+    ],
+    pricing: 'Project-based · Custom quote',
+    bestFor: 'Founders launching or redesigning a conversion-focused site.',
+  },
+  {
+    id: 'content-strategy',
     title: 'Content Strategy',
+    flagship: false,
     description:
       'Create compelling content that resonates with your audience and drives conversions.',
     benefits: [
       'Improved audience engagement',
-      'Established thought leadership',
+      'Thought leadership',
       'Better conversion rates',
       'Consistent brand messaging',
     ],
     deliverables: [
       'Content audit and strategy',
       'Editorial calendar',
-      'Blog posts, articles, and guides',
-      'Performance tracking and optimization',
+      'Articles and guides',
+      'Performance tracking',
     ],
-    price: 'Custom Quote',
+    pricing: 'Project or monthly · Custom quote',
+    bestFor: 'Teams ready to publish with a plan.',
   },
   {
+    id: 'digital-campaigns',
     title: 'Digital Campaigns',
+    flagship: false,
     description:
       'Launch targeted campaigns that reach the right audience and deliver measurable ROI.',
     benefits: [
@@ -240,183 +357,184 @@ export const services = [
     ],
     deliverables: [
       'Campaign strategy and planning',
-      'Ad creation and optimization',
-      'Audience targeting and segmentation',
+      'Ad creatives and optimization',
+      'Audience targeting',
       'Weekly performance reports',
     ],
-    price: 'Custom Quote',
+    pricing: 'Campaign budget + management fee',
+    bestFor: 'Launches and lead-gen pushes with ad budget.',
   },
   {
+    id: 'email-marketing',
     title: 'Email Marketing',
+    flagship: false,
     description:
       'Build and nurture customer relationships through strategic email campaigns.',
     benefits: [
-      'Higher customer retention',
-      'Increased repeat purchases',
-      'Improved customer lifetime value',
-      'Direct communication channel',
+      'Higher retention',
+      'Repeat purchases',
+      'Improved lifetime value',
+      'Direct owned channel',
     ],
     deliverables: [
       'Email strategy and segmentation',
-      'Newsletter templates and design',
-      'Campaign creation and automation',
+      'Templates and design',
+      'Automation setup',
       'Performance analytics',
     ],
-    price: 'Custom Quote',
+    pricing: 'Project or monthly · Custom quote',
+    bestFor: 'Businesses with an audience list or offer funnel.',
   },
   {
+    id: 'consulting-strategy',
     title: 'Consulting & Strategy',
+    flagship: false,
     description:
       'Expert guidance to develop and execute your digital marketing roadmap.',
     benefits: [
       'Clear strategic direction',
-      'Optimized marketing spend',
-      'Competitive advantage',
-      'Accelerated growth',
+      'Smarter marketing spend',
+      'Competitive clarity',
+      'Faster growth decisions',
     ],
     deliverables: [
-      'Digital audit and assessment',
-      'Strategic roadmap development',
-      'Quarterly strategy reviews',
+      'Digital audit',
+      'Strategic roadmap',
+      'Quarterly reviews',
       'Executive recommendations',
     ],
-    price: 'Custom Quote',
-  },
-  {
-    title: 'Web Development',
-    description:
-      'Build fast, modern websites and landing pages that convert visitors into customers.',
-    benefits: [
-      'Professional online presence that builds trust',
-      'Mobile-responsive design for every device',
-      'Faster load times and better SEO foundations',
-      'Clear conversion paths for leads and sales',
-    ],
-    deliverables: [
-      'Custom website or landing page design',
-      'Responsive front-end development',
-      'Performance and basic SEO setup',
-      'Launch support and handover documentation',
-    ],
-    price: 'Custom Quote',
+    pricing: 'Session or retainer · Custom quote',
+    bestFor: 'Leaders who need a plan before heavy execution.',
   },
 ]
 
 export const processSteps = [
   {
     step: '01',
-    title: 'Discovery & Assessment',
+    title: 'Discovery',
     description:
-      'We start by understanding your business goals, target audience, and current digital presence.',
+      'We clarify goals, audience, offers, and what “success” means in numbers.',
   },
   {
     step: '02',
-    title: 'Strategy Development',
+    title: 'Strategy',
     description:
-      'Based on insights, we develop a customized strategy tailored to your unique needs.',
+      'A focused plan for channels, messaging, and milestones—not random tactics.',
   },
   {
     step: '03',
-    title: 'Implementation',
+    title: 'Execution',
     description:
-      'We execute the strategy with precision, ensuring every detail aligns with your goals.',
+      'Campaigns, content, or website work shipped with clear ownership and timelines.',
   },
   {
     step: '04',
-    title: 'Monitoring & Optimization',
+    title: 'Optimize',
     description:
-      'Continuous tracking and optimization to ensure maximum results and ROI.',
+      'Track results, improve what works, and cut what doesn’t—every cycle.',
   },
 ]
 
 export const caseStudies = [
   {
-    id: 1,
-    title: 'Social Media Growth Campaign',
+    id: 'heroes-help-social',
+    title: 'Heroes Help Social Growth',
+    client: 'Heroes Help (NGO)',
+    industry: 'Non-profit · Military support & advocacy · Nigeria',
+    timeframe: 'Ongoing multi-platform programme',
     category: 'Social Media Management',
     image: '/case-studies/social-media.jpg',
     problem:
-      'E-commerce startup struggling with low social media engagement and limited brand awareness. Only 5K followers across platforms with minimal interaction.',
+      'Limited digital structure and inconsistent storytelling weakened community engagement for a mission-led NGO. Platforms lacked a clear content system and advocacy narrative.',
     strategy:
-      'Developed a comprehensive social media strategy focusing on authentic storytelling, community engagement, and platform-specific content. Implemented daily posting schedule with mix of educational, promotional, and user-generated content.',
+      'Built a multi-platform content system around impact storytelling, advocacy themes, and platform-native formats for Instagram, Facebook, LinkedIn, and YouTube.',
     execution:
-      'Created content calendar, designed graphics, managed community interactions, and ran targeted ad campaigns. Implemented analytics tracking to monitor performance and optimize content.',
+      'Ran structured content calendars, brand voice guidelines, community engagement, and performance reviews to keep messaging consistent and emotionally resonant.',
     results: {
       metric1: '+150%',
-      label1: 'Engagement Growth',
+      label1: 'Engagement growth',
       metric2: '50K+',
-      label2: 'Followers Gained',
-      metric3: '3.2x',
-      label3: 'ROI from Ads',
+      label2: 'Community scale (programme)',
+      metric3: '4',
+      label3: 'Core platforms managed',
     },
     testimonial:
-      'Moses transformed our social media presence. The strategic approach and consistent execution delivered results beyond our expectations.',
-    testimonialAuthor: 'CEO, E-Commerce Startup',
+      'Moses brought structure, creativity, and consistency to our digital presence. His work elevated how we communicate and connect with our audience.',
+    testimonialAuthor: 'Dr. Joel Adams, President, Heroes Help',
   },
   {
-    id: 2,
-    title: 'SEO Transformation Project',
+    id: 'seo-transformation',
+    title: 'B2B SEO Transformation',
+    client: 'B2B SaaS company (confidential)',
+    industry: 'SaaS · B2B · Content-led growth',
+    timeframe: '6 months',
     category: 'SEO & Content',
     image: '/case-studies/seo.jpg',
     problem:
-      'B2B SaaS company ranking on page 5+ for target keywords. Organic traffic declining despite increased competition. No structured SEO strategy in place.',
+      'Target keywords sat on page 5+, organic traffic was declining, and there was no structured SEO programme against rising competition.',
     strategy:
-      'Conducted comprehensive SEO audit identifying technical issues, content gaps, and competitive opportunities. Developed keyword strategy targeting high-intent search terms with lower competition.',
+      'Full SEO audit, technical fixes, keyword map for high-intent terms, and a content plan aimed at lower-competition opportunities with commercial value.',
     execution:
-      'Implemented technical SEO fixes, created 50+ optimized blog posts, improved site architecture, and built quality backlinks. Optimized existing pages for target keywords.',
+      'Fixed technical issues, shipped 50+ optimised articles, improved architecture, strengthened internal linking, and built quality backlinks while optimising existing pages.',
     results: {
-      metric1: '1st Page',
-      label1: 'Rankings Achieved',
+      metric1: 'Page 1',
+      label1: 'Priority rankings',
       metric2: '+280%',
-      label2: 'Organic Traffic',
+      label2: 'Organic traffic',
       metric3: '45',
-      label3: 'Leads per Month',
+      label3: 'Leads / month',
     },
     testimonial:
       'The SEO strategy was data-driven and results-oriented. We saw significant improvements in rankings and organic traffic within 6 months.',
     testimonialAuthor: 'Marketing Manager, SaaS Company',
   },
   {
-    id: 3,
-    title: 'Digital Campaign Launch',
+    id: 'digital-campaign-launch',
+    title: 'Product Launch Ad Campaign',
+    client: 'Service business (confidential)',
+    industry: 'Services · New product line launch',
+    timeframe: '90 days',
     category: 'Digital Marketing',
     image: '/case-studies/digital-campaigns.jpg',
     problem:
-      'Service-based business launching new product line with limited budget and no previous digital advertising experience. Needed to reach target audience quickly.',
+      'A service business launched a new offer with limited budget and no prior digital advertising experience—needed qualified leads quickly.',
     strategy:
-      'Developed integrated campaign across Google Ads, Facebook, and LinkedIn. Created audience segments based on buyer personas and implemented retargeting strategy.',
+      'Integrated Google, Facebook, and LinkedIn campaigns with persona-based audiences, retargeting, and landing-page conversion focus.',
     execution:
-      'Designed ad creatives, set up tracking and conversion pixels, managed daily budget optimization, and A/B tested messaging. Implemented landing page optimization.',
+      'Built creatives, conversion tracking, daily budget optimisation, A/B tests on messaging, and landing page improvements for lead quality.',
     results: {
       metric1: '3x',
-      label1: 'ROI in 90 Days',
+      label1: 'ROI in 90 days',
       metric2: '250+',
-      label2: 'Qualified Leads',
+      label2: 'Qualified leads',
       metric3: '18%',
-      label3: 'Conversion Rate',
+      label3: 'Conversion rate',
     },
     testimonial:
       'Professional execution and transparent reporting. Moses delivered exceptional results within our budget constraints.',
     testimonialAuthor: 'Founder, Service Company',
   },
   {
-    id: 4,
-    title: 'Content Marketing Strategy',
+    id: 'content-marketing-strategy',
+    title: 'Content Engine for Lead Quality',
+    client: 'Educational platform (confidential)',
+    industry: 'EdTech / education marketing',
+    timeframe: 'Multi-quarter programme',
     category: 'Content Strategy',
     image: '/case-studies/content-marketing.jpg',
     problem:
-      'Educational platform struggling to establish thought leadership and attract quality leads. Content scattered across channels with no cohesive strategy.',
+      'Thought leadership was weak and content was scattered—few high-quality leads despite publishing activity.',
     strategy:
-      'Created comprehensive content strategy including blog, whitepapers, case studies, and webinars. Developed content calendar aligned with buyer journey and seasonal trends.',
+      'Buyer-journey content system: blog, lead magnets, case-style assets, and distribution aligned to seasonal demand.',
     execution:
-      'Produced 100+ pieces of content, optimized for SEO and audience engagement. Implemented content distribution across owned and earned channels.',
+      'Produced 100+ optimised assets, improved SEO alignment, and built consistent distribution across owned channels.',
     results: {
       metric1: '10x',
-      label1: 'Blog Traffic',
+      label1: 'Blog traffic',
       metric2: '500+',
-      label2: 'Monthly Leads',
+      label2: 'Monthly leads',
       metric3: '4.5/5',
-      label3: 'Avg. Engagement',
+      label3: 'Avg. engagement',
     },
     testimonial:
       'The content strategy elevated our brand authority. We now attract higher-quality leads and have established ourselves as industry leaders.',
@@ -428,92 +546,93 @@ export const experienceRoles = [
   {
     role: 'Senior Coding Mentor',
     company: 'Learn2Earn',
-    period: 'November 2025 – Present',
+    period: '2025 – Present',
+    featured: true,
     responsibilities: [
-      'Mentor and guide students through structured coding curriculum, building foundational and intermediate programming skills',
-      'Design and deliver engaging lessons, projects, and assessments tailored to diverse learner needs',
-      'Track learner progress and provide personalised feedback to maximise outcomes and retention',
+      'Mentor students through structured coding curriculum',
+      'Design lessons, projects, and assessments for diverse learners',
+      'Track progress and give personalised feedback',
     ],
     impact: [
-      'Empowered students with practical coding skills for career advancement',
-      'Created engaging learning experiences that improve student retention and outcomes',
-      'Built foundational programming knowledge across diverse learner backgrounds',
+      'Practical coding skills for career advancement',
+      'Higher engagement and retention in learning paths',
     ],
   },
   {
     role: 'Digital Marketing Lead',
     company: 'MecuryX',
-    period: 'August 2025 – Present',
+    period: '2025 – Present',
     link: 'https://www.mercuryx.com',
+    featured: true,
     responsibilities: [
-      'Led and executed multi-channel digital marketing strategies',
-      'Managed paid advertising campaigns across Meta and Google platforms',
-      'Built high-converting funnels for tech programs and training offers',
-      'Oversaw content direction, brand messaging, and campaign optimization',
+      'Multi-channel digital marketing strategy and execution',
+      'Paid campaigns on Meta and Google',
+      'Funnels for tech programmes and training offers',
+      'Brand messaging and campaign optimisation',
     ],
     impact: [
-      'Improved lead generation and campaign performance',
-      'Increased program awareness and audience reach',
-      'Strengthened brand positioning in the tech education space',
+      'Stronger lead generation and campaign performance',
+      'Wider programme awareness in tech education',
     ],
   },
   {
     role: 'Digital & Content Manager',
     company: 'Heroes Help',
-    period: 'April 2025 – Present',
+    period: '2025 – Present',
     link: 'https://www.heroeshelp.org.ng',
+    featured: true,
     responsibilities: [
-      'Managed Instagram, Facebook, LinkedIn, and YouTube platforms',
-      'Created impactful storytelling content focused on military support and advocacy',
-      'Developed structured content calendars and engagement strategies',
-      'Maintained consistent brand voice across all digital channels',
+      'Managed Instagram, Facebook, LinkedIn, and YouTube',
+      'Impact storytelling for military support and advocacy',
+      'Content calendars and engagement systems',
     ],
     impact: [
-      'Increased audience engagement and social media growth',
-      'Strengthened brand credibility and emotional connection with audience',
-      'Improved content consistency and campaign effectiveness',
+      'Higher engagement and brand credibility',
+      'More consistent multi-platform presence',
     ],
   },
   {
     role: 'Digital Campaign Strategist',
     company: 'SGS Ministry',
     period: '2024',
+    featured: false,
     responsibilities: [
-      'Planned and executed targeted Facebook and Instagram ad campaigns',
-      'Developed audience-specific messaging and creatives',
-      'Monitored and optimized campaign performance',
+      'Facebook and Instagram ad campaigns',
+      'Audience-specific messaging and creatives',
+      'Performance monitoring and optimisation',
     ],
     impact: [
-      'Achieved strong engagement growth within 30 days',
-      'Expanded digital reach and audience interaction',
+      'Strong engagement growth within 30 days',
+      'Expanded digital reach',
     ],
   },
   {
     role: 'Manager (Operations & Client Delivery)',
     company: "Ella's Smart Global Services",
     period: '2022 – 2023',
+    featured: false,
     responsibilities: [
-      'Coordinated service delivery projects and client communication',
-      'Managed teams and ensured operational efficiency',
-      'Maintained quality control and project timelines',
+      'Service delivery coordination and client communication',
+      'Team management and operational quality',
     ],
     impact: [
-      'Strengthened customer experience and client retention strategy',
-      'Built strong communication and service delivery systems',
+      'Stronger client experience systems',
+      'Clearer delivery processes',
     ],
   },
   {
     role: 'Founder / Project Coordinator',
     company: 'KayStar Global Projects',
     period: 'Ongoing',
+    featured: false,
     responsibilities: [
-      'Lead procurement and project execution operations',
-      'Manage client relationships and service delivery',
-      'Coordinate planning, budgeting, and implementation',
+      'Procurement and project execution',
+      'Client relationships and delivery',
+      'Planning, budgeting, and implementation',
     ],
     impact: [
-      'Applied branding and positioning strategies',
-      'Developed client acquisition and business growth systems',
+      'Brand and positioning practice in real operations',
+      'Client acquisition systems',
     ],
   },
 ]
@@ -523,7 +642,7 @@ export const coreCompetencies = [
   'Social Media Management',
   'Paid Advertising (Meta & Google Ads)',
   'Content Creation & Storytelling',
-  'Audience Growth & Engagement',
+  'Web & Landing Page Builds',
   'Marketing Analytics & Optimization',
 ]
 
@@ -531,82 +650,60 @@ export const leadershipTraits = [
   {
     title: 'Strategic Thinking',
     description:
-      'Ability to analyze complex business challenges and develop comprehensive, data-driven solutions that drive measurable results.',
+      'Turn messy growth problems into clear priorities and measurable plans.',
   },
   {
     title: 'Team Leadership',
     description:
-      'Experience building, mentoring, and leading high-performing teams. Strong focus on professional development and creating collaborative environments.',
+      'Mentor junior marketers and coordinate cross-functional delivery.',
   },
   {
     title: 'Execution Excellence',
     description:
-      'Proven track record of translating strategy into action. Detail-oriented approach ensures quality delivery and client satisfaction.',
+      'Ship on time with quality—strategy only counts when it goes live.',
   },
   {
     title: 'Communication',
     description:
-      'Clear, transparent communication with stakeholders at all levels. Ability to explain complex concepts in accessible language.',
+      'Explain technical work in plain language for founders and boards.',
   },
   {
     title: 'Adaptability',
     description:
-      'Quick learner who thrives in dynamic environments. Comfortable navigating change and emerging market trends.',
+      'Comfortable with new platforms, offers, and fast-changing markets.',
   },
   {
     title: 'Problem Solving',
     description:
-      'Creative approach to overcoming obstacles. Strong analytical skills combined with practical, actionable solutions.',
+      'Diagnose bottlenecks in funnels, content, and campaigns—then fix them.',
   },
 ]
 
-export const fullTestimonials = [
-  {
-    quote:
-      'Moses demonstrated exceptional expertise in digital marketing and campaign execution. His ability to translate strategy into measurable results significantly improved our visibility and engagement.',
-    name: 'Ellah Daniel',
-    role: 'CEO',
-    company: 'MecuryX',
-    link: 'https://www.mercuryx.com',
-    rating: 5,
-  },
-  {
-    quote:
-      'Moses brought structure, creativity, and consistency to our digital presence. His work elevated how we communicate and connect with our audience. His professionalism and commitment to excellence are truly commendable.',
-    name: 'Dr. Joel Adams',
-    role: 'President',
-    company: 'Heroes Help',
-    link: 'https://www.heroeshelp.org.ng',
-    rating: 5,
-  },
-  {
-    quote:
-      'Working with Moses was impactful. His approach to digital marketing is strategic, intentional, and results-oriented. He played a key role in improving our brand visibility and online reach.',
-    name: 'Hon. Austin Pelemo',
-    role: 'CEO',
-    company: 'Print Mode',
-    link: 'https://www.printmode.com',
-    rating: 5,
-  },
-]
+export const fullTestimonials = homeTestimonials.map((t) => ({
+  quote: t.text,
+  name: t.name,
+  role: t.role.split(',')[0],
+  company: t.company,
+  link: t.link,
+  rating: t.rating,
+}))
 
 export const footerServices = [
-  'SEO Optimization',
-  'Social Media Management',
-  'Content Strategy',
-  'Digital Campaigns',
-  'Email Marketing',
-  'Consulting & Strategy',
-  'Web Development',
+  { label: 'SEO Optimization', href: '/services#seo-optimization' },
+  { label: 'Social Media', href: '/services#social-media-management' },
+  { label: 'Web Development', href: '/services#web-development' },
+  { label: 'Digital Campaigns', href: '/services#digital-campaigns' },
+  { label: 'Content Strategy', href: '/services#content-strategy' },
+  { label: 'Consulting', href: '/services#consulting-strategy' },
 ]
 
 export const contactSubjects = [
   'SEO Services',
   'Social Media Management',
+  'Web Development',
   'Content Strategy',
   'Digital Campaigns',
-  'Web Development',
-  'Project Management',
+  'Project / Retainer',
   'Consulting',
   'Other',
 ]

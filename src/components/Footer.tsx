@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { footerServices, navLinks, site } from '@/src/data/content'
+import { footerServices, navLinks, site, whatsappHireUrl } from '@/src/data/content'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -8,22 +8,23 @@ export default function Footer() {
     <footer className="bg-card border-t border-border">
       <div className="container py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          <div className="md:col-span-1">
+          <div>
             <h3 className="text-2xl font-display font-bold text-accent mb-4">
               {site.shortName}
             </h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Digital Marketing Specialist & Project Management Expert. Helping
-              businesses grow through strategic expertise.
+            <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+              Digital marketing and web growth for Nigerian brands and founders.
+              SEO, social, ads, and websites that convert.
             </p>
+            <a href={whatsappHireUrl} className="text-accent text-sm font-semibold hover:underline">
+              Chat on WhatsApp →
+            </a>
           </div>
 
           <div>
-            <h4 className="font-heading font-semibold text-foreground mb-4">
-              Quick Links
-            </h4>
+            <h4 className="font-semibold text-foreground mb-4">Navigate</h4>
             <ul className="space-y-2">
-              {navLinks.slice(0, 5).map((link) => (
+              {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -33,21 +34,27 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/experience"
+                  className="text-muted-foreground hover:text-accent text-sm transition-colors"
+                >
+                  Experience
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-heading font-semibold text-foreground mb-4">
-              Services
-            </h4>
+            <h4 className="font-semibold text-foreground mb-4">Services</h4>
             <ul className="space-y-2">
               {footerServices.map((service) => (
-                <li key={service}>
+                <li key={service.href}>
                   <Link
-                    href="/services"
+                    href={service.href}
                     className="text-muted-foreground hover:text-accent text-sm transition-colors"
                   >
-                    {service}
+                    {service.label}
                   </Link>
                 </li>
               ))}
@@ -55,15 +62,10 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-heading font-semibold text-foreground mb-4">
-              Connect
-            </h4>
+            <h4 className="font-semibold text-foreground mb-4">Connect</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <a
-                  href={`mailto:${site.email}`}
-                  className="hover:text-accent transition-colors"
-                >
+                <a href={`mailto:${site.email}`} className="hover:text-accent">
                   {site.email}
                 </a>
               </li>
@@ -72,7 +74,7 @@ export default function Footer() {
                   href={site.social.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-accent transition-colors"
+                  className="hover:text-accent"
                 >
                   {site.phone}
                 </a>

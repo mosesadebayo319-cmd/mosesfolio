@@ -1,100 +1,184 @@
 import Link from 'next/link'
-import { processSteps, services } from '@/src/data/content'
+import {
+  processSteps,
+  servicePackages,
+  services,
+  whatsappHireUrl,
+} from '@/src/data/content'
 
 export const metadata = {
-  title: 'Services | Moses Oluwashina Adebayo',
+  title: 'Services',
   description:
-    'Digital marketing and web development solutions: SEO, social media, content, campaigns, email, consulting, and websites.',
+    'Growth marketing, web presence, SEO, social, ads, and consulting for Nigerian brands and founders.',
 }
 
 export default function ServicesPage() {
   return (
     <div className="min-h-screen">
-      <section className="py-20 md:py-32 bg-card">
+      <section className="py-20 md:py-28 bg-card">
         <div className="container">
           <div className="max-w-3xl mx-auto">
             <div className="accent-line mb-6" />
             <h1 className="section-heading mb-6">Services</h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Comprehensive digital marketing and web development solutions
-              designed to grow your business. From SEO and social media to
-              modern websites, I provide the expertise you need to succeed.
+              Clear packages for growth—and detailed services when you know
+              exactly what you need. Flagship offers are marked below.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="py-20 md:py-32 bg-background">
+      {/* Packages */}
+      <section className="py-16 md:py-24 bg-background">
         <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            {services.map((service) => (
+          <div className="text-center mb-12">
+            <h2 className="section-heading">Start with a package</h2>
+            <p className="section-subtitle">
+              Pick the level of partnership that matches your stage
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {servicePackages.map((pkg) => (
               <div
-                key={service.title}
-                className="p-8 bg-card rounded-xl border border-border hover:border-accent transition-all duration-300 card-hover"
+                key={pkg.id}
+                className="p-8 bg-card rounded-xl border border-border hover:border-accent card-hover flex flex-col"
               >
-                <h3 className="text-2xl font-heading font-semibold mb-3">
-                  {service.title}
+                <h3 className="text-2xl font-display font-bold mb-3 text-accent">
+                  {pkg.title}
                 </h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  {service.description}
+                <p className="text-muted-foreground text-sm mb-5 leading-relaxed">
+                  {pkg.description}
                 </p>
-                <div className="mb-6">
-                  <h4 className="font-semibold mb-3">Key Benefits:</h4>
-                  <ul className="space-y-2">
-                    {service.benefits.map((b) => (
-                      <li
-                        key={b}
-                        className="flex gap-2 text-muted-foreground text-sm"
-                      >
-                        <span className="text-accent">✓</span>
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="mb-6 pb-6 border-b border-border">
-                  <h4 className="font-semibold mb-3">Deliverables:</h4>
-                  <ul className="space-y-2">
-                    {service.deliverables.map((d) => (
-                      <li
-                        key={d}
-                        className="flex gap-2 text-muted-foreground text-sm"
-                      >
-                        <span className="text-accent">✓</span>
-                        <span>{d}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <p className="text-accent font-semibold">{service.price}</p>
+                <ul className="space-y-2 mb-5 text-sm">
+                  {pkg.includes.map((item) => (
+                    <li key={item} className="flex gap-2 text-muted-foreground">
+                      <span className="text-accent">✓</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-xs text-muted-foreground mb-2">
+                  <strong className="text-foreground">Best for:</strong>{' '}
+                  {pkg.bestFor}
+                </p>
+                <p className="text-xs text-muted-foreground mb-5">
+                  <strong className="text-foreground">Not for:</strong>{' '}
+                  {pkg.notFor}
+                </p>
+                <p className="text-accent font-semibold text-sm mt-auto mb-4">
+                  {pkg.pricing}
+                </p>
+                <a
+                  href={`${whatsappHireUrl.replace(
+                    encodeURIComponent(
+                      "Hi Moses, I'd like to discuss a digital marketing / web project."
+                    ),
+                    encodeURIComponent(
+                      `Hi Moses, I'm interested in the ${pkg.title} package.`
+                    )
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="secondary-button text-sm !py-2.5 w-full"
+                >
+                  Discuss this package
+                </a>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-20 md:py-32 bg-card">
+      {/* Detailed services */}
+      <section className="py-16 md:py-24 bg-card">
         <div className="container">
-          <div className="text-center mb-16">
-            <div className="accent-line mx-auto mb-6" />
-            <h2 className="section-heading">My Process</h2>
+          <div className="text-center mb-12">
+            <h2 className="section-heading">All services</h2>
             <p className="section-subtitle">
-              How I deliver results for your business
+              Deep-dive offerings—flagship services highlighted
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {services.map((service) => (
+              <div
+                key={service.id}
+                id={service.id}
+                className="scroll-mt-28 p-8 bg-background rounded-xl border border-border hover:border-accent transition-all"
+              >
+                <div className="flex items-start justify-between gap-3 mb-3">
+                  <h3 className="text-2xl font-semibold">{service.title}</h3>
+                  {service.flagship && (
+                    <span className="text-[10px] uppercase tracking-wide font-bold text-accent-foreground bg-accent px-2 py-1 rounded">
+                      Flagship
+                    </span>
+                  )}
+                </div>
+                <p className="text-muted-foreground mb-5 text-sm leading-relaxed">
+                  {service.description}
+                </p>
+                <p className="text-xs text-muted-foreground mb-4">
+                  <strong className="text-foreground">Best for:</strong>{' '}
+                  {service.bestFor}
+                </p>
+                <div className="mb-5">
+                  <h4 className="font-semibold text-sm mb-2">Key benefits</h4>
+                  <ul className="space-y-1.5">
+                    {service.benefits.map((b) => (
+                      <li
+                        key={b}
+                        className="flex gap-2 text-muted-foreground text-sm"
+                      >
+                        <span className="text-accent">✓</span>
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="mb-5 pb-5 border-b border-border">
+                  <h4 className="font-semibold text-sm mb-2">Deliverables</h4>
+                  <ul className="space-y-1.5">
+                    {service.deliverables.map((d) => (
+                      <li
+                        key={d}
+                        className="flex gap-2 text-muted-foreground text-sm"
+                      >
+                        <span className="text-accent">•</span>
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <p className="text-accent font-semibold text-sm mb-4">
+                  {service.pricing}
+                </p>
+                <Link
+                  href="/contact"
+                  className="text-sm font-semibold text-foreground hover:text-accent"
+                >
+                  Enquire about {service.title} →
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24 bg-background">
+        <div className="container">
+          <div className="text-center mb-12">
+            <h2 className="section-heading">How we work</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {processSteps.map((step) => (
               <div
                 key={step.step}
-                className="p-6 bg-background rounded-xl border border-border text-center"
+                className="p-6 bg-card rounded-xl border border-border text-center"
               >
-                <p className="text-3xl font-display font-bold text-accent mb-4">
+                <p className="text-3xl font-display font-bold text-accent mb-3">
                   {step.step}
                 </p>
-                <h3 className="text-lg font-heading font-semibold mb-3">
-                  {step.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <h3 className="font-semibold mb-2">{step.title}</h3>
+                <p className="text-sm text-muted-foreground">
                   {step.description}
                 </p>
               </div>
@@ -103,18 +187,21 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-32 bg-background">
-        <div className="container">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="section-heading mb-6">Ready to Get Started?</h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              Let&apos;s discuss your goals and find the perfect service package
-              for your business.
-            </p>
-            <Link href="/contact" className="cta-button">
-              Schedule a Consultation
-            </Link>
-          </div>
+      <section className="py-20 bg-card border-t border-border">
+        <div className="container text-center max-w-2xl">
+          <h2 className="section-heading mb-4">Not sure which fit?</h2>
+          <p className="text-muted-foreground mb-8">
+            Message me with your goal—I&apos;ll recommend a package or a single
+            service.
+          </p>
+          <a
+            href={whatsappHireUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cta-button"
+          >
+            Get a recommendation
+          </a>
         </div>
       </section>
     </div>

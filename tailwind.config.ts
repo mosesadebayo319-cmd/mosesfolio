@@ -19,12 +19,8 @@ const config: Config = {
         border: '#334155',
       },
       fontFamily: {
-        sans: 'var(--font-sans)',
-        display: 'var(--font-display)',
-        heading: 'var(--font-heading)',
-      },
-      borderRadius: {
-        lg: '0.65rem',
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'Georgia', 'serif'],
       },
     },
   },
