@@ -28,17 +28,24 @@ npm install
 npm run dev
 ```
 
-### Environment (optional)
+### Environment
+
+See `.env.example`. Important:
 
 ```env
-NEXT_PUBLIC_SITE_URL=https://your-domain.com
-NEXT_PUBLIC_GA_ID=G-XXXXXXXX
+NEXT_PUBLIC_SITE_URL=https://mosesfolio.online
+DATABASE_URL=postgresql://...   # Neon free Postgres — stores form messages
+ADMIN_SECRET=your-secret        # password for /admin
+# NEXT_PUBLIC_GA_ID=G-XXXXXXXX  # optional
 ```
 
-### Contact form
+### Contact form + database
 
-Submissions go to `mosesadebayo319@gmail.com` via [FormSubmit](https://formsubmit.co).  
-The **first** submission sends a confirmation email—approve it once.
+1. **Database** — messages are saved to Postgres (`contact_submissions` table).  
+   Free setup guide: [docs/DATABASE_SETUP.md](./docs/DATABASE_SETUP.md) (Neon + Vercel).
+2. **Email** — a copy is still sent to `mosesadebayo319@gmail.com` via FormSubmit.  
+   Confirm FormSubmit once via the activation email if needed.
+3. **View messages** — open `/admin` and enter `ADMIN_SECRET`.
 
 ## Deploy (Vercel)
 

@@ -1,5 +1,10 @@
 import { NextResponse } from 'next/server'
 import { site } from '@/src/data/content'
+import {
+  getSql,
+  isDatabaseConfigured,
+  saveContactSubmission,
+} from '@/src/lib/db'
 
 export async function POST(request: Request) {
   try {
@@ -28,44 +33,77 @@ export async function POST(request: Request) {
       )
     }
 
-    const payload = {
-      name,
-      email,
-      phone: phone || 'Not provided',
-      subject,
-      budget: budget || 'Not specified',
-      message,
-      _subject: `Portfolio: ${subject} — ${name}`,
-      _template: 'table',
-      _captcha: 'false',
+    const submission = {
+      name: String(name).trim(),
+      email: String(email).trim(),
+      phone: phone ? String(phone).trim() : undefined,
+      subject: String(subject).trim(),
+      budget: budget ? String(budget).trim() : undefined,
+      message: String(message).trim(),
     }
 
-    // FormSubmit.co — free, no API key. Confirm once via email the first time.
-    const res = await fetch(
-      `https://formsubmit.co/ajax/${encodeURIComponent(site.email)}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(payload),
-      }
-    )
+    let savedToDatabase = false
+    let emailed = false
 
-    if (!res.ok) {
-      const text = await res.text()
-      console.error('FormSubmit error:', text)
+    // 1) Save to database (primary store)
+    const sql = getSql()
+    if (sql) {
+      try {
+        await saveContactSubmission(sql, submission)
+        savedToDatabase = true
+      } catch (dbError) {
+        console.error('Database save failed:', dbError)
+      }
+    }
+
+    // 2) Also email via FormSubmit (notification backup)
+    try {
+      const res = await fetch(
+        `https://formsubmit.co/ajax/${encodeURIComponent(site.email)}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            name: submission.name,
+            email: submission.email,
+            phone: submission.phone || 'Not provided',
+            subject: submission.subject,
+            budget: submission.budget || 'Not specified',
+            message: submission.message,
+            _subject: `Portfolio: ${submission.subject} — ${submission.name}`,
+            _template: 'table',
+            _captcha: 'false',
+          }),
+        }
+      )
+      emailed = res.ok
+      if (!res.ok) {
+        console.error('FormSubmit error:', await res.text())
+      }
+    } catch (emailError) {
+      console.error('Email notification failed:', emailError)
+    }
+
+    // Succeed if either channel worked
+    if (!savedToDatabase && !emailed) {
       return NextResponse.json(
         {
           error:
-            'Could not deliver message right now. Please use WhatsApp or email directly.',
+            'Could not save or send your message. Please use WhatsApp or email directly.',
+          databaseConfigured: isDatabaseConfigured(),
         },
         { status: 502 }
       )
     }
 
-    return NextResponse.json({ success: true })
+    return NextResponse.json({
+      success: true,
+      savedToDatabase,
+      emailed,
+    })
   } catch (error) {
     console.error('Contact API error:', error)
     return NextResponse.json(
