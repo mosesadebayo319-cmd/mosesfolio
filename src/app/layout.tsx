@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import Navigation from '@/src/components/Navigation'
 import Footer from '@/src/components/Footer'
 import WhatsAppFloat from '@/src/components/WhatsAppFloat'
-import Analytics from '@/src/components/Analytics'
+import GoogleAnalytics from '@/src/components/Analytics'
 import { site } from '@/src/data/content'
 import './globals.css'
 
@@ -103,6 +104,7 @@ export default function RootLayout({
         <Footer />
         <WhatsAppFloat />
         <Analytics />
+        <GoogleAnalytics />
       </body>
     </html>
   )
