@@ -210,7 +210,7 @@ export default async function HomePage() {
             {featuredProjects.map((project, i) => (
               <ScrollReveal key={project.title} delay={i * 80}>
                 <article className="group overflow-hidden rounded-xl border border-border hover:border-accent card-hover bg-card h-full flex flex-col">
-                  <div className="relative h-52 overflow-hidden bg-card">
+                  <div className="relative w-full aspect-video overflow-hidden bg-card">
                     {project.image.startsWith('data:') ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
