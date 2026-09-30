@@ -231,3 +231,43 @@ body {
     transform: none;
   }
 }
+
+/* Continuous client and partner logo row. */
+.clients-marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+}
+
+.clients-track {
+  display: flex;
+  width: max-content;
+  animation: clients-scroll 36s linear infinite;
+}
+
+.clients-group {
+  display: flex;
+  gap: 1.25rem;
+  padding-right: 1.25rem;
+  flex: none;
+}
+
+.clients-card {
+  width: 13rem;
+  flex: none;
+}
+
+.clients-marquee:hover .clients-track,
+.clients-marquee:focus-within .clients-track {
+  animation-play-state: paused;
+}
+
+@keyframes clients-scroll {
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clients-marquee { mask-image: none; }
+  .clients-track { width: auto; animation: none; }
+  .clients-group { flex-wrap: wrap; justify-content: center; padding-right: 0; }
+  .clients-group[aria-hidden='true'] { display: none; }
+}
