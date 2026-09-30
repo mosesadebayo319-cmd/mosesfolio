@@ -26,7 +26,7 @@ export default function ContactPage() {
             <p className="text-xl text-muted-foreground leading-relaxed mb-8">
               Need help with SEO, social media, ads, a website, or a digital
               product? Tell me what you are trying to achieve. WhatsApp is
-              fastest; I work from Karu with teams in Abuja and across Nigeria.
+              fastest; I work from Abuja with teams across Nigeria.
             </p>
             <a
               href={whatsappHireUrl}
