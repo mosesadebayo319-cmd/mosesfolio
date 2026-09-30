@@ -1,7 +1,6 @@
 import type { PublicProject } from '@/src/lib/content-loader'
 
-// These additions are kept in code so they appear even when the admin database
-// contains older published projects. Add verified campaign results when supplied.
+// Keep these recent case studies visible when older admin projects are stored in the database.
 export const recentCaseStudies: PublicProject[] = [
   {
     id: 'impactdesk',
