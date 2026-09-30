@@ -38,6 +38,9 @@ export type PublicProject = {
   category: string
   image: string
   imageFit?: 'contain' | 'cover'
+  imageCaption?: string
+  role?: string
+  projectUrl?: string
   problem: string
   strategy: string
   execution: string
@@ -188,21 +191,29 @@ function mapStaticProject(c: (typeof staticCaseStudies)[number]): PublicProject 
     timeframe: c.timeframe,
     category: c.category,
     image: c.image,
+    role: c.role,
     problem: c.problem,
     strategy: c.strategy,
     execution: c.execution,
     results: c.results,
+    resultHeading: c.resultHeading,
     testimonial: c.testimonial,
     testimonialAuthor: c.testimonialAuthor,
   }
 }
 
-function withRecentProjects(projects: PublicProject[]): PublicProject[] {
-  const recentIds = new Set(recentCaseStudies.map((project) => project.id))
-  return [
+function mergeProjects(databaseProjects: PublicProject[]): PublicProject[] {
+  const ordered = [
     ...recentCaseStudies,
-    ...projects.filter((project) => !recentIds.has(project.id)),
+    ...databaseProjects,
+    ...staticCaseStudies.map(mapStaticProject),
   ]
+  const seen = new Set<string>()
+  return ordered.filter((project) => {
+    if (seen.has(project.id)) return false
+    seen.add(project.id)
+    return true
+  })
 }
 
 export async function getPublicProjects(): Promise<PublicProject[]> {
@@ -210,12 +221,12 @@ export async function getPublicProjects(): Promise<PublicProject[]> {
     const sql = getSql()
     if (sql) {
       const rows = await listProjects(sql, { publishedOnly: true })
-      if (rows.length) return withRecentProjects(rows.map(mapDbProject))
+      return mergeProjects(rows.map(mapDbProject))
     }
   } catch (e) {
     console.error('getPublicProjects failed:', e)
   }
-  return withRecentProjects(staticCaseStudies.map(mapStaticProject))
+  return mergeProjects([])
 }
 
 export async function getFeaturedProjects(): Promise<
