@@ -55,13 +55,19 @@ export default function ContactPage() {
                 </a>
               </div>
               <div className="p-6 bg-card rounded-xl border border-border">
-                <h3 className="font-semibold text-accent mb-2">WhatsApp</h3>
+                <h3 className="font-semibold text-accent mb-2">WhatsApp for work</h3>
                 <a
                   href={site.social.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-accent"
                 >
+                  {site.whatsappPhone}
+                </a>
+              </div>
+              <div className="p-6 bg-card rounded-xl border border-border">
+                <h3 className="font-semibold text-accent mb-2">Call me directly</h3>
+                <a href={`tel:+${site.callRaw}`} className="hover:text-accent">
                   {site.phone}
                 </a>
               </div>
