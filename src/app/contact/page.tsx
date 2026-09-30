@@ -19,7 +19,6 @@ export default function ContactPage() {
       <section className="py-20 md:py-28 bg-card border-b border-border">
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="accent-line mx-auto mb-6" />
             <h1 className="section-heading mb-6">
               Let&apos;s discuss your project
             </h1>
