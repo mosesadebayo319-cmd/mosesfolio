@@ -38,6 +38,9 @@ export type PublicProject = {
   category: string
   image: string
   imageFit?: 'contain' | 'cover'
+  imageCaption?: string
+  role?: string
+  projectUrl?: string
   problem: string
   strategy: string
   execution: string
@@ -188,21 +191,47 @@ function mapStaticProject(c: (typeof staticCaseStudies)[number]): PublicProject 
     timeframe: c.timeframe,
     category: c.category,
     image: c.image,
+    role: c.role,
     problem: c.problem,
     strategy: c.strategy,
     execution: c.execution,
     results: c.results,
+    resultHeading: c.resultHeading,
     testimonial: c.testimonial,
     testimonialAuthor: c.testimonialAuthor,
   }
 }
 
-function withRecentProjects(projects: PublicProject[]): PublicProject[] {
-  const recentIds = new Set(recentCaseStudies.map((project) => project.id))
-  return [
+const retiredProjectIds = new Set([
+  'heroes-help-social',
+  'seo-transformation',
+  'digital-campaign-launch',
+  'content-marketing-strategy',
+])
+
+const retiredProjectTitles = new Set([
+  'Heroes Help Social Growth',
+  'B2B SEO Transformation',
+  'Product Launch Ad Campaign',
+  'Content Engine for Lead Quality',
+])
+
+function isRetiredProject(project: { id: string; title: string }): boolean {
+  return retiredProjectIds.has(project.id) || retiredProjectTitles.has(project.title)
+}
+
+function mergeProjects(databaseProjects: PublicProject[]): PublicProject[] {
+  const ordered = [
     ...recentCaseStudies,
-    ...projects.filter((project) => !recentIds.has(project.id)),
+    ...databaseProjects.filter((project) => !isRetiredProject(project)),
+    ...staticCaseStudies.map(mapStaticProject),
   ]
+  const seen = new Set<string>()
+  return ordered.filter((project) => {
+    if (seen.has(project.id)) return false
+    seen.add(project.id)
+    return true
+  })
 }
 
 export async function getPublicProjects(): Promise<PublicProject[]> {
@@ -210,12 +239,12 @@ export async function getPublicProjects(): Promise<PublicProject[]> {
     const sql = getSql()
     if (sql) {
       const rows = await listProjects(sql, { publishedOnly: true })
-      if (rows.length) return withRecentProjects(rows.map(mapDbProject))
+      return mergeProjects(rows.map(mapDbProject))
     }
   } catch (e) {
     console.error('getPublicProjects failed:', e)
   }
-  return withRecentProjects(staticCaseStudies.map(mapStaticProject))
+  return mergeProjects([])
 }
 
 export async function getFeaturedProjects(): Promise<
@@ -245,15 +274,22 @@ export async function getFeaturedProjects(): Promise<
       if (!rows.length) {
         rows = (await listProjects(sql, { publishedOnly: true })).slice(0, 3)
       }
-      if (rows.length) {
-        existing = rows.map((project) => ({
+      const activeRows = rows.filter(
+        (project) =>
+          !isRetiredProject({
+            id: project.slug || String(project.id),
+            title: project.title,
+          })
+      )
+      if (activeRows.length) {
+        existing = activeRows.map((project) => ({
           title: project.title,
           category: project.category || 'Project',
           result:
             [project.metric1, project.label1].filter(Boolean).join(' ') ||
             'View case study',
           image: project.image || '/case-studies/digital-campaigns.jpg',
-          href: `/case-studies#${project.slug}`,
+          href: `/case-studies#${project.slug || project.id}`,
         }))
       }
     }

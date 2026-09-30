@@ -21,12 +21,12 @@ export default function ContactPage() {
           <div className="max-w-3xl mx-auto text-center">
             <div className="accent-line mx-auto mb-6" />
             <h1 className="section-heading mb-6">
-              Hire a digital marketer in Abuja
+              Let&apos;s discuss your project
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed mb-8">
-              Ready for SEO, social media, ads, or a website that converts?
-              WhatsApp is fastest—I usually reply within 2 hours on business
-              days. Serving clients from Abuja across Nigeria.
+              Need help with SEO, social media, ads, a website, or a digital
+              product? Tell me what you are trying to achieve. WhatsApp is
+              fastest; I work from Abuja with teams across Nigeria.
             </p>
             <a
               href={whatsappHireUrl}

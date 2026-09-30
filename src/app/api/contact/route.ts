@@ -2,14 +2,16 @@ import { NextResponse } from 'next/server'
 import { site } from '@/src/data/content'
 import {
   getSql,
-  isDatabaseConfigured,
   saveContactSubmission,
 } from '@/src/lib/db'
 
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { name, email, phone, subject, budget, message } = body || {}
+    const { name, email, phone, subject, budget, message, company } = body || {}
+
+    // Quietly discard submissions that filled the hidden form field.
+    if (company) return NextResponse.json({ success: true })
 
     if (!name || !email || !subject || !message) {
       return NextResponse.json(
@@ -87,13 +89,13 @@ export async function POST(request: Request) {
       console.error('Email notification failed:', emailError)
     }
 
-    // Succeed if either channel worked
-    if (!savedToDatabase && !emailed) {
+    // A database copy alone is not a confirmed notification to Moses.
+    if (!emailed) {
       return NextResponse.json(
         {
-          error:
-            'Could not save or send your message. Please use WhatsApp or email directly.',
-          databaseConfigured: isDatabaseConfigured(),
+          error: savedToDatabase
+            ? 'Your message was saved, but the email notification failed. Please use WhatsApp so I can respond promptly.'
+            : 'Could not send your message. Please use WhatsApp or email directly.',
         },
         { status: 502 }
       )
@@ -102,7 +104,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       success: true,
       savedToDatabase,
-      emailed,
+      emailed: true,
     })
   } catch (error) {
     console.error('Contact API error:', error)

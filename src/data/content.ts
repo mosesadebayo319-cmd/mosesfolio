@@ -3,11 +3,11 @@ export const site = {
   shortName: 'Moses',
   // Primary SEO title (homepage / default)
   title:
-    'Moses Adebayo | Digital Marketing Expert in Abuja — SEO, Social Media & Websites',
+    'Moses Adebayo | Digital Marketing & Web Products in Abuja',
   description:
-    'Hire Moses Adebayo, a digital marketing specialist in Abuja, Nigeria. SEO, social media management, paid ads, content strategy, and conversion-focused websites that generate leads for SMEs, NGOs, and founders.',
-  jobTitle: 'Digital Marketing Specialist & Web Growth Partner',
-  tagline: 'Leads you can measure. Brands people remember.',
+    'Moses Adebayo is an Abuja-based digital marketer and product developer helping SMEs and NGOs with SEO, social media, paid campaigns, websites, and practical digital tools.',
+  jobTitle: 'Digital Marketer & Product Developer',
+  tagline: 'Clear strategy. Work you can verify.',
   location: 'Abuja, Nigeria',
   email: 'mosesadebayo319@gmail.com',
   phone: '+234 812 432 8229',
@@ -27,9 +27,9 @@ export const site = {
 export const pageSeo = {
   home: {
     title:
-      'Moses Adebayo | Digital Marketing Expert in Abuja — SEO, Social Media & Websites',
+      'Moses Adebayo | Digital Marketing & Web Products in Abuja',
     description:
-      'Digital marketing expert in Abuja helping Nigerian brands get more leads through SEO, social media, paid ads, and high-converting websites. Book a free strategy chat on WhatsApp.',
+      'Abuja-based digital marketer and product developer working on SEO, social media, paid campaigns, websites, and digital tools for SMEs and nonprofits.',
   },
   services: {
     title: 'Digital Marketing Services in Abuja | SEO, Social, Ads & Web',
@@ -39,17 +39,17 @@ export const pageSeo = {
   caseStudies: {
     title: 'Case Studies | Product & Campaign Work by Moses Adebayo',
     description:
-      'Explore Moses Adebayo’s product and campaign work, including ImpactDesk and the Heroes Help Tickets for Troops LinkedIn awareness campaign.'
+      'Explore Moses Adebayo’s product and campaign work, including ImpactDesk and the Heroes Help Tickets for Troops LinkedIn awareness campaign.',
   },
   about: {
     title: 'About Moses Adebayo | Digital Marketer & Growth Partner, Abuja',
     description:
-      'Meet Moses Oluwashina Adebayo — digital marketing specialist, project leader, and coding mentor based in Abuja. Partner to NGOs, education brands, and service businesses across Nigeria.',
+      'Meet Moses Oluwashina Adebayo, an Abuja-based digital marketer and ImpactDesk developer working with SMEs, nonprofits, and education teams.',
   },
   contact: {
-    title: 'Contact Moses Adebayo | Hire a Digital Marketer in Abuja',
+    title: 'Contact Moses Adebayo | Marketing & Product Projects',
     description:
-      'Contact Moses Adebayo for SEO, social media, ads, or website projects. WhatsApp +234 812 432 8229 or send a brief. Based in Abuja, serving clients nationwide.',
+      'Contact Moses Adebayo about SEO, social media, paid campaigns, websites, or digital product development. Based in Abuja and serving clients across Nigeria.',
   },
   experience: {
     title: 'Experience | Moses Adebayo Digital Marketing Career',
@@ -64,7 +64,7 @@ export const pageSeo = {
 }
 
 export const whatsappHireUrl = `https://wa.me/${site.phoneRaw}?text=${encodeURIComponent(
-  "Hi Moses, I found your portfolio (mosesfolio.online). I'd like help with digital marketing / a website. Are you available for a quick chat?"
+  "Hi Moses, I found your portfolio (mosesfolio.online). I'd like help with digital marketing, a website, or a digital product. Are you available for a quick chat?"
 )}`
 
 export const navLinks = [
@@ -76,10 +76,10 @@ export const navLinks = [
 ]
 
 export const stats = [
-  { value: '15+', label: 'Clients supported' },
-  { value: '150%', label: 'Avg. engagement lift' },
-  { value: '50K+', label: 'Followers grown' },
-  { value: '3x', label: 'Campaign ROI examples' },
+  { value: '10,677', label: 'LinkedIn impressions' },
+  { value: '7,366', label: 'Video views' },
+  { value: '31', label: 'Clicks' },
+  { value: '$30', label: 'Campaign spend' },
 ]
 
 export const coreExpertise = [
@@ -123,25 +123,11 @@ export const coreExpertise = [
 
 export const featuredProjects = [
   {
-    title: 'Heroes Help Social Growth',
+    title: 'Heroes Help Social Media Programme',
     category: 'Social Media Management',
-    result: '+150% engagement · 50K+ community growth',
+    result: 'Advocacy content across four channels',
     image: '/case-studies/heroes-help-social.jpg',
     href: '/case-studies#heroes-help-social',
-  },
-  {
-    title: 'B2B SEO Transformation',
-    category: 'SEO & Content',
-    result: 'Page-1 rankings · +280% organic traffic',
-    image: '/case-studies/seo.jpg',
-    href: '/case-studies#seo-transformation',
-  },
-  {
-    title: 'Product Launch Campaign',
-    category: 'Digital Marketing',
-    result: '3x ROI in 90 days · 250+ qualified leads',
-    image: '/case-studies/digital-campaigns.jpg',
-    href: '/case-studies#digital-campaign-launch',
   },
 ]
 
@@ -150,7 +136,7 @@ export const homeTestimonials = [
     name: 'Ellah Daniel',
     role: 'CEO, MecuryX',
     text: 'Moses demonstrated exceptional expertise in digital marketing and campaign execution. His ability to translate strategy into measurable results significantly improved our visibility and engagement.',
-    link: 'https://www.mercuryx.com',
+    link: 'https://mecuryx.com',
     company: 'MecuryX',
     rating: 5,
   },
@@ -174,7 +160,7 @@ export const homeTestimonials = [
 
 export const clients = [
   {
-    name: 'Mecuryx',
+    name: 'MecuryX',
     logo: 'https://mecuryx.com/images/mercuryx_tp.png',
     url: 'https://mecuryx.com',
     description: 'Tech Education & Training',
@@ -479,107 +465,31 @@ export const processSteps = [
 export const caseStudies = [
   {
     id: 'heroes-help-social',
-    title: 'Heroes Help Social Growth',
+    title: 'Heroes Help Social Media Programme',
     client: 'Heroes Help (NGO)',
-    industry: 'Non-profit · Military support & advocacy · Nigeria',
-    timeframe: 'Ongoing multi-platform programme',
+    industry: 'Nonprofit advocacy · Nigeria',
+    timeframe: 'Ongoing programme',
     category: 'Social Media Management',
     image: '/case-studies/heroes-help-social.jpg',
+    role: 'Digital and content manager',
     problem:
-      'Limited digital structure and inconsistent storytelling weakened community engagement for a mission-led NGO. Platforms lacked a clear content system and advocacy narrative.',
+      'Heroes Help needed a more consistent way to communicate its mission and engage its community across social channels.',
     strategy:
-      'Built a multi-platform content system around impact storytelling, advocacy themes, and platform-native formats for Instagram, Facebook, LinkedIn, and YouTube.',
+      'Organize advocacy and impact stories into a content plan tailored to Instagram, Facebook, LinkedIn, and YouTube.',
     execution:
-      'Ran structured content calendars, brand voice guidelines, community engagement, and performance reviews to keep messaging consistent and emotionally resonant.',
+      'Created content calendars, aligned messaging across channels, supported community engagement, and reviewed performance to guide future content.',
     results: {
-      metric1: '+150%',
-      label1: 'Engagement growth',
-      metric2: '50K+',
-      label2: 'Community scale (programme)',
-      metric3: '4',
-      label3: 'Core platforms managed',
+      metric1: '4',
+      label1: 'Channels in scope',
+      metric2: '',
+      label2: '',
+      metric3: '',
+      label3: '',
     },
+    resultHeading: 'Scope of work',
     testimonial:
       'Moses brought structure, creativity, and consistency to our digital presence. His work elevated how we communicate and connect with our audience.',
     testimonialAuthor: 'Dr. Joel Adams, President, Heroes Help',
-  },
-  {
-    id: 'seo-transformation',
-    title: 'B2B SEO Transformation',
-    client: 'B2B SaaS company (confidential)',
-    industry: 'SaaS · B2B · Content-led growth',
-    timeframe: '6 months',
-    category: 'SEO & Content',
-    image: '/case-studies/seo.jpg',
-    problem:
-      'Target keywords sat on page 5+, organic traffic was declining, and there was no structured SEO programme against rising competition.',
-    strategy:
-      'Full SEO audit, technical fixes, keyword map for high-intent terms, and a content plan aimed at lower-competition opportunities with commercial value.',
-    execution:
-      'Fixed technical issues, shipped 50+ optimised articles, improved architecture, strengthened internal linking, and built quality backlinks while optimising existing pages.',
-    results: {
-      metric1: 'Page 1',
-      label1: 'Priority rankings',
-      metric2: '+280%',
-      label2: 'Organic traffic',
-      metric3: '45',
-      label3: 'Leads / month',
-    },
-    testimonial:
-      'The SEO strategy was data-driven and results-oriented. We saw significant improvements in rankings and organic traffic within 6 months.',
-    testimonialAuthor: 'Marketing Manager, SaaS Company',
-  },
-  {
-    id: 'digital-campaign-launch',
-    title: 'Product Launch Ad Campaign',
-    client: 'Service business (confidential)',
-    industry: 'Services · New product line launch',
-    timeframe: '90 days',
-    category: 'Digital Marketing',
-    image: '/case-studies/digital-campaigns.jpg',
-    problem:
-      'A service business launched a new offer with limited budget and no prior digital advertising experience—needed qualified leads quickly.',
-    strategy:
-      'Integrated Google, Facebook, and LinkedIn campaigns with persona-based audiences, retargeting, and landing-page conversion focus.',
-    execution:
-      'Built creatives, conversion tracking, daily budget optimisation, A/B tests on messaging, and landing page improvements for lead quality.',
-    results: {
-      metric1: '3x',
-      label1: 'ROI in 90 days',
-      metric2: '250+',
-      label2: 'Qualified leads',
-      metric3: '18%',
-      label3: 'Conversion rate',
-    },
-    testimonial:
-      'Professional execution and transparent reporting. Moses delivered exceptional results within our budget constraints.',
-    testimonialAuthor: 'Founder, Service Company',
-  },
-  {
-    id: 'content-marketing-strategy',
-    title: 'Content Engine for Lead Quality',
-    client: 'Educational platform (confidential)',
-    industry: 'EdTech / education marketing',
-    timeframe: 'Multi-quarter programme',
-    category: 'Content Strategy',
-    image: '/case-studies/content-marketing.jpg',
-    problem:
-      'Thought leadership was weak and content was scattered—few high-quality leads despite publishing activity.',
-    strategy:
-      'Buyer-journey content system: blog, lead magnets, case-style assets, and distribution aligned to seasonal demand.',
-    execution:
-      'Produced 100+ optimised assets, improved SEO alignment, and built consistent distribution across owned channels.',
-    results: {
-      metric1: '10x',
-      label1: 'Blog traffic',
-      metric2: '500+',
-      label2: 'Monthly leads',
-      metric3: '4.5/5',
-      label3: 'Avg. engagement',
-    },
-    testimonial:
-      'The content strategy elevated our brand authority. We now attract higher-quality leads and have established ourselves as industry leaders.',
-    testimonialAuthor: 'Director, Educational Platform',
   },
 ]
 
@@ -742,6 +652,7 @@ export const contactSubjects = [
   'SEO Services',
   'Social Media Management',
   'Web Development',
+  'Digital Product Development',
   'Content Strategy',
   'Digital Campaigns',
   'Project / Retainer',

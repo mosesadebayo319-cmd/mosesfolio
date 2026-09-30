@@ -101,6 +101,7 @@ const jsonLd = {
         'Google Ads',
         'Meta Ads',
         'Web Development',
+        'Digital Product Development',
         'Content Strategy',
       ],
       sameAs: [

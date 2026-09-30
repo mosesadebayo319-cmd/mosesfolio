@@ -70,6 +70,21 @@ export default async function CaseStudiesPage() {
                         />
                       )}
                     </div>
+                    {study.imageCaption && (
+                      <p className="mt-3 text-xs text-muted-foreground">
+                        {study.imageCaption}
+                      </p>
+                    )}
+                    {!isDataImage && (
+                      <a
+                        href={study.image}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block mt-2 text-sm text-accent underline"
+                      >
+                        Open full-size image
+                      </a>
+                    )}
                   </div>
                   <div className={i % 2 === 1 ? 'md:order-1' : ''}>
                     <p className="text-accent text-sm font-semibold mb-2">
@@ -92,6 +107,11 @@ export default async function CaseStudiesPage() {
                       {study.timeframe && (
                         <span className="px-3 py-1 rounded-full border border-border">
                           {study.timeframe}
+                        </span>
+                      )}
+                      {study.role && (
+                        <span className="px-3 py-1 rounded-full border border-border">
+                          My role: {study.role}
                         </span>
                       )}
                     </div>
@@ -152,6 +172,16 @@ export default async function CaseStudiesPage() {
                       <p className="text-sm text-muted-foreground leading-relaxed mb-6">
                         {study.outcomeNote}
                       </p>
+                    )}
+                    {study.projectUrl && (
+                      <a
+                        href={study.projectUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="secondary-button mb-6"
+                      >
+                        View live project
+                      </a>
                     )}
                     {study.testimonial && (
                       <div className="p-5 bg-background rounded-xl border border-border">

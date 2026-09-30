@@ -214,3 +214,20 @@ body {
   background: var(--accent);
   box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.2);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .cta-button,
+  .secondary-button,
+  .card-hover {
+    transition: none;
+  }
+
+  .cta-button:hover,
+  .card-hover:hover {
+    transform: none;
+  }
+}
