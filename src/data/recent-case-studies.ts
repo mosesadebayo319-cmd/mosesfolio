@@ -9,7 +9,8 @@ export const recentCaseStudies: PublicProject[] = [
     industry: 'Nonprofit technology',
     timeframe: '2026 pilot release',
     category: 'Product Development',
-    image: '/case-studies/impactdesk.svg',
+    image: '/case-studies/impactdesk-screenshot.jpg',
+    imageFit: 'contain',
     problem:
       'NGO teams need a clear way to connect program activity, field evidence, indicator updates, and donor reporting while keeping each organization’s records separate.',
     strategy:
@@ -25,6 +26,7 @@ export const recentCaseStudies: PublicProject[] = [
       label3: 'Current release stage',
     },
     resultHeading: 'What shipped',
+    outcomeNote: 'The screenshot uses example data. Its activity and beneficiary counts are illustrative, not customer results.',
     testimonial: '',
     testimonialAuthor: '',
     featured: true,
