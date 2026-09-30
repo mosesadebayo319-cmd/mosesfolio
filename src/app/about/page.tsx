@@ -5,6 +5,7 @@ import {
   aboutValues,
   experienceRoles,
   pageSeo,
+  site,
   skillCategories,
   whatsappHireUrl,
 } from '@/src/data/content'
@@ -195,6 +196,9 @@ export default function AboutPage() {
             </Link>
             <a href="/Moses-Adebayo-CV.pdf" download className="cta-button">
               Download CV (PDF)
+            </a>
+            <a href={site.social.github} target="_blank" rel="noopener noreferrer" className="secondary-button">
+              View GitHub projects
             </a>
           </div>
         </div>
