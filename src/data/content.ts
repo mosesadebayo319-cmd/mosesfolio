@@ -21,6 +21,7 @@ export const site = {
     facebook: 'https://www.facebook.com/profile.php?id=61583181652994',
     instagram: 'https://www.instagram.com/mosesadebayo46',
     linkedin: 'https://www.linkedin.com/in/moses-adebayo-143384109',
+    github: 'https://github.com/mosesadebayo319-cmd',
     whatsapp: 'https://wa.me/2348124328229',
   },
 }
