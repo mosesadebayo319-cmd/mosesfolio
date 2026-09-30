@@ -58,5 +58,6 @@ ADMIN_SECRET=your-secret        # password for /admin
 
 ## Contact
 
-- WhatsApp: +234 816 469 4058  
+- WhatsApp for work: +234 812 432 8229  
+- Direct calls: +234 816 469 4058  
 - Email: mosesadebayo319@gmail.com  
