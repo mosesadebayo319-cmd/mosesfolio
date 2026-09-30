@@ -45,17 +45,16 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1">
               <p className="text-accent font-semibold text-sm uppercase tracking-wider mb-4">
-                Digital marketing expert · Abuja, Nigeria
+                Digital marketer & product developer · Abuja, Nigeria
               </p>
               <div className="accent-line mb-8" />
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold mb-6 leading-tight">
-                Digital marketing that gets Nigerian brands more qualified
-                leads.
+                Campaigns and digital tools that help Nigerian teams grow.
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground mb-4 leading-relaxed">
-                I help SMEs, NGOs, and founders in Abuja and across Nigeria grow
-                with SEO, social media, paid ads, and websites built to convert—
-                not just look busy online.
+                I run SEO, social, and paid campaigns for SMEs and NGOs. I also
+                develop useful web products, including ImpactDesk, a reporting
+                workspace for nonprofit teams.
               </p>
               <p className="text-accent font-medium mb-8">{site.tagline}</p>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -65,14 +64,14 @@ export default async function HomePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Free strategy chat on WhatsApp
+                  Discuss your project on WhatsApp
                 </a>
                 <Link href="/case-studies" className="secondary-button">
                   See case studies
                 </Link>
               </div>
               <p className="text-xs text-muted-foreground mt-4">
-                SEO · Social media · Meta & Google Ads · Websites · Abuja-based
+                SEO · Social media · Paid ads · Websites · Product development
               </p>
             </div>
 
@@ -98,6 +97,12 @@ export default async function HomePage() {
       {/* Stats */}
       <section className="py-12 border-y border-border bg-card">
         <div className="container">
+          <div className="text-center mb-8">
+            <p className="font-semibold mb-2">A documented campaign result</p>
+            <p className="text-sm text-muted-foreground">
+              Tickets for Troops LinkedIn awareness campaign · 21–23 September 2026
+            </p>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {stats.map((s) => (
               <div key={s.label}>
@@ -108,6 +113,12 @@ export default async function HomePage() {
               </div>
             ))}
           </div>
+          <p className="text-center text-sm text-muted-foreground mt-7">
+            Awareness results; no leads or conversions were recorded.{' '}
+            <Link href="/case-studies#tickets-for-troops-linkedin" className="text-accent underline">
+              Read the case study
+            </Link>
+          </p>
         </div>
       </section>
 
@@ -193,7 +204,7 @@ export default async function HomePage() {
           <div className="text-center mb-14">
             <div className="accent-line mx-auto mb-6" />
             <h2 className="section-heading">Selected work</h2>
-            <p className="section-subtitle">Outcomes from real engagements</p>
+            <p className="section-subtitle">Campaigns and product work with clear scope and evidence</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
             {featuredProjects.map((project, i) => (
