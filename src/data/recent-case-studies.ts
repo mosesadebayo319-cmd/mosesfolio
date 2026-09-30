@@ -6,11 +6,14 @@ export const recentCaseStudies: PublicProject[] = [
     id: 'impactdesk',
     title: 'ImpactDesk: NGO reporting workspace',
     client: 'ImpactDesk',
+    role: 'Developer',
+    projectUrl: 'https://impactdesk.onrender.com/',
     industry: 'Nonprofit technology',
     timeframe: '2026 pilot release',
     category: 'Product Development',
     image: '/case-studies/impactdesk-screenshot.jpg',
     imageFit: 'contain',
+    imageCaption: 'ImpactDesk landing page with illustrative example data.',
     problem:
       'NGO teams need a clear way to connect program activity, field evidence, indicator updates, and donor reporting while keeping each organization’s records separate.',
     strategy:
@@ -35,11 +38,13 @@ export const recentCaseStudies: PublicProject[] = [
     id: 'tickets-for-troops-linkedin',
     title: 'Tickets for Troops LinkedIn awareness campaign',
     client: 'Heroes Help',
+    role: 'Digital marketer',
     industry: 'Nonprofit advocacy',
     timeframe: '21–23 September 2026',
     category: 'LinkedIn Campaign',
     image: '/case-studies/tickets-for-troops-linkedin.jpg',
     imageFit: 'contain',
+    imageCaption: 'LinkedIn Campaign Manager summary for the 21–23 September 2026 campaign.',
     problem:
       'Raise awareness of Heroes Help’s Tickets for Troops initiative among a professional audience through video views.',
     strategy:
