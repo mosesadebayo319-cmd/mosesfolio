@@ -24,7 +24,6 @@ export default async function CaseStudiesPage() {
       <section className="py-20 md:py-28 bg-card">
         <div className="container">
           <div className="max-w-3xl mx-auto">
-            <div className="accent-line mb-6" />
             <h1 className="section-heading mb-6">
               Selected projects and campaigns
             </h1>
