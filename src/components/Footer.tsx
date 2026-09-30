@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { IconFacebook, IconGitHub, IconInstagram, IconLinkedIn } from '@/src/components/Icons'
 import { footerServices, navLinks, site, whatsappHireUrl } from '@/src/data/content'
 
 export default function Footer() {
@@ -78,31 +79,25 @@ export default function Footer() {
               </li>
               <li>{site.location}</li>
             </ul>
-            <div className="flex gap-3 mt-4">
-              <a
-                href={site.social.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-accent text-sm"
-              >
-                LinkedIn
-              </a>
-              <a
-                href={site.social.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-accent text-sm"
-              >
-                Instagram
-              </a>
-              <a
-                href={site.social.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-accent text-sm"
-              >
-                Facebook
-              </a>
+            <div className="flex flex-wrap gap-2 mt-4" aria-label="Social profiles">
+              {[
+                { name: 'GitHub', href: site.social.github, Icon: IconGitHub },
+                { name: 'LinkedIn', href: site.social.linkedin, Icon: IconLinkedIn },
+                { name: 'Instagram', href: site.social.instagram, Icon: IconInstagram },
+                { name: 'Facebook', href: site.social.facebook, Icon: IconFacebook },
+              ].map(({ name, href, Icon }) => (
+                <a
+                  key={name}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit my ${name} profile`}
+                  title={name}
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-border text-muted-foreground hover:border-accent hover:text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              ))}
             </div>
           </div>
         </div>
