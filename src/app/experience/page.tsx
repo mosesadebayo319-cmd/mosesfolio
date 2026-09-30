@@ -25,9 +25,12 @@ export default function ExperiencePage() {
               Digital marketing experience
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Digital transformation, team leadership, and measurable growth
-              across education, non-profit, and service businesses.
+              Digital marketing, project coordination, and product development
+              across education, nonprofit, and service organizations.
             </p>
+            <a href="/Moses-Adebayo-CV.pdf" download className="cta-button mt-8">
+              Download CV (PDF)
+            </a>
           </div>
         </div>
       </section>
