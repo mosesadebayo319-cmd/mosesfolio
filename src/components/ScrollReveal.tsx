@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useRef, type ReactNode } from 'react'
 
 export default function ScrollReveal({
   children,
@@ -12,36 +12,40 @@ export default function ScrollReveal({
   delay?: number
 }) {
   const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     const el = ref.current
-    if (!el) return
-    let timer: ReturnType<typeof setTimeout> | undefined
+    if (
+      !el ||
+      typeof IntersectionObserver === 'undefined' ||
+      typeof el.animate !== 'function' ||
+      typeof window.matchMedia !== 'function' ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return
+    }
 
-    const obs = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          timer = setTimeout(() => setVisible(true), delay)
-          obs.unobserve(entry.target)
-        }
+        if (!entry.isIntersecting) return
+        el.animate(
+          [
+            { opacity: 0.8, transform: 'translateY(12px)' },
+            { opacity: 1, transform: 'translateY(0)' },
+          ],
+          { duration: 450, delay, easing: 'ease-out' }
+        )
+        observer.disconnect()
       },
       { threshold: 0.12 }
     )
-    obs.observe(el)
-    return () => {
-      if (timer) clearTimeout(timer)
-      obs.disconnect()
-    }
+
+    observer.observe(el)
+    return () => observer.disconnect()
   }, [delay])
 
   return (
-    <div
-      ref={ref}
-      className={`transition-all duration-700 ease-out ${
-        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      } ${className}`}
-    >
+    <div ref={ref} className={className}>
       {children}
     </div>
   )
