@@ -28,7 +28,6 @@ export default function AboutPage() {
       <section className="py-20 md:py-28 bg-card">
         <div className="container">
           <div className="max-w-3xl mx-auto">
-            <div className="accent-line mb-6" />
             <h1 className="section-heading mb-6">
               About Moses Adebayo
             </h1>
@@ -95,7 +94,6 @@ export default function AboutPage() {
       <section className="py-16 md:py-24 bg-card">
         <div className="container">
           <div className="text-center mb-12">
-            <div className="accent-line mx-auto mb-6" />
             <h2 className="section-heading">Values</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -119,7 +117,6 @@ export default function AboutPage() {
       <section className="py-16 md:py-24 bg-background">
         <div className="container">
           <div className="text-center mb-12">
-            <div className="accent-line mx-auto mb-6" />
             <h2 className="section-heading">Skills & expertise</h2>
             <p className="section-subtitle">
               Tools and capabilities I use on client work
@@ -153,7 +150,6 @@ export default function AboutPage() {
       <section className="py-16 md:py-24 bg-card">
         <div className="container max-w-3xl">
           <div className="text-center mb-12">
-            <div className="accent-line mx-auto mb-6" />
             <h2 className="section-heading">Recent roles</h2>
             <p className="section-subtitle">Where I&apos;m applying the work</p>
           </div>

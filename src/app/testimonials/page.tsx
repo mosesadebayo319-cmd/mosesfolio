@@ -18,7 +18,6 @@ export default async function TestimonialsPage() {
     <div className="min-h-screen">
       <section className="py-20 md:py-28 bg-card">
         <div className="container max-w-3xl mx-auto text-center">
-          <div className="accent-line mx-auto mb-6" />
           <h1 className="section-heading mb-6">Client feedback</h1>
           <p className="text-xl text-muted-foreground">
             Leaders I&apos;ve supported with strategy and execution.
