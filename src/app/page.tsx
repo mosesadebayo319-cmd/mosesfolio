@@ -341,8 +341,7 @@ export default async function HomePage() {
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
               Whether you need SEO, social media, ads, or a new website—tell me
-              your goal. {site.responseTime}. Based in Karu, serving Abuja and clients nationwide
-              nationwide.
+              your goal. {site.responseTime}. Based in Karu, serving Abuja and clients nationwide.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
