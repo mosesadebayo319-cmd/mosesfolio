@@ -37,6 +37,7 @@ export type PublicProject = {
   timeframe: string
   category: string
   image: string
+  imageFit?: 'contain' | 'cover'
   problem: string
   strategy: string
   execution: string
@@ -218,7 +219,7 @@ export async function getPublicProjects(): Promise<PublicProject[]> {
 }
 
 export async function getFeaturedProjects(): Promise<
-  { title: string; category: string; result: string; image: string; href: string }[]
+  { title: string; category: string; result: string; image: string; href: string; imageFit?: 'contain' | 'cover' }[]
 > {
   const recentFeatured = recentCaseStudies
     .filter((project) => project.featured)
@@ -229,6 +230,7 @@ export async function getFeaturedProjects(): Promise<
         .filter(Boolean)
         .join(' '),
       image: project.image,
+      imageFit: project.imageFit,
       href: `/case-studies#${project.id}`,
     }))
 

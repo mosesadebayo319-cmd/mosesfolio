@@ -36,7 +36,8 @@ export const recentCaseStudies: PublicProject[] = [
     industry: 'Nonprofit advocacy',
     timeframe: '21–23 September 2026',
     category: 'LinkedIn Campaign',
-    image: '/case-studies/ticket-for-troops.svg',
+    image: '/case-studies/tickets-for-troops-linkedin.jpg',
+    imageFit: 'contain',
     problem:
       'Raise awareness of Heroes Help’s Tickets for Troops initiative among a professional audience through video views.',
     strategy:
