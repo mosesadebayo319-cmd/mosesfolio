@@ -54,14 +54,14 @@ export default async function CaseStudiesPage() {
                         <img
                           src={study.image}
                           alt={study.title}
-                          className="w-full h-full object-cover"
+                          className={`w-full h-full ${study.imageFit === 'contain' ? 'object-contain' : 'object-cover'}`}
                         />
                       ) : (
                         <Image
                           src={study.image}
                           alt={study.title}
                           fill
-                          className="object-cover"
+                          className={study.imageFit === 'contain' ? 'object-contain' : 'object-cover'}
                           sizes="(max-width:768px) 100vw, 50vw"
                           unoptimized={
                             study.image.startsWith('http') &&
