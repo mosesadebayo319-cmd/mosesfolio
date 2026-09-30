@@ -248,6 +248,18 @@ export default async function HomePage() {
                     <p className="text-muted-foreground text-sm mb-4 flex-1">
                       {project.result}
                     </p>
+                    {project.stack && project.stack.length > 0 && (
+                      <div className="mb-4">
+                        <p className="text-xs font-semibold text-foreground mb-2">{project.stackLabel || 'Built with'}</p>
+                        <ul className="flex flex-wrap gap-1.5" aria-label={project.stackLabel || 'Technology stack'}>
+                          {project.stack.map((item) => (
+                            <li key={item} className="px-2 py-1 rounded-full border border-border text-[11px] text-muted-foreground">
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                     <Link
                       href={project.href}
                       className="text-accent font-semibold text-sm hover:underline"
