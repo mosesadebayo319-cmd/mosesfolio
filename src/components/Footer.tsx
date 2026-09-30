@@ -13,7 +13,7 @@ export default function Footer() {
               {site.shortName}
             </h3>
             <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-              Digital marketer and product developer in Karu, Nasarawa—SEO, social media, paid
+              Digital marketer and product developer in Abuja, Nigeria—SEO, social media, paid
               ads, and websites that convert for SMEs, NGOs, and founders.
             </p>
             <a href={whatsappHireUrl} className="text-accent text-sm font-semibold hover:underline">
