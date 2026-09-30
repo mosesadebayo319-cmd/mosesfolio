@@ -106,6 +106,7 @@ const jsonLd = {
       ],
       sameAs: [
         site.social.linkedin,
+        site.social.github,
         site.social.instagram,
         site.social.facebook,
       ],
