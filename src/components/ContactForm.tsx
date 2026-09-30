@@ -56,6 +56,7 @@ export default function ContactForm() {
           subject: form.subject,
           budget: form.budget,
           message: form.message,
+          company: form.company,
         }),
       })
       const data = await res.json()
@@ -84,7 +85,7 @@ export default function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="rounded-xl border border-accent/40 bg-background p-8 text-center space-y-4">
+      <div role="status" className="rounded-xl border border-accent/40 bg-background p-8 text-center space-y-4">
         <p className="text-2xl font-display font-bold text-accent">Message sent</p>
         <p className="text-muted-foreground">
           Thanks—I&apos;ll reply soon. Prefer a faster chat?
@@ -109,7 +110,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+    <form onSubmit={handleSubmit} className="space-y-5">
       {/* Honeypot */}
       <input
         type="text"
@@ -226,7 +227,7 @@ export default function ContactForm() {
         />
       </div>
 
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p role="alert" className="text-sm text-red-400">{error}</p>}
 
       <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
         <button
