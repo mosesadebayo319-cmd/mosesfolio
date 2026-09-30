@@ -202,10 +202,26 @@ function mapStaticProject(c: (typeof staticCaseStudies)[number]): PublicProject 
   }
 }
 
+const retiredProjectIds = new Set([
+  'seo-transformation',
+  'digital-campaign-launch',
+  'content-marketing-strategy',
+])
+
+const retiredProjectTitles = new Set([
+  'B2B SEO Transformation',
+  'Product Launch Ad Campaign',
+  'Content Engine for Lead Quality',
+])
+
+function isRetiredProject(project: { id: string; title: string }): boolean {
+  return retiredProjectIds.has(project.id) || retiredProjectTitles.has(project.title)
+}
+
 function mergeProjects(databaseProjects: PublicProject[]): PublicProject[] {
   const ordered = [
     ...recentCaseStudies,
-    ...databaseProjects,
+    ...databaseProjects.filter((project) => !isRetiredProject(project)),
     ...staticCaseStudies.map(mapStaticProject),
   ]
   const seen = new Set<string>()
@@ -257,7 +273,9 @@ export async function getFeaturedProjects(): Promise<
         rows = (await listProjects(sql, { publishedOnly: true })).slice(0, 3)
       }
       if (rows.length) {
-        existing = rows.map((project) => ({
+        existing = rows
+          .filter((project) => !isRetiredProject({ id: project.slug || String(project.id), title: project.title }))
+          .map((project) => ({
           title: project.title,
           category: project.category || 'Project',
           result:
