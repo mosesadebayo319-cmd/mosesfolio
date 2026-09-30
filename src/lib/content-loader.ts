@@ -5,6 +5,7 @@ import {
   servicePackages as staticPackages,
   services as staticServices,
 } from '@/src/data/content'
+import { recentCaseStudies } from '@/src/data/recent-case-studies'
 import {
   getSql,
   listPackages,
@@ -50,6 +51,8 @@ export type PublicProject = {
   testimonial: string
   testimonialAuthor: string
   featured?: boolean
+  resultHeading?: string
+  outcomeNote?: string
 }
 
 export type PublicTestimonial = {
@@ -175,68 +178,61 @@ export async function getPublicServices(): Promise<PublicService[]> {
   }
 }
 
+function mapStaticProject(c: (typeof staticCaseStudies)[number]): PublicProject {
+  return {
+    id: c.id,
+    title: c.title,
+    client: c.client,
+    industry: c.industry,
+    timeframe: c.timeframe,
+    category: c.category,
+    image: c.image,
+    problem: c.problem,
+    strategy: c.strategy,
+    execution: c.execution,
+    results: c.results,
+    testimonial: c.testimonial,
+    testimonialAuthor: c.testimonialAuthor,
+  }
+}
+
+function withRecentProjects(projects: PublicProject[]): PublicProject[] {
+  const recentIds = new Set(recentCaseStudies.map((project) => project.id))
+  return [
+    ...recentCaseStudies,
+    ...projects.filter((project) => !recentIds.has(project.id)),
+  ]
+}
+
 export async function getPublicProjects(): Promise<PublicProject[]> {
   try {
     const sql = getSql()
-    if (!sql) {
-      return staticCaseStudies.map((c) => ({
-        id: c.id,
-        title: c.title,
-        client: c.client,
-        industry: c.industry,
-        timeframe: c.timeframe,
-        category: c.category,
-        image: c.image,
-        problem: c.problem,
-        strategy: c.strategy,
-        execution: c.execution,
-        results: c.results,
-        testimonial: c.testimonial,
-        testimonialAuthor: c.testimonialAuthor,
-      }))
+    if (sql) {
+      const rows = await listProjects(sql, { publishedOnly: true })
+      if (rows.length) return withRecentProjects(rows.map(mapDbProject))
     }
-    const rows = await listProjects(sql, { publishedOnly: true })
-    if (!rows.length) {
-      return staticCaseStudies.map((c) => ({
-        id: c.id,
-        title: c.title,
-        client: c.client,
-        industry: c.industry,
-        timeframe: c.timeframe,
-        category: c.category,
-        image: c.image,
-        problem: c.problem,
-        strategy: c.strategy,
-        execution: c.execution,
-        results: c.results,
-        testimonial: c.testimonial,
-        testimonialAuthor: c.testimonialAuthor,
-      }))
-    }
-    return rows.map(mapDbProject)
   } catch (e) {
     console.error('getPublicProjects failed:', e)
-    return staticCaseStudies.map((c) => ({
-      id: c.id,
-      title: c.title,
-      client: c.client,
-      industry: c.industry,
-      timeframe: c.timeframe,
-      category: c.category,
-      image: c.image,
-      problem: c.problem,
-      strategy: c.strategy,
-      execution: c.execution,
-      results: c.results,
-      testimonial: c.testimonial,
-      testimonialAuthor: c.testimonialAuthor,
-    }))
   }
+  return withRecentProjects(staticCaseStudies.map(mapStaticProject))
 }
 
 export async function getFeaturedProjects(): Promise<
   { title: string; category: string; result: string; image: string; href: string }[]
 > {
+  const recentFeatured = recentCaseStudies
+    .filter((project) => project.featured)
+    .map((project) => ({
+      title: project.title,
+      category: project.category,
+      result: [project.results.metric1, project.results.label1]
+        .filter(Boolean)
+        .join(' '),
+      image: project.image,
+      href: `/case-studies#${project.id}`,
+    }))
+
+  let existing = staticFeatured
   try {
     const sql = getSql()
     if (sql) {
@@ -248,20 +244,26 @@ export async function getFeaturedProjects(): Promise<
         rows = (await listProjects(sql, { publishedOnly: true })).slice(0, 3)
       }
       if (rows.length) {
-        return rows.map((p) => ({
-          title: p.title,
-          category: p.category || 'Project',
+        existing = rows.map((project) => ({
+          title: project.title,
+          category: project.category || 'Project',
           result:
-            [p.metric1, p.label1].filter(Boolean).join(' ') || 'View case study',
-          image: p.image || '/case-studies/digital-campaigns.jpg',
-          href: `/case-studies#${p.slug}`,
+            [project.metric1, project.label1].filter(Boolean).join(' ') ||
+            'View case study',
+          image: project.image || '/case-studies/digital-campaigns.jpg',
+          href: `/case-studies#${project.slug}`,
         }))
       }
     }
   } catch (e) {
     console.error('getFeaturedProjects failed:', e)
   }
-  return staticFeatured
+
+  const recentTitles = new Set(recentFeatured.map((project) => project.title))
+  return [
+    ...recentFeatured,
+    ...existing.filter((project) => !recentTitles.has(project.title)),
+  ].slice(0, 3)
 }
 
 export async function getPublicTestimonials(): Promise<PublicTestimonial[]> {
