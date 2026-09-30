@@ -48,7 +48,7 @@ export default async function CaseStudiesPage() {
                   className="scroll-mt-28 grid grid-cols-1 md:grid-cols-2 gap-12 items-start"
                 >
                   <div className={i % 2 === 1 ? 'md:order-2' : ''}>
-                    <div className="rounded-xl overflow-hidden border border-border relative h-80 md:h-96 bg-card">
+                    <div className="rounded-xl overflow-hidden border border-border relative w-full aspect-video bg-card">
                       {isDataImage ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
