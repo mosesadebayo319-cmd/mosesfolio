@@ -3,10 +3,10 @@ export const site = {
   shortName: 'Moses',
   // Primary SEO title (homepage / default)
   title:
-    'Moses Adebayo | Digital Marketing Expert in Abuja — SEO, Social Media & Websites',
+    'Moses Adebayo | Digital Marketing & Web Products in Abuja',
   description:
-    'Hire Moses Adebayo, a digital marketing specialist in Abuja, Nigeria. SEO, social media management, paid ads, content strategy, and conversion-focused websites that generate leads for SMEs, NGOs, and founders.',
-  jobTitle: 'Digital Marketing Specialist & Web Growth Partner',
+    'Moses Adebayo is an Abuja-based digital marketer and product developer helping SMEs and NGOs with SEO, social media, paid campaigns, websites, and practical digital tools.',
+  jobTitle: 'Digital Marketer & Product Developer',
   tagline: 'Leads you can measure. Brands people remember.',
   location: 'Abuja, Nigeria',
   email: 'mosesadebayo319@gmail.com',
@@ -27,9 +27,9 @@ export const site = {
 export const pageSeo = {
   home: {
     title:
-      'Moses Adebayo | Digital Marketing Expert in Abuja — SEO, Social Media & Websites',
+      'Moses Adebayo | Digital Marketing & Web Products in Abuja',
     description:
-      'Digital marketing expert in Abuja helping Nigerian brands get more leads through SEO, social media, paid ads, and high-converting websites. Book a free strategy chat on WhatsApp.',
+      'Abuja-based digital marketer and product developer working on SEO, social media, paid campaigns, websites, and digital tools for SMEs and nonprofits.',
   },
   services: {
     title: 'Digital Marketing Services in Abuja | SEO, Social, Ads & Web',
@@ -44,12 +44,12 @@ export const pageSeo = {
   about: {
     title: 'About Moses Adebayo | Digital Marketer & Growth Partner, Abuja',
     description:
-      'Meet Moses Oluwashina Adebayo — digital marketing specialist, project leader, and coding mentor based in Abuja. Partner to NGOs, education brands, and service businesses across Nigeria.',
+      'Meet Moses Oluwashina Adebayo, an Abuja-based digital marketer and ImpactDesk developer working with SMEs, nonprofits, and education teams.',
   },
   contact: {
     title: 'Contact Moses Adebayo | Hire a Digital Marketer in Abuja',
     description:
-      'Contact Moses Adebayo for SEO, social media, ads, or website projects. WhatsApp +234 812 432 8229 or send a brief. Based in Abuja, serving clients nationwide.',
+      'Contact Moses Adebayo about SEO, social media, paid campaigns, websites, or digital product development. Based in Abuja and serving clients across Nigeria.',
   },
   experience: {
     title: 'Experience | Moses Adebayo Digital Marketing Career',
