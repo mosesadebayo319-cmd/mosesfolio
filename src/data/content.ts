@@ -37,9 +37,9 @@ export const pageSeo = {
       'Digital marketing services for Nigerian SMEs and NGOs: SEO optimization, social media management, Meta & Google ads, content strategy, and web development. Custom quotes. Abuja-based.',
   },
   caseStudies: {
-    title: 'Case Studies | Digital Marketing Results by Moses Adebayo',
+    title: 'Case Studies | Product & Campaign Work by Moses Adebayo',
     description:
-      'Real digital marketing case studies: social growth, SEO transformations, and paid campaigns with measurable ROI. See how Moses Adebayo helps brands grow in Nigeria.',
+      'Explore Moses Adebayo’s product and campaign work, including ImpactDesk and the Heroes Help Tickets for Troops LinkedIn awareness campaign.'
   },
   about: {
     title: 'About Moses Adebayo | Digital Marketer & Growth Partner, Abuja',

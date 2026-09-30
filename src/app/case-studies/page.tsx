@@ -26,12 +26,11 @@ export default async function CaseStudiesPage() {
           <div className="max-w-3xl mx-auto">
             <div className="accent-line mb-6" />
             <h1 className="section-heading mb-6">
-              Digital marketing case studies
+              Selected projects and campaigns
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Real campaigns and growth projects: the challenge, the strategy,
-              the execution, and the results. Proof that marketing can be
-              measured—not just posted.
+              A closer look at product work and campaigns: the challenge, the approach,
+              what shipped, and the results we can verify.
             </p>
           </div>
         </div>
@@ -128,14 +127,15 @@ export default async function CaseStudiesPage() {
                         </div>
                       )}
                     </div>
+                    {[study.results.metric1, study.results.metric2, study.results.metric3].some(Boolean) && (
                     <div className="p-6 bg-card rounded-xl border border-border mb-6">
-                      <h3 className="font-semibold mb-4">Results</h3>
+                      <h3 className="font-semibold mb-4">{study.resultHeading || 'Results'}</h3>
                       <div className="grid grid-cols-3 gap-3">
                         {[
                           [study.results.metric1, study.results.label1],
                           [study.results.metric2, study.results.label2],
                           [study.results.metric3, study.results.label3],
-                        ].map(([m, l]) => (
+                        ].filter(([m]) => Boolean(m)).map(([m, l]) => (
                           <div key={String(l) + String(m)} className="text-center">
                             <p className="text-xl md:text-2xl font-bold text-accent mb-1">
                               {m}
@@ -147,6 +147,12 @@ export default async function CaseStudiesPage() {
                         ))}
                       </div>
                     </div>
+                    )}
+                    {study.outcomeNote && (
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                        {study.outcomeNote}
+                      </p>
+                    )}
                     {study.testimonial && (
                       <div className="p-5 bg-background rounded-xl border border-border">
                         <p className="text-muted-foreground italic text-sm mb-2">
