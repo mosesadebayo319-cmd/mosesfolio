@@ -26,7 +26,7 @@ export default function ContactPage() {
             <p className="text-xl text-muted-foreground leading-relaxed mb-8">
               Need help with SEO, social media, ads, a website, or a digital
               product? Tell me what you are trying to achieve. WhatsApp is
-              fastest; I work from Abuja with teams across Nigeria.
+              fastest; I work from Karu with teams in Abuja and across Nigeria.
             </p>
             <a
               href={whatsappHireUrl}
@@ -55,13 +55,19 @@ export default function ContactPage() {
                 </a>
               </div>
               <div className="p-6 bg-card rounded-xl border border-border">
-                <h3 className="font-semibold text-accent mb-2">WhatsApp</h3>
+                <h3 className="font-semibold text-accent mb-2">WhatsApp for work</h3>
                 <a
                   href={site.social.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-accent"
                 >
+                  {site.whatsappPhone}
+                </a>
+              </div>
+              <div className="p-6 bg-card rounded-xl border border-border">
+                <h3 className="font-semibold text-accent mb-2">Call me directly</h3>
+                <a href={`tel:+${site.callRaw}`} className="hover:text-accent">
                   {site.phone}
                 </a>
               </div>

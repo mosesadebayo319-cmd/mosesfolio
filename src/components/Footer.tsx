@@ -13,7 +13,7 @@ export default function Footer() {
               {site.shortName}
             </h3>
             <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-              Digital marketing expert in Abuja, Nigeria—SEO, social media, paid
+              Digital marketer and product developer in Karu, Nasarawa—SEO, social media, paid
               ads, and websites that convert for SMEs, NGOs, and founders.
             </p>
             <a href={whatsappHireUrl} className="text-accent text-sm font-semibold hover:underline">
@@ -34,14 +34,6 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link
-                  href="/experience"
-                  className="text-muted-foreground hover:text-accent text-sm transition-colors"
-                >
-                  Experience
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -76,7 +68,12 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-accent"
                 >
-                  {site.phone}
+                  WhatsApp: {site.whatsappPhone}
+                </a>
+              </li>
+              <li>
+                <a href={`tel:+${site.callRaw}`} className="hover:text-accent">
+                  Call: {site.phone}
                 </a>
               </li>
               <li>{site.location}</li>

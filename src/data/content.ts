@@ -3,22 +3,24 @@ export const site = {
   shortName: 'Moses',
   // Primary SEO title (homepage / default)
   title:
-    'Moses Adebayo | Digital Marketing & Web Products in Abuja',
+    'Moses Adebayo | Digital Marketing & Web Products near Abuja',
   description:
-    'Moses Adebayo is an Abuja-based digital marketer and product developer helping SMEs and NGOs with SEO, social media, paid campaigns, websites, and practical digital tools.',
+    'Moses Adebayo is a Karu-based digital marketer and product developer serving SMEs and NGOs in Abuja and nationwide with SEO, social media, paid campaigns, websites, and practical digital tools.',
   jobTitle: 'Digital Marketer & Product Developer',
   tagline: 'Clear strategy. Work you can verify.',
-  location: 'Abuja, Nigeria',
+  location: 'Karu, Nasarawa State, Nigeria',
   email: 'mosesadebayo319@gmail.com',
-  phone: '+234 812 432 8229',
-  phoneRaw: '2348124328229',
+  phone: '+234 816 469 4058',
+  callRaw: '2348164694058',
+  whatsappPhone: '+234 812 432 8229',
+  whatsappRaw: '2348124328229',
   hours: 'Monday – Friday, 9:00 AM – 6:00 PM WAT',
   responseTime: 'Usually within 2 hours on business days',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://mosesfolio.online',
   social: {
     facebook: 'https://www.facebook.com/profile.php?id=61583181652994',
     instagram: 'https://www.instagram.com/mosesadebayo46',
-    linkedin: 'https://www.linkedin.com/in/ma-digital-marketer448899',
+    linkedin: 'https://www.linkedin.com/in/moses-adebayo-143384109',
     whatsapp: 'https://wa.me/2348124328229',
   },
 }
@@ -27,14 +29,14 @@ export const site = {
 export const pageSeo = {
   home: {
     title:
-      'Moses Adebayo | Digital Marketing & Web Products in Abuja',
+      'Moses Adebayo | Digital Marketing & Web Products near Abuja',
     description:
-      'Abuja-based digital marketer and product developer working on SEO, social media, paid campaigns, websites, and digital tools for SMEs and nonprofits.',
+      'Karu-based digital marketer and product developer serving Abuja and working on SEO, social media, paid campaigns, websites, and digital tools for SMEs and nonprofits.',
   },
   services: {
-    title: 'Digital Marketing Services in Abuja | SEO, Social, Ads & Web',
+    title: 'Digital Marketing Services in Abuja & Nasarawa | SEO, Social, Ads & Web',
     description:
-      'Digital marketing services for Nigerian SMEs and NGOs: SEO optimization, social media management, Meta & Google ads, content strategy, and web development. Custom quotes. Abuja-based.',
+      'Digital marketing services for Nigerian SMEs and NGOs: SEO optimization, social media management, Meta & Google ads, content strategy, and web development. Custom quotes. Based in Karu and serving Abuja.',
   },
   caseStudies: {
     title: 'Case Studies | Product & Campaign Work by Moses Adebayo',
@@ -42,14 +44,14 @@ export const pageSeo = {
       'Explore Moses Adebayo’s product and campaign work, including ImpactDesk and the Heroes Help Tickets for Troops LinkedIn awareness campaign.',
   },
   about: {
-    title: 'About Moses Adebayo | Digital Marketer & Growth Partner, Abuja',
+    title: 'About Moses Adebayo | Digital Marketer & Product Developer',
     description:
-      'Meet Moses Oluwashina Adebayo, an Abuja-based digital marketer and ImpactDesk developer working with SMEs, nonprofits, and education teams.',
+      'Meet Moses Oluwashina Adebayo, a Karu-based digital marketer and ImpactDesk developer working with SMEs, nonprofits, and education teams.',
   },
   contact: {
     title: 'Contact Moses Adebayo | Marketing & Product Projects',
     description:
-      'Contact Moses Adebayo about SEO, social media, paid campaigns, websites, or digital product development. Based in Abuja and serving clients across Nigeria.',
+      'Contact Moses Adebayo about SEO, social media, paid campaigns, websites, or digital product development. Based in Karu, serving Abuja and clients across Nigeria.',
   },
   experience: {
     title: 'Experience | Moses Adebayo Digital Marketing Career',
@@ -63,7 +65,7 @@ export const pageSeo = {
   },
 }
 
-export const whatsappHireUrl = `https://wa.me/${site.phoneRaw}?text=${encodeURIComponent(
+export const whatsappHireUrl = `https://wa.me/${site.whatsappRaw}?text=${encodeURIComponent(
   "Hi Moses, I found your portfolio (mosesfolio.online). I'd like help with digital marketing, a website, or a digital product. Are you available for a quick chat?"
 )}`
 
@@ -72,6 +74,7 @@ export const navLinks = [
   { label: 'Services', href: '/services' },
   { label: 'Work', href: '/case-studies' },
   { label: 'About', href: '/about' },
+  { label: 'Experience', href: '/experience' },
   { label: 'Contact', href: '/contact' },
 ]
 

@@ -33,7 +33,7 @@ export default function AboutPage() {
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
               Digital marketer and product developer based in{' '}
-              <strong className="text-foreground">Abuja, Nigeria</strong>. I help
+              <strong className="text-foreground">Karu, Nasarawa State</strong>. I help
               SMEs and NGOs connect with their audiences and build practical
               tools for their work.
             </p>
@@ -189,10 +189,13 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
-          <div className="text-center mt-10">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mt-10">
             <Link href="/experience" className="secondary-button">
               Full experience timeline
             </Link>
+            <a href="/Moses-Adebayo-CV.pdf" download className="cta-button">
+              Download CV (PDF)
+            </a>
           </div>
         </div>
       </section>
