@@ -45,7 +45,7 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1">
               <p className="text-accent font-semibold text-sm uppercase tracking-wider mb-4">
-                Digital marketer & product developer · Abuja, Nigeria
+                Digital marketer & product developer · Karu, Nasarawa
               </p>
               <div className="accent-line mb-8" />
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold mb-6 leading-tight">
@@ -81,7 +81,7 @@ export default async function HomePage() {
                 <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-accent/40 shadow-2xl shadow-accent/10">
                   <Image
                     src="/hero/hero.jpg"
-                    alt="Moses Oluwashina Adebayo, digital marketing specialist in Abuja Nigeria"
+                    alt="Moses Oluwashina Adebayo, digital marketer based in Karu, Nasarawa"
                     fill
                     priority
                     sizes="(max-width:768px) 320px, 384px"
@@ -341,7 +341,7 @@ export default async function HomePage() {
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
               Whether you need SEO, social media, ads, or a new website—tell me
-              your goal. {site.responseTime}. Serving clients from Abuja
+              your goal. {site.responseTime}. Based in Karu, serving Abuja and clients nationwide
               nationwide.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
