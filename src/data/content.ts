@@ -163,6 +163,12 @@ export const homeTestimonials = [
 
 export const clients = [
   {
+    name: 'MoTechy',
+    logo: '/clients/motechy.jpg',
+    url: 'https://motechy.vercel.app/',
+    description: 'Technology partner',
+  },
+  {
     name: 'MecuryX',
     logo: 'https://mecuryx.com/images/mercuryx_tp.png',
     url: 'https://mecuryx.com',
