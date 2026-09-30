@@ -47,7 +47,6 @@ export default async function HomePage() {
               <p className="text-accent font-semibold text-sm uppercase tracking-wider mb-4">
                 Digital marketer & product developer · Abuja, Nigeria
               </p>
-              <div className="accent-line mb-8" />
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold mb-6 leading-tight">
                 Campaigns and digital tools that help Nigerian teams grow.
               </h1>
@@ -126,7 +125,6 @@ export default async function HomePage() {
       <section className="py-20 md:py-28 bg-background">
         <div className="container">
           <div className="text-center mb-14">
-            <div className="accent-line mx-auto mb-6" />
             <h2 className="section-heading">Digital marketing services</h2>
             <p className="section-subtitle">
               Practical growth support for Nigerian brands—from visibility and
@@ -213,7 +211,6 @@ export default async function HomePage() {
       <section className="py-20 md:py-28 bg-background">
         <div className="container">
           <div className="text-center mb-14">
-            <div className="accent-line mx-auto mb-6" />
             <h2 className="section-heading">Selected work</h2>
             <p className="section-subtitle">Campaigns and product work with clear scope and evidence</p>
           </div>
@@ -283,7 +280,6 @@ export default async function HomePage() {
       <section className="py-20 md:py-28 bg-card">
         <div className="container">
           <div className="text-center mb-14">
-            <div className="accent-line mx-auto mb-6" />
             <h2 className="section-heading">A simple process</h2>
             <p className="section-subtitle">From clarity to measurable growth</p>
           </div>
@@ -310,7 +306,6 @@ export default async function HomePage() {
       <section className="py-20 md:py-28 bg-background">
         <div className="container">
           <div className="text-center mb-14">
-            <div className="accent-line mx-auto mb-6" />
             <h2 className="section-heading">What clients say</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
