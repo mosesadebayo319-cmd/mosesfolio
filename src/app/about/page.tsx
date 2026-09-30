@@ -32,10 +32,10 @@ export default function AboutPage() {
               About Moses Adebayo
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Digital marketing specialist and growth partner based in{' '}
-              <strong className="text-foreground">Abuja, Nigeria</strong>—helping
-              SMEs, NGOs, and founders turn online attention into enquiries,
-              sales, and stronger brands.
+              Digital marketer and product developer based in{' '}
+              <strong className="text-foreground">Abuja, Nigeria</strong>. I help
+              SMEs and NGOs connect with their audiences and build practical
+              tools for their work.
             </p>
           </div>
         </div>
@@ -60,8 +60,9 @@ export default function AboutPage() {
               </p>
               <p className="text-muted-foreground leading-relaxed">
                 Today I offer SEO, social media management, paid campaigns, and
-                conversion-focused websites—plus coding mentorship. Available
-                for projects, monthly retainers, and hands-on growth partnerships.
+                conversion-focused websites. As the developer of ImpactDesk, I
+                also build digital products for nonprofit teams. I am available
+                for projects, retainers, and coding mentorship.
               </p>
               <div className="flex flex-wrap gap-2 mt-6">
                 {['Projects', 'Retainers', 'Mentoring'].map((b) => (
