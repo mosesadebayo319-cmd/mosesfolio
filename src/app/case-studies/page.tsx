@@ -115,6 +115,20 @@ export default async function CaseStudiesPage() {
                         </span>
                       )}
                     </div>
+                    {study.stack && study.stack.length > 0 && (
+                      <div className="mb-8">
+                        <h3 className="text-sm font-semibold text-foreground mb-3">
+                          {study.stackLabel || 'Built with'}
+                        </h3>
+                        <ul className="flex flex-wrap gap-2" aria-label={study.stackLabel || 'Technology stack'}>
+                          {study.stack.map((item) => (
+                            <li key={item} className="px-3 py-1 rounded-full border border-border bg-card text-xs text-muted-foreground">
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                     <div className="space-y-5 mb-8">
                       {study.problem && (
                         <div>
