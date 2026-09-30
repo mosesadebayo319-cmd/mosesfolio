@@ -45,7 +45,7 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1">
               <p className="text-accent font-semibold text-sm uppercase tracking-wider mb-4">
-                Digital marketer & product developer · Karu, Nasarawa
+                Digital marketer & product developer · Abuja, Nigeria
               </p>
               <div className="accent-line mb-8" />
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold mb-6 leading-tight">
@@ -81,7 +81,7 @@ export default async function HomePage() {
                 <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-accent/40 shadow-2xl shadow-accent/10">
                   <Image
                     src="/hero/hero.jpg"
-                    alt="Moses Oluwashina Adebayo, digital marketer based in Karu, Nasarawa"
+                    alt="Moses Oluwashina Adebayo, digital marketer based in Abuja, Nigeria"
                     fill
                     priority
                     sizes="(max-width:768px) 320px, 384px"
@@ -167,33 +167,44 @@ export default async function HomePage() {
               Clients & partners
             </h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-            {clients.map((client) => (
-              <a
-                key={client.name}
-                href={client.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group p-5 bg-background rounded-xl border border-border hover:border-accent transition-all flex flex-col items-center"
-              >
-                <div className="w-16 h-16 mb-3 relative">
-                  <Image
-                    src={client.logo}
-                    alt={`${client.name} logo`}
-                    fill
-                    className="object-contain"
-                    unoptimized
-                    sizes="64px"
-                  />
+          <div className="clients-marquee" aria-label="Clients and partners">
+            <div className="clients-track">
+              {[false, true].map((duplicate) => (
+                <div
+                  key={duplicate ? 'duplicate' : 'original'}
+                  className="clients-group"
+                  aria-hidden={duplicate}
+                >
+                  {clients.map((client) => (
+                    <a
+                      key={client.name}
+                      href={client.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      tabIndex={duplicate ? -1 : 0}
+                      className="group clients-card p-5 bg-background rounded-xl border border-border hover:border-accent transition-colors flex flex-col items-center"
+                    >
+                      <div className={`mb-3 relative ${client.name === 'MoTechy' ? 'w-40 h-16 rounded-md overflow-hidden bg-white' : 'w-16 h-16'}`}>
+                        <Image
+                          src={client.logo}
+                          alt={duplicate ? '' : `${client.name} logo`}
+                          fill
+                          className={client.name === 'MoTechy' ? 'object-cover scale-125' : 'object-contain'}
+                          unoptimized
+                          sizes={client.name === 'MoTechy' ? '160px' : '64px'}
+                        />
+                      </div>
+                      <h3 className="font-semibold text-sm text-center group-hover:text-accent">
+                        {client.name}
+                      </h3>
+                      <p className="text-xs text-muted-foreground text-center mt-1">
+                        {client.description}
+                      </p>
+                    </a>
+                  ))}
                 </div>
-                <h3 className="font-semibold text-sm text-center group-hover:text-accent">
-                  {client.name}
-                </h3>
-                <p className="text-xs text-muted-foreground text-center mt-1">
-                  {client.description}
-                </p>
-              </a>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -341,7 +352,7 @@ export default async function HomePage() {
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
               Whether you need SEO, social media, ads, or a new website—tell me
-              your goal. {site.responseTime}. Based in Karu, serving Abuja and clients nationwide.
+              your goal. {site.responseTime}. Based in Abuja, serving clients nationwide.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a

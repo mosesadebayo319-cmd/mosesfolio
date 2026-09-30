@@ -31,7 +31,7 @@ export default async function ServicesPage() {
           <div className="max-w-3xl mx-auto">
             <div className="accent-line mb-6" />
             <h1 className="section-heading mb-6">
-              Digital marketing services in Abuja & Nasarawa
+              Digital marketing services in Abuja
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
               SEO, social media, paid ads, content, and websites for Nigerian

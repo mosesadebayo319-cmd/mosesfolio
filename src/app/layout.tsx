@@ -25,12 +25,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
     default: site.title,
-    template: '%s | Moses Adebayo — Karu & Abuja',
+    template: '%s | Moses Adebayo — Abuja',
   },
   description: site.description,
   keywords: [
     'digital marketing Abuja',
-    'digital marketing Nasarawa',
     'SEO specialist Nigeria',
     'social media manager Abuja',
     'digital marketer Nigeria',
@@ -91,8 +90,8 @@ const jsonLd = {
       telephone: site.phone,
       address: {
         '@type': 'PostalAddress',
-        addressLocality: 'Karu',
-        addressRegion: 'Nasarawa',
+        addressLocality: 'Abuja',
+        addressRegion: 'FCT',
         addressCountry: 'NG',
       },
       knowsAbout: [
@@ -128,8 +127,8 @@ const jsonLd = {
       ],
       address: {
         '@type': 'PostalAddress',
-        addressLocality: 'Karu',
-        addressRegion: 'Nasarawa',
+        addressLocality: 'Abuja',
+        addressRegion: 'FCT',
         addressCountry: 'NG',
       },
       provider: { '@id': `${site.url}/#person` },

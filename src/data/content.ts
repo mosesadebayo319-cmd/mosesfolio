@@ -3,12 +3,12 @@ export const site = {
   shortName: 'Moses',
   // Primary SEO title (homepage / default)
   title:
-    'Moses Adebayo | Digital Marketing & Web Products near Abuja',
+    'Moses Adebayo | Digital Marketing & Web Products in Abuja',
   description:
-    'Moses Adebayo is a Karu-based digital marketer and product developer serving SMEs and NGOs in Abuja and nationwide with SEO, social media, paid campaigns, websites, and practical digital tools.',
+    'Moses Adebayo is an Abuja-based digital marketer and product developer serving SMEs and NGOs in Nigeria with SEO, social media, paid campaigns, websites, and practical digital tools.',
   jobTitle: 'Digital Marketer & Product Developer',
   tagline: 'Clear strategy. Work you can verify.',
-  location: 'Karu, Nasarawa State, Nigeria',
+  location: 'Abuja, Nigeria',
   email: 'mosesadebayo319@gmail.com',
   phone: '+234 816 469 4058',
   callRaw: '2348164694058',
@@ -29,14 +29,14 @@ export const site = {
 export const pageSeo = {
   home: {
     title:
-      'Moses Adebayo | Digital Marketing & Web Products near Abuja',
+      'Moses Adebayo | Digital Marketing & Web Products in Abuja',
     description:
-      'Karu-based digital marketer and product developer serving Abuja and working on SEO, social media, paid campaigns, websites, and digital tools for SMEs and nonprofits.',
+      'Abuja-based digital marketer and product developer working on SEO, social media, paid campaigns, websites, and digital tools for SMEs and nonprofits.',
   },
   services: {
-    title: 'Digital Marketing Services in Abuja & Nasarawa | SEO, Social, Ads & Web',
+    title: 'Digital Marketing Services in Abuja | SEO, Social, Ads & Web',
     description:
-      'Digital marketing services for Nigerian SMEs and NGOs: SEO optimization, social media management, Meta & Google ads, content strategy, and web development. Custom quotes. Based in Karu and serving Abuja.',
+      'Digital marketing services for Nigerian SMEs and NGOs: SEO optimization, social media management, Meta & Google ads, content strategy, and web development. Custom quotes. Based in Abuja.',
   },
   caseStudies: {
     title: 'Case Studies | Product & Campaign Work by Moses Adebayo',
@@ -46,12 +46,12 @@ export const pageSeo = {
   about: {
     title: 'About Moses Adebayo | Digital Marketer & Product Developer',
     description:
-      'Meet Moses Oluwashina Adebayo, a Karu-based digital marketer and ImpactDesk developer working with SMEs, nonprofits, and education teams.',
+      'Meet Moses Oluwashina Adebayo, an Abuja-based digital marketer and ImpactDesk developer working with SMEs, nonprofits, and education teams.',
   },
   contact: {
     title: 'Contact Moses Adebayo | Marketing & Product Projects',
     description:
-      'Contact Moses Adebayo about SEO, social media, paid campaigns, websites, or digital product development. Based in Karu, serving Abuja and clients across Nigeria.',
+      'Contact Moses Adebayo about SEO, social media, paid campaigns, websites, or digital product development. Based in Abuja and serving clients across Nigeria.',
   },
   experience: {
     title: 'Experience | Moses Adebayo Digital Marketing Career',
@@ -162,6 +162,12 @@ export const homeTestimonials = [
 ]
 
 export const clients = [
+  {
+    name: 'MoTechy',
+    logo: '/clients/motechy.jpg',
+    url: 'https://motechy.vercel.app/',
+    description: 'Technology partner',
+  },
   {
     name: 'MecuryX',
     logo: 'https://mecuryx.com/images/mercuryx_tp.png',
