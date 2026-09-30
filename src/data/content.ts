@@ -7,7 +7,7 @@ export const site = {
   description:
     'Moses Adebayo is an Abuja-based digital marketer and product developer helping SMEs and NGOs with SEO, social media, paid campaigns, websites, and practical digital tools.',
   jobTitle: 'Digital Marketer & Product Developer',
-  tagline: 'Leads you can measure. Brands people remember.',
+  tagline: 'Clear strategy. Work you can verify.',
   location: 'Abuja, Nigeria',
   email: 'mosesadebayo319@gmail.com',
   phone: '+234 812 432 8229',
@@ -39,7 +39,7 @@ export const pageSeo = {
   caseStudies: {
     title: 'Case Studies | Product & Campaign Work by Moses Adebayo',
     description:
-      'Explore Moses Adebayo’s product and campaign work, including ImpactDesk and the Heroes Help Tickets for Troops LinkedIn awareness campaign.'
+      'Explore Moses Adebayo’s product and campaign work, including ImpactDesk and the Heroes Help Tickets for Troops LinkedIn awareness campaign.',
   },
   about: {
     title: 'About Moses Adebayo | Digital Marketer & Growth Partner, Abuja',
@@ -47,7 +47,7 @@ export const pageSeo = {
       'Meet Moses Oluwashina Adebayo, an Abuja-based digital marketer and ImpactDesk developer working with SMEs, nonprofits, and education teams.',
   },
   contact: {
-    title: 'Contact Moses Adebayo | Hire a Digital Marketer in Abuja',
+    title: 'Contact Moses Adebayo | Marketing & Product Projects',
     description:
       'Contact Moses Adebayo about SEO, social media, paid campaigns, websites, or digital product development. Based in Abuja and serving clients across Nigeria.',
   },
@@ -64,7 +64,7 @@ export const pageSeo = {
 }
 
 export const whatsappHireUrl = `https://wa.me/${site.phoneRaw}?text=${encodeURIComponent(
-  "Hi Moses, I found your portfolio (mosesfolio.online). I'd like help with digital marketing / a website. Are you available for a quick chat?"
+  "Hi Moses, I found your portfolio (mosesfolio.online). I'd like help with digital marketing, a website, or a digital product. Are you available for a quick chat?"
 )}`
 
 export const navLinks = [
