@@ -1,6 +1,6 @@
 # Mosesfolio
 
-Portfolio for **Moses Oluwashina Adebayo** — digital marketing & web growth partner (Karu, Nasarawa State, Nigeria).
+Portfolio for **Moses Oluwashina Adebayo** — digital marketing & web growth partner (Abuja, Nigeria).
 
 ## Stack
 
