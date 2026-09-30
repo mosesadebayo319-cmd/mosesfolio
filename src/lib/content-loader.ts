@@ -203,12 +203,14 @@ function mapStaticProject(c: (typeof staticCaseStudies)[number]): PublicProject 
 }
 
 const retiredProjectIds = new Set([
+  'heroes-help-social',
   'seo-transformation',
   'digital-campaign-launch',
   'content-marketing-strategy',
 ])
 
 const retiredProjectTitles = new Set([
+  'Heroes Help Social Growth',
   'B2B SEO Transformation',
   'Product Launch Ad Campaign',
   'Content Engine for Lead Quality',
@@ -272,17 +274,22 @@ export async function getFeaturedProjects(): Promise<
       if (!rows.length) {
         rows = (await listProjects(sql, { publishedOnly: true })).slice(0, 3)
       }
-      if (rows.length) {
-        existing = rows
-          .filter((project) => !isRetiredProject({ id: project.slug || String(project.id), title: project.title }))
-          .map((project) => ({
+      const activeRows = rows.filter(
+        (project) =>
+          !isRetiredProject({
+            id: project.slug || String(project.id),
+            title: project.title,
+          })
+      )
+      if (activeRows.length) {
+        existing = activeRows.map((project) => ({
           title: project.title,
           category: project.category || 'Project',
           result:
             [project.metric1, project.label1].filter(Boolean).join(' ') ||
             'View case study',
           image: project.image || '/case-studies/digital-campaigns.jpg',
-          href: `/case-studies#${project.slug}`,
+          href: `/case-studies#${project.slug || project.id}`,
         }))
       }
     }
