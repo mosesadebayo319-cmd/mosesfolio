@@ -5,13 +5,15 @@ export const site = {
   title:
     'Moses Adebayo | Digital Marketing & Web Products near Abuja',
   description:
-    'Moses Adebayo is a Karu-based digital marketer and product developer serving Abuja and clients nationwide helping SMEs and NGOs with SEO, social media, paid campaigns, websites, and practical digital tools.',
+    'Moses Adebayo is a Karu-based digital marketer and product developer serving SMEs and NGOs in Abuja and nationwide with SEO, social media, paid campaigns, websites, and practical digital tools.',
   jobTitle: 'Digital Marketer & Product Developer',
   tagline: 'Clear strategy. Work you can verify.',
   location: 'Karu, Nasarawa State, Nigeria',
   email: 'mosesadebayo319@gmail.com',
   phone: '+234 816 469 4058',
-  phoneRaw: '2348124328229',
+  callRaw: '2348164694058',
+  whatsappPhone: '+234 812 432 8229',
+  whatsappRaw: '2348124328229',
   hours: 'Monday – Friday, 9:00 AM – 6:00 PM WAT',
   responseTime: 'Usually within 2 hours on business days',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://mosesfolio.online',
@@ -63,7 +65,7 @@ export const pageSeo = {
   },
 }
 
-export const whatsappHireUrl = `https://wa.me/${site.phoneRaw}?text=${encodeURIComponent(
+export const whatsappHireUrl = `https://wa.me/${site.whatsappRaw}?text=${encodeURIComponent(
   "Hi Moses, I found your portfolio (mosesfolio.online). I'd like help with digital marketing, a website, or a digital product. Are you available for a quick chat?"
 )}`
 
