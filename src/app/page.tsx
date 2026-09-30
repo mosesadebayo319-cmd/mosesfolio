@@ -189,7 +189,7 @@ export default async function HomePage() {
                           src={client.logo}
                           alt={duplicate ? '' : `${client.name} logo`}
                           fill
-                          className={client.name === 'MoTechy' ? 'object-cover scale-150' : 'object-contain'}
+                          className={client.name === 'MoTechy' ? 'object-cover scale-125' : 'object-contain'}
                           unoptimized
                           sizes={client.name === 'MoTechy' ? '160px' : '64px'}
                         />
