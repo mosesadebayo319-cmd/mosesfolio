@@ -3,6 +3,37 @@ import type { PublicProject } from '@/src/lib/content-loader'
 // Keep these recent case studies visible when older admin projects are stored in the database.
 export const recentCaseStudies: PublicProject[] = [
   {
+    id: 'motechy-website',
+    title: 'MoTechy website',
+    client: 'MoTechy',
+    role: 'Website developer',
+    projectUrl: 'https://motechy.vercel.app/',
+    industry: 'Digital marketing · Nigeria',
+    timeframe: '',
+    category: 'Website Development',
+    image: '/case-studies/motechy-website.jpg',
+    imageFit: 'contain',
+    imageCaption: 'MoTechy homepage showing the agency offer and contact options.',
+    problem:
+      'MoTechy needed a website that clearly presents its digital marketing offer to Nigerian founders and SME owners and gives visitors a way to start a conversation.',
+    strategy:
+      'Organize the site around a direct agency message, service and package navigation, and prominent contact routes.',
+    execution:
+      'Built the MoTechy website with pages for services, packages, about, and contact, plus visible strategy-call and WhatsApp actions.',
+    results: {
+      metric1: 'Live',
+      label1: 'Website',
+      metric2: '',
+      label2: '',
+      metric3: '',
+      label3: '',
+    },
+    resultHeading: 'What shipped',
+    testimonial: '',
+    testimonialAuthor: '',
+    featured: true,
+  },
+  {
     id: 'impactdesk',
     title: 'ImpactDesk: NGO reporting workspace',
     client: 'ImpactDesk',

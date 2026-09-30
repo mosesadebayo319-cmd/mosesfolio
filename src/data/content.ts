@@ -42,7 +42,7 @@ export const pageSeo = {
   caseStudies: {
     title: 'Case Studies | Product & Campaign Work by Moses Adebayo',
     description:
-      'Explore Moses Adebayo’s product and campaign work, including ImpactDesk and the Heroes Help Tickets for Troops LinkedIn awareness campaign.',
+      'Explore Moses Adebayo’s product and campaign work, including the MoTechy website, ImpactDesk, and the Heroes Help Tickets for Troops LinkedIn awareness campaign.',
   },
   about: {
     title: 'About Moses Adebayo | Digital Marketer & Product Developer',
