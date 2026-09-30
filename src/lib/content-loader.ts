@@ -36,6 +36,8 @@ export type PublicProject = {
   industry: string
   timeframe: string
   category: string
+  stack?: string[]
+  stackLabel?: string
   image: string
   imageFit?: 'contain' | 'cover'
   imageCaption?: string
@@ -248,13 +250,15 @@ export async function getPublicProjects(): Promise<PublicProject[]> {
 }
 
 export async function getFeaturedProjects(): Promise<
-  { title: string; category: string; result: string; image: string; href: string; imageFit?: 'contain' | 'cover' }[]
+  { title: string; category: string; result: string; image: string; href: string; imageFit?: 'contain' | 'cover'; stack?: string[]; stackLabel?: string }[]
 > {
   const recentFeatured = recentCaseStudies
     .filter((project) => project.featured)
     .map((project) => ({
       title: project.title,
       category: project.category,
+      stack: project.stack,
+      stackLabel: project.stackLabel,
       result: [project.results.metric1, project.results.label1]
         .filter(Boolean)
         .join(' '),
