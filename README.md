@@ -1,6 +1,6 @@
 # Mosesfolio
 
-Portfolio for **Moses Oluwashina Adebayo** — digital marketing & web growth partner (Abuja, Nigeria).
+Portfolio for **Moses Oluwashina Adebayo** — digital marketing & web growth partner (Karu, Nasarawa State, Nigeria).
 
 ## Stack
 
@@ -58,5 +58,5 @@ ADMIN_SECRET=your-secret        # password for /admin
 
 ## Contact
 
-- WhatsApp: +234 812 432 8229  
+- WhatsApp: +234 816 469 4058  
 - Email: mosesadebayo319@gmail.com  
