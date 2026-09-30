@@ -189,7 +189,7 @@ export const clients = [
   },
   {
     name: 'Print Mode',
-    logo: 'https://media.licdn.com/dms/image/v2/D4E0BAQEzOSZYi8zOWA/company-logo_200_200/B4EZYkZwJKHcAM-/0/1744367453900?e=1779321600&v=beta&t=2F-or9YXXpiOG2_4YtcNqw71FILiBcMcOwCMCnIc3B4',
+    logo: '/clients/print-mode.jpg',
     url: 'https://printmode.com',
     description: 'Design, Print & Innovation',
   },

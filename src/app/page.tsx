@@ -184,14 +184,14 @@ export default async function HomePage() {
                       tabIndex={duplicate ? -1 : 0}
                       className="group clients-card p-5 bg-background rounded-xl border border-border hover:border-accent transition-colors flex flex-col items-center"
                     >
-                      <div className={`mb-3 relative ${client.name === 'MoTechy' ? 'w-40 h-16 rounded-md overflow-hidden bg-white' : 'w-16 h-16'}`}>
+                      <div className={`mb-3 relative ${client.name === 'MoTechy' ? 'w-40 h-16 rounded-md overflow-hidden bg-white' : client.name === 'Print Mode' ? 'w-40 h-16' : 'w-16 h-16'}`}>
                         <Image
                           src={client.logo}
                           alt={duplicate ? '' : `${client.name} logo`}
                           fill
                           className={client.name === 'MoTechy' ? 'object-cover scale-125' : 'object-contain'}
                           unoptimized
-                          sizes={client.name === 'MoTechy' ? '160px' : '64px'}
+                          sizes={client.name === 'MoTechy' || client.name === 'Print Mode' ? '160px' : '64px'}
                         />
                       </div>
                       <h3 className="font-semibold text-sm text-center group-hover:text-accent">
