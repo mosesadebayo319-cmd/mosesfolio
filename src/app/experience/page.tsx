@@ -61,6 +61,7 @@ export default function ExperiencePage() {
                   </div>
                   <p className="text-sm text-muted-foreground">{role.period}</p>
                 </div>
+                {(role.responsibilities.length > 0 || role.impact.length > 0) && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <h3 className="text-sm font-semibold mb-2">Focus</h3>
@@ -91,6 +92,7 @@ export default function ExperiencePage() {
                     </ul>
                   </div>
                 </div>
+                )}
               </div>
             ))}
           </div>

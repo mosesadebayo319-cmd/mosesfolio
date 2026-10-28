@@ -57,7 +57,7 @@ export const pageSeo = {
   experience: {
     title: 'Experience | Moses Adebayo Digital Marketing Career',
     description:
-      'Professional experience in digital marketing leadership, social media, paid campaigns, and coding mentorship — MecuryX, Heroes Help, Learn2Earn, and more.',
+      'Professional experience in digital marketing leadership, social media, paid campaigns, and coding mentorship — Jeda Systems, MecuryX, Heroes Help, Learn2Earn, and more.',
   },
   testimonials: {
     title: 'Client Testimonials | Moses Adebayo Digital Marketing',
@@ -163,6 +163,12 @@ export const homeTestimonials = [
 ]
 
 export const clients = [
+  {
+    name: 'Jeda Systems',
+    logo: 'https://jedasystems.com/wp-content/uploads/2025/07/image-1.png',
+    url: 'https://jedasystems.com/',
+    description: 'Current employer',
+  },
   {
     name: 'MoTechy',
     logo: '/clients/motechy.jpg',
@@ -504,6 +510,15 @@ export const caseStudies = [
 ]
 
 export const experienceRoles = [
+  {
+    role: 'Digital Marketing Executive',
+    company: 'Jeda Systems',
+    period: 'October 2026 – Present',
+    link: 'https://jedasystems.com/',
+    featured: true,
+    responsibilities: [],
+    impact: [],
+  },
   {
     role: 'Senior Coding Mentor',
     company: 'Learn2Earn',
