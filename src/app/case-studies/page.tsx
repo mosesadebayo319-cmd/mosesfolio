@@ -1,243 +1,139 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import Image from 'next/image'
-import { pageSeo, whatsappHireUrl } from '@/src/data/content'
+import { pageSeo } from '@/src/data/content'
 import { getPublicProjects } from '@/src/lib/content-loader'
-
+import { Arrow, ProjectGallery } from '@/src/components/CreativeUI'
+import { PageIntro, ProjectCTA } from '@/src/components/CreativeSections'
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = {
   title: pageSeo.caseStudies.title,
   description: pageSeo.caseStudies.description,
   alternates: { canonical: '/case-studies' },
-  openGraph: {
-    title: pageSeo.caseStudies.title,
-    description: pageSeo.caseStudies.description,
-  },
 }
-
-export const dynamic = 'force-dynamic'
-
 export default async function CaseStudiesPage() {
-  const caseStudies = await getPublicProjects()
-
+  const projects = await getPublicProjects()
   return (
-    <div className="min-h-screen">
-      <section className="py-20 md:py-28 bg-card">
-        <div className="container">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="section-heading mb-6">
-              Selected projects and campaigns
-            </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              A closer look at product work and campaigns: the challenge, the approach,
-              what shipped, and the results we can verify.
-            </p>
-          </div>
-        </div>
+    <>
+      <PageIntro
+        label="THE SELECTED COLLECTION"
+        title="Made with purpose."
+        accent="Built to be useful."
+      >
+        <p>
+          A closer look at the websites, products, and campaigns I’ve helped
+          bring to life. The brief, the thinking, and what actually shipped.
+        </p>
+      </PageIntro>
+      <section className="cr-section cr-wrap">
+        <ProjectGallery projects={projects} />
       </section>
-
-      <section className="py-20 md:py-28 bg-background">
-        <div className="container">
-          <div className="space-y-24">
-            {caseStudies.map((study, i) => {
-              const isDataImage = study.image.startsWith('data:')
-              return (
-                <article
-                  key={study.id}
-                  id={study.id}
-                  className="scroll-mt-28 grid grid-cols-1 md:grid-cols-2 gap-12 items-start"
+      <div className="cr-wrap">
+        {projects.map((p, i) => (
+          <article className="cr-case-detail" id={p.id} key={p.id}>
+            <div className="cr-case-detail-head">
+              <div>
+                <p className="cr-eyebrow">
+                  {String(i + 1).padStart(2, '0')} / {p.category.toUpperCase()}
+                </p>
+                <h2>{p.title}</h2>
+              </div>
+              {p.projectUrl && (
+                <a
+                  className="cr-text-link"
+                  href={p.projectUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <div className={i % 2 === 1 ? 'md:order-2' : ''}>
-                    <div className="rounded-xl overflow-hidden border border-border relative w-full aspect-video bg-card">
-                      {isDataImage ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={study.image}
-                          alt={study.title}
-                          className={`w-full h-full ${study.imageFit === 'contain' ? 'object-contain' : 'object-cover'}`}
-                        />
-                      ) : (
-                        <Image
-                          src={study.image}
-                          alt={study.title}
-                          fill
-                          className={study.imageFit === 'contain' ? 'object-contain' : 'object-cover'}
-                          sizes="(max-width:768px) 100vw, 50vw"
-                          unoptimized={
-                            study.image.startsWith('http') &&
-                            !study.image.includes('mosesfolio')
-                          }
-                        />
-                      )}
-                    </div>
-                    {study.imageCaption && (
-                      <p className="mt-3 text-xs text-muted-foreground">
-                        {study.imageCaption}
-                      </p>
-                    )}
-                    {!isDataImage && (
-                      <a
-                        href={study.image}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block mt-2 text-sm text-accent underline"
-                      >
-                        Open full-size image
-                      </a>
-                    )}
+                  Visit live project <Arrow />
+                </a>
+              )}
+            </div>
+            <div className="cr-case-image">
+              <div className="cr-case-image-inner">
+                <Image
+                  src={p.image}
+                  alt={p.title}
+                  fill
+                  sizes="(max-width:700px) 90vw, 80vw"
+                  unoptimized
+                />
+              </div>
+            </div>
+            <div className="cr-caption">
+              <span>{p.imageCaption}</span>
+              <a href={p.image} target="_blank" rel="noopener noreferrer">
+                Full image ↗
+              </a>
+            </div>
+            <div className="cr-case-meta">
+              {[
+                ['CLIENT', p.client],
+                ['MY ROLE', p.role],
+                ['INDUSTRY', p.industry],
+                ['WHEN', p.timeframe],
+              ]
+                .filter(([, v]) => v)
+                .map(([k, v]) => (
+                  <div key={k}>
+                    {k}
+                    <strong>{v}</strong>
                   </div>
-                  <div className={i % 2 === 1 ? 'md:order-1' : ''}>
-                    <p className="text-accent text-sm font-semibold mb-2">
-                      {study.category}
-                    </p>
-                    <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-                      {study.title}
-                    </h2>
-                    <div className="flex flex-wrap gap-3 text-xs text-muted-foreground mb-6">
-                      {study.client && (
-                        <span className="px-3 py-1 rounded-full border border-border">
-                          {study.client}
-                        </span>
-                      )}
-                      {study.industry && (
-                        <span className="px-3 py-1 rounded-full border border-border">
-                          {study.industry}
-                        </span>
-                      )}
-                      {study.timeframe && (
-                        <span className="px-3 py-1 rounded-full border border-border">
-                          {study.timeframe}
-                        </span>
-                      )}
-                      {study.role && (
-                        <span className="px-3 py-1 rounded-full border border-border">
-                          My role: {study.role}
-                        </span>
-                      )}
+                ))}
+            </div>
+            {p.stack && (
+              <div
+                className="cr-tags"
+                aria-label={p.stackLabel || 'Technology stack'}
+              >
+                {p.stack.map((s) => (
+                  <span key={s}>{s}</span>
+                ))}
+              </div>
+            )}
+            <div className="cr-case-body">
+              <div>
+                {[
+                  ['The challenge', p.problem],
+                  ['The thinking', p.strategy],
+                  ['The making', p.execution],
+                ]
+                  .filter(([, v]) => v)
+                  .map(([title, text]) => (
+                    <div key={title}>
+                      <h3>{title}</h3>
+                      <p>{text}</p>
                     </div>
-                    {study.stack && study.stack.length > 0 && (
-                      <div className="mb-8">
-                        <h3 className="text-sm font-semibold text-foreground mb-3">
-                          {study.stackLabel || 'Built with'}
-                        </h3>
-                        <ul className="flex flex-wrap gap-2" aria-label={study.stackLabel || 'Technology stack'}>
-                          {study.stack.map((item) => (
-                            <li key={item} className="px-3 py-1 rounded-full border border-border bg-card text-xs text-muted-foreground">
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
+                  ))}
+              </div>
+              <aside className="cr-case-result">
+                <h3>{p.resultHeading || 'The outcome'}</h3>
+                <div className="cr-case-metrics">
+                  {[
+                    [p.results.metric1, p.results.label1],
+                    [p.results.metric2, p.results.label2],
+                    [p.results.metric3, p.results.label3],
+                  ]
+                    .filter(([v]) => v && v !== '—')
+                    .map(([value, label]) => (
+                      <div key={label + value}>
+                        <strong>{value}</strong>
+                        <span>{label}</span>
                       </div>
-                    )}
-                    <div className="space-y-5 mb-8">
-                      {study.problem && (
-                        <div>
-                          <h3 className="font-semibold text-accent mb-2">
-                            The challenge
-                          </h3>
-                          <p className="text-muted-foreground leading-relaxed text-sm">
-                            {study.problem}
-                          </p>
-                        </div>
-                      )}
-                      {study.strategy && (
-                        <div>
-                          <h3 className="font-semibold text-accent mb-2">
-                            The strategy
-                          </h3>
-                          <p className="text-muted-foreground leading-relaxed text-sm">
-                            {study.strategy}
-                          </p>
-                        </div>
-                      )}
-                      {study.execution && (
-                        <div>
-                          <h3 className="font-semibold text-accent mb-2">
-                            The execution
-                          </h3>
-                          <p className="text-muted-foreground leading-relaxed text-sm">
-                            {study.execution}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                    {[study.results.metric1, study.results.metric2, study.results.metric3].some(Boolean) && (
-                    <div className="p-6 bg-card rounded-xl border border-border mb-6">
-                      <h3 className="font-semibold mb-4">{study.resultHeading || 'Results'}</h3>
-                      <div className="grid grid-cols-3 gap-3">
-                        {[
-                          [study.results.metric1, study.results.label1],
-                          [study.results.metric2, study.results.label2],
-                          [study.results.metric3, study.results.label3],
-                        ].filter(([m]) => Boolean(m)).map(([m, l]) => (
-                          <div key={String(l) + String(m)} className="text-center">
-                            <p className="text-xl md:text-2xl font-bold text-accent mb-1">
-                              {m}
-                            </p>
-                            <p className="text-[11px] text-muted-foreground">
-                              {l}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    )}
-                    {study.outcomeNote && (
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                        {study.outcomeNote}
-                      </p>
-                    )}
-                    {study.projectUrl && (
-                      <a
-                        href={study.projectUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="secondary-button mb-6"
-                      >
-                        View live project
-                      </a>
-                    )}
-                    {study.testimonial && (
-                      <div className="p-5 bg-background rounded-xl border border-border">
-                        <p className="text-muted-foreground italic text-sm mb-2">
-                          &ldquo;{study.testimonial}&rdquo;
-                        </p>
-                        {study.testimonialAuthor && (
-                          <p className="font-semibold text-sm">
-                            {study.testimonialAuthor}
-                          </p>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </article>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-card border-t border-border">
-        <div className="container text-center max-w-2xl">
-          <h2 className="section-heading mb-4">Want results like these?</h2>
-          <p className="text-muted-foreground mb-8">
-            Share your goals—I&apos;ll tell you honestly if I&apos;m the right
-            fit.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href={whatsappHireUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cta-button"
-            >
-              WhatsApp Moses
-            </a>
-            <Link href="/contact" className="secondary-button">
-              Send a project brief
-            </Link>
-          </div>
-        </div>
-      </section>
-    </div>
+                    ))}
+                </div>
+                {p.outcomeNote && <p>{p.outcomeNote}</p>}
+                {p.testimonial && (
+                  <blockquote>
+                    <p>“{p.testimonial}”</p>
+                    <p>{p.testimonialAuthor}</p>
+                  </blockquote>
+                )}
+              </aside>
+            </div>
+          </article>
+        ))}
+      </div>
+      <ProjectCTA />
+    </>
   )
 }

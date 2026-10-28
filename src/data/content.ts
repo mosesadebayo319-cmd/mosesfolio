@@ -165,7 +165,7 @@ export const homeTestimonials = [
 export const clients = [
   {
     name: 'Jeda Systems',
-    logo: 'https://jedasystems.com/wp-content/uploads/2025/07/image-1.png',
+    logo: '/clients/jeda-systems.png',
     url: 'https://jedasystems.com/',
     description: 'Current employer',
   },
@@ -177,7 +177,7 @@ export const clients = [
   },
   {
     name: 'MecuryX',
-    logo: 'https://mecuryx.com/images/mercuryx_tp.png',
+    logo: '/clients/mecuryx.png',
     url: 'https://mecuryx.com',
     description: 'Tech Education & Training',
   },
@@ -189,7 +189,7 @@ export const clients = [
   },
   {
     name: 'SGS Ministry',
-    logo: 'https://sgsministry.org/wp-content/uploads/2023/03/image6-removebg-preview-e1679848377965.png',
+    logo: '/clients/sgs-ministry.png',
     url: 'https://sgsministry.org',
     description: 'Spiritual & Community Ministry',
   },

@@ -1,156 +1,94 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import { pageSeo, experienceRoles, leadershipTraits } from '@/src/data/content'
 import {
-  coreCompetencies,
-  experienceRoles,
-  leadershipTraits,
-  pageSeo,
-  whatsappHireUrl,
-} from '@/src/data/content'
-
+  PageIntro,
+  SectionHeading,
+  ProjectCTA,
+} from '@/src/components/CreativeSections'
 export const metadata: Metadata = {
   title: pageSeo.experience.title,
   description: pageSeo.experience.description,
   alternates: { canonical: '/experience' },
 }
-
 export default function ExperiencePage() {
   return (
-    <div className="min-h-screen">
-      <section className="py-20 md:py-28 bg-card">
-        <div className="container">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="section-heading mb-6">
-              Digital marketing experience
-            </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              Digital marketing, project coordination, and product development
-              across education, nonprofit, and service organizations.
-            </p>
-            <a href="/Moses-Adebayo-CV.pdf" download className="cta-button mt-8">
-              Download CV (PDF)
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 md:py-28 bg-background">
-        <div className="container max-w-3xl">
-          <div className="pl-2">
-            {experienceRoles.map((role) => (
-              <div key={role.role + role.company} className="timeline-item">
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-3">
-                  <div>
-                    <h2 className="text-xl font-semibold text-accent">
-                      {role.role}
-                    </h2>
-                    <p className="font-medium">
-                      {role.link ? (
-                        <a
-                          href={role.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="hover:text-accent"
-                        >
-                          {role.company}
-                        </a>
-                      ) : (
-                        role.company
-                      )}
-                    </p>
-                  </div>
-                  <p className="text-sm text-muted-foreground">{role.period}</p>
-                </div>
-                {(role.responsibilities.length > 0 || role.impact.length > 0) && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <h3 className="text-sm font-semibold mb-2">Focus</h3>
-                    <ul className="space-y-1.5">
-                      {role.responsibilities.map((r) => (
-                        <li
-                          key={r}
-                          className="text-sm text-muted-foreground flex gap-2"
-                        >
-                          <span className="text-accent">•</span>
-                          {r}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-semibold mb-2">Impact</h3>
-                    <ul className="space-y-1.5">
-                      {role.impact.map((imp) => (
-                        <li
-                          key={imp}
-                          className="text-sm text-muted-foreground flex gap-2"
-                        >
-                          <span className="text-accent">✓</span>
-                          {imp}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                )}
+    <>
+      <PageIntro
+        label="THE JOURNEY SO FAR"
+        title="Different teams."
+        accent="A shared drive."
+      >
+        <p>
+          Marketing, project coordination, coding mentorship, and product
+          development. Experience shaped by the people and problems along the
+          way.
+        </p>
+        <a
+          href="/Moses-Adebayo-CV.pdf"
+          download
+          className="cr-button cr-button-dark"
+        >
+          Download my CV ↓
+        </a>
+      </PageIntro>
+      <section className="cr-section cr-wrap">
+        {experienceRoles.map((r, i) => (
+          <article className="cr-role" key={r.company + r.role} data-reveal>
+            <div className="cr-role-head">
+              <div>
+                <p className="cr-eyebrow">0{i + 1} / EXPERIENCE</p>
+                <h2>
+                  {r.link ? (
+                    <a href={r.link} target="_blank" rel="noopener noreferrer">
+                      {r.company} ↗
+                    </a>
+                  ) : (
+                    r.company
+                  )}
+                </h2>
               </div>
-            ))}
-          </div>
-        </div>
+              <div>
+                <h3>{r.role}</h3>
+                <span>{r.period.replace(/–/g, 'to')}</span>
+              </div>
+            </div>
+            {(r.responsibilities.length > 0 || r.impact.length > 0) && (
+              <div className="cr-role-list">
+                <div>
+                  <h4>THE FOCUS</h4>
+                  <ul>
+                    {r.responsibilities.map((t) => (
+                      <li key={t}>{t}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h4>THE CONTRIBUTION</h4>
+                  <ul>
+                    {r.impact.map((t) => (
+                      <li key={t}>{t}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
+          </article>
+        ))}
       </section>
-
-      <section className="py-16 bg-card">
-        <div className="container">
-          <h2 className="section-heading text-center mb-8">Competencies</h2>
-          <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
-            {coreCompetencies.map((c) => (
-              <span
-                key={c}
-                className="px-4 py-2 bg-background border border-border rounded-lg text-sm"
-              >
-                {c}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container">
-          <h2 className="section-heading text-center mb-12">
-            Leadership strengths
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <section className="cr-section cr-process">
+        <div className="cr-wrap">
+          <SectionHeading label="BEYOND A JOB TITLE" title="How I show up." />
+          <div className="cr-values">
             {leadershipTraits.map((t) => (
-              <div
-                key={t.title}
-                className="p-6 bg-card rounded-xl border border-border"
-              >
-                <h3 className="font-semibold text-accent mb-2">{t.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {t.description}
-                </p>
+              <div key={t.title}>
+                <h3>{t.title}</h3>
+                <p>{t.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
-
-      <section className="py-16 bg-card border-t border-border text-center">
-        <div className="container">
-          <Link href="/about" className="secondary-button mr-3 mb-3 inline-flex">
-            About Moses
-          </Link>
-          <a
-            href={whatsappHireUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cta-button inline-flex"
-          >
-            Hire me
-          </a>
-        </div>
-      </section>
-    </div>
+      <ProjectCTA />
+    </>
   )
 }
