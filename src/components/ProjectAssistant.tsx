@@ -24,6 +24,26 @@ export default function ProjectAssistant() {
 
   useEffect(() => {
     if (!open) return
+    const viewport = window.visualViewport
+    const syncViewport = () => {
+      const node = backdrop.current
+      if (!node || !viewport || window.innerWidth > 800) return
+      node.style.setProperty('--assistant-visible-height', `${viewport.height}px`)
+      node.style.setProperty('--assistant-keyboard-offset', `${Math.max(0, window.innerHeight - viewport.height - viewport.offsetTop)}px`)
+    }
+    syncViewport()
+    viewport?.addEventListener('resize', syncViewport)
+    viewport?.addEventListener('scroll', syncViewport)
+    window.addEventListener('resize', syncViewport)
+    return () => {
+      viewport?.removeEventListener('resize', syncViewport)
+      viewport?.removeEventListener('scroll', syncViewport)
+      window.removeEventListener('resize', syncViewport)
+    }
+  }, [open])
+
+  useEffect(() => {
+    if (!open) return
     const media = window.matchMedia('(min-width: 801px)')
     const previous = document.body.style.overflow
     const sync = () => { document.body.style.overflow = media.matches ? 'hidden' : previous }
