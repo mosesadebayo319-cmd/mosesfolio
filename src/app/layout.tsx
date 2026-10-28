@@ -1,22 +1,23 @@
 import type { Metadata } from 'next'
-import { Inter, Playfair_Display } from 'next/font/google'
+import localFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/next'
 import Navigation from '@/src/components/Navigation'
 import Footer from '@/src/components/Footer'
-import WhatsAppFloat from '@/src/components/WhatsAppFloat'
+import ProjectAssistant from '@/src/components/ProjectAssistant'
 import GoogleAnalytics from '@/src/components/Analytics'
 import { site } from '@/src/data/content'
 import './globals.css'
 
-const inter = Inter({
-  subsets: ['latin'],
+const inter = localFont({
+  src: './fonts/inter-latin.woff2',
+  weight: '100 900',
   variable: '--font-sans',
   display: 'swap',
 })
 
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['600', '700', '800'],
+const playfair = localFont({
+  src: './fonts/playfair-latin.woff2',
+  weight: '600 800',
   variable: '--font-display',
   display: 'swap',
 })
@@ -171,7 +172,7 @@ export default function RootLayout({
         <Navigation />
         <main id="main-content">{children}</main>
         <Footer />
-        <WhatsAppFloat />
+        <ProjectAssistant />
         <Analytics />
         <GoogleAnalytics />
       </body>
