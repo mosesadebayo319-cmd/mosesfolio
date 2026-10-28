@@ -66,7 +66,7 @@ ADMIN_SECRET=your-secret        # password for /admin
 
 The floating project assistant is served from `public/project-assistant.html`, with its responsive host in `src/components/ProjectAssistant.tsx`. It only loads when opened and keeps conversation state in the current page session. Closing it does not submit anything.
 
-Set `GROQ_API_KEY` as a server-only Vercel environment variable for Production and Preview. `GROQ_MODEL` optionally overrides the default `llama-3.3-70b-versatile` (verified in Groq's supported models documentation during implementation). Redeploy after changing environment variables. Never use a `NEXT_PUBLIC_` prefix for credentials.
+Set `GROQ_API_KEY` as a server-only Vercel environment variable for Production and Preview. `GROQ_MODEL` optionally overrides the default `openai/gpt-oss-20b` (verified in Groq's supported models documentation during implementation). Redeploy after changing environment variables. Never use a `NEXT_PUBLIC_` prefix for credentials.
 
 The `/api/assistant` endpoint uses verified portfolio content, bounds and validates conversation input, and applies a best-effort per-instance rate limit. It does not log conversations or call outbound messaging tools. Messages submitted to the conversational assistant are processed by Groq. Without a working connection, guided service choices and enquiry preparation remain available. The enquiry is reviewed locally before the visitor chooses to open WhatsApp and send it.
 
