@@ -264,3 +264,12 @@ body {
   .clients-group { flex-wrap: wrap; justify-content: center; padding-right: 0; }
   .clients-group[aria-hidden='true'] { display: none; }
 }
+
+/* Project assistant: spacious desktop studio, compact mobile sheet. */
+.project-assistant-launcher{position:fixed;right:24px;bottom:24px;z-index:60;display:flex;align-items:center;gap:10px;border:1px solid #a7f3d0;border-radius:999px;background:#82efcd;color:#092b26;padding:15px 21px;font-size:13px;font-weight:700;box-shadow:0 10px 35px #0005}
+.project-assistant-launcher[hidden],.project-assistant-backdrop[hidden]{display:none}
+.project-assistant-launcher:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.project-assistant-backdrop{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:#050b14b8;backdrop-filter:blur(9px);padding:28px}
+.project-assistant-frame{width:min(1060px,100%);height:min(790px,calc(100dvh - 56px));border:1px solid #3c4a5b;border-radius:24px;overflow:hidden;box-shadow:0 40px 130px #0009;background:#0a1422}
+.project-assistant-frame iframe{display:block;width:100%;height:100%;border:0}
+@media(max-width:800px){.project-assistant-launcher{right:16px;bottom:16px;padding:13px 17px;font-size:12px}.project-assistant-backdrop{pointer-events:none;background:none;backdrop-filter:none;padding:0;align-items:flex-end;justify-content:flex-end}.project-assistant-frame{pointer-events:auto;width:calc(100% - 24px);max-width:440px;height:min(62dvh,580px);max-height:calc(100dvh - 110px);margin:0 12px 12px;border-radius:20px;box-shadow:0 15px 60px #0008}}
