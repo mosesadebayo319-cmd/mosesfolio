@@ -12,7 +12,6 @@ import {
   getPublicTestimonials,
 } from '@/src/lib/content-loader'
 import {
-  Burst,
   Arrow,
   Portrait,
   ProjectGallery,
@@ -82,19 +81,19 @@ export default async function HomePage() {
             <span key={i}>
               STRATEGY{' '}
               <b>
-                <Burst />
+                <Arrow />
               </b>{' '}
               DIGITAL EXPERIENCES{' '}
               <b>
-                <Burst />
+                <Arrow />
               </b>{' '}
               MEANINGFUL GROWTH{' '}
               <b>
-                <Burst />
+                <Arrow />
               </b>{' '}
               IDEAS INTO ACTION{' '}
               <b>
-                <Burst />
+                <Arrow />
               </b>{' '}
             </span>
           ))}
@@ -154,7 +153,7 @@ export default async function HomePage() {
                   {item.mark === '↗' ? (
                     <Arrow />
                   ) : item.number === '02' ? (
-                    <Burst />
+                    <Arrow />
                   ) : (
                     item.mark
                   )}

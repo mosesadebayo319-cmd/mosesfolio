@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { navLinks } from '@/src/data/content'
-import { Burst, Arrow } from './CreativeUI'
+import { Arrow } from './CreativeUI'
 export default function Navigation() {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
@@ -22,9 +22,6 @@ export default function Navigation() {
       <nav className="cr-wrap cr-nav" aria-label="Main navigation">
         <Link href="/" className="cr-wordmark" aria-label="Moses home">
           moses
-          <span>
-            <Burst />
-          </span>
         </Link>
         <div className="cr-desktop-links">
           {navLinks

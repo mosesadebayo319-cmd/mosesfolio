@@ -1,10 +1,10 @@
-# Expressive portfolio redesign
+# Editorial portfolio redesign
 
 Review branch only. Do not merge or promote to production until Moses approves.
 
 ## Direction
 
-Warm ivory and ink with lime and violet accents. Oversized typography, a portrait collage, staggered project previews, and a consistent visual system across Home, Work, Services, About, Experience, Contact, and Testimonials.
+Warm ivory and charcoal with muted slate-blue accents. Oversized typography, a clean portrait frame, staggered project previews, and a consistent visual system across Home, Work, Services, About, Experience, Contact, and Testimonials. Decorative stars, stickers, and bright lime have been removed following Moses’ review.
 
 ## Interactions to review
 
@@ -12,7 +12,7 @@ Warm ivory and ink with lime and violet accents. Oversized typography, a portrai
 - Work filters separate websites/products and marketing. Cards link to the complete case studies on the same page.
 - Services expand and collapse using native, keyboard-accessible disclosures.
 - Mobile menu closes after navigation and with Escape.
-- Reveals, rotating graphic elements, and moving collaborator logos respect reduced motion. Footer includes a pause control.
+- Reveals, hover effects, and moving collaborator logos respect reduced motion. Footer includes a pause control.
 - Project calls to action open the existing assistant. Its pricing logic, keyboard handling, and contact handoff remain intact.
 - Contact form uses the existing endpoint. Work WhatsApp and direct phone numbers remain separate.
 - CV download, GitHub, other social profiles, current Jeda Systems role, project stacks, and source-backed campaign figures are retained.

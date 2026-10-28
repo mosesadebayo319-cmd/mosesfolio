@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { site, navLinks } from '@/src/data/content'
 import { IconGitHub, IconLinkedIn, IconInstagram, IconFacebook } from './Icons'
-import { Burst, MotionControl } from './CreativeUI'
+import { MotionControl } from './CreativeUI'
 export default function Footer() {
   return (
     <footer className="cr-footer">
@@ -9,9 +9,6 @@ export default function Footer() {
         <div className="cr-footer-top">
           <Link href="/" className="cr-wordmark">
             moses
-            <span>
-              <Burst />
-            </span>
           </Link>
           <p>
             Strategy with purpose.
@@ -72,9 +69,6 @@ export default function Footer() {
         </div>
         <div className="cr-footer-type" aria-hidden="true">
           MAKE IT MATTER
-          <span>
-            <Burst />
-          </span>
         </div>
       </div>
     </footer>

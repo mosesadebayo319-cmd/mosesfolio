@@ -8,6 +8,7 @@ import GoogleAnalytics from '@/src/components/Analytics'
 import { site } from '@/src/data/content'
 import './globals.css'
 import './creative.css'
+import './refinement.css'
 import { CreativeMotion } from '@/src/components/CreativeUI'
 
 const inter = localFont({

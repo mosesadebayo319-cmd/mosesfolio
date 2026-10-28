@@ -133,10 +133,6 @@ export function Portrait() {
         ref.current?.style.setProperty('--tilt-y', '0deg')
       }}
     >
-      <div className="cr-orbit" aria-hidden="true" />
-      <span className="cr-spark cr-spark-one" aria-hidden="true">
-        <Burst />
-      </span>
       <div className="cr-portrait-card">
         <Image
           src="/hero/hero.jpg"
@@ -150,18 +146,6 @@ export function Portrait() {
           <span>STRATEGIST. BUILDER.</span>
         </div>
       </div>
-      <span className="cr-sticker cr-sticker-lime">
-        Strategy meets
-        <br />
-        <strong>let’s build it.</strong>
-      </span>
-      <span className="cr-sticker cr-sticker-purple">
-        A little curiosity.
-        <br />A lot of intention.
-      </span>
-      <span className="cr-spark cr-spark-two" aria-hidden="true">
-        <Burst />
-      </span>
     </div>
   )
 }

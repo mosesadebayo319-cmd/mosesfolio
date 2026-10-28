@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import type { ReactNode } from 'react'
 import { clients, site } from '@/src/data/content'
-import { Burst, Arrow, StartProject } from './CreativeUI'
+import { Arrow, StartProject } from './CreativeUI'
 export function PageIntro({
   label,
   title,
@@ -24,9 +24,6 @@ export function PageIntro({
         {title}
         <br />
         <span className="cr-serif">{accent}</span>
-        <span className="cr-title-star" aria-hidden="true">
-          <Burst />
-        </span>
       </h1>
       {children && <div className="cr-intro-copy">{children}</div>}
     </section>
@@ -88,9 +85,6 @@ export function ProjectCTA() {
           </h2>
         </div>
         <div className="cr-cta-side">
-          <span className="cr-cta-star" aria-hidden="true">
-            <Burst />
-          </span>
           <StartProject />
           <a className="cr-text-link" href={`mailto:${site.email}`}>
             Prefer email? Say hello <Arrow />
