@@ -12,9 +12,9 @@ export const recentCaseStudies: PublicProject[] = [
     timeframe: '',
     category: 'Website Development',
     stack: ['HTML', 'CSS', 'JavaScript', 'Vercel'],
-    image: '/case-studies/motechy-website.jpg',
+    image: '/case-studies/motechy-website-october-2026.jpg',
     imageFit: 'contain',
-    imageCaption: 'MoTechy homepage showing the agency offer and contact options.',
+    imageCaption: 'MoTechy’s updated homepage presenting its marketing and software services.',
     problem:
       'MoTechy needed a website that clearly presents its digital marketing offer to Nigerian founders and SME owners and gives visitors a way to start a conversation.',
     strategy:
