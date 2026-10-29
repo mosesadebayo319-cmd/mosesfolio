@@ -1,14 +1,14 @@
-# Editorial portfolio redesign
+# Monica portfolio adaptation
 
 Review branch only. Do not merge or promote to production until Moses approves.
 
 ## Direction
 
-Warm ivory and charcoal with muted slate-blue accents. Oversized typography, a clean portrait frame, staggered project previews, and a consistent visual system across Home, Work, Services, About, Experience, Contact, and Testimonials. Decorative stars, stickers, and bright lime have been removed following Moses’ review.
+Moses selected the Monica template by StyleShout. The portfolio adapts its dark green, warm cream, and ochre palette, DM Serif Display typography, portrait-led introduction, split About/Expertise sections, and numbered services. All public pages use the same presentation. Decorative stars, stickers, and lime accents remain removed.
 
 ## Interactions to review
 
-- Portrait responds to a mouse pointer, with touch and reduced-motion exceptions.
+- Portrait-led hero and subtle section reveals, without decorative floating elements.
 - Work filters separate websites/products and marketing. Cards link to the complete case studies on the same page.
 - Services expand and collapse using native, keyboard-accessible disclosures.
 - Mobile menu closes after navigation and with Escape.
@@ -20,3 +20,5 @@ Warm ivory and charcoal with muted slate-blue accents. Oversized typography, a c
 ## Review notes
 
 The production domain is unchanged. The Vercel preview runs on its own branch. Preview contact submissions should only be tested with a mocked endpoint to avoid sending a real enquiry. Physical iPhone keyboard behavior still warrants a device check.
+
+The footer credits Monica by StyleShout. See THIRD_PARTY_NOTICES.md for design and font licensing.

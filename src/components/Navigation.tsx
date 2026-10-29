@@ -21,7 +21,7 @@ export default function Navigation() {
     <header className="cr-header">
       <nav className="cr-wrap cr-nav" aria-label="Main navigation">
         <Link href="/" className="cr-wordmark" aria-label="Moses home">
-          moses
+          Moses.
         </Link>
         <div className="cr-desktop-links">
           {navLinks
@@ -38,7 +38,7 @@ export default function Navigation() {
             ))}
         </div>
         <Link href="/contact" className="cr-nav-contact">
-          Let’s talk <Arrow />
+          Let’s Work Together
         </Link>
         <button
           className="cr-menu-button"

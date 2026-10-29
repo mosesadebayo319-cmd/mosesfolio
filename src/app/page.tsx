@@ -11,12 +11,7 @@ import {
   getPublicProjects,
   getPublicTestimonials,
 } from '@/src/lib/content-loader'
-import {
-  Arrow,
-  Portrait,
-  ProjectGallery,
-  StartProject,
-} from '@/src/components/CreativeUI'
+import { Arrow, ProjectGallery } from '@/src/components/CreativeUI'
 import {
   Collaborators,
   ProjectCTA,
@@ -28,6 +23,7 @@ export const metadata: Metadata = {
   description: pageSeo.home.description,
   alternates: { canonical: '/' },
 }
+
 export default async function HomePage() {
   const [projects, testimonials] = await Promise.all([
     getPublicProjects(),
@@ -35,155 +31,153 @@ export default async function HomePage() {
   ])
   return (
     <>
-      <section className="cr-hero cr-wrap">
-        <div className="cr-hero-topline">
-          <span className="cr-eyebrow">
-            <span className="cr-dot" />
-            INDEPENDENT MIND. CONNECTED SKILLS.
-          </span>
-          <span className="cr-location">ABUJA, NG</span>
-        </div>
-        <div className="cr-hero-grid">
-          <div className="cr-hero-copy">
+      <section className="mo-intro">
+        <div className="cr-wrap mo-intro-grid">
+          <div className="mo-intro-text" data-reveal>
+            <p className="mo-pretitle">Hello, I’m Moses</p>
             <h1>
-              Good ideas.
-              <br />
-              Bold moves.
-              <br />
-              <span className="cr-serif">Real impact.</span>
+              I create marketing <br />
+              strategies & digital <br />
+              products for your <br />
+              business.
             </h1>
-            <p>
-              I’m Moses. A digital marketer & product developer connecting the
-              dots between your next big idea and the people it’s made for.
+            <p className="mo-intro-description">
+              Digital marketer & product developer in Abuja, Nigeria. Helping
+              SMEs and nonprofits communicate clearly, reach their audience, and
+              build useful tools.
             </p>
-            <div className="cr-hero-actions">
-              <Link href="/case-studies" className="cr-button cr-button-dark">
+            <div className="mo-hero-actions">
+              <Link href="/case-studies" className="cr-text-link">
                 Explore my work <Arrow />
               </Link>
-              <StartProject className="cr-button-quiet" />
+              <a href="/Moses-Adebayo-CV.pdf" download className="cr-text-link">
+                Download CV ↓
+              </a>
             </div>
           </div>
-          <Portrait />
-        </div>
-        <div className="cr-hero-bottom">
-          <div>
-            <span className="cr-dot" />
-            MARKETING MIND. BUILDER’S INSTINCT.
+          <div className="mo-intro-image" data-reveal>
+            <Image
+              src="/hero/hero.jpg"
+              alt="Moses Adebayo, digital marketer and product developer"
+              width={400}
+              height={500}
+              priority
+            />
+            <span>MOSES ADEBAYO · ABUJA, NG</span>
           </div>
-          <a href="#selected-work">
-            A little scroll goes a long way <span>↓</span>
+          <a href="#about-moses" className="mo-scroll">
+            <span aria-hidden="true">↓</span>Scroll to explore
           </a>
         </div>
       </section>
-      <div className="cr-ribbon" aria-hidden="true">
-        <div>
-          {[0, 1].map((i) => (
-            <span key={i}>
-              STRATEGY{' '}
-              <b>
-                <Arrow />
-              </b>{' '}
-              DIGITAL EXPERIENCES{' '}
-              <b>
-                <Arrow />
-              </b>{' '}
-              MEANINGFUL GROWTH{' '}
-              <b>
-                <Arrow />
-              </b>{' '}
-              IDEAS INTO ACTION{' '}
-              <b>
-                <Arrow />
-              </b>{' '}
-            </span>
-          ))}
+      <section className="mo-about" id="about-moses">
+        <div className="cr-wrap mo-split">
+          <div className="mo-split-heading" data-reveal>
+            <p className="mo-pretitle">About</p>
+            <h2>
+              Strategy, meet <br />
+              the person who <br />
+              builds it.
+            </h2>
+            <Link href="/about" className="mo-outline">
+              More About Me <Arrow />
+            </Link>
+          </div>
+          <div className="mo-prose" data-reveal>
+            <p>
+              I’m Moses Adebayo. I work at the intersection of digital marketing
+              and product development, bringing a practical approach to the way
+              businesses show up online.
+            </p>
+            <p>
+              My work spans SEO, social media, paid campaigns, and websites. I
+              also built ImpactDesk, a reporting workspace that helps nonprofit
+              teams connect their activities, evidence, and donor reporting.
+            </p>
+            <p>
+              Based in Abuja, I collaborate with SMEs, nonprofits, and education
+              teams across Nigeria. I’m interested in work with a clear purpose,
+              a thoughtful process, and outcomes we can explain honestly.
+            </p>
+            <Link href="/experience" className="cr-text-link">
+              Explore my experience <Arrow />
+            </Link>
+          </div>
         </div>
-      </div>
-      <section className="cr-section cr-wrap" id="selected-work">
-        <SectionHeading
-          label="01 / SELECTED WORK"
-          title="Less talk. More making."
-          link="All projects"
-          href="/case-studies"
-        />
-        <ProjectGallery projects={projects.slice(0, 4)} compact />
       </section>
-      <Collaborators />
-      <section className="cr-section cr-ink">
-        <div className="cr-wrap">
-          <SectionHeading
-            label="02 / WHAT I BRING"
-            title="One curious mind. A useful mix."
-          />
-          <div className="cr-expertise-grid">
+      <section className="mo-expertise">
+        <div className="cr-wrap mo-split">
+          <div className="mo-split-heading" data-reveal>
+            <p className="mo-pretitle">Expertise</p>
+            <h2>
+              The right skills <br />
+              for your next <br />
+              chapter.
+            </h2>
+            <p>
+              From shaping the message to building the experience, I help
+              connect the work that moves your business forward.
+            </p>
+            <Link href="/services" className="mo-outline">
+              View All Services <Arrow />
+            </Link>
+          </div>
+          <div className="mo-service-grid">
             {[
               {
-                number: '01',
-                title: 'Build a presence.',
-                text: 'Websites and practical products that make your business easier to understand, use, and choose.',
-                tags: 'WEBSITES / WEB PRODUCTS',
-                mark: '↗',
+                title: 'Digital marketing',
+                text: 'A clear strategy for your audience, channels, and offers. SEO, social media, and paid campaigns supported by practical reporting.',
               },
               {
-                number: '02',
-                title: 'Start a conversation.',
-                text: 'Content, social strategy, and campaigns that help your message find the people who need it.',
-                tags: 'CONTENT / SOCIAL / PAID ADS',
-                mark: '✳︎',
+                title: 'Websites & products',
+                text: 'Business websites, landing pages, and practical software that make your services easier to understand and your workflows easier to manage.',
               },
               {
-                number: '03',
-                title: 'Find your momentum.',
-                text: 'Search visibility, measurement, and a clear plan to turn activity into informed next steps.',
-                tags: 'SEO / ANALYTICS / STRATEGY',
-                mark: '◎',
+                title: 'Content & community',
+                text: 'Consistent content, thoughtful messaging, and community management that give your audience a reason to listen and stay connected.',
               },
-            ].map((item) => (
-              <Link
-                href="/services"
-                className="cr-expertise-card"
-                key={item.number}
-                data-reveal
-              >
-                <div className="cr-card-top">
-                  <span>{item.number}</span>
-                  <Arrow />
-                </div>
-                <span className="cr-expertise-mark" aria-hidden="true">
-                  {item.mark === '↗' ? (
-                    <Arrow />
-                  ) : item.number === '02' ? (
-                    <Arrow />
-                  ) : (
-                    item.mark
-                  )}
-                </span>
+              {
+                title: 'Project leadership',
+                text: 'Clear plans, responsible delivery, and useful communication. Bringing structure to creative and technical work so everyone knows what comes next.',
+              },
+            ].map((item, i) => (
+              <div key={item.title} className="mo-service-item" data-reveal>
+                <span>0{i + 1}</span>
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
-                <small>{item.tags}</small>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
       </section>
-      <section className="cr-section cr-wrap">
-        <div className="cr-result-layout" data-reveal>
-          <div>
-            <p className="cr-eyebrow">03 / A CAMPAIGN, IN NUMBERS</p>
+      <Collaborators />
+      <section className="cr-section cr-wrap" id="selected-work">
+        <SectionHeading
+          label="SELECTED WORK"
+          title="A closer look at what I do."
+          link="All case studies"
+          href="/case-studies"
+        />
+        <ProjectGallery projects={projects.slice(0, 4)} compact />
+      </section>
+      <section className="mo-results">
+        <div className="cr-wrap mo-split">
+          <div className="mo-split-heading" data-reveal>
+            <p className="mo-pretitle">Campaign results</p>
             <h2>
-              Small campaign.
-              <br />
-              <span className="cr-serif">Visible reach.</span>
+              Awareness <br />
+              you can <br />
+              account for.
             </h2>
             <p>
-              A three-day LinkedIn awareness campaign for Heroes Help’s Tickets
-              for Troops initiative.
+              Tickets for Troops. A three-day LinkedIn video awareness campaign
+              for Heroes Help.
             </p>
             <Link
-              className="cr-text-link"
               href="/case-studies#tickets-for-troops-linkedin"
+              className="cr-text-link"
             >
-              See the complete story <Arrow />
+              Read the campaign story <Arrow />
             </Link>
           </div>
           <div className="cr-metric-grid">
@@ -194,56 +188,17 @@ export default async function HomePage() {
               </div>
             ))}
             <p>
-              21–23 September 2026 · Awareness results. No leads or conversions
-              recorded.
+              21–23 September 2026. Awareness results only; no leads or
+              conversions were recorded.
             </p>
-          </div>
-        </div>
-      </section>
-      <section className="cr-about-strip">
-        <div className="cr-wrap cr-about-layout">
-          <div className="cr-about-photo" data-reveal>
-            <Image
-              src="/about-moses.jpg"
-              alt="Moses Adebayo"
-              width={600}
-              height={600}
-              className="object-cover"
-            />
-            <span className="cr-photo-note">The person behind the pixels.</span>
-          </div>
-          <div data-reveal>
-            <p className="cr-eyebrow">04 / A LITTLE ABOUT ME</p>
-            <h2>
-              Equal parts
-              <br />
-              strategy & <span className="cr-serif">getting it done.</span>
-            </h2>
-            <p>
-              I like understanding how things work. Businesses, audiences,
-              workflows. Then finding a clearer, more useful way forward.
-            </p>
-            <p>
-              From building ImpactDesk for nonprofit reporting to running
-              campaigns and mentoring new coders, I bring a practical approach
-              to every brief.
-            </p>
-            <div className="cr-inline-actions">
-              <Link href="/about" className="cr-button cr-button-dark">
-                Meet Moses <Arrow />
-              </Link>
-              <a href="/Moses-Adebayo-CV.pdf" download className="cr-text-link">
-                Download CV ↓
-              </a>
-            </div>
           </div>
         </div>
       </section>
       <section className="cr-section cr-wrap">
         <SectionHeading
-          label="05 / ALWAYS BUILDING"
-          title="Where I put it to work."
-          link="My experience"
+          label="EXPERIENCE"
+          title="The teams behind the journey."
+          link="Full experience"
           href="/experience"
         />
         <div className="cr-role-preview">
@@ -265,15 +220,15 @@ export default async function HomePage() {
       <section className="cr-section cr-process">
         <div className="cr-wrap">
           <SectionHeading
-            label="06 / THE WAY WE WORK"
-            title="A clear path from hello."
+            label="THE PROCESS"
+            title="A thoughtful way to work together."
           />
           <div className="cr-process-grid">
-            {processSteps.map((step) => (
-              <div key={step.step} data-reveal>
-                <span>{step.step}</span>
-                <h3>{step.title}</h3>
-                <p>{step.description.replace(/—/g, '. ')}</p>
+            {processSteps.map((s) => (
+              <div key={s.step} data-reveal>
+                <span>{s.step}</span>
+                <h3>{s.title}</h3>
+                <p>{s.description.replace(/—/g, '. ')}</p>
               </div>
             ))}
           </div>
@@ -290,7 +245,7 @@ export default async function HomePage() {
               <strong>{testimonials[0].name}</strong>
               <span>{testimonials[0].role}</span>
               <Link href="/testimonials" className="cr-text-link">
-                More kind words <Arrow />
+                More client feedback <Arrow />
               </Link>
             </footer>
           </blockquote>

@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="cr-wrap">
         <div className="cr-footer-top">
           <Link href="/" className="cr-wordmark">
-            moses
+            Moses.
           </Link>
           <p>
             Strategy with purpose.
@@ -66,9 +66,13 @@ export default function Footer() {
           <span>Based in Abuja. Thinking beyond.</span>
           <MotionControl />
           <a href="#main-content">Back to top ↑</a>
-        </div>
-        <div className="cr-footer-type" aria-hidden="true">
-          MAKE IT MATTER
+          <a
+            href="https://styleshout.com/free-templates/monica/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Monica design by StyleShout
+          </a>
         </div>
       </div>
     </footer>

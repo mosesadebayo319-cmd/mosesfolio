@@ -9,12 +9,20 @@ import { site } from '@/src/data/content'
 import './globals.css'
 import './creative.css'
 import './refinement.css'
+import './monica.css'
 import { CreativeMotion } from '@/src/components/CreativeUI'
 
 const inter = localFont({
   src: './fonts/inter-latin.woff2',
   weight: '100 900',
   variable: '--font-sans',
+  display: 'swap',
+})
+
+const dmSerif = localFont({
+  src: './fonts/dm-serif-display.ttf',
+  weight: '400',
+  variable: '--font-editorial',
   display: 'swap',
 })
 
@@ -163,7 +171,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${playfair.variable} ${dmSerif.variable}`}
+    >
       <body className="min-h-screen bg-background text-foreground antialiased font-sans creative-site">
         <CreativeMotion />
         <script
