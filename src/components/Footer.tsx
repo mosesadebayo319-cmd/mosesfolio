@@ -1,109 +1,78 @@
 import Link from 'next/link'
-import { IconFacebook, IconGitHub, IconInstagram, IconLinkedIn } from '@/src/components/Icons'
-import { footerServices, navLinks, site, whatsappHireUrl } from '@/src/data/content'
-
+import { site, navLinks } from '@/src/data/content'
+import { IconGitHub, IconLinkedIn, IconInstagram, IconFacebook } from './Icons'
+import { MotionControl } from './CreativeUI'
 export default function Footer() {
-  const year = new Date().getFullYear()
-
   return (
-    <footer className="bg-card border-t border-border">
-      <div className="container py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          <div>
-            <h3 className="text-2xl font-display font-bold text-accent mb-4">
-              {site.shortName}
-            </h3>
-            <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-              Digital marketer and product developer in Abuja, Nigeria—SEO, social media, paid
-              ads, and websites that convert for SMEs, NGOs, and founders.
-            </p>
-            <a href={whatsappHireUrl} className="text-accent text-sm font-semibold hover:underline">
-              WhatsApp for a free strategy chat →
-            </a>
-          </div>
-
-          <div>
-            <h4 className="font-semibold text-foreground mb-4">Navigate</h4>
-            <ul className="space-y-2">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-muted-foreground hover:text-accent text-sm transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold text-foreground mb-4">Services</h4>
-            <ul className="space-y-2">
-              {footerServices.map((service) => (
-                <li key={service.href}>
-                  <Link
-                    href={service.href}
-                    className="text-muted-foreground hover:text-accent text-sm transition-colors"
-                  >
-                    {service.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold text-foreground mb-4">Connect</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <a href={`mailto:${site.email}`} className="hover:text-accent">
-                  {site.email}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={site.social.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-accent"
-                >
-                  WhatsApp: {site.whatsappPhone}
-                </a>
-              </li>
-              <li>
-                <a href={`tel:+${site.callRaw}`} className="hover:text-accent">
-                  Call: {site.phone}
-                </a>
-              </li>
-              <li>{site.location}</li>
-            </ul>
-            <div className="flex flex-wrap gap-2 mt-4" aria-label="Social profiles">
-              {[
-                { name: 'GitHub', href: site.social.github, Icon: IconGitHub },
-                { name: 'LinkedIn', href: site.social.linkedin, Icon: IconLinkedIn },
-                { name: 'Instagram', href: site.social.instagram, Icon: IconInstagram },
-                { name: 'Facebook', href: site.social.facebook, Icon: IconFacebook },
-              ].map(({ name, href, Icon }) => (
-                <a
-                  key={name}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Visit my ${name} profile`}
-                  title={name}
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-border text-muted-foreground hover:border-accent hover:text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                >
-                  <Icon className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
+    <footer className="cr-footer">
+      <div className="cr-wrap">
+        <div className="cr-footer-top">
+          <Link href="/" className="cr-wordmark">
+            Moses.
+          </Link>
+          <p>
+            Strategy with purpose.
+            <br />
+            Digital work with personality.
+          </p>
+          <div className="cr-socials">
+            {[
+              { name: 'GitHub', href: site.social.github, Icon: IconGitHub },
+              {
+                name: 'LinkedIn',
+                href: site.social.linkedin,
+                Icon: IconLinkedIn,
+              },
+              {
+                name: 'Instagram',
+                href: site.social.instagram,
+                Icon: IconInstagram,
+              },
+              {
+                name: 'Facebook',
+                href: site.social.facebook,
+                Icon: IconFacebook,
+              },
+            ].map(({ name, href, Icon }) => (
+              <a
+                href={href}
+                key={name}
+                aria-label={name}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon className="w-5 h-5" />
+              </a>
+            ))}
           </div>
         </div>
-
-        <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          © {year} {site.name}. All rights reserved.
+        <div className="cr-footer-middle">
+          <div>
+            {navLinks
+              .filter((l) => l.href !== '/')
+              .map((l) => (
+                <Link key={l.href} href={l.href}>
+                  {l.label}
+                </Link>
+              ))}
+            <a href="/Moses-Adebayo-CV.pdf" download>
+              Download CV ↗
+            </a>
+          </div>
+          <a href={'mailto:' + site.email}>{site.email}</a>
+        </div>
+        <div className="cr-footer-bottom">
+          <span>© {new Date().getFullYear()} Moses Adebayo</span>
+          <span>Based in Abuja. Thinking beyond.</span>
+          <MotionControl />
+          <a href="#main-content">Back to top ↑</a>
+          <a
+            href="https://styleshout.com/free-templates/monica/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Monica design by StyleShout
+          </a>
         </div>
       </div>
     </footer>

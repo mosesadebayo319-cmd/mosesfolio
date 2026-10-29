@@ -1,227 +1,115 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
+import { pageSeo, aboutValues, skillCategories } from '@/src/data/content'
+import { Arrow } from '@/src/components/CreativeUI'
 import {
-  aboutValues,
-  experienceRoles,
-  pageSeo,
-  site,
-  skillCategories,
-  whatsappHireUrl,
-} from '@/src/data/content'
-
+  PageIntro,
+  ProjectCTA,
+  SectionHeading,
+  Collaborators,
+} from '@/src/components/CreativeSections'
 export const metadata: Metadata = {
   title: pageSeo.about.title,
   description: pageSeo.about.description,
   alternates: { canonical: '/about' },
-  openGraph: {
-    title: pageSeo.about.title,
-    description: pageSeo.about.description,
-  },
 }
-
 export default function AboutPage() {
-  const featured = experienceRoles.filter((r) => r.featured)
-
   return (
-    <div className="min-h-screen">
-      <section className="py-20 md:py-28 bg-card">
-        <div className="container">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="section-heading mb-6">
-              About Moses Adebayo
-            </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              Digital marketer and product developer based in{' '}
-              <strong className="text-foreground">Abuja, Nigeria</strong>. I help
-              SMEs and NGOs connect with their audiences and build practical
-              tools for their work.
-            </p>
+    <>
+      <PageIntro
+        label="THE PERSON BEHIND THE WORK"
+        title="Curious by nature."
+        accent="Practical by choice."
+      >
+        <p>
+          I’m Moses Adebayo, a digital marketer and product developer based in
+          Abuja, Nigeria. I help ambitious teams communicate clearly and build
+          useful things.
+        </p>
+      </PageIntro>
+      <section className="cr-section cr-wrap cr-bio-grid">
+        <div className="cr-about-photo" data-reveal>
+          <Image
+            src="/about-moses.jpg"
+            alt="Moses Oluwashina Adebayo"
+            width={600}
+            height={600}
+            priority
+          />
+          <span className="cr-photo-note">
+            A marketer who likes to make things.
+          </span>
+        </div>
+        <div className="cr-bio-copy" data-reveal>
+          <p className="cr-eyebrow">A LITTLE BACKSTORY</p>
+          <h2>
+            Strategy in my head.
+            <br />
+            <span className="cr-serif">Work in my hands.</span>
+          </h2>
+          <p>
+            I started in operations and project coordination, learning how teams
+            deliver under pressure. That still shapes how I work: clear owners,
+            realistic milestones, and an honest view of results.
+          </p>
+          <p>
+            I’ve worked with nonprofits, education teams, and service businesses
+            across Nigeria. Today, my work moves between SEO, social media, paid
+            campaigns, websites, and product development.
+          </p>
+          <p>
+            As the developer of ImpactDesk, I’m also exploring how practical
+            software can help nonprofit teams connect activity, evidence, and
+            reporting. I mentor new coders, too.
+          </p>
+          <div className="cr-inline-actions">
+            <Link className="cr-button cr-button-dark" href="/experience">
+              My experience <Arrow />
+            </Link>
+            <a href="/Moses-Adebayo-CV.pdf" download className="cr-text-link">
+              Download my CV ↓
+            </a>
           </div>
         </div>
       </section>
-
-      <section className="py-20 md:py-28 bg-background">
-        <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="section-heading mb-6">My journey</h2>
-              <p className="text-muted-foreground mb-4 leading-relaxed">
-                I started in operations and project coordination—learning how
-                teams deliver under pressure. That still shapes my marketing
-                work: clear owners, clear deadlines, and clear numbers—not
-                guesswork.
-              </p>
-              <p className="text-muted-foreground mb-4 leading-relaxed">
-                I&apos;ve partnered with NGOs, ministries, education brands, and
-                service businesses across Nigeria. The pattern that works is
-                simple: know the audience, choose a few channels, show up
-                consistently, and report what actually moved the needle.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Today I offer SEO, social media management, paid campaigns, and
-                conversion-focused websites. As the developer of ImpactDesk, I
-                also build digital products for nonprofit teams. I am available
-                for projects, retainers, and coding mentorship.
-              </p>
-              <div className="flex flex-wrap gap-2 mt-6">
-                {['Projects', 'Retainers', 'Mentoring'].map((b) => (
-                  <span
-                    key={b}
-                    className="px-3 py-1 text-xs font-semibold rounded-full border border-accent text-accent"
-                  >
-                    {b}
-                  </span>
+      <Collaborators />
+      <section className="cr-section cr-process">
+        <div className="cr-wrap">
+          <SectionHeading
+            label="WHAT STAYS CONSTANT"
+            title="The way I approach the work."
+          />
+          <div className="cr-values">
+            {aboutValues.map((v, i) => (
+              <div key={v.title} data-reveal>
+                <span className="cr-eyebrow">0{i + 1}</span>
+                <h3>{v.title}</h3>
+                <p>{v.desc.replace(/—/g, '. ')}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="cr-section cr-wrap">
+        <SectionHeading
+          label="ALWAYS ADDING TO THE TOOLKIT"
+          title="A little left brain. A little right."
+        />
+        <div className="cr-skills">
+          {skillCategories.map((c) => (
+            <div key={c.category}>
+              <h3>{c.category}</h3>
+              <div className="cr-tags">
+                {c.items.map((item) => (
+                  <span key={item}>{item}</span>
                 ))}
               </div>
             </div>
-            <div className="bg-card rounded-xl p-4 border border-border">
-              <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden">
-                <Image
-                  src="/about-moses.jpg"
-                  alt="Moses Oluwashina Adebayo"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width:768px) 100vw, 50vw"
-                  priority
-                />
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
-
-      <section className="py-16 md:py-24 bg-card">
-        <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="section-heading">Values</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {aboutValues.map((v) => (
-              <div
-                key={v.title}
-                className="p-8 bg-background rounded-xl border border-border"
-              >
-                <h3 className="text-xl font-semibold mb-3 text-accent">
-                  {v.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {v.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="section-heading">Skills & expertise</h2>
-            <p className="section-subtitle">
-              Tools and capabilities I use on client work
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {skillCategories.map((cat) => (
-              <div
-                key={cat.category}
-                className="p-8 bg-card rounded-xl border border-border hover:border-accent transition-all"
-              >
-                <h3 className="text-lg font-semibold mb-4 text-accent">
-                  {cat.category}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {cat.items.map((item) => (
-                    <span
-                      key={item}
-                      className="px-3 py-1.5 bg-background border border-border rounded-lg text-sm"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24 bg-card">
-        <div className="container max-w-3xl">
-          <div className="text-center mb-12">
-            <h2 className="section-heading">Recent roles</h2>
-            <p className="section-subtitle">Where I&apos;m applying the work</p>
-          </div>
-          <div className="pl-2">
-            {featured.map((job) => (
-              <div key={job.role + job.company} className="timeline-item">
-                <h3 className="text-xl font-semibold text-accent">{job.role}</h3>
-                <p className="font-medium mb-1">
-                  {job.link ? (
-                    <a
-                      href={job.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-accent"
-                    >
-                      {job.company}
-                    </a>
-                  ) : (
-                    job.company
-                  )}
-                </p>
-                <p className="text-sm text-muted-foreground mb-3">{job.period}</p>
-                <ul className="space-y-1">
-                  {job.impact.map((imp) => (
-                    <li
-                      key={imp}
-                      className="text-sm text-muted-foreground flex gap-2"
-                    >
-                      <span className="text-accent">✓</span>
-                      {imp}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center mt-10">
-            <Link href="/experience" className="secondary-button">
-              Full experience timeline
-            </Link>
-            <a href="/Moses-Adebayo-CV.pdf" download className="cta-button">
-              Download CV (PDF)
-            </a>
-            <a href={site.social.github} target="_blank" rel="noopener noreferrer" className="secondary-button">
-              View GitHub projects
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-background border-t border-border">
-        <div className="container text-center max-w-2xl">
-          <h2 className="section-heading mb-4">Let&apos;s work together</h2>
-          <p className="text-muted-foreground mb-8">
-            Projects, retainers, or a quick strategy chat—start on WhatsApp or
-            send a brief.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href={whatsappHireUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cta-button"
-            >
-              WhatsApp
-            </a>
-            <Link href="/contact" className="secondary-button">
-              Contact form
-            </Link>
-          </div>
-        </div>
-      </section>
-    </div>
+      <ProjectCTA />
+    </>
   )
 }

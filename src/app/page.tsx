@@ -2,381 +2,256 @@ import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
 import {
-  clients,
-  coreExpertise,
+  experienceRoles,
   pageSeo,
-  processSteps,
-  site,
   stats,
-  whatsappHireUrl,
+  processSteps,
 } from '@/src/data/content'
-import { ServiceIcon } from '@/src/components/Icons'
-import ScrollReveal from '@/src/components/ScrollReveal'
 import {
-  getFeaturedProjects,
+  getPublicProjects,
   getPublicTestimonials,
 } from '@/src/lib/content-loader'
-
+import { Arrow, ProjectGallery } from '@/src/components/CreativeUI'
+import {
+  Collaborators,
+  ProjectCTA,
+  SectionHeading,
+} from '@/src/components/CreativeSections'
 export const dynamic = 'force-dynamic'
-
 export const metadata: Metadata = {
   title: { absolute: pageSeo.home.title },
   description: pageSeo.home.description,
   alternates: { canonical: '/' },
-  openGraph: {
-    title: pageSeo.home.title,
-    description: pageSeo.home.description,
-    url: site.url,
-  },
 }
 
 export default async function HomePage() {
-  const [featuredProjects, homeTestimonials] = await Promise.all([
-    getFeaturedProjects(),
+  const [projects, testimonials] = await Promise.all([
+    getPublicProjects(),
     getPublicTestimonials(),
   ])
-
   return (
-    <div className="min-h-screen">
-      {/* Hero */}
-      <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-background">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-card to-background" />
-        <div className="container relative z-10 py-16 md:py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div className="order-2 lg:order-1">
-              <p className="text-accent font-semibold text-sm uppercase tracking-wider mb-4">
-                Digital marketer & product developer · Abuja, Nigeria
-              </p>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold mb-6 leading-tight">
-                Campaigns and digital tools that help Nigerian teams grow.
-              </h1>
-              <p className="text-lg md:text-xl text-muted-foreground mb-4 leading-relaxed">
-                I run SEO, social, and paid campaigns for SMEs and NGOs. I also
-                develop useful web products, including ImpactDesk, a reporting
-                workspace for nonprofit teams.
-              </p>
-              <p className="text-accent font-medium mb-8">{site.tagline}</p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href={whatsappHireUrl}
-                  className="cta-button"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Discuss your project on WhatsApp
-                </a>
-                <Link href="/case-studies" className="secondary-button">
-                  See case studies
-                </Link>
-              </div>
-              <p className="text-xs text-muted-foreground mt-4">
-                SEO · Social media · Paid ads · Websites · Product development
-              </p>
+    <>
+      <section className="mo-intro">
+        <div className="cr-wrap mo-intro-grid">
+          <div className="mo-intro-text" data-reveal>
+            <p className="mo-pretitle">Hello, I’m Moses</p>
+            <h1>
+              I create marketing <br />
+              strategies & digital <br />
+              products for your <br />
+              business.
+            </h1>
+            <p className="mo-intro-description">
+              Digital marketer & product developer in Abuja, Nigeria. Helping
+              SMEs and nonprofits communicate clearly, reach their audience, and
+              build useful tools.
+            </p>
+            <div className="mo-hero-actions">
+              <Link href="/case-studies" className="cr-text-link">
+                Explore my work <Arrow />
+              </Link>
+              <a href="/Moses-Adebayo-CV.pdf" download className="cr-text-link">
+                Download CV ↓
+              </a>
             </div>
-
-            <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-              <div className="relative">
-                <div className="absolute -inset-3 rounded-full bg-accent/20 blur-2xl" />
-                <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-accent/40 shadow-2xl shadow-accent/10">
-                  <Image
-                    src="/hero/hero.jpg"
-                    alt="Moses Oluwashina Adebayo, digital marketer based in Abuja, Nigeria"
-                    fill
-                    priority
-                    sizes="(max-width:768px) 320px, 384px"
-                    className="object-cover object-center"
-                  />
-                </div>
-              </div>
-            </div>
+          </div>
+          <div className="mo-intro-image" data-reveal>
+            <Image
+              src="/hero/hero.jpg"
+              alt="Moses Adebayo, digital marketer and product developer"
+              width={400}
+              height={500}
+              priority
+            />
+            <span>MOSES ADEBAYO · ABUJA, NG</span>
+          </div>
+          <a href="#about-moses" className="mo-scroll">
+            <span aria-hidden="true">↓</span>Scroll to explore
+          </a>
+        </div>
+      </section>
+      <section className="mo-about" id="about-moses">
+        <div className="cr-wrap mo-split">
+          <div className="mo-split-heading" data-reveal>
+            <p className="mo-pretitle">About</p>
+            <h2>
+              Strategy, meet <br />
+              the person who <br />
+              builds it.
+            </h2>
+            <Link href="/about" className="mo-outline">
+              More About Me <Arrow />
+            </Link>
+          </div>
+          <div className="mo-prose" data-reveal>
+            <p>
+              I’m Moses Adebayo. I work at the intersection of digital marketing
+              and product development, bringing a practical approach to the way
+              businesses show up online.
+            </p>
+            <p>
+              My work spans SEO, social media, paid campaigns, and websites. I
+              also built ImpactDesk, a reporting workspace that helps nonprofit
+              teams connect their activities, evidence, and donor reporting.
+            </p>
+            <p>
+              Based in Abuja, I collaborate with SMEs, nonprofits, and education
+              teams across Nigeria. I’m interested in work with a clear purpose,
+              a thoughtful process, and outcomes we can explain honestly.
+            </p>
+            <Link href="/experience" className="cr-text-link">
+              Explore my experience <Arrow />
+            </Link>
           </div>
         </div>
       </section>
-
-      {/* Stats */}
-      <section className="py-12 border-y border-border bg-card">
-        <div className="container">
-          <div className="text-center mb-8">
-            <p className="font-semibold mb-2">A documented campaign result</p>
-            <p className="text-sm text-muted-foreground">
-              Tickets for Troops LinkedIn awareness campaign · 21–23 September 2026
+      <section className="mo-expertise">
+        <div className="cr-wrap mo-split">
+          <div className="mo-split-heading" data-reveal>
+            <p className="mo-pretitle">Expertise</p>
+            <h2>
+              The right skills <br />
+              for your next <br />
+              chapter.
+            </h2>
+            <p>
+              From shaping the message to building the experience, I help
+              connect the work that moves your business forward.
             </p>
+            <Link href="/services" className="mo-outline">
+              View All Services <Arrow />
+            </Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div className="mo-service-grid">
+            {[
+              {
+                title: 'Digital marketing',
+                text: 'A clear strategy for your audience, channels, and offers. SEO, social media, and paid campaigns supported by practical reporting.',
+              },
+              {
+                title: 'Websites & products',
+                text: 'Business websites, landing pages, and practical software that make your services easier to understand and your workflows easier to manage.',
+              },
+              {
+                title: 'Content & community',
+                text: 'Consistent content, thoughtful messaging, and community management that give your audience a reason to listen and stay connected.',
+              },
+              {
+                title: 'Project leadership',
+                text: 'Clear plans, responsible delivery, and useful communication. Bringing structure to creative and technical work so everyone knows what comes next.',
+              },
+            ].map((item, i) => (
+              <div key={item.title} className="mo-service-item" data-reveal>
+                <span>0{i + 1}</span>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <Collaborators />
+      <section className="cr-section cr-wrap" id="selected-work">
+        <SectionHeading
+          label="SELECTED WORK"
+          title="A closer look at what I do."
+          link="All case studies"
+          href="/case-studies"
+        />
+        <ProjectGallery projects={projects.slice(0, 4)} compact />
+      </section>
+      <section className="mo-results">
+        <div className="cr-wrap mo-split">
+          <div className="mo-split-heading" data-reveal>
+            <p className="mo-pretitle">Campaign results</p>
+            <h2>
+              Awareness <br />
+              you can <br />
+              account for.
+            </h2>
+            <p>
+              Tickets for Troops. A three-day LinkedIn video awareness campaign
+              for Heroes Help.
+            </p>
+            <Link
+              href="/case-studies#tickets-for-troops-linkedin"
+              className="cr-text-link"
+            >
+              Read the campaign story <Arrow />
+            </Link>
+          </div>
+          <div className="cr-metric-grid">
             {stats.map((s) => (
               <div key={s.label}>
-                <p className="text-3xl md:text-4xl font-display font-bold text-accent mb-1">
-                  {s.value}
-                </p>
-                <p className="text-sm text-muted-foreground">{s.label}</p>
+                <strong>{s.value}</strong>
+                <span>{s.label}</span>
               </div>
             ))}
-          </div>
-          <p className="text-center text-sm text-muted-foreground mt-7">
-            Awareness results; no leads or conversions were recorded.{' '}
-            <Link href="/case-studies#tickets-for-troops-linkedin" className="text-accent underline">
-              Read the case study
-            </Link>
-          </p>
-        </div>
-      </section>
-
-      {/* Expertise */}
-      <section className="py-20 md:py-28 bg-background">
-        <div className="container">
-          <div className="text-center mb-14">
-            <h2 className="section-heading">Digital marketing services</h2>
-            <p className="section-subtitle">
-              Practical growth support for Nigerian brands—from visibility and
-              content to ads and websites that turn traffic into enquiries.
+            <p>
+              21–23 September 2026. Awareness results only; no leads or
+              conversions were recorded.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {coreExpertise.map((item, i) => (
-              <ScrollReveal key={item.id} delay={i * 60}>
-                <div className="p-8 h-full bg-card rounded-xl border border-border hover:border-accent card-hover">
-                  <div className="text-accent mb-4">
-                    <ServiceIcon name={item.icon} />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed text-sm">
-                    {item.desc}
-                  </p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-          <div className="text-center mt-10">
-            <Link href="/services" className="secondary-button">
-              View all services
+        </div>
+      </section>
+      <section className="cr-section cr-wrap">
+        <SectionHeading
+          label="EXPERIENCE"
+          title="The teams behind the journey."
+          link="Full experience"
+          href="/experience"
+        />
+        <div className="cr-role-preview">
+          {experienceRoles.slice(0, 3).map((r, i) => (
+            <Link href="/experience" key={r.company}>
+              <span className="cr-role-index">0{i + 1}</span>
+              <div>
+                <h3>{r.company}</h3>
+                <p>{r.role}</p>
+              </div>
+              <span className="cr-role-date">
+                {r.period.replace(/–/g, 'to')}
+              </span>
+              <Arrow />
             </Link>
-          </div>
+          ))}
         </div>
       </section>
-
-      {/* Clients */}
-      <section className="py-16 md:py-20 bg-card">
-        <div className="container">
-          <div className="text-center mb-10">
-            <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-2">
-              Trusted by
-            </p>
-            <h2 className="text-2xl md:text-3xl font-display font-bold">
-              Clients & partners
-            </h2>
-          </div>
-          <div className="clients-marquee" aria-label="Clients and partners">
-            <div className="clients-track">
-              {[false, true].map((duplicate) => (
-                <div
-                  key={duplicate ? 'duplicate' : 'original'}
-                  className="clients-group"
-                  aria-hidden={duplicate}
-                >
-                  {clients.map((client) => (
-                    <a
-                      key={client.name}
-                      href={client.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      tabIndex={duplicate ? -1 : 0}
-                      className="group clients-card p-5 bg-background rounded-xl border border-border hover:border-accent transition-colors flex flex-col items-center"
-                    >
-                      <div className={`mb-3 relative ${client.name === 'MoTechy' ? 'w-40 h-16 rounded-md overflow-hidden bg-white' : client.name === 'Print Mode' ? 'w-40 h-16' : 'w-16 h-16'}`}>
-                        <Image
-                          src={client.logo}
-                          alt={duplicate ? '' : `${client.name} logo`}
-                          fill
-                          className={client.name === 'MoTechy' ? 'object-cover scale-125' : 'object-contain'}
-                          unoptimized
-                          sizes={client.name === 'MoTechy' || client.name === 'Print Mode' ? '160px' : '64px'}
-                        />
-                      </div>
-                      <h3 className="font-semibold text-sm text-center group-hover:text-accent">
-                        {client.name}
-                      </h3>
-                      <p className="text-xs text-muted-foreground text-center mt-1">
-                        {client.description}
-                      </p>
-                    </a>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Case studies preview */}
-      <section className="py-20 md:py-28 bg-background">
-        <div className="container">
-          <div className="text-center mb-14">
-            <h2 className="section-heading">Selected work</h2>
-            <p className="section-subtitle">Campaigns and product work with clear scope and evidence</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
-            {featuredProjects.map((project, i) => (
-              <ScrollReveal key={project.title} delay={i * 80}>
-                <article className="group overflow-hidden rounded-xl border border-border hover:border-accent card-hover bg-card h-full flex flex-col">
-                  <div className="relative w-full aspect-video overflow-hidden bg-card">
-                    {project.image.startsWith('data:') ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className={`w-full h-full ${project.imageFit === 'contain' ? 'object-contain' : 'object-cover'} group-hover:scale-105 transition-transform duration-500`}
-                      />
-                    ) : (
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className={`${project.imageFit === 'contain' ? 'object-contain' : 'object-cover'} group-hover:scale-105 transition-transform duration-500`}
-                        sizes="(max-width:768px) 100vw, 33vw"
-                        unoptimized={project.image.startsWith('http')}
-                      />
-                    )}
-                  </div>
-                  <div className="p-6 flex flex-col flex-1">
-                    <p className="text-accent text-sm font-semibold mb-2">
-                      {project.category}
-                    </p>
-                    <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                    <p className="text-muted-foreground text-sm mb-4 flex-1">
-                      {project.result}
-                    </p>
-                    {project.stack && project.stack.length > 0 && (
-                      <div className="mb-4">
-                        <p className="text-xs font-semibold text-foreground mb-2">{project.stackLabel || 'Built with'}</p>
-                        <ul className="flex flex-wrap gap-1.5" aria-label={project.stackLabel || 'Technology stack'}>
-                          {project.stack.map((item) => (
-                            <li key={item} className="px-2 py-1 rounded-full border border-border text-[11px] text-muted-foreground">
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                    <Link
-                      href={project.href}
-                      className="text-accent font-semibold text-sm hover:underline"
-                    >
-                      Read case study →
-                    </Link>
-                  </div>
-                </article>
-              </ScrollReveal>
-            ))}
-          </div>
-          <div className="text-center">
-            <Link href="/case-studies" className="secondary-button">
-              All case studies
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="py-20 md:py-28 bg-card">
-        <div className="container">
-          <div className="text-center mb-14">
-            <h2 className="section-heading">A simple process</h2>
-            <p className="section-subtitle">From clarity to measurable growth</p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {processSteps.map((step) => (
-              <div
-                key={step.step}
-                className="p-6 bg-background rounded-xl border border-border text-center"
-              >
-                <p className="text-3xl font-display font-bold text-accent mb-3">
-                  {step.step}
-                </p>
-                <h3 className="font-semibold mb-2">{step.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {step.description}
-                </p>
+      <section className="cr-section cr-process">
+        <div className="cr-wrap">
+          <SectionHeading
+            label="THE PROCESS"
+            title="A thoughtful way to work together."
+          />
+          <div className="cr-process-grid">
+            {processSteps.map((s) => (
+              <div key={s.step} data-reveal>
+                <span>{s.step}</span>
+                <h3>{s.title}</h3>
+                <p>{s.description.replace(/—/g, '. ')}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
-
-      {/* Testimonials */}
-      <section className="py-20 md:py-28 bg-background">
-        <div className="container">
-          <div className="text-center mb-14">
-            <h2 className="section-heading">What clients say</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {homeTestimonials.map((t) => (
-              <blockquote
-                key={t.name + t.company}
-                className="p-8 bg-card rounded-xl border border-border hover:border-accent transition-all flex flex-col"
-              >
-                <div
-                  className="flex gap-1 mb-4 text-accent"
-                  aria-label={`${t.rating} out of 5 stars`}
-                >
-                  {Array.from({ length: t.rating }).map((_, i) => (
-                    <span key={i}>★</span>
-                  ))}
-                </div>
-                <p className="text-muted-foreground mb-6 leading-relaxed italic flex-1">
-                  &ldquo;{t.text}&rdquo;
-                </p>
-                <footer>
-                  <p className="font-semibold">{t.name}</p>
-                  <p className="text-sm text-muted-foreground">
-                    {[t.role, t.company].filter(Boolean).join(' · ')}
-                    {t.link && t.link !== '#' && (
-                      <>
-                        {' · '}
-                        <a
-                          href={t.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-accent hover:underline"
-                        >
-                          {t.company || 'Link'}
-                        </a>
-                      </>
-                    )}
-                  </p>
-                </footer>
-              </blockquote>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-20 md:py-28 bg-card border-t border-border">
-        <div className="container">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="section-heading mb-6">
-              Ready to grow your brand in Nigeria?
-            </h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              Whether you need SEO, social media, ads, or a new website—tell me
-              your goal. {site.responseTime}. Based in Abuja, serving clients nationwide.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href={whatsappHireUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cta-button"
-              >
-                WhatsApp Moses
-              </a>
-              <Link href="/contact" className="secondary-button">
-                Send a project brief
+      {testimonials[0] && (
+        <section className="cr-quote-section cr-wrap" data-reveal>
+          <span className="cr-quote-mark" aria-hidden="true">
+            “
+          </span>
+          <blockquote>
+            <p>{testimonials[0].text}</p>
+            <footer>
+              <strong>{testimonials[0].name}</strong>
+              <span>{testimonials[0].role}</span>
+              <Link href="/testimonials" className="cr-text-link">
+                More client feedback <Arrow />
               </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+            </footer>
+          </blockquote>
+        </section>
+      )}
+      <ProjectCTA />
+    </>
   )
 }
