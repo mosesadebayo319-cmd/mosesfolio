@@ -161,28 +161,68 @@ export function ProjectGallery({
   compact?: boolean
 }) {
   const [filter, setFilter] = useState('All work')
+  const [search, setSearch] = useState('')
+  const query = search.trim().toLowerCase()
   const visible = projects.filter(
-    (p) => filter === 'All work' || groupFor(p) === filter,
+    (p) =>
+      (filter === 'All work' || groupFor(p) === filter) &&
+      (!query ||
+        [p.title, p.client, p.category, p.industry, ...(p.stack || [])]
+          .join(' ')
+          .toLowerCase()
+          .includes(query)),
   )
   return (
     <div>
       {!compact && (
-        <div className="cr-filters" aria-label="Filter projects">
-          {['All work', 'Web & products', 'Marketing'].map((label) => (
-            <button
-              key={label}
-              aria-pressed={filter === label}
-              className={filter === label ? 'active' : ''}
-              onClick={() => setFilter(label)}
-            >
-              {label}
-              <span>
-                {label === 'All work'
-                  ? projects.length
-                  : projects.filter((p) => groupFor(p) === label).length}
-              </span>
-            </button>
-          ))}
+        <div className="jl-project-toolbar">
+          <div className="cr-filters" aria-label="Filter projects">
+            {['All work', 'Web & products', 'Marketing'].map((label) => (
+              <button
+                key={label}
+                aria-pressed={filter === label}
+                className={filter === label ? 'active' : ''}
+                onClick={() => setFilter(label)}
+              >
+                {label}
+                <span>
+                  {label === 'All work'
+                    ? projects.length
+                    : projects.filter((p) => groupFor(p) === label).length}
+                </span>
+              </button>
+            ))}
+          </div>
+          <label className="jl-project-search">
+            <span>Search projects</span>
+            <input
+              type="search"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              placeholder="Project, skill or industry"
+            />
+          </label>
+        </div>
+      )}
+      {!compact && (
+        <p className="jl-project-count" role="status">
+          {visible.length} {visible.length === 1 ? 'project' : 'projects'} shown
+        </p>
+      )}
+      {!visible.length && (
+        <div className="jl-empty-results">
+          <h3>No matching projects yet.</h3>
+          <p>Try another search or explore all of my work.</p>
+          <button
+            type="button"
+            className="cr-button"
+            onClick={() => {
+              setSearch('')
+              setFilter('All work')
+            }}
+          >
+            Show all projects
+          </button>
         </div>
       )}
       <div className="cr-project-grid" aria-live="polite">

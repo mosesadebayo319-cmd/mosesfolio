@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="cr-wrap">
         <div className="cr-footer-top">
           <Link href="/" className="cr-wordmark">
-            Moses.
+            Moses Adebayo.
           </Link>
           <p>
             Strategy with purpose.
@@ -71,8 +71,11 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Monica design by StyleShout
+            Design foundation: StyleShout
           </a>
+        </div>
+        <div className="jl-footer-signature" aria-hidden="true">
+          Moses Adebayo.
         </div>
       </div>
     </footer>

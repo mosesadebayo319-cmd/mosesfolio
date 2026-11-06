@@ -1,5 +1,9 @@
 # Third-party design and fonts
 
+## Current portfolio presentation
+
+The current preview is an original implementation informed by the public visual language of jedaacademy.com. It does not include Jeda Academy source code, brand assets, photographs, illustrations, or copy. Existing components from the earlier Monica adaptation remain part of the codebase, and their attribution is retained below and in the footer. The sans-serif presentation uses the existing locally hosted Inter font.
+
 ## Monica by StyleShout
 
 The portfolio presentation is adapted from the Monica 1.0.0 template by StyleShout, rebuilt as Next.js components with custom portfolio content and existing application functionality.

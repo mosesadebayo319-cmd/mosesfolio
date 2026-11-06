@@ -17,6 +17,9 @@ import {
   ProjectCTA,
   SectionHeading,
 } from '@/src/components/CreativeSections'
+import PortfolioHero from '@/src/components/PortfolioHero'
+import PortfolioFAQ from '@/src/components/PortfolioFAQ'
+import TestimonialSlider from '@/src/components/TestimonialSlider'
 export const dynamic = 'force-dynamic'
 export const metadata: Metadata = {
   title: { absolute: pageSeo.home.title },
@@ -31,197 +34,153 @@ export default async function HomePage() {
   ])
   return (
     <>
-      <section className="mo-intro">
-        <div className="cr-wrap mo-intro-grid">
-          <div className="mo-intro-text" data-reveal>
-            <p className="mo-pretitle">Hello, I’m Moses</p>
-            <h1>
-              I create marketing <br />
-              strategies & digital <br />
-              products for your <br />
-              business.
-            </h1>
-            <p className="mo-intro-description">
-              Digital marketer & product developer in Abuja, Nigeria. Helping
-              SMEs and nonprofits communicate clearly, reach their audience, and
-              build useful tools.
-            </p>
-            <div className="mo-hero-actions">
-              <Link href="/case-studies" className="cr-text-link">
-                Explore my work <Arrow />
-              </Link>
-              <a href="/Moses-Adebayo-CV.pdf" download className="cr-text-link">
-                Download CV ↓
-              </a>
-            </div>
-          </div>
-          <div className="mo-intro-image" data-reveal>
-            <Image
-              src="/hero/hero.jpg"
-              alt="Moses Adebayo, digital marketer and product developer"
-              width={400}
-              height={500}
-              priority
-            />
-            <span>MOSES ADEBAYO · ABUJA, NG</span>
-          </div>
-          <a href="#about-moses" className="mo-scroll">
-            <span aria-hidden="true">↓</span>Scroll to explore
-          </a>
-        </div>
-      </section>
-      <section className="mo-about" id="about-moses">
-        <div className="cr-wrap mo-split">
-          <div className="mo-split-heading" data-reveal>
-            <p className="mo-pretitle">About</p>
-            <h2>
-              Strategy, meet <br />
-              the person who <br />
-              builds it.
-            </h2>
-            <Link href="/about" className="mo-outline">
-              More About Me <Arrow />
-            </Link>
-          </div>
-          <div className="mo-prose" data-reveal>
-            <p>
-              I’m Moses Adebayo. I work at the intersection of digital marketing
-              and product development, bringing a practical approach to the way
-              businesses show up online.
-            </p>
-            <p>
-              My work spans SEO, social media, paid campaigns, and websites. I
-              also built ImpactDesk, a reporting workspace that helps nonprofit
-              teams connect their activities, evidence, and donor reporting.
-            </p>
-            <p>
-              Based in Abuja, I collaborate with SMEs, nonprofits, and education
-              teams across Nigeria. I’m interested in work with a clear purpose,
-              a thoughtful process, and outcomes we can explain honestly.
-            </p>
-            <Link href="/experience" className="cr-text-link">
-              Explore my experience <Arrow />
-            </Link>
-          </div>
-        </div>
-      </section>
-      <section className="mo-expertise">
-        <div className="cr-wrap mo-split">
-          <div className="mo-split-heading" data-reveal>
-            <p className="mo-pretitle">Expertise</p>
-            <h2>
-              The right skills <br />
-              for your next <br />
-              chapter.
-            </h2>
-            <p>
-              From shaping the message to building the experience, I help
-              connect the work that moves your business forward.
-            </p>
-            <Link href="/services" className="mo-outline">
-              View All Services <Arrow />
-            </Link>
-          </div>
-          <div className="mo-service-grid">
-            {[
-              {
-                title: 'Digital marketing',
-                text: 'A clear strategy for your audience, channels, and offers. SEO, social media, and paid campaigns supported by practical reporting.',
-              },
-              {
-                title: 'Websites & products',
-                text: 'Business websites, landing pages, and practical software that make your services easier to understand and your workflows easier to manage.',
-              },
-              {
-                title: 'Content & community',
-                text: 'Consistent content, thoughtful messaging, and community management that give your audience a reason to listen and stay connected.',
-              },
-              {
-                title: 'Project leadership',
-                text: 'Clear plans, responsible delivery, and useful communication. Bringing structure to creative and technical work so everyone knows what comes next.',
-              },
-            ].map((item, i) => (
-              <div key={item.title} className="mo-service-item" data-reveal>
-                <span>0{i + 1}</span>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <PortfolioHero />
       <Collaborators />
-      <section className="cr-section cr-wrap" id="selected-work">
+      <section className="jl-section cr-wrap jl-value-layout">
+        <div data-reveal>
+          <p className="cr-eyebrow">WHY WORK WITH ME</p>
+          <h2>
+            More than
+            <br />a single skill.
+          </h2>
+          <p>
+            Clear thinking, useful work, and a connected approach to your
+            digital presence.
+          </p>
+          <Link href="/services" className="cr-text-link">
+            Discover my services <Arrow />
+          </Link>
+        </div>
+        <div className="jl-value-grid">
+          {[
+            {
+              icon: '01',
+              title: 'Strategy before tactics.',
+              text: 'We start with your audience, goals, and priorities. Every channel and deliverable needs a reason to be there.',
+            },
+            {
+              icon: '02',
+              title: 'Built around your needs.',
+              text: 'Marketing and development under one roof. A website, a campaign, or a practical product shaped around your brief.',
+            },
+            {
+              icon: '03',
+              title: 'Work you can examine.',
+              text: 'See the scope, the process, and the evidence in each case study. Clear reporting, with context around the results.',
+            },
+            {
+              icon: '04',
+              title: 'A direct working relationship.',
+              text: 'Speak with the person planning and building the work. Clear responsibilities and useful communication throughout.',
+            },
+          ].map((item) => (
+            <article className="jl-value-card" key={item.icon} data-reveal>
+              <span className="jl-card-index">{item.icon}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="jl-section cr-wrap" id="selected-work">
         <SectionHeading
-          label="SELECTED WORK"
-          title="A closer look at what I do."
-          link="All case studies"
+          label="PROJECTS & CAMPAIGNS"
+          title="Good thinking. Tangible work."
+          link="View all case studies"
           href="/case-studies"
         />
-        <ProjectGallery projects={projects.slice(0, 4)} compact />
+        <ProjectGallery projects={projects.slice(0, 3)} compact />
       </section>
-      <section className="mo-results">
-        <div className="cr-wrap mo-split">
-          <div className="mo-split-heading" data-reveal>
-            <p className="mo-pretitle">Campaign results</p>
+      <section className="jl-results cr-wrap" data-reveal>
+        <div className="jl-results-heading">
+          <div>
+            <p className="cr-eyebrow">A DOCUMENTED CAMPAIGN</p>
             <h2>
-              Awareness <br />
-              you can <br />
-              account for.
+              Small campaign.
+              <br />
+              Meaningful reach.
             </h2>
+          </div>
+          <div>
             <p>
-              Tickets for Troops. A three-day LinkedIn video awareness campaign
-              for Heroes Help.
+              Tickets for Troops. Three days of LinkedIn awareness activity for
+              Heroes Help.
             </p>
             <Link
               href="/case-studies#tickets-for-troops-linkedin"
-              className="cr-text-link"
+              className="jl-light-link"
             >
               Read the campaign story <Arrow />
             </Link>
           </div>
-          <div className="cr-metric-grid">
-            {stats.map((s) => (
-              <div key={s.label}>
-                <strong>{s.value}</strong>
-                <span>{s.label}</span>
-              </div>
-            ))}
-            <p>
-              21–23 September 2026. Awareness results only; no leads or
-              conversions were recorded.
-            </p>
+        </div>
+        <div className="jl-results-grid">
+          {stats.map((s) => (
+            <div key={s.label}>
+              <strong>{s.value}</strong>
+              <span>{s.label}</span>
+            </div>
+          ))}
+        </div>
+        <p className="jl-results-note">
+          21–23 September 2026. Awareness results; no leads or conversions were
+          recorded.
+        </p>
+      </section>
+      <section className="jl-section cr-wrap jl-about">
+        <div className="jl-about-image" data-reveal>
+          <Image
+            src="/about-moses.jpg"
+            alt="Moses Adebayo"
+            width={600}
+            height={600}
+          />
+          <div>
+            <span>BASED IN ABUJA, NIGERIA</span>
+            <strong>
+              A practical mind.
+              <br />A personal approach.
+            </strong>
+          </div>
+        </div>
+        <div className="jl-about-copy" data-reveal>
+          <p className="cr-eyebrow">MEET MOSES</p>
+          <h2>
+            Connecting the
+            <br />
+            message and
+            <br />
+            <span>the experience.</span>
+          </h2>
+          <p>
+            I’m Moses Oluwashina Adebayo, a digital marketer and product
+            developer working with businesses, nonprofits, and education teams.
+          </p>
+          <p>
+            From the MoTechy website to ImpactDesk and the Tickets for Troops
+            campaign, my work connects strategy with practical execution. I also
+            mentor new coders and help teams bring structure to their projects.
+          </p>
+          <div className="jl-about-tags">
+            <span>Marketing strategy</span>
+            <span>Web development</span>
+            <span>Digital products</span>
+          </div>
+          <div className="cr-inline-actions">
+            <Link href="/about" className="cr-button">
+              More about Moses <Arrow />
+            </Link>
+            <a href="/Moses-Adebayo-CV.pdf" download className="cr-text-link">
+              Download CV ↓
+            </a>
           </div>
         </div>
       </section>
-      <section className="cr-section cr-wrap">
-        <SectionHeading
-          label="EXPERIENCE"
-          title="The teams behind the journey."
-          link="Full experience"
-          href="/experience"
-        />
-        <div className="cr-role-preview">
-          {experienceRoles.slice(0, 3).map((r, i) => (
-            <Link href="/experience" key={r.company}>
-              <span className="cr-role-index">0{i + 1}</span>
-              <div>
-                <h3>{r.company}</h3>
-                <p>{r.role}</p>
-              </div>
-              <span className="cr-role-date">
-                {r.period.replace(/–/g, 'to')}
-              </span>
-              <Arrow />
-            </Link>
-          ))}
-        </div>
-      </section>
-      <section className="cr-section cr-process">
-        <div className="cr-wrap">
+      <section className="jl-process">
+        <div className="jl-section cr-wrap">
           <SectionHeading
-            label="THE PROCESS"
-            title="A thoughtful way to work together."
+            label="HOW WE WORK"
+            title="A clear route from brief to delivery."
           />
           <div className="cr-process-grid">
             {processSteps.map((s) => (
@@ -234,23 +193,60 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-      {testimonials[0] && (
-        <section className="cr-quote-section cr-wrap" data-reveal>
-          <span className="cr-quote-mark" aria-hidden="true">
-            “
-          </span>
-          <blockquote>
-            <p>{testimonials[0].text}</p>
-            <footer>
-              <strong>{testimonials[0].name}</strong>
-              <span>{testimonials[0].role}</span>
-              <Link href="/testimonials" className="cr-text-link">
-                More client feedback <Arrow />
-              </Link>
-            </footer>
-          </blockquote>
+      <section className="jl-section cr-wrap">
+        <SectionHeading
+          label="PROFESSIONAL EXPERIENCE"
+          title="The teams behind the journey."
+          link="Explore my experience"
+          href="/experience"
+        />
+        <div className="cr-role-preview">
+          {experienceRoles.slice(0, 3).map((role, i) => (
+            <Link href="/experience" key={role.company}>
+              <span className="cr-role-index">0{i + 1}</span>
+              <div>
+                <h3>{role.company}</h3>
+                <p>{role.role}</p>
+              </div>
+              <span className="cr-role-date">
+                {role.period.replace(/–/g, 'to')}
+              </span>
+              <Arrow />
+            </Link>
+          ))}
+        </div>
+      </section>
+      {!!testimonials.length && (
+        <section className="jl-section cr-wrap jl-testimonial-layout">
+          <div>
+            <p className="cr-eyebrow">CLIENT PERSPECTIVES</p>
+            <h2>
+              Good work starts
+              <br />
+              with good people.
+            </h2>
+            <Link href="/testimonials" className="cr-text-link">
+              All client feedback <Arrow />
+            </Link>
+          </div>
+          <TestimonialSlider testimonials={testimonials} />
         </section>
       )}
+      <section className="jl-section cr-wrap jl-faq-layout">
+        <div>
+          <p className="cr-eyebrow">BEFORE WE BEGIN</p>
+          <h2>
+            A few useful
+            <br />
+            answers.
+          </h2>
+          <p>Still have a question? Let’s work through the details.</p>
+          <Link href="/contact" className="cr-text-link">
+            Get in touch <Arrow />
+          </Link>
+        </div>
+        <PortfolioFAQ />
+      </section>
       <ProjectCTA />
     </>
   )

@@ -1,24 +1,22 @@
-# Monica portfolio adaptation
+# Jeda-inspired portfolio preview
 
-Review branch only. Do not merge or promote to production until Moses approves.
+Review only. Do not merge or release to production until Moses approves this preview.
 
 ## Direction
 
-Moses selected the Monica template by StyleShout. The portfolio adapts its dark green, warm cream, and ochre palette, DM Serif Display typography, portrait-led introduction, split About/Expertise sections, and numbered services. All public pages use the same presentation. Decorative stars, stickers, and lime accents remain removed.
+An original Next.js portfolio informed by the public visual language of jedaacademy.com: rounded navigation, white and pale-blue surfaces, navy typography, and restrained red/blue gradients. The reference uses WordPress TutorStarter and Elementor; this implementation keeps the existing Next.js application. No Jeda Academy logos, photographs, illustrations, copy, or source code are used.
 
-## Interactions to review
+## Review interactions
 
-- Portrait-led hero and subtle section reveals, without decorative floating elements.
-- Work filters separate websites/products and marketing. Cards link to the complete case studies on the same page.
-- Services expand and collapse using native, keyboard-accessible disclosures.
-- Mobile menu closes after navigation and with Escape.
-- Reveals, hover effects, and moving collaborator logos respect reduced motion. Footer includes a pause control.
-- Project calls to action open the existing assistant. Its pricing logic, keyboard handling, and contact handoff remain intact.
-- Contact form uses the existing endpoint. Work WhatsApp and direct phone numbers remain separate.
-- CV download, GitHub, other social profiles, current Jeda Systems role, project stacks, and source-backed campaign figures are retained.
+- Marketing and web/product service tabs, including arrow-key keyboard navigation.
+- Project search across titles, clients, categories, industries, and technology stacks, combined with existing category filters and an empty-state reset.
+- Manual client-feedback slider, practical FAQ disclosures, service accordions, project links, and mobile navigation.
+- Subtle reveals and animated collaborator logos, with reduced-motion support and the existing motion pause control.
+- The existing assistant retains its pricing controls, keyboard handling, suggested replies, and reviewed WhatsApp handoff, with a matching navy theme.
+- CV, GitHub/social profiles, current Jeda Systems role, documented case study results, direct phone and separate work WhatsApp details are preserved.
 
-## Review notes
+## Content and attribution
 
-The production domain is unchanged. The Vercel preview runs on its own branch. Preview contact submissions should only be tested with a mocked endpoint to avoid sending a real enquiry. Physical iPhone keyboard behavior still warrants a device check.
+Projects and feedback continue to use the existing content loader and admin data. No reference-site customer claims, course metrics, stock identities, or endorsements are introduced. Existing design-foundation attribution remains visible in the footer; see THIRD_PARTY_NOTICES.md.
 
-The footer credits Monica by StyleShout. See THIRD_PARTY_NOTICES.md for design and font licensing.
+Contact form checks should use a mocked endpoint so preview verification does not send a real enquiry.
