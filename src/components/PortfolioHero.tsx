@@ -39,15 +39,6 @@ export default function PortfolioHero() {
             View services
           </Link>
         </div>
-        <div className="ja-service-picture">
-          <Image
-            src="/case-studies/motechy-website-october-2026.jpg"
-            alt="MoTechy website developed by Moses"
-            fill
-            sizes="(max-width:600px) 1px, 230px"
-            unoptimized
-          />
-        </div>
       </div>
     </section>
   );

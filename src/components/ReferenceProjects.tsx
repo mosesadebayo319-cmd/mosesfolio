@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { PublicProject } from "@/src/lib/content-loader";
@@ -13,6 +13,24 @@ export default function ReferenceProjects({
 }) {
   const [category, setCategory] = useState("All projects");
   const [search, setSearch] = useState("");
+  const gridRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("ja-card-entered");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.1 },
+    );
+    gridRef.current
+      ?.querySelectorAll("article")
+      .forEach((card) => observer.observe(card));
+    return () => observer.disconnect();
+  }, [category, search, projects]);
   const visible = projects.filter((project) => {
     const group = /development|product|website/i.test(project.category)
       ? "Websites and products"
@@ -56,7 +74,7 @@ export default function ReferenceProjects({
           />
         </label>
       </div>
-      <div className="ja-project-results" aria-live="polite">
+      <div ref={gridRef} className="ja-project-results" aria-live="polite">
         {visible.map((project) => (
           <article key={project.id} className="ja-course-card">
             <Link href={`/case-studies#${project.id}`}>
@@ -65,7 +83,7 @@ export default function ReferenceProjects({
                   src={project.image}
                   alt={project.title}
                   fill
-                  sizes="(max-width:600px) 90vw, 300px"
+                  sizes="(max-width:760px) 90vw, (max-width:1100px) 45vw, 30vw"
                   unoptimized
                 />
               </div>
