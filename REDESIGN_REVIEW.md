@@ -16,3 +16,9 @@ Recreates the public layout and measured typography of jedaacademy.com in the ex
 - CV, social profiles, Jeda Systems experience, documented results, direct phone, and separate work WhatsApp preserved.
 
 Contact form checks use a mocked endpoint so verification does not send a real enquiry. Existing design-foundation attribution remains visible; see THIRD_PARTY_NOTICES.md.
+
+## Homepage audit refinements
+
+The homepage now has one wide ImpactDesk feature and one searchable grid for the remaining projects. Collaborator logos appear directly after the introduction; the repeated image-tile gallery and extra contact banner are removed. Project images use landscape frames with contain fitting, campaign results are readable HTML, and service/biography sections are shorter. ImpactDesk screenshot figures remain explicitly identified as illustrative.
+
+Legacy admin ImpactDesk entries with alternate IDs are consolidated in the public project merge, keeping the reviewed case study and preserving stored data. Browser checks cover responsive layouts, grid filters/search/reset, case-study navigation, assistant opening/closing, the CV, reduced motion, and a mocked contact submission. A focused project-merge check verifies canonical precedence and retention of unrelated projects.

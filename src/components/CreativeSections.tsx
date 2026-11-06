@@ -1,18 +1,18 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import type { ReactNode } from 'react'
-import { clients, site } from '@/src/data/content'
-import { Arrow, StartProject } from './CreativeUI'
+import Link from "next/link";
+import Image from "next/image";
+import type { ReactNode } from "react";
+import { clients, site } from "@/src/data/content";
+import { Arrow, StartProject } from "./CreativeUI";
 export function PageIntro({
   label,
   title,
   accent,
   children,
 }: {
-  label: string
-  title: string
-  accent: string
-  children?: ReactNode
+  label: string;
+  title: string;
+  accent: string;
+  children?: ReactNode;
 }) {
   return (
     <section className="cr-page-intro cr-wrap">
@@ -23,7 +23,7 @@ export function PageIntro({
       </h1>
       {children && <div className="cr-intro-copy">{children}</div>}
     </section>
-  )
+  );
 }
 export function Collaborators() {
   return (
@@ -47,7 +47,9 @@ export function Collaborators() {
                   rel="noopener noreferrer"
                   tabIndex={duplicate ? -1 : 0}
                 >
-                  <div className="cr-client-logo">
+                  <div
+                    className={`cr-client-logo${c.name === "SGS Ministry" ? " cr-client-logo-dark" : ""}`}
+                  >
                     <Image
                       src={c.logo}
                       alt=""
@@ -65,7 +67,7 @@ export function Collaborators() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 export function ProjectCTA() {
   return (
@@ -82,7 +84,7 @@ export function ProjectCTA() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 export function SectionHeading({
   label,
@@ -90,10 +92,10 @@ export function SectionHeading({
   link,
   href,
 }: {
-  label: string
-  title: string
-  link?: string
-  href?: string
+  label: string;
+  title: string;
+  link?: string;
+  href?: string;
 }) {
   return (
     <div className="cr-section-heading" data-reveal>
@@ -107,5 +109,5 @@ export function SectionHeading({
         </Link>
       )}
     </div>
-  )
+  );
 }

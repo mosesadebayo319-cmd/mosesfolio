@@ -1,5 +1,5 @@
-import Image from 'next/image'
-import Link from 'next/link'
+import Image from "next/image";
+import Link from "next/link";
 export default function PortfolioHero() {
   return (
     <section className="ja-hero cr-wrap" aria-label="Introduction">
@@ -11,9 +11,8 @@ export default function PortfolioHero() {
             Websites & products.
           </h1>
           <p>
-            I’m Moses Adebayo, a digital marketer and product developer in
-            Abuja. I help businesses and nonprofits with campaigns, websites,
-            and practical digital tools.
+            I’m Moses Adebayo, based in Abuja. I help businesses and nonprofits
+            with campaigns, websites, and practical digital tools.
           </p>
           <Link href="/case-studies" className="ja-button ja-button-white">
             Explore my work
@@ -51,5 +50,5 @@ export default function PortfolioHero() {
         </div>
       </div>
     </section>
-  )
+  );
 }
