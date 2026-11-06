@@ -13,8 +13,8 @@ export default function ContactPage() {
     <>
       <PageIntro
         label="EVERY GOOD PROJECT STARTS SOMEWHERE"
-        title="A big idea?"
-        accent="A simple hello."
+        title="Contact Moses"
+        accent=""
       >
         <p>
           A campaign to run, a product to build, or a question to work through.
@@ -24,11 +24,10 @@ export default function ContactPage() {
       </PageIntro>
       <section className="cr-section cr-wrap cr-contact-grid">
         <div>
-          <p className="cr-eyebrow">YOUR PEOPLE. MY INBOX.</p>
           <div className="cr-contact-channel">
             <span>START A WORK CONVERSATION</span>
             <a href={whatsappHireUrl} target="_blank" rel="noopener noreferrer">
-              Say hello on WhatsApp ↗
+              Say hello on WhatsApp
             </a>
             <p>{site.whatsappPhone}</p>
           </div>
@@ -65,7 +64,6 @@ export default function ContactPage() {
           </div>
         </div>
         <div className="cr-contact-form">
-          <p className="cr-eyebrow">THE FIRST CHAPTER</p>
           <h2>Tell me about your project.</h2>
           <p>
             A little context goes a long way. Share your goals, your timing, and

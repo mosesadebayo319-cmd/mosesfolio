@@ -11,10 +11,6 @@ export default function TestimonialSlider({
   if (!item) return null
   return (
     <div className="jl-testimonial-card">
-      <div className="jl-testimonial-top">
-        <span aria-hidden="true">“</span>
-        <span>CLIENT FEEDBACK</span>
-      </div>
       <div aria-live="polite" aria-atomic="true">
         <blockquote key={index}>
           <p>{item.text}</p>
@@ -23,17 +19,13 @@ export default function TestimonialSlider({
             <span>{item.role}</span>
             {item.link && item.link !== '#' && (
               <a href={item.link} target="_blank" rel="noopener noreferrer">
-                {item.company} ↗
+                {item.company}
               </a>
             )}
           </footer>
         </blockquote>
       </div>
       <div className="jl-testimonial-controls">
-        <span>
-          {String(index + 1).padStart(2, '0')} /{' '}
-          {String(testimonials.length).padStart(2, '0')}
-        </span>
         <div>
           <button
             type="button"
@@ -43,7 +35,7 @@ export default function TestimonialSlider({
               setIndex((index - 1 + testimonials.length) % testimonials.length)
             }
           >
-            ←
+            Previous
           </button>
           <button
             type="button"
@@ -51,7 +43,7 @@ export default function TestimonialSlider({
             disabled={testimonials.length < 2}
             onClick={() => setIndex((index + 1) % testimonials.length)}
           >
-            →
+            Next
           </button>
         </div>
       </div>

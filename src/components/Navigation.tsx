@@ -25,22 +25,20 @@ export default function Navigation() {
             m.
           </span>
           <span className="jl-brand-name">
-            Moses Adebayo<small>MARKETING & DEVELOPMENT</small>
+            Moses<span>Adebayo</span>
           </span>
         </Link>
         <div className="cr-desktop-links">
-          {navLinks
-            .filter((l) => l.href !== '/' && l.href !== '/contact')
-            .map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                aria-current={pathname === l.href ? 'page' : undefined}
-              >
-                {l.label}
-                <span />
-              </Link>
-            ))}
+          {navLinks.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              aria-current={pathname === l.href ? 'page' : undefined}
+            >
+              {l.label}
+              <span />
+            </Link>
+          ))}
         </div>
         <Link href="/contact" className="cr-nav-contact">
           Let’s talk <Arrow />
@@ -52,8 +50,7 @@ export default function Navigation() {
           aria-controls="mobile-navigation"
           onClick={() => setOpen(!open)}
         >
-          {open ? 'Close' : 'Menu'}
-          <span>{open ? '×' : '+'}</span>
+          <span aria-hidden="true">{open ? '×' : '☰'}</span>
         </button>
       </nav>
       {open && (
@@ -66,7 +63,6 @@ export default function Navigation() {
                 onClick={() => setOpen(false)}
                 aria-current={pathname === l.href ? 'page' : undefined}
               >
-                <span>0{i + 1}</span>
                 {l.label}
                 <Arrow />
               </Link>

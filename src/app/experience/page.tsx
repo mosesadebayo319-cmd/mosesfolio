@@ -15,8 +15,8 @@ export default function ExperiencePage() {
     <>
       <PageIntro
         label="THE JOURNEY SO FAR"
-        title="Different teams."
-        accent="A shared drive."
+        title="Professional experience"
+        accent=""
       >
         <p>
           Marketing, project coordination, coding mentorship, and product
@@ -28,7 +28,7 @@ export default function ExperiencePage() {
           download
           className="cr-button cr-button-dark"
         >
-          Download my CV ↓
+          Download my CV
         </a>
       </PageIntro>
       <section className="cr-section cr-wrap">
@@ -36,11 +36,10 @@ export default function ExperiencePage() {
           <article className="cr-role" key={r.company + r.role} data-reveal>
             <div className="cr-role-head">
               <div>
-                <p className="cr-eyebrow">0{i + 1} / EXPERIENCE</p>
                 <h2>
                   {r.link ? (
                     <a href={r.link} target="_blank" rel="noopener noreferrer">
-                      {r.company} ↗
+                      {r.company}
                     </a>
                   ) : (
                     r.company
@@ -77,7 +76,7 @@ export default function ExperiencePage() {
       </section>
       <section className="cr-section cr-process">
         <div className="cr-wrap">
-          <SectionHeading label="BEYOND A JOB TITLE" title="How I show up." />
+          <SectionHeading label="BEYOND A JOB TITLE" title="Professional strengths" />
           <div className="cr-values">
             {leadershipTraits.map((t) => (
               <div key={t.title}>

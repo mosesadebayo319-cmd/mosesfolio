@@ -1,253 +1,165 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
-import {
-  experienceRoles,
-  pageSeo,
-  stats,
-  processSteps,
-} from '@/src/data/content'
-import {
-  getPublicProjects,
-  getPublicTestimonials,
-} from '@/src/lib/content-loader'
-import { Arrow, ProjectGallery } from '@/src/components/CreativeUI'
-import {
-  Collaborators,
-  ProjectCTA,
-  SectionHeading,
-} from '@/src/components/CreativeSections'
+import { pageSeo } from '@/src/data/content'
+import { getPublicProjects } from '@/src/lib/content-loader'
+import { Collaborators } from '@/src/components/CreativeSections'
+import { StartProject } from '@/src/components/CreativeUI'
 import PortfolioHero from '@/src/components/PortfolioHero'
-import PortfolioFAQ from '@/src/components/PortfolioFAQ'
-import TestimonialSlider from '@/src/components/TestimonialSlider'
+import ReferenceProjects from '@/src/components/ReferenceProjects'
 export const dynamic = 'force-dynamic'
 export const metadata: Metadata = {
   title: { absolute: pageSeo.home.title },
   description: pageSeo.home.description,
   alternates: { canonical: '/' },
 }
-
 export default async function HomePage() {
-  const [projects, testimonials] = await Promise.all([
-    getPublicProjects(),
-    getPublicTestimonials(),
-  ])
+  const projects = await getPublicProjects()
+  const featured =
+    projects.find((project) => project.id === 'impactdesk') || projects[0]
   return (
     <>
       <PortfolioHero />
-      <Collaborators />
-      <section className="jl-section cr-wrap jl-value-layout">
-        <div data-reveal>
-          <p className="cr-eyebrow">WHY WORK WITH ME</p>
-          <h2>
-            More than
-            <br />a single skill.
-          </h2>
-          <p>
-            Clear thinking, useful work, and a connected approach to your
-            digital presence.
-          </p>
-          <Link href="/services" className="cr-text-link">
-            Discover my services <Arrow />
-          </Link>
+      <section className="ja-reasons cr-wrap">
+        <div className="ja-reasons-heading">
+          <h2>How I work</h2>
         </div>
-        <div className="jl-value-grid">
+        <div className="ja-reasons-grid">
           {[
             {
-              icon: '01',
-              title: 'Strategy before tactics.',
-              text: 'We start with your audience, goals, and priorities. Every channel and deliverable needs a reason to be there.',
+              title: 'Strategy first.',
+              text: 'We agree on your audience, goals, channels, and priorities before starting a campaign or development project.',
             },
             {
-              icon: '02',
-              title: 'Built around your needs.',
-              text: 'Marketing and development under one roof. A website, a campaign, or a practical product shaped around your brief.',
+              title: 'Marketing and development.',
+              text: 'Campaigns, content, websites, and practical digital products, planned around the needs of your business or team.',
             },
             {
-              icon: '03',
-              title: 'Work you can examine.',
-              text: 'See the scope, the process, and the evidence in each case study. Clear reporting, with context around the results.',
+              title: 'Clear reporting.',
+              text: 'I document the scope, work completed, and results, with evidence and context you can review in my case studies.',
             },
             {
-              icon: '04',
-              title: 'A direct working relationship.',
-              text: 'Speak with the person planning and building the work. Clear responsibilities and useful communication throughout.',
+              title: 'Direct communication.',
+              text: 'You work directly with the person planning and building your project, with clear responsibilities and agreed next steps.',
             },
           ].map((item) => (
-            <article className="jl-value-card" key={item.icon} data-reveal>
-              <span className="jl-card-index">{item.icon}</span>
+            <article key={item.title} data-reveal>
               <h3>{item.title}</h3>
               <p>{item.text}</p>
             </article>
           ))}
         </div>
       </section>
-      <section className="jl-section cr-wrap" id="selected-work">
-        <SectionHeading
-          label="PROJECTS & CAMPAIGNS"
-          title="Good thinking. Tangible work."
-          link="View all case studies"
-          href="/case-studies"
-        />
-        <ProjectGallery projects={projects.slice(0, 3)} compact />
-      </section>
-      <section className="jl-results cr-wrap" data-reveal>
-        <div className="jl-results-heading">
-          <div>
-            <p className="cr-eyebrow">A DOCUMENTED CAMPAIGN</p>
-            <h2>
-              Small campaign.
-              <br />
-              Meaningful reach.
-            </h2>
-          </div>
-          <div>
-            <p>
-              Tickets for Troops. Three days of LinkedIn awareness activity for
-              Heroes Help.
-            </p>
+      <section className="ja-project-showcase cr-wrap">
+        <h2>Explore my projects</h2>
+        <div className="ja-image-grid">
+          {projects.slice(0, 4).map((project) => (
             <Link
-              href="/case-studies#tickets-for-troops-linkedin"
-              className="jl-light-link"
+              href={'/case-studies#' + project.id}
+              key={project.id}
+              className="ja-image-card"
             >
-              Read the campaign story <Arrow />
-            </Link>
-          </div>
-        </div>
-        <div className="jl-results-grid">
-          {stats.map((s) => (
-            <div key={s.label}>
-              <strong>{s.value}</strong>
-              <span>{s.label}</span>
-            </div>
-          ))}
-        </div>
-        <p className="jl-results-note">
-          21–23 September 2026. Awareness results; no leads or conversions were
-          recorded.
-        </p>
-      </section>
-      <section className="jl-section cr-wrap jl-about">
-        <div className="jl-about-image" data-reveal>
-          <Image
-            src="/about-moses.jpg"
-            alt="Moses Adebayo"
-            width={600}
-            height={600}
-          />
-          <div>
-            <span>BASED IN ABUJA, NIGERIA</span>
-            <strong>
-              A practical mind.
-              <br />A personal approach.
-            </strong>
-          </div>
-        </div>
-        <div className="jl-about-copy" data-reveal>
-          <p className="cr-eyebrow">MEET MOSES</p>
-          <h2>
-            Connecting the
-            <br />
-            message and
-            <br />
-            <span>the experience.</span>
-          </h2>
-          <p>
-            I’m Moses Oluwashina Adebayo, a digital marketer and product
-            developer working with businesses, nonprofits, and education teams.
-          </p>
-          <p>
-            From the MoTechy website to ImpactDesk and the Tickets for Troops
-            campaign, my work connects strategy with practical execution. I also
-            mentor new coders and help teams bring structure to their projects.
-          </p>
-          <div className="jl-about-tags">
-            <span>Marketing strategy</span>
-            <span>Web development</span>
-            <span>Digital products</span>
-          </div>
-          <div className="cr-inline-actions">
-            <Link href="/about" className="cr-button">
-              More about Moses <Arrow />
-            </Link>
-            <a href="/Moses-Adebayo-CV.pdf" download className="cr-text-link">
-              Download CV ↓
-            </a>
-          </div>
-        </div>
-      </section>
-      <section className="jl-process">
-        <div className="jl-section cr-wrap">
-          <SectionHeading
-            label="HOW WE WORK"
-            title="A clear route from brief to delivery."
-          />
-          <div className="cr-process-grid">
-            {processSteps.map((s) => (
-              <div key={s.step} data-reveal>
-                <span>{s.step}</span>
-                <h3>{s.title}</h3>
-                <p>{s.description.replace(/—/g, '. ')}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section className="jl-section cr-wrap">
-        <SectionHeading
-          label="PROFESSIONAL EXPERIENCE"
-          title="The teams behind the journey."
-          link="Explore my experience"
-          href="/experience"
-        />
-        <div className="cr-role-preview">
-          {experienceRoles.slice(0, 3).map((role, i) => (
-            <Link href="/experience" key={role.company}>
-              <span className="cr-role-index">0{i + 1}</span>
-              <div>
-                <h3>{role.company}</h3>
-                <p>{role.role}</p>
-              </div>
-              <span className="cr-role-date">
-                {role.period.replace(/–/g, 'to')}
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                sizes="(max-width:600px) 90vw, 25vw"
+                unoptimized
+              />
+              <span>
+                {project.title
+                  .replace(': NGO reporting workspace', '')
+                  .replace(' LinkedIn awareness campaign', '')}
               </span>
-              <Arrow />
             </Link>
           ))}
         </div>
       </section>
-      {!!testimonials.length && (
-        <section className="jl-section cr-wrap jl-testimonial-layout">
-          <div>
-            <p className="cr-eyebrow">CLIENT PERSPECTIVES</p>
-            <h2>
-              Good work starts
-              <br />
-              with good people.
-            </h2>
-            <Link href="/testimonials" className="cr-text-link">
-              All client feedback <Arrow />
+      {featured && (
+        <section className="ja-featured cr-wrap">
+          <h2>Featured project</h2>
+          <article className="ja-course-card">
+            <Link href={'/case-studies#' + featured.id}>
+              <div className="ja-course-image">
+                <Image
+                  src={featured.image}
+                  alt={featured.title}
+                  fill
+                  sizes="(max-width:600px) 90vw, 300px"
+                  unoptimized
+                />
+              </div>
+              <div className="ja-course-copy">
+                <h3>{featured.title}</h3>
+                <p>{featured.category}</p>
+                <p>{featured.role}</p>
+              </div>
             </Link>
-          </div>
-          <TestimonialSlider testimonials={testimonials} />
+          </article>
         </section>
       )}
-      <section className="jl-section cr-wrap jl-faq-layout">
-        <div>
-          <p className="cr-eyebrow">BEFORE WE BEGIN</p>
-          <h2>
-            A few useful
-            <br />
-            answers.
-          </h2>
-          <p>Still have a question? Let’s work through the details.</p>
-          <Link href="/contact" className="cr-text-link">
-            Get in touch <Arrow />
+      <ReferenceProjects projects={projects} />
+      <section className="ja-about-band">
+        <Image
+          src="/about-moses.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="ja-banner-photo"
+        />
+        <div className="ja-about-band-content">
+          <h2>About Moses Adebayo</h2>
+          <ul>
+            <li>
+              <strong>Digital marketer.</strong> SEO, social media, content, and
+              paid campaigns for businesses and nonprofits.
+            </li>
+            <li>
+              <strong>Product developer.</strong> Creator of ImpactDesk, an NGO
+              reporting workspace, and developer of the MoTechy website.
+            </li>
+            <li>
+              <strong>Based in Abuja.</strong> Working with teams across Nigeria
+              on marketing, websites, and practical digital tools.
+            </li>
+            <li>
+              <strong>Current role.</strong> Digital Marketing Executive at Jeda
+              Systems.
+            </li>
+          </ul>
+          <Link href="/about" className="ja-button">
+            More about me
           </Link>
         </div>
-        <PortfolioFAQ />
       </section>
-      <ProjectCTA />
+      <section className="ja-business cr-wrap">
+        <h2>Marketing and development support</h2>
+        <p>
+          Tell me about your organisation, what you want to achieve, and the
+          work you need delivered.
+        </p>
+        <p>
+          I work with SMEs, nonprofits, education teams, and founders on
+          projects and ongoing marketing support.
+        </p>
+        <StartProject />
+      </section>
+      <Collaborators />
+      <section className="ja-contact-banner">
+        <Image
+          src="/hero/hero.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="ja-banner-photo"
+        />
+        <div>
+          <h2>Discuss your project</h2>
+          <Link href="/contact" className="ja-button ja-button-gradient">
+            Contact Moses
+          </Link>
+        </div>
+      </section>
     </>
   )
 }

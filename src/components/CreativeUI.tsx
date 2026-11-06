@@ -6,18 +6,7 @@ import { usePathname } from 'next/navigation'
 import type { PublicProject } from '@/src/lib/content-loader'
 
 export function Arrow() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      className="cr-arrow"
-    >
-      <path d="M5 19 19 5M5 5h14v14" />
-    </svg>
-  )
+  return null
 }
 export function Burst() {
   return (
@@ -185,11 +174,6 @@ export function ProjectGallery({
                 onClick={() => setFilter(label)}
               >
                 {label}
-                <span>
-                  {label === 'All work'
-                    ? projects.length
-                    : projects.filter((p) => groupFor(p) === label).length}
-                </span>
               </button>
             ))}
           </div>
@@ -258,7 +242,6 @@ export function ProjectGallery({
             </Link>
             <div className="cr-project-info">
               <div>
-                <p className="cr-eyebrow">{p.category}</p>
                 <h3>
                   <Link href={compact ? `/case-studies#${p.id}` : `#${p.id}`}>
                     {p.title
@@ -267,9 +250,6 @@ export function ProjectGallery({
                   </Link>
                 </h3>
               </div>
-              <span className="cr-project-number">
-                {String(i + 1).padStart(2, '0')}
-              </span>
             </div>
           </article>
         ))}
@@ -292,9 +272,6 @@ export function ServiceAccordion({
       {items.map((s, i) => (
         <details key={s.id} id={s.id} className="cr-service" open={i === 0}>
           <summary>
-            <span className="cr-service-number">
-              {String(i + 1).padStart(2, '0')}
-            </span>
             <h3>{s.title}</h3>
             <span className="cr-service-toggle" aria-hidden="true">
               +

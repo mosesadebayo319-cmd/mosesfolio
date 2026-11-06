@@ -16,14 +16,10 @@ export function PageIntro({
 }) {
   return (
     <section className="cr-page-intro cr-wrap">
-      <p className="cr-eyebrow">
-        <span className="cr-dot" />
-        {label}
-      </p>
       <h1>
         {title}
-        <br />
-        <span className="cr-serif">{accent}</span>
+        {accent && <br />}
+        {accent && <span className="cr-serif">{accent}</span>}
       </h1>
       {children && <div className="cr-intro-copy">{children}</div>}
     </section>
@@ -33,7 +29,6 @@ export function Collaborators() {
   return (
     <section className="cr-collaborators">
       <div className="cr-wrap cr-collaborator-heading">
-        <p className="cr-eyebrow">GOOD COMPANY. SHARED AMBITION.</p>
         <span>Clients, collaborators & teams</span>
       </div>
       <div className="cr-logo-marquee">
@@ -77,12 +72,7 @@ export function ProjectCTA() {
     <section className="cr-cta">
       <div className="cr-wrap">
         <div>
-          <p className="cr-eyebrow">GOT SOMETHING IN MIND?</p>
-          <h2>
-            Let’s make
-            <br />
-            <span className="cr-serif">something matter.</span>
-          </h2>
+          <h2>Discuss your project</h2>
         </div>
         <div className="cr-cta-side">
           <StartProject />
@@ -108,7 +98,6 @@ export function SectionHeading({
   return (
     <div className="cr-section-heading" data-reveal>
       <div>
-        <p className="cr-eyebrow">{label}</p>
         <h2>{title}</h2>
       </div>
       {href && (

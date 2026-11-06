@@ -11,12 +11,21 @@ import './creative.css'
 import './refinement.css'
 import './monica.css'
 import './academy.css'
+import './clarity.css'
+import './reference.css'
 import { CreativeMotion } from '@/src/components/CreativeUI'
 
 const inter = localFont({
   src: './fonts/inter-latin.woff2',
   weight: '100 900',
   variable: '--font-sans',
+  display: 'swap',
+})
+
+const montserrat = localFont({
+  src: './fonts/montserrat-latin.woff',
+  weight: '100 900',
+  variable: '--font-body-reference',
   display: 'swap',
 })
 
@@ -158,7 +167,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable} ${montserrat.variable}`}>
       <body className="min-h-screen bg-background text-foreground antialiased font-sans creative-site">
         <CreativeMotion />
         <script

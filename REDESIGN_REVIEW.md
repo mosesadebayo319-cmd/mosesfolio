@@ -1,22 +1,18 @@
-# Jeda-inspired portfolio preview
+# Jeda layout portfolio preview
 
 Review only. Do not merge or release to production until Moses approves this preview.
 
 ## Direction
 
-An original Next.js portfolio informed by the public visual language of jedaacademy.com: rounded navigation, white and pale-blue surfaces, navy typography, and restrained red/blue gradients. The reference uses WordPress TutorStarter and Elementor; this implementation keeps the existing Next.js application. No Jeda Academy logos, photographs, illustrations, copy, or source code are used.
+Recreates the public layout and measured typography of jedaacademy.com in the existing Next.js application: rounded navigation, equal hero panels, four information cards, image tiles, a featured project, gradient project filtering, portrait sections, and a four-column footer. Headings use Inter; navigation and body copy use Montserrat, hosted locally. The reference uses WordPress TutorStarter and Elementor. No Jeda Academy logos, photographs, illustrations, copy, or source code are included.
 
 ## Review interactions
 
-- Marketing and web/product service tabs, including arrow-key keyboard navigation.
-- Project search across titles, clients, categories, industries, and technology stacks, combined with existing category filters and an empty-state reset.
-- Manual client-feedback slider, practical FAQ disclosures, service accordions, project links, and mobile navigation.
-- Subtle reveals and animated collaborator logos, with reduced-motion support and the existing motion pause control.
-- The existing assistant retains its pricing controls, keyboard handling, suggested replies, and reviewed WhatsApp handoff, with a matching navy theme.
-- CV, GitHub/social profiles, current Jeda Systems role, documented case study results, direct phone and separate work WhatsApp details are preserved.
+- Live project search and category selection, with an empty-state reset; existing detailed case-study filters remain available.
+- Service disclosures, project links, mobile navigation, image hover transitions, scroll reveals, and full-colour animated collaborator logos.
+- Reduced-motion support and the existing motion pause control.
+- Decorative numbering, arrows, tagline labels, and tiny section labels removed. Functional controls, project results, and contact details retained.
+- Existing project assistant preserves pricing controls, keyboard handling, suggested replies, and reviewed WhatsApp handoff.
+- CV, social profiles, Jeda Systems experience, documented results, direct phone, and separate work WhatsApp preserved.
 
-## Content and attribution
-
-Projects and feedback continue to use the existing content loader and admin data. No reference-site customer claims, course metrics, stock identities, or endorsements are introduced. Existing design-foundation attribution remains visible in the footer; see THIRD_PARTY_NOTICES.md.
-
-Contact form checks should use a mocked endpoint so preview verification does not send a real enquiry.
+Contact form checks use a mocked endpoint so verification does not send a real enquiry. Existing design-foundation attribution remains visible; see THIRD_PARTY_NOTICES.md.
