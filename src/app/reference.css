@@ -1652,3 +1652,52 @@ body.creative-site {
     transform: none;
   }
 }
+
+/* Admin uploads and long CMS content remain within their shared layouts. */
+.admin-content {
+  overflow-wrap: anywhere;
+}
+.admin-content input,
+.admin-content textarea,
+.admin-content select {
+  min-width: 0;
+  max-width: 100%;
+  font-size: 16px;
+}
+.admin-content textarea {
+  line-height: 1.5;
+}
+.admin-project-preview {
+  position: relative;
+  aspect-ratio: 16/9;
+  max-width: 650px;
+  border: 1px solid #d5dceb;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #edf0f8;
+}
+.ja-course-copy,
+.ja-feature-copy,
+.cr-project-info,
+.cr-case-body,
+.cr-case-meta,
+.cr-testimonial,
+.cr-package,
+.ja-home-service-grid article {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.ja-stack li {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.cr-case-detail {
+  scroll-margin-top: 115px;
+}
+.ja-home .ja-course-image {
+  aspect-ratio: 16 / 9;
+}
+.cr-service {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}

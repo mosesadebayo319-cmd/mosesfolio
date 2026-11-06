@@ -1,56 +1,69 @@
-import { NextResponse } from 'next/server'
-import { isAuthorizedRequest } from '@/src/lib/admin-auth'
+import { initializeAdminContent } from "@/src/lib/admin-content";
+import { revalidateContent } from "@/src/lib/revalidate-content";
+export const dynamic = "force-dynamic";
+import { NextResponse } from "next/server";
+import { isAuthorizedRequest } from "@/src/lib/admin-auth";
 import {
   createPackage,
   getSql,
   isDatabaseConfigured,
   listPackages,
-} from '@/src/lib/db'
+} from "@/src/lib/db";
 
 function linesToArray(value: unknown): string[] {
-  if (Array.isArray(value)) return value.map(String).filter(Boolean)
-  if (typeof value === 'string') {
+  if (Array.isArray(value)) return value.map(String).filter(Boolean);
+  if (typeof value === "string") {
     return value
-      .split('\n')
+      .split("\n")
       .map((s) => s.trim())
-      .filter(Boolean)
+      .filter(Boolean);
   }
-  return []
+  return [];
 }
 
 export async function GET(request: Request) {
   if (!isAuthorizedRequest(request)) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   if (!isDatabaseConfigured()) {
-    return NextResponse.json({ error: 'DATABASE_URL not set', packages: [] }, { status: 503 })
+    return NextResponse.json(
+      { error: "DATABASE_URL not set", packages: [] },
+      { status: 503 },
+    );
   }
   try {
-    const sql = getSql()!
-    const packages = await listPackages(sql)
-    return NextResponse.json({ packages })
+    const sql = getSql()!;
+    const packages = await listPackages(sql);
+    return NextResponse.json({ packages });
   } catch (e) {
-    console.error(e)
-    return NextResponse.json({ error: 'Failed to load', packages: [] }, { status: 500 })
+    console.error(e);
+    return NextResponse.json(
+      { error: "Failed to load", packages: [] },
+      { status: 500 },
+    );
   }
 }
 
 export async function POST(request: Request) {
   if (!isAuthorizedRequest(request)) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   if (!isDatabaseConfigured()) {
-    return NextResponse.json({ error: 'DATABASE_URL not set' }, { status: 503 })
+    return NextResponse.json(
+      { error: "DATABASE_URL not set" },
+      { status: 503 },
+    );
   }
   try {
-    const body = await request.json()
+    const body = await request.json();
     if (!body?.title?.trim()) {
-      return NextResponse.json({ error: 'Title is required' }, { status: 400 })
+      return NextResponse.json({ error: "Title is required" }, { status: 400 });
     }
-    const sql = getSql()!
+    const sql = getSql()!;
+    await initializeAdminContent(sql);
     const pkg = await createPackage(sql, {
       title: String(body.title).trim(),
-      description: String(body.description || '').trim(),
+      description: String(body.description || "").trim(),
       includes: linesToArray(body.includes),
       best_for: body.best_for ? String(body.best_for) : undefined,
       not_for: body.not_for ? String(body.not_for) : undefined,
@@ -58,10 +71,11 @@ export async function POST(request: Request) {
       published: body.published !== false,
       sort_order: Number(body.sort_order) || 0,
       slug: body.slug ? String(body.slug) : undefined,
-    })
-    return NextResponse.json({ package: pkg }, { status: 201 })
+    });
+    revalidateContent();
+    return NextResponse.json({ package: pkg }, { status: 201 });
   } catch (e) {
-    console.error(e)
-    return NextResponse.json({ error: 'Failed to create' }, { status: 500 })
+    console.error(e);
+    return NextResponse.json({ error: "Failed to create" }, { status: 500 });
   }
 }
