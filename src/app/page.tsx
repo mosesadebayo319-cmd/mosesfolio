@@ -2,10 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { pageSeo } from "@/src/data/content";
-import { getPublicProjects } from "@/src/lib/content-loader";
+import { getPublicProjects, getPublicServices } from "@/src/lib/content-loader";
 import { Collaborators } from "@/src/components/CreativeSections";
 import { StartProject } from "@/src/components/CreativeUI";
 import PortfolioHero from "@/src/components/PortfolioHero";
+import ProjectImage from "@/src/components/ProjectImage";
 import ReferenceProjects from "@/src/components/ReferenceProjects";
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
@@ -14,9 +15,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 export default async function HomePage() {
-  const projects = await getPublicProjects();
-  const featured =
-    projects.find((project) => project.id === "impactdesk") || projects[0];
+  const [projects, services] = await Promise.all([
+    getPublicProjects(),
+    getPublicServices(),
+  ]);
+  const featured = projects.find((project) => project.featured);
   // Send only the fields used by the interactive grid to the browser.
   const selected = projects
     .filter((project) => project.id !== featured?.id)
@@ -28,10 +31,10 @@ export default async function HomePage() {
       role: project.role,
       image: project.image,
       stack: project.stack,
-      results:
-        project.id === "tickets-for-troops-linkedin"
-          ? project.results
-          : undefined,
+      imageFit: project.imageFit,
+      imagePosition: project.imagePosition,
+      outcomeNote: project.outcomeNote,
+      results: project.results,
     }));
   return (
     <div className="ja-home">
@@ -49,12 +52,13 @@ export default async function HomePage() {
               className="ja-feature-preview"
               aria-label={`Read ${featured.title} case study`}
             >
-              <Image
+              <ProjectImage
+                key={featured.image}
+                imageFit={featured.imageFit}
+                imagePosition={featured.imagePosition}
                 src={featured.image}
                 alt={featured.title}
-                fill
                 sizes="(max-width:760px) 90vw, 55vw"
-                unoptimized
               />
             </Link>
             <div className="ja-feature-copy">
@@ -83,36 +87,25 @@ export default async function HomePage() {
         </section>
       )}
       <ReferenceProjects projects={selected} />
-      <section
-        className="ja-home-services cr-wrap"
-        aria-labelledby="services-title"
-      >
-        <div className="ja-home-section-heading">
-          <h2 id="services-title">How I can help</h2>
-          <Link href="/services">View services</Link>
-        </div>
-        <div className="ja-home-service-grid">
-          {[
-            {
-              title: "Digital marketing",
-              text: "SEO, social media, content, and paid campaigns for businesses and nonprofits.",
-            },
-            {
-              title: "Websites and products",
-              text: "Business websites and practical software, planned around the people who will use them.",
-            },
-            {
-              title: "Clear delivery",
-              text: "Agreed scope, direct communication, and reporting you can review throughout the work.",
-            },
-          ].map((item) => (
-            <article key={item.title} data-reveal>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
+      {!!services.length && (
+        <section
+          className="ja-home-services cr-wrap"
+          aria-labelledby="services-title"
+        >
+          <div className="ja-home-section-heading">
+            <h2 id="services-title">How I can help</h2>
+            <Link href="/services">View services</Link>
+          </div>
+          <div className="ja-home-service-grid">
+            {services.map((item) => (
+              <article key={item.title} data-reveal>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
       <section className="ja-home-about cr-wrap" aria-labelledby="about-title">
         <div className="ja-home-portrait">
           <Image

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import ProjectImage from "./ProjectImage";
 import Link from "next/link";
 import type { PublicProject } from "@/src/lib/content-loader";
 export default function ReferenceProjects({
@@ -8,7 +8,16 @@ export default function ReferenceProjects({
 }: {
   projects: (Pick<
     PublicProject,
-    "id" | "title" | "client" | "category" | "role" | "image" | "stack"
+    | "id"
+    | "title"
+    | "client"
+    | "category"
+    | "role"
+    | "image"
+    | "stack"
+    | "imageFit"
+    | "imagePosition"
+    | "outcomeNote"
   > & { results?: PublicProject["results"] })[];
 }) {
   const [category, setCategory] = useState("All projects");
@@ -48,6 +57,7 @@ export default function ReferenceProjects({
         .includes(search.trim().toLowerCase())
     );
   });
+  if (!projects.length) return null;
   return (
     <section className="ja-project-panel cr-wrap" aria-label="Find a project">
       <h2>Selected projects</h2>
@@ -79,12 +89,13 @@ export default function ReferenceProjects({
           <article key={project.id} className="ja-course-card">
             <Link href={`/case-studies#${project.id}`}>
               <div className="ja-course-image">
-                <Image
+                <ProjectImage
+                  key={project.image}
+                  imageFit={project.imageFit}
+                  imagePosition={project.imagePosition}
                   src={project.image}
                   alt={project.title}
-                  fill
                   sizes="(max-width:760px) 90vw, (max-width:1100px) 45vw, 30vw"
-                  unoptimized
                 />
               </div>
               <div className="ja-course-copy">
@@ -102,20 +113,30 @@ export default function ReferenceProjects({
                     ))}
                   </ul>
                 )}
-                {project.results && (
-                  <div className="ja-campaign-results">
-                    <p>
-                      <strong>{project.results.metric1}</strong>{" "}
-                      {project.results.label1.toLowerCase()}
-                    </p>
-                    <p>
-                      <strong>{project.results.metric2}</strong>{" "}
-                      {project.results.label2.toLowerCase()}
-                    </p>
-                    <p className="ja-project-note">
-                      Awareness campaign. No recorded leads or conversions.
-                    </p>
-                  </div>
+                {project.results &&
+                  [
+                    project.results.metric1,
+                    project.results.metric2,
+                    project.results.metric3,
+                  ].some((value) => value && value !== "—") && (
+                    <div className="ja-campaign-results">
+                      {[
+                        [project.results.metric1, project.results.label1],
+                        [project.results.metric2, project.results.label2],
+                        [project.results.metric3, project.results.label3],
+                      ]
+                        .filter(
+                          ([value, label]) => value && value !== "—" && label,
+                        )
+                        .map(([value, label]) => (
+                          <p key={label}>
+                            <strong>{value}</strong> {label}
+                          </p>
+                        ))}
+                    </div>
+                  )}
+                {project.outcomeNote && (
+                  <p className="ja-project-note">{project.outcomeNote}</p>
                 )}
                 <span className="ja-case-link">Read case study</span>
               </div>

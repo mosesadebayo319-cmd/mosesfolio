@@ -1,12 +1,13 @@
-'use client'
-import { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import type { PublicProject } from '@/src/lib/content-loader'
+"use client";
+import ProjectImage from "./ProjectImage";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import type { PublicProject } from "@/src/lib/content-loader";
 
 export function Arrow() {
-  return null
+  return null;
 }
 export function Burst() {
   return (
@@ -28,98 +29,98 @@ export function Burst() {
         />
       ))}
     </svg>
-  )
+  );
 }
 export function MotionControl() {
-  const [paused, setPaused] = useState(false)
+  const [paused, setPaused] = useState(false);
   return (
     <button
       type="button"
       className="cr-motion-control"
       aria-pressed={paused}
       onClick={() => {
-        const next = !paused
-        setPaused(next)
-        document.documentElement.dataset.motion = next ? 'off' : 'on'
+        const next = !paused;
+        setPaused(next);
+        document.documentElement.dataset.motion = next ? "off" : "on";
       }}
     >
-      {paused ? '▶ Resume motion' : 'Ⅱ Pause motion'}
+      {paused ? "▶ Resume motion" : "Ⅱ Pause motion"}
     </button>
-  )
+  );
 }
-export function StartProject({ className = '' }: { className?: string }) {
+export function StartProject({ className = "" }: { className?: string }) {
   return (
     <button
       className={`cr-button ${className}`}
-      onClick={() => window.dispatchEvent(new Event('moses:open-assistant'))}
+      onClick={() => window.dispatchEvent(new Event("moses:open-assistant"))}
     >
       Let’s talk about your project <Arrow />
     </button>
-  )
+  );
 }
 
 export function CreativeMotion() {
-  const pathname = usePathname()
+  const pathname = usePathname();
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const observer = new IntersectionObserver(
       (entries) =>
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return
+          if (!entry.isIntersecting) return;
           entry.target.animate(
             [
-              { opacity: 0.2, transform: 'translateY(35px)' },
-              { opacity: 1, transform: 'translateY(0)' },
+              { opacity: 0.2, transform: "translateY(35px)" },
+              { opacity: 1, transform: "translateY(0)" },
             ],
-            { duration: 700, easing: 'cubic-bezier(.2,.7,.2,1)' },
-          )
-          observer.unobserve(entry.target)
+            { duration: 700, easing: "cubic-bezier(.2,.7,.2,1)" },
+          );
+          observer.unobserve(entry.target);
         }),
       { threshold: 0.08 },
-    )
+    );
     document
-      .querySelectorAll('[data-reveal]')
-      .forEach((node) => observer.observe(node))
+      .querySelectorAll("[data-reveal]")
+      .forEach((node) => observer.observe(node));
     const update = () =>
       document.documentElement.style.setProperty(
-        '--page-progress',
+        "--page-progress",
         `${window.scrollY / Math.max(1, document.documentElement.scrollHeight - window.innerHeight)}`,
-      )
-    update()
-    window.addEventListener('scroll', update, { passive: true })
+      );
+    update();
+    window.addEventListener("scroll", update, { passive: true });
     return () => {
-      observer.disconnect()
-      window.removeEventListener('scroll', update)
-    }
-  }, [pathname])
-  return <div className="cr-reading-progress" aria-hidden="true" />
+      observer.disconnect();
+      window.removeEventListener("scroll", update);
+    };
+  }, [pathname]);
+  return <div className="cr-reading-progress" aria-hidden="true" />;
 }
 
 export function Portrait() {
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDivElement>(null);
   return (
     <div
       className="cr-portrait-composition"
       ref={ref}
       onPointerMove={(e) => {
         if (
-          e.pointerType !== 'mouse' ||
-          window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          e.pointerType !== "mouse" ||
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches
         )
-          return
-        const b = e.currentTarget.getBoundingClientRect()
+          return;
+        const b = e.currentTarget.getBoundingClientRect();
         e.currentTarget.style.setProperty(
-          '--tilt-x',
+          "--tilt-x",
           `${(e.clientY - b.top - b.height / 2) / -40}deg`,
-        )
+        );
         e.currentTarget.style.setProperty(
-          '--tilt-y',
+          "--tilt-y",
           `${(e.clientX - b.left - b.width / 2) / 40}deg`,
-        )
+        );
       }}
       onPointerLeave={() => {
-        ref.current?.style.setProperty('--tilt-x', '0deg')
-        ref.current?.style.setProperty('--tilt-y', '0deg')
+        ref.current?.style.setProperty("--tilt-x", "0deg");
+        ref.current?.style.setProperty("--tilt-y", "0deg");
       }}
     >
       <div className="cr-portrait-card">
@@ -136,41 +137,41 @@ export function Portrait() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 const groupFor = (p: PublicProject) =>
   /development|product|website/i.test(p.category)
-    ? 'Web & products'
-    : 'Marketing'
+    ? "Web & products"
+    : "Marketing";
 export function ProjectGallery({
   projects,
   compact = false,
 }: {
-  projects: PublicProject[]
-  compact?: boolean
+  projects: PublicProject[];
+  compact?: boolean;
 }) {
-  const [filter, setFilter] = useState('All work')
-  const [search, setSearch] = useState('')
-  const query = search.trim().toLowerCase()
+  const [filter, setFilter] = useState("All work");
+  const [search, setSearch] = useState("");
+  const query = search.trim().toLowerCase();
   const visible = projects.filter(
     (p) =>
-      (filter === 'All work' || groupFor(p) === filter) &&
+      (filter === "All work" || groupFor(p) === filter) &&
       (!query ||
         [p.title, p.client, p.category, p.industry, ...(p.stack || [])]
-          .join(' ')
+          .join(" ")
           .toLowerCase()
           .includes(query)),
-  )
+  );
   return (
     <div>
       {!compact && (
         <div className="jl-project-toolbar">
           <div className="cr-filters" aria-label="Filter projects">
-            {['All work', 'Web & products', 'Marketing'].map((label) => (
+            {["All work", "Web & products", "Marketing"].map((label) => (
               <button
                 key={label}
                 aria-pressed={filter === label}
-                className={filter === label ? 'active' : ''}
+                className={filter === label ? "active" : ""}
                 onClick={() => setFilter(label)}
               >
                 {label}
@@ -190,7 +191,7 @@ export function ProjectGallery({
       )}
       {!compact && (
         <p className="jl-project-count" role="status">
-          {visible.length} {visible.length === 1 ? 'project' : 'projects'} shown
+          {visible.length} {visible.length === 1 ? "project" : "projects"} shown
         </p>
       )}
       {!visible.length && (
@@ -201,8 +202,8 @@ export function ProjectGallery({
             type="button"
             className="cr-button"
             onClick={() => {
-              setSearch('')
-              setFilter('All work')
+              setSearch("");
+              setFilter("All work");
             }}
           >
             Show all projects
@@ -225,13 +226,14 @@ export function ProjectGallery({
                   <span>{p.client || p.category}</span>
                 </div>
                 <div className="cr-project-screen">
-                  <Image
+                  <ProjectImage
+                    key={p.image}
+                    imageFit={p.imageFit}
+                    imagePosition={p.imagePosition}
                     src={p.image}
                     alt={p.title}
-                    fill
                     sizes="(max-width:700px) 90vw, 45vw"
                     className="object-cover object-top"
-                    unoptimized
                   />
                 </div>
               </div>
@@ -245,8 +247,8 @@ export function ProjectGallery({
                 <h3>
                   <Link href={compact ? `/case-studies#${p.id}` : `#${p.id}`}>
                     {p.title
-                      .replace(': NGO reporting workspace', '')
-                      .replace(' LinkedIn awareness campaign', '')}
+                      .replace(": NGO reporting workspace", "")
+                      .replace(" LinkedIn awareness campaign", "")}
                   </Link>
                 </h3>
               </div>
@@ -255,17 +257,17 @@ export function ProjectGallery({
         ))}
       </div>
     </div>
-  )
+  );
 }
 export function ServiceAccordion({
   items,
 }: {
   items: {
-    id: string
-    title: string
-    description: string
-    deliverables: string[]
-  }[]
+    id: string;
+    title: string;
+    description: string;
+    deliverables: string[];
+  }[];
 }) {
   return (
     <div className="cr-service-list">
@@ -278,7 +280,7 @@ export function ServiceAccordion({
             </span>
           </summary>
           <div className="cr-service-body">
-            <p>{s.description.replace(/—/g, '. ')}</p>
+            <p>{s.description.replace(/—/g, ". ")}</p>
             <div className="cr-tags">
               {s.deliverables.map((item) => (
                 <span key={item}>{item}</span>
@@ -291,5 +293,5 @@ export function ServiceAccordion({
         </details>
       ))}
     </div>
-  )
+  );
 }

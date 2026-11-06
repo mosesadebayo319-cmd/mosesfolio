@@ -1,17 +1,17 @@
-import type { Metadata } from 'next'
-import Image from 'next/image'
-import { pageSeo } from '@/src/data/content'
-import { getPublicProjects } from '@/src/lib/content-loader'
-import { Arrow, ProjectGallery } from '@/src/components/CreativeUI'
-import { PageIntro, ProjectCTA } from '@/src/components/CreativeSections'
-export const dynamic = 'force-dynamic'
+import type { Metadata } from "next";
+import ProjectImage from "@/src/components/ProjectImage";
+import { pageSeo } from "@/src/data/content";
+import { getPublicProjects } from "@/src/lib/content-loader";
+import { Arrow, ProjectGallery } from "@/src/components/CreativeUI";
+import { PageIntro, ProjectCTA } from "@/src/components/CreativeSections";
+export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: pageSeo.caseStudies.title,
   description: pageSeo.caseStudies.description,
-  alternates: { canonical: '/case-studies' },
-}
+  alternates: { canonical: "/case-studies" },
+};
 export default async function CaseStudiesPage() {
-  const projects = await getPublicProjects()
+  const projects = await getPublicProjects();
   return (
     <>
       <PageIntro
@@ -47,12 +47,12 @@ export default async function CaseStudiesPage() {
             </div>
             <div className="cr-case-image">
               <div className="cr-case-image-inner">
-                <Image
+                <ProjectImage
+                  key={p.image}
+                  imageFit="contain"
                   src={p.image}
                   alt={p.title}
-                  fill
                   sizes="(max-width:700px) 90vw, 80vw"
-                  unoptimized
                 />
               </div>
             </div>
@@ -64,10 +64,10 @@ export default async function CaseStudiesPage() {
             </div>
             <div className="cr-case-meta">
               {[
-                ['CLIENT', p.client],
-                ['MY ROLE', p.role],
-                ['INDUSTRY', p.industry],
-                ['WHEN', p.timeframe],
+                ["CLIENT", p.client],
+                ["MY ROLE", p.role],
+                ["INDUSTRY", p.industry],
+                ["WHEN", p.timeframe],
               ]
                 .filter(([, v]) => v)
                 .map(([k, v]) => (
@@ -80,7 +80,7 @@ export default async function CaseStudiesPage() {
             {p.stack && (
               <div
                 className="cr-tags"
-                aria-label={p.stackLabel || 'Technology stack'}
+                aria-label={p.stackLabel || "Technology stack"}
               >
                 {p.stack.map((s) => (
                   <span key={s}>{s}</span>
@@ -90,9 +90,9 @@ export default async function CaseStudiesPage() {
             <div className="cr-case-body">
               <div>
                 {[
-                  ['The challenge', p.problem],
-                  ['The thinking', p.strategy],
-                  ['The making', p.execution],
+                  ["The challenge", p.problem],
+                  ["The thinking", p.strategy],
+                  ["The making", p.execution],
                 ]
                   .filter(([, v]) => v)
                   .map(([title, text]) => (
@@ -103,14 +103,14 @@ export default async function CaseStudiesPage() {
                   ))}
               </div>
               <aside className="cr-case-result">
-                <h3>{p.resultHeading || 'The outcome'}</h3>
+                <h3>{p.resultHeading || "The outcome"}</h3>
                 <div className="cr-case-metrics">
                   {[
                     [p.results.metric1, p.results.label1],
                     [p.results.metric2, p.results.label2],
                     [p.results.metric3, p.results.label3],
                   ]
-                    .filter(([v]) => v && v !== '—')
+                    .filter(([v]) => v && v !== "—")
                     .map(([value, label]) => (
                       <div key={label + value}>
                         <strong>{value}</strong>
@@ -132,5 +132,5 @@ export default async function CaseStudiesPage() {
       </div>
       <ProjectCTA />
     </>
-  )
+  );
 }

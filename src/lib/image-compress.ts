@@ -4,49 +4,59 @@
  */
 export async function compressImageFile(
   file: File,
-  opts?: { maxWidth?: number; maxHeight?: number; quality?: number; maxBytes?: number }
+  opts?: {
+    maxWidth?: number;
+    maxHeight?: number;
+    quality?: number;
+    maxBytes?: number;
+  },
 ): Promise<string> {
-  const maxWidth = opts?.maxWidth ?? 1400
-  const maxHeight = opts?.maxHeight ?? 1400
-  const quality = opts?.quality ?? 0.78
-  const maxBytes = opts?.maxBytes ?? 900_000
+  const maxWidth = opts?.maxWidth ?? 1400;
+  const maxHeight = opts?.maxHeight ?? 1400;
+  const quality = opts?.quality ?? 0.78;
+  const maxBytes = opts?.maxBytes ?? 900_000;
 
-  if (!file.type.startsWith('image/')) {
-    throw new Error('Please choose an image file.')
+  if (!file.type.startsWith("image/")) {
+    throw new Error("Please choose an image file.");
   }
 
-  const bitmap = await createImageBitmap(file)
-  let { width, height } = bitmap
+  if (file.size > 15 * 1024 * 1024)
+    throw new Error("Choose an image smaller than 15 MB.");
+  const bitmap = await createImageBitmap(file);
+  let { width, height } = bitmap;
 
-  const scale = Math.min(1, maxWidth / width, maxHeight / height)
-  width = Math.round(width * scale)
-  height = Math.round(height * scale)
+  const scale = Math.min(1, maxWidth / width, maxHeight / height);
+  width = Math.round(width * scale);
+  height = Math.round(height * scale);
 
-  const canvas = document.createElement('canvas')
-  canvas.width = width
-  canvas.height = height
-  const ctx = canvas.getContext('2d')
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext("2d");
   if (!ctx) {
-    bitmap.close()
-    throw new Error('Could not process image in this browser.')
+    bitmap.close();
+    throw new Error("Could not process image in this browser.");
   }
-  ctx.drawImage(bitmap, 0, 0, width, height)
-  bitmap.close()
+  // JPEG has no transparency; avoid black backgrounds on uploaded logos.
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, width, height);
+  ctx.drawImage(bitmap, 0, 0, width, height);
+  bitmap.close();
 
-  let q = quality
-  let dataUrl = canvas.toDataURL('image/jpeg', q)
+  let q = quality;
+  let dataUrl = canvas.toDataURL("image/jpeg", q);
 
   // Reduce quality until under maxBytes (approx base64 length)
   while (dataUrl.length > maxBytes * 1.37 && q > 0.4) {
-    q -= 0.08
-    dataUrl = canvas.toDataURL('image/jpeg', q)
+    q -= 0.08;
+    dataUrl = canvas.toDataURL("image/jpeg", q);
   }
 
   if (dataUrl.length > 2_000_000) {
     throw new Error(
-      'Image is still too large after compression. Try a smaller photo.'
-    )
+      "Image is still too large after compression. Try a smaller photo.",
+    );
   }
 
-  return dataUrl
+  return dataUrl;
 }

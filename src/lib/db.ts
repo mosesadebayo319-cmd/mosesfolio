@@ -1,134 +1,143 @@
-import { neon, type NeonQueryFunction } from '@neondatabase/serverless'
+import { neon, type NeonQueryFunction } from "@neondatabase/serverless";
 
 export type ContactSubmission = {
-  id: number
-  name: string
-  email: string
-  phone: string | null
-  subject: string
-  budget: string | null
-  message: string
-  created_at: string
-}
+  id: number;
+  name: string;
+  email: string;
+  phone: string | null;
+  subject: string;
+  budget: string | null;
+  message: string;
+  created_at: string;
+};
 
 export type DbService = {
-  id: number
-  title: string
-  description: string
-  benefits: string[]
-  deliverables: string[]
-  pricing: string | null
-  best_for: string | null
-  flagship: boolean
-  slug: string
-  sort_order: number
-  published: boolean
-  created_at: string
-  updated_at: string
-}
+  id: number;
+  title: string;
+  description: string;
+  benefits: string[];
+  deliverables: string[];
+  pricing: string | null;
+  best_for: string | null;
+  flagship: boolean;
+  slug: string;
+  sort_order: number;
+  published: boolean;
+  created_at: string;
+  updated_at: string;
+};
 
 export type DbProject = {
-  id: number
-  title: string
-  client: string | null
-  industry: string | null
-  timeframe: string | null
-  category: string | null
-  image: string | null
-  problem: string | null
-  strategy: string | null
-  execution: string | null
-  metric1: string | null
-  label1: string | null
-  metric2: string | null
-  label2: string | null
-  metric3: string | null
-  label3: string | null
-  testimonial: string | null
-  testimonial_author: string | null
-  slug: string
-  featured: boolean
-  published: boolean
-  sort_order: number
-  created_at: string
-  updated_at: string
-}
+  id: number;
+  title: string;
+  client: string | null;
+  industry: string | null;
+  timeframe: string | null;
+  category: string | null;
+  image: string | null;
+  role: string | null;
+  stack: string[];
+  stack_label: string | null;
+  project_url: string | null;
+  image_fit: "contain" | "cover";
+  image_position: "top" | "center" | "bottom";
+  image_caption: string | null;
+  outcome_note: string | null;
+  result_heading: string | null;
+  problem: string | null;
+  strategy: string | null;
+  execution: string | null;
+  metric1: string | null;
+  label1: string | null;
+  metric2: string | null;
+  label2: string | null;
+  metric3: string | null;
+  label3: string | null;
+  testimonial: string | null;
+  testimonial_author: string | null;
+  slug: string;
+  featured: boolean;
+  published: boolean;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+};
 
 export type DbTestimonial = {
-  id: number
-  name: string
-  role: string | null
-  company: string | null
-  quote: string
-  link: string | null
-  rating: number
-  sort_order: number
-  published: boolean
-  created_at: string
-  updated_at: string
-}
+  id: number;
+  name: string;
+  role: string | null;
+  company: string | null;
+  quote: string;
+  link: string | null;
+  rating: number;
+  sort_order: number;
+  published: boolean;
+  created_at: string;
+  updated_at: string;
+};
 
 export type DbPackage = {
-  id: number
-  title: string
-  description: string
-  includes: string[]
-  best_for: string | null
-  not_for: string | null
-  pricing: string | null
-  slug: string
-  sort_order: number
-  published: boolean
-  created_at: string
-  updated_at: string
-}
+  id: number;
+  title: string;
+  description: string;
+  includes: string[];
+  best_for: string | null;
+  not_for: string | null;
+  pricing: string | null;
+  slug: string;
+  sort_order: number;
+  published: boolean;
+  created_at: string;
+  updated_at: string;
+};
 
 export type DashboardStats = {
-  messagesTotal: number
-  messagesWeek: number
-  servicesPublished: number
-  servicesTotal: number
-  projectsPublished: number
-  projectsFeatured: number
-  projectsTotal: number
-  testimonialsPublished: number
-  packagesPublished: number
-  recentMessages: ContactSubmission[]
-}
+  messagesTotal: number;
+  messagesWeek: number;
+  servicesPublished: number;
+  servicesTotal: number;
+  projectsPublished: number;
+  projectsFeatured: number;
+  projectsTotal: number;
+  testimonialsPublished: number;
+  packagesPublished: number;
+  recentMessages: ContactSubmission[];
+};
 
 export function getSql(): NeonQueryFunction<false, false> | null {
-  const url = process.env.DATABASE_URL
-  if (!url) return null
-  return neon(url)
+  const url = process.env.DATABASE_URL;
+  if (!url) return null;
+  return neon(url, { fetchOptions: { cache: "no-store" } });
 }
 
 export function isDatabaseConfigured(): boolean {
-  return Boolean(process.env.DATABASE_URL)
+  return Boolean(process.env.DATABASE_URL);
 }
 
 export function slugify(text: string): string {
   return text
     .toLowerCase()
     .trim()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '')
-    .slice(0, 80)
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "")
+    .slice(0, 80);
 }
 
 function parseStringArray(value: unknown): string[] {
-  if (Array.isArray(value)) return value.map(String)
-  if (typeof value === 'string') {
+  if (Array.isArray(value)) return value.map(String);
+  if (typeof value === "string") {
     try {
-      const parsed = JSON.parse(value)
-      return Array.isArray(parsed) ? parsed.map(String) : []
+      const parsed = JSON.parse(value);
+      return Array.isArray(parsed) ? parsed.map(String) : [];
     } catch {
       return value
-        .split('\n')
+        .split("\n")
         .map((s) => s.trim())
-        .filter(Boolean)
+        .filter(Boolean);
     }
   }
-  return []
+  return [];
 }
 
 function mapService(row: Record<string, unknown>): DbService {
@@ -146,7 +155,7 @@ function mapService(row: Record<string, unknown>): DbService {
     published: Boolean(row.published),
     created_at: String(row.created_at),
     updated_at: String(row.updated_at),
-  }
+  };
 }
 
 function mapProject(row: Record<string, unknown>): DbProject {
@@ -158,6 +167,19 @@ function mapProject(row: Record<string, unknown>): DbProject {
     timeframe: row.timeframe != null ? String(row.timeframe) : null,
     category: row.category != null ? String(row.category) : null,
     image: row.image != null ? String(row.image) : null,
+    role: row.role != null ? String(row.role) : null,
+    stack: parseStringArray(row.stack),
+    stack_label: row.stack_label != null ? String(row.stack_label) : null,
+    project_url: row.project_url != null ? String(row.project_url) : null,
+    image_fit: row.image_fit === "contain" ? "contain" : "cover",
+    image_position:
+      row.image_position === "center" || row.image_position === "bottom"
+        ? row.image_position
+        : "top",
+    image_caption: row.image_caption != null ? String(row.image_caption) : null,
+    outcome_note: row.outcome_note != null ? String(row.outcome_note) : null,
+    result_heading:
+      row.result_heading != null ? String(row.result_heading) : null,
     problem: row.problem != null ? String(row.problem) : null,
     strategy: row.strategy != null ? String(row.strategy) : null,
     execution: row.execution != null ? String(row.execution) : null,
@@ -176,13 +198,15 @@ function mapProject(row: Record<string, unknown>): DbProject {
     sort_order: Number(row.sort_order ?? 0),
     created_at: String(row.created_at),
     updated_at: String(row.updated_at),
-  }
+  };
 }
 
 export async function ensureAllTables(
-  sql: NeonQueryFunction<false, false>
+  sql: NeonQueryFunction<false, false>,
 ): Promise<void> {
-  await sql`
+  // PostgreSQL can race on CREATE IF NOT EXISTS; serialize first-run DDL.
+  const statements = [sql`SELECT pg_advisory_xact_lock(74687300)`];
+  statements.push(sql`
     CREATE TABLE IF NOT EXISTS contact_submissions (
       id SERIAL PRIMARY KEY,
       name TEXT NOT NULL,
@@ -193,9 +217,9 @@ export async function ensureAllTables(
       message TEXT NOT NULL,
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
-  `
+  `);
 
-  await sql`
+  statements.push(sql`
     CREATE TABLE IF NOT EXISTS site_services (
       id SERIAL PRIMARY KEY,
       title TEXT NOT NULL,
@@ -211,9 +235,9 @@ export async function ensureAllTables(
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
-  `
+  `);
 
-  await sql`
+  statements.push(sql`
     CREATE TABLE IF NOT EXISTS site_projects (
       id SERIAL PRIMARY KEY,
       title TEXT NOT NULL,
@@ -240,9 +264,28 @@ export async function ensureAllTables(
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
-  `
+  `);
 
-  await sql`
+  statements.push(sql`
+    ALTER TABLE site_projects
+      ADD COLUMN IF NOT EXISTS role TEXT,
+      ADD COLUMN IF NOT EXISTS stack JSONB NOT NULL DEFAULT '[]'::jsonb,
+      ADD COLUMN IF NOT EXISTS stack_label TEXT,
+      ADD COLUMN IF NOT EXISTS project_url TEXT,
+      ADD COLUMN IF NOT EXISTS image_fit TEXT NOT NULL DEFAULT 'cover',
+      ADD COLUMN IF NOT EXISTS image_position TEXT NOT NULL DEFAULT 'top',
+      ADD COLUMN IF NOT EXISTS image_caption TEXT,
+      ADD COLUMN IF NOT EXISTS outcome_note TEXT,
+      ADD COLUMN IF NOT EXISTS result_heading TEXT
+  `);
+  statements.push(sql`
+    CREATE TABLE IF NOT EXISTS site_content_state (
+      collection TEXT PRIMARY KEY,
+      initialized_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `);
+
+  statements.push(sql`
     CREATE TABLE IF NOT EXISTS site_testimonials (
       id SERIAL PRIMARY KEY,
       name TEXT NOT NULL,
@@ -256,9 +299,9 @@ export async function ensureAllTables(
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
-  `
+  `);
 
-  await sql`
+  statements.push(sql`
     CREATE TABLE IF NOT EXISTS site_packages (
       id SERIAL PRIMARY KEY,
       title TEXT NOT NULL,
@@ -273,7 +316,8 @@ export async function ensureAllTables(
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
-  `
+  `);
+  await sql.transaction(statements);
 }
 
 function mapTestimonial(row: Record<string, unknown>): DbTestimonial {
@@ -289,14 +333,14 @@ function mapTestimonial(row: Record<string, unknown>): DbTestimonial {
     published: Boolean(row.published),
     created_at: String(row.created_at),
     updated_at: String(row.updated_at),
-  }
+  };
 }
 
 function mapPackage(row: Record<string, unknown>): DbPackage {
   return {
     id: Number(row.id),
     title: String(row.title),
-    description: String(row.description ?? ''),
+    description: String(row.description ?? ""),
     includes: parseStringArray(row.includes),
     best_for: row.best_for != null ? String(row.best_for) : null,
     not_for: row.not_for != null ? String(row.not_for) : null,
@@ -306,28 +350,28 @@ function mapPackage(row: Record<string, unknown>): DbPackage {
     published: Boolean(row.published),
     created_at: String(row.created_at),
     updated_at: String(row.updated_at),
-  }
+  };
 }
 
 /** @deprecated use ensureAllTables */
 export async function ensureContactTable(
-  sql: NeonQueryFunction<false, false>
+  sql: NeonQueryFunction<false, false>,
 ): Promise<void> {
-  await ensureAllTables(sql)
+  await ensureAllTables(sql);
 }
 
 export async function saveContactSubmission(
   sql: NeonQueryFunction<false, false>,
   data: {
-    name: string
-    email: string
-    phone?: string
-    subject: string
-    budget?: string
-    message: string
-  }
+    name: string;
+    email: string;
+    phone?: string;
+    subject: string;
+    budget?: string;
+    message: string;
+  },
 ): Promise<ContactSubmission> {
-  await ensureAllTables(sql)
+  await ensureAllTables(sql);
 
   const rows = await sql`
     INSERT INTO contact_submissions (name, email, phone, subject, budget, message)
@@ -340,33 +384,33 @@ export async function saveContactSubmission(
       ${data.message}
     )
     RETURNING id, name, email, phone, subject, budget, message, created_at
-  `
+  `;
 
-  return rows[0] as ContactSubmission
+  return rows[0] as ContactSubmission;
 }
 
 export async function listContactSubmissions(
-  sql: NeonQueryFunction<false, false>
+  sql: NeonQueryFunction<false, false>,
 ): Promise<ContactSubmission[]> {
-  await ensureAllTables(sql)
+  await ensureAllTables(sql);
 
   const rows = await sql`
     SELECT id, name, email, phone, subject, budget, message, created_at
     FROM contact_submissions
     ORDER BY created_at DESC
     LIMIT 200
-  `
+  `;
 
-  return rows as ContactSubmission[]
+  return rows as ContactSubmission[];
 }
 
 // ─── Services ───────────────────────────────────────────────
 
 export async function listServices(
   sql: NeonQueryFunction<false, false>,
-  opts?: { publishedOnly?: boolean }
+  opts?: { publishedOnly?: boolean },
 ): Promise<DbService[]> {
-  await ensureAllTables(sql)
+  await ensureAllTables(sql);
   const rows = opts?.publishedOnly
     ? await sql`
         SELECT * FROM site_services
@@ -376,29 +420,29 @@ export async function listServices(
     : await sql`
         SELECT * FROM site_services
         ORDER BY sort_order ASC, id DESC
-      `
-  return (rows as Record<string, unknown>[]).map(mapService)
+      `;
+  return (rows as Record<string, unknown>[]).map(mapService);
 }
 
 export async function createService(
   sql: NeonQueryFunction<false, false>,
   data: {
-    title: string
-    description: string
-    benefits: string[]
-    deliverables: string[]
-    pricing?: string
-    best_for?: string
-    flagship?: boolean
-    slug?: string
-    sort_order?: number
-    published?: boolean
-  }
+    title: string;
+    description: string;
+    benefits: string[];
+    deliverables: string[];
+    pricing?: string;
+    best_for?: string;
+    flagship?: boolean;
+    slug?: string;
+    sort_order?: number;
+    published?: boolean;
+  },
 ): Promise<DbService> {
-  await ensureAllTables(sql)
-  const slug = data.slug || slugify(data.title) || `service-${Date.now()}`
-  const benefits = JSON.stringify(data.benefits || [])
-  const deliverables = JSON.stringify(data.deliverables || [])
+  await ensureAllTables(sql);
+  const slug = data.slug || slugify(data.title) || `service-${Date.now()}`;
+  const benefits = JSON.stringify(data.benefits || []);
+  const deliverables = JSON.stringify(data.deliverables || []);
 
   const rows = await sql`
     INSERT INTO site_services (
@@ -418,55 +462,55 @@ export async function createService(
       ${data.published ?? true}
     )
     RETURNING *
-  `
-  return mapService(rows[0] as Record<string, unknown>)
+  `;
+  return mapService(rows[0] as Record<string, unknown>);
 }
 
 export async function updateService(
   sql: NeonQueryFunction<false, false>,
   id: number,
   data: Partial<{
-    title: string
-    description: string
-    benefits: string[]
-    deliverables: string[]
-    pricing: string
-    best_for: string
-    flagship: boolean
-    slug: string
-    sort_order: number
-    published: boolean
-  }>
+    title: string;
+    description: string;
+    benefits: string[];
+    deliverables: string[];
+    pricing: string;
+    best_for: string;
+    flagship: boolean;
+    slug: string;
+    sort_order: number;
+    published: boolean;
+  }>,
 ): Promise<DbService | null> {
-  await ensureAllTables(sql)
-  const existing = await sql`SELECT * FROM site_services WHERE id = ${id}`
-  if (!existing.length) return null
-  const cur = existing[0] as Record<string, unknown>
+  await ensureAllTables(sql);
+  const existing = await sql`SELECT * FROM site_services WHERE id = ${id}`;
+  if (!existing.length) return null;
+  const cur = existing[0] as Record<string, unknown>;
 
-  const title = data.title ?? String(cur.title)
-  const description = data.description ?? String(cur.description)
+  const title = data.title ?? String(cur.title);
+  const description = data.description ?? String(cur.description);
   const benefits = JSON.stringify(
-    data.benefits ?? parseStringArray(cur.benefits)
-  )
+    data.benefits ?? parseStringArray(cur.benefits),
+  );
   const deliverables = JSON.stringify(
-    data.deliverables ?? parseStringArray(cur.deliverables)
-  )
+    data.deliverables ?? parseStringArray(cur.deliverables),
+  );
   const pricing =
     data.pricing !== undefined
       ? data.pricing || null
       : cur.pricing != null
         ? String(cur.pricing)
-        : null
+        : null;
   const best_for =
     data.best_for !== undefined
       ? data.best_for || null
       : cur.best_for != null
         ? String(cur.best_for)
-        : null
-  const flagship = data.flagship ?? Boolean(cur.flagship)
-  const slug = data.slug ?? String(cur.slug)
-  const sort_order = data.sort_order ?? Number(cur.sort_order ?? 0)
-  const published = data.published ?? Boolean(cur.published)
+        : null;
+  const flagship = data.flagship ?? Boolean(cur.flagship);
+  const slug = data.slug ?? String(cur.slug);
+  const sort_order = data.sort_order ?? Number(cur.sort_order ?? 0);
+  const published = data.published ?? Boolean(cur.published);
 
   const rows = await sql`
     UPDATE site_services SET
@@ -483,34 +527,35 @@ export async function updateService(
       updated_at = NOW()
     WHERE id = ${id}
     RETURNING *
-  `
-  return mapService(rows[0] as Record<string, unknown>)
+  `;
+  return mapService(rows[0] as Record<string, unknown>);
 }
 
 export async function deleteService(
   sql: NeonQueryFunction<false, false>,
-  id: number
+  id: number,
 ): Promise<boolean> {
-  await ensureAllTables(sql)
-  const rows = await sql`DELETE FROM site_services WHERE id = ${id} RETURNING id`
-  return rows.length > 0
+  await ensureAllTables(sql);
+  const rows =
+    await sql`DELETE FROM site_services WHERE id = ${id} RETURNING id`;
+  return rows.length > 0;
 }
 
 // ─── Projects ───────────────────────────────────────────────
 
 export async function listProjects(
   sql: NeonQueryFunction<false, false>,
-  opts?: { publishedOnly?: boolean; featuredOnly?: boolean }
+  opts?: { publishedOnly?: boolean; featuredOnly?: boolean },
 ): Promise<DbProject[]> {
-  await ensureAllTables(sql)
+  await ensureAllTables(sql);
 
   if (opts?.featuredOnly && opts?.publishedOnly) {
     const rows = await sql`
       SELECT * FROM site_projects
       WHERE published = true AND featured = true
       ORDER BY sort_order ASC, id DESC
-    `
-    return (rows as Record<string, unknown>[]).map(mapProject)
+    `;
+    return (rows as Record<string, unknown>[]).map(mapProject);
   }
 
   if (opts?.publishedOnly) {
@@ -518,49 +563,59 @@ export async function listProjects(
       SELECT * FROM site_projects
       WHERE published = true
       ORDER BY sort_order ASC, id DESC
-    `
-    return (rows as Record<string, unknown>[]).map(mapProject)
+    `;
+    return (rows as Record<string, unknown>[]).map(mapProject);
   }
 
   const rows = await sql`
     SELECT * FROM site_projects
     ORDER BY sort_order ASC, id DESC
-  `
-  return (rows as Record<string, unknown>[]).map(mapProject)
+  `;
+  return (rows as Record<string, unknown>[]).map(mapProject);
 }
 
 export async function createProject(
   sql: NeonQueryFunction<false, false>,
   data: {
-    title: string
-    client?: string
-    industry?: string
-    timeframe?: string
-    category?: string
-    image?: string
-    problem?: string
-    strategy?: string
-    execution?: string
-    metric1?: string
-    label1?: string
-    metric2?: string
-    label2?: string
-    metric3?: string
-    label3?: string
-    testimonial?: string
-    testimonial_author?: string
-    slug?: string
-    featured?: boolean
-    published?: boolean
-    sort_order?: number
-  }
+    title: string;
+    client?: string;
+    industry?: string;
+    timeframe?: string;
+    category?: string;
+    image?: string;
+    role?: string;
+    stack?: string[];
+    stack_label?: string;
+    project_url?: string;
+    image_fit?: "contain" | "cover";
+    image_position?: "top" | "center" | "bottom";
+    image_caption?: string;
+    outcome_note?: string;
+    result_heading?: string;
+    problem?: string;
+    strategy?: string;
+    execution?: string;
+    metric1?: string;
+    label1?: string;
+    metric2?: string;
+    label2?: string;
+    metric3?: string;
+    label3?: string;
+    testimonial?: string;
+    testimonial_author?: string;
+    slug?: string;
+    featured?: boolean;
+    published?: boolean;
+    sort_order?: number;
+  },
 ): Promise<DbProject> {
-  await ensureAllTables(sql)
-  const slug = data.slug || slugify(data.title) || `project-${Date.now()}`
+  await ensureAllTables(sql);
+  const slug = data.slug || slugify(data.title) || `project-${Date.now()}`;
 
   const rows = await sql`
     INSERT INTO site_projects (
       title, client, industry, timeframe, category, image,
+      role, stack, stack_label, project_url, image_fit, image_position, image_caption, outcome_note, result_heading,
       problem, strategy, execution,
       metric1, label1, metric2, label2, metric3, label3,
       testimonial, testimonial_author,
@@ -573,6 +628,15 @@ export async function createProject(
       ${data.timeframe || null},
       ${data.category || null},
       ${data.image || null},
+      ${data.role || null},
+      ${JSON.stringify(data.stack || [])}::jsonb,
+      ${data.stack_label || null},
+      ${data.project_url || null},
+      ${data.image_fit || "cover"},
+      ${data.image_position || "top"},
+      ${data.image_caption || null},
+      ${data.outcome_note || null},
+      ${data.result_heading || null},
       ${data.problem || null},
       ${data.strategy || null},
       ${data.execution || null},
@@ -590,70 +654,92 @@ export async function createProject(
       ${data.sort_order ?? 0}
     )
     RETURNING *
-  `
-  return mapProject(rows[0] as Record<string, unknown>)
+  `;
+  return mapProject(rows[0] as Record<string, unknown>);
 }
 
 export async function updateProject(
   sql: NeonQueryFunction<false, false>,
   id: number,
   data: Partial<{
-    title: string
-    client: string
-    industry: string
-    timeframe: string
-    category: string
-    image: string
-    problem: string
-    strategy: string
-    execution: string
-    metric1: string
-    label1: string
-    metric2: string
-    label2: string
-    metric3: string
-    label3: string
-    testimonial: string
-    testimonial_author: string
-    slug: string
-    featured: boolean
-    published: boolean
-    sort_order: number
-  }>
+    title: string;
+    client: string;
+    industry: string;
+    timeframe: string;
+    category: string;
+    image: string;
+    role: string;
+    stack: string[];
+    stack_label: string;
+    project_url: string;
+    image_fit: "contain" | "cover";
+    image_position: "top" | "center" | "bottom";
+    image_caption: string;
+    outcome_note: string;
+    result_heading: string;
+    problem: string;
+    strategy: string;
+    execution: string;
+    metric1: string;
+    label1: string;
+    metric2: string;
+    label2: string;
+    metric3: string;
+    label3: string;
+    testimonial: string;
+    testimonial_author: string;
+    slug: string;
+    featured: boolean;
+    published: boolean;
+    sort_order: number;
+  }>,
 ): Promise<DbProject | null> {
-  await ensureAllTables(sql)
-  const existing = await sql`SELECT * FROM site_projects WHERE id = ${id}`
-  if (!existing.length) return null
-  const cur = existing[0] as Record<string, unknown>
+  await ensureAllTables(sql);
+  const existing = await sql`SELECT * FROM site_projects WHERE id = ${id}`;
+  if (!existing.length) return null;
+  const cur = existing[0] as Record<string, unknown>;
 
   const pick = (key: string, val: string | undefined) =>
     val !== undefined
       ? val || null
       : cur[key] != null
         ? String(cur[key])
-        : null
+        : null;
 
-  const title = data.title ?? String(cur.title)
-  const client = pick('client', data.client)
-  const industry = pick('industry', data.industry)
-  const timeframe = pick('timeframe', data.timeframe)
-  const category = pick('category', data.category)
-  const image = pick('image', data.image)
-  const problem = pick('problem', data.problem)
-  const strategy = pick('strategy', data.strategy)
-  const execution = pick('execution', data.execution)
-  const metric1 = pick('metric1', data.metric1)
-  const label1 = pick('label1', data.label1)
-  const metric2 = pick('metric2', data.metric2)
-  const label2 = pick('label2', data.label2)
-  const metric3 = pick('metric3', data.metric3)
-  const label3 = pick('label3', data.label3)
-  const testimonial = pick('testimonial', data.testimonial)
-  const testimonial_author = pick('testimonial_author', data.testimonial_author)
-  const slug = data.slug ?? String(cur.slug)
-  const featured = data.featured ?? Boolean(cur.featured)
-  const published = data.published ?? Boolean(cur.published)
-  const sort_order = data.sort_order ?? Number(cur.sort_order ?? 0)
+  const title = data.title ?? String(cur.title);
+  const client = pick("client", data.client);
+  const industry = pick("industry", data.industry);
+  const timeframe = pick("timeframe", data.timeframe);
+  const category = pick("category", data.category);
+  const image = pick("image", data.image);
+  const role = pick("role", data.role);
+  const stack = JSON.stringify(data.stack ?? parseStringArray(cur.stack));
+  const stack_label = pick("stack_label", data.stack_label);
+  const project_url = pick("project_url", data.project_url);
+  const image_fit = data.image_fit ?? String(cur.image_fit || "cover");
+  const image_position =
+    data.image_position ?? String(cur.image_position || "top");
+  const image_caption = pick("image_caption", data.image_caption);
+  const outcome_note = pick("outcome_note", data.outcome_note);
+  const result_heading = pick("result_heading", data.result_heading);
+  const problem = pick("problem", data.problem);
+  const strategy = pick("strategy", data.strategy);
+  const execution = pick("execution", data.execution);
+  const metric1 = pick("metric1", data.metric1);
+  const label1 = pick("label1", data.label1);
+  const metric2 = pick("metric2", data.metric2);
+  const label2 = pick("label2", data.label2);
+  const metric3 = pick("metric3", data.metric3);
+  const label3 = pick("label3", data.label3);
+  const testimonial = pick("testimonial", data.testimonial);
+  const testimonial_author = pick(
+    "testimonial_author",
+    data.testimonial_author,
+  );
+  const slug = data.slug ?? String(cur.slug);
+  const featured = data.featured ?? Boolean(cur.featured);
+  const published = data.published ?? Boolean(cur.published);
+  const sort_order = data.sort_order ?? Number(cur.sort_order ?? 0);
 
   const rows = await sql`
     UPDATE site_projects SET
@@ -663,6 +749,9 @@ export async function updateProject(
       timeframe = ${timeframe},
       category = ${category},
       image = ${image},
+      role = ${role}, stack = ${stack}::jsonb, stack_label = ${stack_label},
+      project_url = ${project_url}, image_fit = ${image_fit}, image_position = ${image_position},
+      image_caption = ${image_caption}, outcome_note = ${outcome_note}, result_heading = ${result_heading},
       problem = ${problem},
       strategy = ${strategy},
       execution = ${execution},
@@ -681,43 +770,44 @@ export async function updateProject(
       updated_at = NOW()
     WHERE id = ${id}
     RETURNING *
-  `
-  return mapProject(rows[0] as Record<string, unknown>)
+  `;
+  return mapProject(rows[0] as Record<string, unknown>);
 }
 
 export async function deleteProject(
   sql: NeonQueryFunction<false, false>,
-  id: number
+  id: number,
 ): Promise<boolean> {
-  await ensureAllTables(sql)
-  const rows = await sql`DELETE FROM site_projects WHERE id = ${id} RETURNING id`
-  return rows.length > 0
+  await ensureAllTables(sql);
+  const rows =
+    await sql`DELETE FROM site_projects WHERE id = ${id} RETURNING id`;
+  return rows.length > 0;
 }
 
 /** Reorder projects by id list (first = sort_order 0) */
 export async function reorderProjects(
   sql: NeonQueryFunction<false, false>,
-  orderedIds: number[]
+  orderedIds: number[],
 ): Promise<void> {
-  await ensureAllTables(sql)
+  await ensureAllTables(sql);
   for (let i = 0; i < orderedIds.length; i++) {
     await sql`
       UPDATE site_projects SET sort_order = ${i}, updated_at = NOW()
       WHERE id = ${orderedIds[i]}
-    `
+    `;
   }
 }
 
 export async function reorderServices(
   sql: NeonQueryFunction<false, false>,
-  orderedIds: number[]
+  orderedIds: number[],
 ): Promise<void> {
-  await ensureAllTables(sql)
+  await ensureAllTables(sql);
   for (let i = 0; i < orderedIds.length; i++) {
     await sql`
       UPDATE site_services SET sort_order = ${i}, updated_at = NOW()
       WHERE id = ${orderedIds[i]}
-    `
+    `;
   }
 }
 
@@ -725,9 +815,9 @@ export async function reorderServices(
 
 export async function listTestimonials(
   sql: NeonQueryFunction<false, false>,
-  opts?: { publishedOnly?: boolean }
+  opts?: { publishedOnly?: boolean },
 ): Promise<DbTestimonial[]> {
-  await ensureAllTables(sql)
+  await ensureAllTables(sql);
   const rows = opts?.publishedOnly
     ? await sql`
         SELECT * FROM site_testimonials
@@ -737,24 +827,24 @@ export async function listTestimonials(
     : await sql`
         SELECT * FROM site_testimonials
         ORDER BY sort_order ASC, id DESC
-      `
-  return (rows as Record<string, unknown>[]).map(mapTestimonial)
+      `;
+  return (rows as Record<string, unknown>[]).map(mapTestimonial);
 }
 
 export async function createTestimonial(
   sql: NeonQueryFunction<false, false>,
   data: {
-    name: string
-    role?: string
-    company?: string
-    quote: string
-    link?: string
-    rating?: number
-    sort_order?: number
-    published?: boolean
-  }
+    name: string;
+    role?: string;
+    company?: string;
+    quote: string;
+    link?: string;
+    rating?: number;
+    sort_order?: number;
+    published?: boolean;
+  },
 ): Promise<DbTestimonial> {
-  await ensureAllTables(sql)
+  await ensureAllTables(sql);
   const rows = await sql`
     INSERT INTO site_testimonials (
       name, role, company, quote, link, rating, sort_order, published
@@ -770,52 +860,52 @@ export async function createTestimonial(
       ${data.published ?? true}
     )
     RETURNING *
-  `
-  return mapTestimonial(rows[0] as Record<string, unknown>)
+  `;
+  return mapTestimonial(rows[0] as Record<string, unknown>);
 }
 
 export async function updateTestimonial(
   sql: NeonQueryFunction<false, false>,
   id: number,
   data: Partial<{
-    name: string
-    role: string
-    company: string
-    quote: string
-    link: string
-    rating: number
-    sort_order: number
-    published: boolean
-  }>
+    name: string;
+    role: string;
+    company: string;
+    quote: string;
+    link: string;
+    rating: number;
+    sort_order: number;
+    published: boolean;
+  }>,
 ): Promise<DbTestimonial | null> {
-  await ensureAllTables(sql)
-  const existing = await sql`SELECT * FROM site_testimonials WHERE id = ${id}`
-  if (!existing.length) return null
-  const cur = existing[0] as Record<string, unknown>
+  await ensureAllTables(sql);
+  const existing = await sql`SELECT * FROM site_testimonials WHERE id = ${id}`;
+  if (!existing.length) return null;
+  const cur = existing[0] as Record<string, unknown>;
 
-  const name = data.name ?? String(cur.name)
+  const name = data.name ?? String(cur.name);
   const role =
     data.role !== undefined
       ? data.role || null
       : cur.role != null
         ? String(cur.role)
-        : null
+        : null;
   const company =
     data.company !== undefined
       ? data.company || null
       : cur.company != null
         ? String(cur.company)
-        : null
-  const quote = data.quote ?? String(cur.quote)
+        : null;
+  const quote = data.quote ?? String(cur.quote);
   const link =
     data.link !== undefined
       ? data.link || null
       : cur.link != null
         ? String(cur.link)
-        : null
-  const rating = data.rating ?? Number(cur.rating ?? 5)
-  const sort_order = data.sort_order ?? Number(cur.sort_order ?? 0)
-  const published = data.published ?? Boolean(cur.published)
+        : null;
+  const rating = data.rating ?? Number(cur.rating ?? 5);
+  const sort_order = data.sort_order ?? Number(cur.sort_order ?? 0);
+  const published = data.published ?? Boolean(cur.published);
 
   const rows = await sql`
     UPDATE site_testimonials SET
@@ -830,27 +920,27 @@ export async function updateTestimonial(
       updated_at = NOW()
     WHERE id = ${id}
     RETURNING *
-  `
-  return mapTestimonial(rows[0] as Record<string, unknown>)
+  `;
+  return mapTestimonial(rows[0] as Record<string, unknown>);
 }
 
 export async function deleteTestimonial(
   sql: NeonQueryFunction<false, false>,
-  id: number
+  id: number,
 ): Promise<boolean> {
-  await ensureAllTables(sql)
+  await ensureAllTables(sql);
   const rows =
-    await sql`DELETE FROM site_testimonials WHERE id = ${id} RETURNING id`
-  return rows.length > 0
+    await sql`DELETE FROM site_testimonials WHERE id = ${id} RETURNING id`;
+  return rows.length > 0;
 }
 
 // ─── Packages ───────────────────────────────────────────────
 
 export async function listPackages(
   sql: NeonQueryFunction<false, false>,
-  opts?: { publishedOnly?: boolean }
+  opts?: { publishedOnly?: boolean },
 ): Promise<DbPackage[]> {
-  await ensureAllTables(sql)
+  await ensureAllTables(sql);
   const rows = opts?.publishedOnly
     ? await sql`
         SELECT * FROM site_packages
@@ -860,27 +950,27 @@ export async function listPackages(
     : await sql`
         SELECT * FROM site_packages
         ORDER BY sort_order ASC, id DESC
-      `
-  return (rows as Record<string, unknown>[]).map(mapPackage)
+      `;
+  return (rows as Record<string, unknown>[]).map(mapPackage);
 }
 
 export async function createPackage(
   sql: NeonQueryFunction<false, false>,
   data: {
-    title: string
-    description: string
-    includes: string[]
-    best_for?: string
-    not_for?: string
-    pricing?: string
-    slug?: string
-    sort_order?: number
-    published?: boolean
-  }
+    title: string;
+    description: string;
+    includes: string[];
+    best_for?: string;
+    not_for?: string;
+    pricing?: string;
+    slug?: string;
+    sort_order?: number;
+    published?: boolean;
+  },
 ): Promise<DbPackage> {
-  await ensureAllTables(sql)
-  const slug = data.slug || slugify(data.title) || `package-${Date.now()}`
-  const includes = JSON.stringify(data.includes || [])
+  await ensureAllTables(sql);
+  const slug = data.slug || slugify(data.title) || `package-${Date.now()}`;
+  const includes = JSON.stringify(data.includes || []);
 
   const rows = await sql`
     INSERT INTO site_packages (
@@ -898,56 +988,56 @@ export async function createPackage(
       ${data.published ?? true}
     )
     RETURNING *
-  `
-  return mapPackage(rows[0] as Record<string, unknown>)
+  `;
+  return mapPackage(rows[0] as Record<string, unknown>);
 }
 
 export async function updatePackage(
   sql: NeonQueryFunction<false, false>,
   id: number,
   data: Partial<{
-    title: string
-    description: string
-    includes: string[]
-    best_for: string
-    not_for: string
-    pricing: string
-    slug: string
-    sort_order: number
-    published: boolean
-  }>
+    title: string;
+    description: string;
+    includes: string[];
+    best_for: string;
+    not_for: string;
+    pricing: string;
+    slug: string;
+    sort_order: number;
+    published: boolean;
+  }>,
 ): Promise<DbPackage | null> {
-  await ensureAllTables(sql)
-  const existing = await sql`SELECT * FROM site_packages WHERE id = ${id}`
-  if (!existing.length) return null
-  const cur = existing[0] as Record<string, unknown>
+  await ensureAllTables(sql);
+  const existing = await sql`SELECT * FROM site_packages WHERE id = ${id}`;
+  if (!existing.length) return null;
+  const cur = existing[0] as Record<string, unknown>;
 
-  const title = data.title ?? String(cur.title)
-  const description = data.description ?? String(cur.description ?? '')
+  const title = data.title ?? String(cur.title);
+  const description = data.description ?? String(cur.description ?? "");
   const includes = JSON.stringify(
-    data.includes ?? parseStringArray(cur.includes)
-  )
+    data.includes ?? parseStringArray(cur.includes),
+  );
   const best_for =
     data.best_for !== undefined
       ? data.best_for || null
       : cur.best_for != null
         ? String(cur.best_for)
-        : null
+        : null;
   const not_for =
     data.not_for !== undefined
       ? data.not_for || null
       : cur.not_for != null
         ? String(cur.not_for)
-        : null
+        : null;
   const pricing =
     data.pricing !== undefined
       ? data.pricing || null
       : cur.pricing != null
         ? String(cur.pricing)
-        : null
-  const slug = data.slug ?? String(cur.slug)
-  const sort_order = data.sort_order ?? Number(cur.sort_order ?? 0)
-  const published = data.published ?? Boolean(cur.published)
+        : null;
+  const slug = data.slug ?? String(cur.slug);
+  const sort_order = data.sort_order ?? Number(cur.sort_order ?? 0);
+  const published = data.published ?? Boolean(cur.published);
 
   const rows = await sql`
     UPDATE site_packages SET
@@ -963,42 +1053,49 @@ export async function updatePackage(
       updated_at = NOW()
     WHERE id = ${id}
     RETURNING *
-  `
-  return mapPackage(rows[0] as Record<string, unknown>)
+  `;
+  return mapPackage(rows[0] as Record<string, unknown>);
 }
 
 export async function deletePackage(
   sql: NeonQueryFunction<false, false>,
-  id: number
+  id: number,
 ): Promise<boolean> {
-  await ensureAllTables(sql)
-  const rows = await sql`DELETE FROM site_packages WHERE id = ${id} RETURNING id`
-  return rows.length > 0
+  await ensureAllTables(sql);
+  const rows =
+    await sql`DELETE FROM site_packages WHERE id = ${id} RETURNING id`;
+  return rows.length > 0;
 }
 
 export async function getDashboardStats(
-  sql: NeonQueryFunction<false, false>
+  sql: NeonQueryFunction<false, false>,
 ): Promise<DashboardStats> {
-  await ensureAllTables(sql)
+  await ensureAllTables(sql);
 
-  const [msgTotal] = await sql`SELECT COUNT(*)::int AS c FROM contact_submissions`
+  const [msgTotal] =
+    await sql`SELECT COUNT(*)::int AS c FROM contact_submissions`;
   const [msgWeek] = await sql`
     SELECT COUNT(*)::int AS c FROM contact_submissions
     WHERE created_at >= NOW() - INTERVAL '7 days'
-  `
-  const [svcPub] = await sql`SELECT COUNT(*)::int AS c FROM site_services WHERE published = true`
-  const [svcAll] = await sql`SELECT COUNT(*)::int AS c FROM site_services`
-  const [projPub] = await sql`SELECT COUNT(*)::int AS c FROM site_projects WHERE published = true`
-  const [projFeat] = await sql`SELECT COUNT(*)::int AS c FROM site_projects WHERE featured = true AND published = true`
-  const [projAll] = await sql`SELECT COUNT(*)::int AS c FROM site_projects`
-  const [testPub] = await sql`SELECT COUNT(*)::int AS c FROM site_testimonials WHERE published = true`
-  const [pkgPub] = await sql`SELECT COUNT(*)::int AS c FROM site_packages WHERE published = true`
+  `;
+  const [svcPub] =
+    await sql`SELECT COUNT(*)::int AS c FROM site_services WHERE published = true`;
+  const [svcAll] = await sql`SELECT COUNT(*)::int AS c FROM site_services`;
+  const [projPub] =
+    await sql`SELECT COUNT(*)::int AS c FROM site_projects WHERE published = true`;
+  const [projFeat] =
+    await sql`SELECT COUNT(*)::int AS c FROM site_projects WHERE featured = true AND published = true`;
+  const [projAll] = await sql`SELECT COUNT(*)::int AS c FROM site_projects`;
+  const [testPub] =
+    await sql`SELECT COUNT(*)::int AS c FROM site_testimonials WHERE published = true`;
+  const [pkgPub] =
+    await sql`SELECT COUNT(*)::int AS c FROM site_packages WHERE published = true`;
   const recent = await sql`
     SELECT id, name, email, phone, subject, budget, message, created_at
     FROM contact_submissions
     ORDER BY created_at DESC
     LIMIT 5
-  `
+  `;
 
   return {
     messagesTotal: Number((msgTotal as { c: number }).c || 0),
@@ -1011,6 +1108,14 @@ export async function getDashboardStats(
     testimonialsPublished: Number((testPub as { c: number }).c || 0),
     packagesPublished: Number((pkgPub as { c: number }).c || 0),
     recentMessages: recent as ContactSubmission[],
-  }
+  };
 }
 
+export async function isContentInitialized(
+  sql: NeonQueryFunction<false, false>,
+  collection: string,
+): Promise<boolean> {
+  const rows =
+    await sql`SELECT collection FROM site_content_state WHERE collection = ${collection}`;
+  return rows.length > 0;
+}
