@@ -1,24 +1,24 @@
-# Monica portfolio adaptation
+# Jeda layout portfolio preview
 
-Review branch only. Do not merge or promote to production until Moses approves.
+Review only. Do not merge or release to production until Moses approves this preview.
 
 ## Direction
 
-Moses selected the Monica template by StyleShout. The portfolio adapts its dark green, warm cream, and ochre palette, DM Serif Display typography, portrait-led introduction, split About/Expertise sections, and numbered services. All public pages use the same presentation. Decorative stars, stickers, and lime accents remain removed.
+Recreates the public layout and measured typography of jedaacademy.com in the existing Next.js application: rounded navigation, equal hero panels, four information cards, image tiles, a featured project, gradient project filtering, portrait sections, and a four-column footer. Headings use Inter; navigation and body copy use Montserrat, hosted locally. The reference uses WordPress TutorStarter and Elementor. No Jeda Academy logos, photographs, illustrations, copy, or source code are included.
 
-## Interactions to review
+## Review interactions
 
-- Portrait-led hero and subtle section reveals, without decorative floating elements.
-- Work filters separate websites/products and marketing. Cards link to the complete case studies on the same page.
-- Services expand and collapse using native, keyboard-accessible disclosures.
-- Mobile menu closes after navigation and with Escape.
-- Reveals, hover effects, and moving collaborator logos respect reduced motion. Footer includes a pause control.
-- Project calls to action open the existing assistant. Its pricing logic, keyboard handling, and contact handoff remain intact.
-- Contact form uses the existing endpoint. Work WhatsApp and direct phone numbers remain separate.
-- CV download, GitHub, other social profiles, current Jeda Systems role, project stacks, and source-backed campaign figures are retained.
+- Live project search and category selection, with an empty-state reset; existing detailed case-study filters remain available.
+- Service disclosures, project links, mobile navigation, image hover transitions, scroll reveals, and full-colour animated collaborator logos.
+- Reduced-motion support and the existing motion pause control.
+- Decorative numbering, arrows, tagline labels, and tiny section labels removed. Functional controls, project results, and contact details retained.
+- Existing project assistant preserves pricing controls, keyboard handling, suggested replies, and reviewed WhatsApp handoff.
+- CV, social profiles, Jeda Systems experience, documented results, direct phone, and separate work WhatsApp preserved.
 
-## Review notes
+Contact form checks use a mocked endpoint so verification does not send a real enquiry. Existing design-foundation attribution remains visible; see THIRD_PARTY_NOTICES.md.
 
-The production domain is unchanged. The Vercel preview runs on its own branch. Preview contact submissions should only be tested with a mocked endpoint to avoid sending a real enquiry. Physical iPhone keyboard behavior still warrants a device check.
+## Homepage audit refinements
 
-The footer credits Monica by StyleShout. See THIRD_PARTY_NOTICES.md for design and font licensing.
+The homepage now has one wide ImpactDesk feature and one searchable grid for the remaining projects. Collaborator logos appear directly after the introduction; the repeated image-tile gallery and extra contact banner are removed. Project images use landscape frames with contain fitting, campaign results are readable HTML, and service/biography sections are shorter. ImpactDesk screenshot figures remain explicitly identified as illustrative.
+
+Legacy admin ImpactDesk entries with alternate IDs are consolidated in the public project merge, keeping the reviewed case study and preserving stored data. Browser checks cover responsive layouts, grid filters/search/reset, case-study navigation, assistant opening/closing, the CV, reduced motion, and a mocked contact submission. A focused project-merge check verifies canonical precedence and retention of unrelated projects.

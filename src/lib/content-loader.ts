@@ -230,8 +230,10 @@ function mergeProjects(databaseProjects: PublicProject[]): PublicProject[] {
   ]
   const seen = new Set<string>()
   return ordered.filter((project) => {
-    if (seen.has(project.id)) return false
-    seen.add(project.id)
+    // Recent, reviewed case studies take precedence over legacy admin aliases.
+    const identity = /^impactdesk\b/i.test(project.title) ? 'impactdesk' : project.id
+    if (seen.has(identity)) return false
+    seen.add(identity)
     return true
   })
 }

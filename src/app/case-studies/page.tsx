@@ -16,8 +16,8 @@ export default async function CaseStudiesPage() {
     <>
       <PageIntro
         label="THE SELECTED COLLECTION"
-        title="Made with purpose."
-        accent="Built to be useful."
+        title="Projects and case studies"
+        accent=""
       >
         <p>
           A closer look at the websites, products, and campaigns I’ve helped
@@ -32,9 +32,6 @@ export default async function CaseStudiesPage() {
           <article className="cr-case-detail" id={p.id} key={p.id}>
             <div className="cr-case-detail-head">
               <div>
-                <p className="cr-eyebrow">
-                  {String(i + 1).padStart(2, '0')} / {p.category.toUpperCase()}
-                </p>
                 <h2>{p.title}</h2>
               </div>
               {p.projectUrl && (
@@ -62,7 +59,7 @@ export default async function CaseStudiesPage() {
             <div className="cr-caption">
               <span>{p.imageCaption}</span>
               <a href={p.image} target="_blank" rel="noopener noreferrer">
-                Full image ↗
+                Full image
               </a>
             </div>
             <div className="cr-case-meta">

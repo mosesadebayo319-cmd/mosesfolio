@@ -22,8 +22,8 @@ export default async function ServicesPage() {
     <>
       <PageIntro
         label="THE SKILLS TO CONNECT THE DOTS"
-        title="Your ambition."
-        accent="My kind of brief."
+        title="Services"
+        accent=""
       >
         <p>
           Strategy, campaigns, websites, and practical digital products. We’ll
@@ -34,7 +34,7 @@ export default async function ServicesPage() {
       <section className="cr-section cr-wrap">
         <SectionHeading
           label="01 / THE TOOLKIT"
-          title="A useful mix of skills."
+          title="Services"
         />
         <ServiceAccordion items={services} />
       </section>
@@ -42,17 +42,16 @@ export default async function ServicesPage() {
         <div className="cr-wrap">
           <SectionHeading
             label="02 / WAYS TO WORK TOGETHER"
-            title="Pick a starting point."
+            title="Service packages"
           />
           <div className="cr-package-grid">
             {packages.map((p, i) => (
               <article className="cr-package" key={p.id} data-reveal>
-                <span className="cr-eyebrow">0{i + 1} / PARTNERSHIP</span>
                 <h3>{p.title}</h3>
                 <p>{p.description}</p>
                 <ul>
                   {p.includes.map((item) => (
-                    <li key={item}>↗ {item}</li>
+                    <li key={item}> {item}</li>
                   ))}
                 </ul>
                 <p className="cr-package-note">
@@ -75,12 +74,11 @@ export default async function ServicesPage() {
       <section className="cr-section cr-wrap">
         <SectionHeading
           label="03 / NOTHING LEFT TO GUESSWORK"
-          title="A process with direction."
+          title="My process"
         />
         <div className="cr-process-grid">
           {processSteps.map((s) => (
             <div key={s.step}>
-              <span>{s.step}</span>
               <h3>{s.title}</h3>
               <p>{s.description.replace(/—/g, '. ')}</p>
             </div>

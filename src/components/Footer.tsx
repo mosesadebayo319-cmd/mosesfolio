@@ -4,17 +4,37 @@ import { IconGitHub, IconLinkedIn, IconInstagram, IconFacebook } from './Icons'
 import { MotionControl } from './CreativeUI'
 export default function Footer() {
   return (
-    <footer className="cr-footer">
-      <div className="cr-wrap">
-        <div className="cr-footer-top">
-          <Link href="/" className="cr-wordmark">
-            Moses.
-          </Link>
-          <p>
-            Strategy with purpose.
-            <br />
-            Digital work with personality.
-          </p>
+    <footer className="ja-footer">
+      <div className="ja-footer-card">
+        <Link href="/" className="ja-footer-logo">
+          MOSES<span>ADEBAYO</span>
+        </Link>
+        <nav aria-label="Footer navigation">
+          {navLinks.slice(0, 4).map((link) => (
+            <Link href={link.href} key={link.href}>
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="ja-footer-links">
+          <Link href="/about">About Moses</Link>
+          <Link href="/experience">Experience</Link>
+          <a href="/Moses-Adebayo-CV.pdf" download>
+            Download CV
+          </a>
+          <Link href="/testimonials">Client feedback</Link>
+        </div>
+        <div className="ja-footer-contact">
+          <a href={'tel:+' + site.callRaw}>{site.phone}</a>
+          <a href={'mailto:' + site.email}>{site.email}</a>
+          <a
+            href={site.social.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Work WhatsApp
+          </a>
+          <span>{site.location}</span>
           <div className="cr-socials">
             {[
               { name: 'GitHub', href: site.social.github, Icon: IconGitHub },
@@ -35,8 +55,8 @@ export default function Footer() {
               },
             ].map(({ name, href, Icon }) => (
               <a
-                href={href}
                 key={name}
+                href={href}
                 aria-label={name}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -46,34 +66,20 @@ export default function Footer() {
             ))}
           </div>
         </div>
-        <div className="cr-footer-middle">
-          <div>
-            {navLinks
-              .filter((l) => l.href !== '/')
-              .map((l) => (
-                <Link key={l.href} href={l.href}>
-                  {l.label}
-                </Link>
-              ))}
-            <a href="/Moses-Adebayo-CV.pdf" download>
-              Download CV ↗
-            </a>
-          </div>
-          <a href={'mailto:' + site.email}>{site.email}</a>
+        <div className="ja-footer-watermark" aria-hidden="true">
+          MOSES ADEBAYO
         </div>
-        <div className="cr-footer-bottom">
-          <span>© {new Date().getFullYear()} Moses Adebayo</span>
-          <span>Based in Abuja. Thinking beyond.</span>
-          <MotionControl />
-          <a href="#main-content">Back to top ↑</a>
-          <a
-            href="https://styleshout.com/free-templates/monica/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Monica design by StyleShout
-          </a>
-        </div>
+      </div>
+      <div className="ja-footer-bottom">
+        <span>© {new Date().getFullYear()} Moses Adebayo</span>
+        <MotionControl />
+        <a
+          href="https://styleshout.com/free-templates/monica/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Design foundation: StyleShout
+        </a>
       </div>
     </footer>
   )

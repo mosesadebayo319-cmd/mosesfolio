@@ -19,8 +19,8 @@ export default function AboutPage() {
     <>
       <PageIntro
         label="THE PERSON BEHIND THE WORK"
-        title="Curious by nature."
-        accent="Practical by choice."
+        title="About Moses Adebayo"
+        accent=""
       >
         <p>
           I’m Moses Adebayo, a digital marketer and product developer based in
@@ -37,17 +37,9 @@ export default function AboutPage() {
             height={600}
             priority
           />
-          <span className="cr-photo-note">
-            A marketer who likes to make things.
-          </span>
         </div>
         <div className="cr-bio-copy" data-reveal>
-          <p className="cr-eyebrow">A LITTLE BACKSTORY</p>
-          <h2>
-            Strategy in my head.
-            <br />
-            <span className="cr-serif">Work in my hands.</span>
-          </h2>
+          <h2>My background</h2>
           <p>
             I started in operations and project coordination, learning how teams
             deliver under pressure. That still shapes how I work: clear owners,
@@ -68,7 +60,7 @@ export default function AboutPage() {
               My experience <Arrow />
             </Link>
             <a href="/Moses-Adebayo-CV.pdf" download className="cr-text-link">
-              Download my CV ↓
+              Download my CV
             </a>
           </div>
         </div>
@@ -78,12 +70,11 @@ export default function AboutPage() {
         <div className="cr-wrap">
           <SectionHeading
             label="WHAT STAYS CONSTANT"
-            title="The way I approach the work."
+            title="My approach"
           />
           <div className="cr-values">
             {aboutValues.map((v, i) => (
               <div key={v.title} data-reveal>
-                <span className="cr-eyebrow">0{i + 1}</span>
                 <h3>{v.title}</h3>
                 <p>{v.desc.replace(/—/g, '. ')}</p>
               </div>
@@ -94,7 +85,7 @@ export default function AboutPage() {
       <section className="cr-section cr-wrap">
         <SectionHeading
           label="ALWAYS ADDING TO THE TOOLKIT"
-          title="A little left brain. A little right."
+          title="Skills"
         />
         <div className="cr-skills">
           {skillCategories.map((c) => (

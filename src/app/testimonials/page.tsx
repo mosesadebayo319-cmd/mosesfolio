@@ -12,11 +12,7 @@ export default async function TestimonialsPage() {
   const testimonials = await getPublicTestimonials()
   return (
     <>
-      <PageIntro
-        label="IN THEIR WORDS"
-        title="Good work."
-        accent="Good company."
-      >
+      <PageIntro label="IN THEIR WORDS" title="Client feedback" accent="">
         <p>A few words from the people I’ve worked alongside.</p>
       </PageIntro>
       <section className="cr-section cr-wrap cr-testimonial-grid">
@@ -39,7 +35,7 @@ export default async function TestimonialsPage() {
                     rel="noopener noreferrer"
                     className="cr-text-link"
                   >
-                    {t.company || 'Visit company'} ↗
+                    {t.company || 'Visit company'}
                   </a>
                 )}
               </footer>

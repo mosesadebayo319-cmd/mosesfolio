@@ -1,39 +1,34 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import type { ReactNode } from 'react'
-import { clients, site } from '@/src/data/content'
-import { Arrow, StartProject } from './CreativeUI'
+import Link from "next/link";
+import Image from "next/image";
+import type { ReactNode } from "react";
+import { clients, site } from "@/src/data/content";
+import { Arrow, StartProject } from "./CreativeUI";
 export function PageIntro({
   label,
   title,
   accent,
   children,
 }: {
-  label: string
-  title: string
-  accent: string
-  children?: ReactNode
+  label: string;
+  title: string;
+  accent: string;
+  children?: ReactNode;
 }) {
   return (
     <section className="cr-page-intro cr-wrap">
-      <p className="cr-eyebrow">
-        <span className="cr-dot" />
-        {label}
-      </p>
       <h1>
         {title}
-        <br />
-        <span className="cr-serif">{accent}</span>
+        {accent && <br />}
+        {accent && <span className="cr-serif">{accent}</span>}
       </h1>
       {children && <div className="cr-intro-copy">{children}</div>}
     </section>
-  )
+  );
 }
 export function Collaborators() {
   return (
     <section className="cr-collaborators">
       <div className="cr-wrap cr-collaborator-heading">
-        <p className="cr-eyebrow">GOOD COMPANY. SHARED AMBITION.</p>
         <span>Clients, collaborators & teams</span>
       </div>
       <div className="cr-logo-marquee">
@@ -52,7 +47,9 @@ export function Collaborators() {
                   rel="noopener noreferrer"
                   tabIndex={duplicate ? -1 : 0}
                 >
-                  <div className="cr-client-logo">
+                  <div
+                    className={`cr-client-logo${c.name === "SGS Ministry" ? " cr-client-logo-dark" : ""}`}
+                  >
                     <Image
                       src={c.logo}
                       alt=""
@@ -70,19 +67,14 @@ export function Collaborators() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 export function ProjectCTA() {
   return (
     <section className="cr-cta">
       <div className="cr-wrap">
         <div>
-          <p className="cr-eyebrow">GOT SOMETHING IN MIND?</p>
-          <h2>
-            Let’s make
-            <br />
-            <span className="cr-serif">something matter.</span>
-          </h2>
+          <h2>Discuss your project</h2>
         </div>
         <div className="cr-cta-side">
           <StartProject />
@@ -92,7 +84,7 @@ export function ProjectCTA() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 export function SectionHeading({
   label,
@@ -100,15 +92,14 @@ export function SectionHeading({
   link,
   href,
 }: {
-  label: string
-  title: string
-  link?: string
-  href?: string
+  label: string;
+  title: string;
+  link?: string;
+  href?: string;
 }) {
   return (
     <div className="cr-section-heading" data-reveal>
       <div>
-        <p className="cr-eyebrow">{label}</p>
         <h2>{title}</h2>
       </div>
       {href && (
@@ -118,5 +109,5 @@ export function SectionHeading({
         </Link>
       )}
     </div>
-  )
+  );
 }
