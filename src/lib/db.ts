@@ -204,7 +204,9 @@ function mapProject(row: Record<string, unknown>): DbProject {
 export async function ensureAllTables(
   sql: NeonQueryFunction<false, false>,
 ): Promise<void> {
-  await sql`
+  // PostgreSQL can race on CREATE IF NOT EXISTS; serialize first-run DDL.
+  const statements = [sql`SELECT pg_advisory_xact_lock(74687300)`];
+  statements.push(sql`
     CREATE TABLE IF NOT EXISTS contact_submissions (
       id SERIAL PRIMARY KEY,
       name TEXT NOT NULL,
@@ -215,9 +217,9 @@ export async function ensureAllTables(
       message TEXT NOT NULL,
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
-  `;
+  `);
 
-  await sql`
+  statements.push(sql`
     CREATE TABLE IF NOT EXISTS site_services (
       id SERIAL PRIMARY KEY,
       title TEXT NOT NULL,
@@ -233,9 +235,9 @@ export async function ensureAllTables(
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
-  `;
+  `);
 
-  await sql`
+  statements.push(sql`
     CREATE TABLE IF NOT EXISTS site_projects (
       id SERIAL PRIMARY KEY,
       title TEXT NOT NULL,
@@ -262,9 +264,9 @@ export async function ensureAllTables(
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
-  `;
+  `);
 
-  await sql`
+  statements.push(sql`
     ALTER TABLE site_projects
       ADD COLUMN IF NOT EXISTS role TEXT,
       ADD COLUMN IF NOT EXISTS stack JSONB NOT NULL DEFAULT '[]'::jsonb,
@@ -275,15 +277,15 @@ export async function ensureAllTables(
       ADD COLUMN IF NOT EXISTS image_caption TEXT,
       ADD COLUMN IF NOT EXISTS outcome_note TEXT,
       ADD COLUMN IF NOT EXISTS result_heading TEXT
-  `;
-  await sql`
+  `);
+  statements.push(sql`
     CREATE TABLE IF NOT EXISTS site_content_state (
       collection TEXT PRIMARY KEY,
       initialized_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
-  `;
+  `);
 
-  await sql`
+  statements.push(sql`
     CREATE TABLE IF NOT EXISTS site_testimonials (
       id SERIAL PRIMARY KEY,
       name TEXT NOT NULL,
@@ -297,9 +299,9 @@ export async function ensureAllTables(
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
-  `;
+  `);
 
-  await sql`
+  statements.push(sql`
     CREATE TABLE IF NOT EXISTS site_packages (
       id SERIAL PRIMARY KEY,
       title TEXT NOT NULL,
@@ -314,7 +316,8 @@ export async function ensureAllTables(
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
-  `;
+  `);
+  await sql.transaction(statements);
 }
 
 function mapTestimonial(row: Record<string, unknown>): DbTestimonial {

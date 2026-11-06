@@ -35,3 +35,5 @@ Run `node --test tests/admin-content.test.cjs`, `npm run lint`, and `npm run bui
 The complete browser flow was also exercised with an isolated PostgreSQL 16 database through a local Neon-compatible HTTP bridge: upload → authenticated API → SQL persistence → homepage and case studies, including featured ordering, metadata, image fit, drafts, deletion, empty collections, initialization idempotence, validation, services, packages, and testimonials. No production credentials or content were used for those tests.
 
 Uploaded image bytes are served by `/api/project-images/[id]` for published projects only. Public page payloads contain image URLs, not copies of the base64 file. Responses use ETags and must revalidate, so edits remain current and unpublished image requests return 404.
+
+First-run schema setup is also transactional and guarded by a separate advisory lock. Verification included eight simultaneous cold schema requests and two simultaneous initial content imports against PostgreSQL, with no DDL race or duplicate records.
