@@ -35,7 +35,7 @@ export function isAuthorizedRequest(request: Request): boolean {
 export async function isAuthorizedFromCookies(): Promise<boolean> {
   const expected = getAdminSecret()
   if (!expected) return false
-  const jar = cookies()
+  const jar = await cookies()
   const value = jar.get(ADMIN_COOKIE)?.value
   return value === expected
 }

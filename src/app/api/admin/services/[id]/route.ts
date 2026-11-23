@@ -24,7 +24,7 @@ function linesToArray(value: unknown): string[] | undefined {
 
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   if (!isAuthorizedRequest(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -36,7 +36,7 @@ export async function PUT(
     );
   }
 
-  const id = Number(params.id);
+  const id = Number((await params).id);
   if (!id) return NextResponse.json({ error: "Invalid id" }, { status: 400 });
 
   try {
@@ -72,7 +72,7 @@ export async function PUT(
 
 export async function DELETE(
   _request: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   if (!isAuthorizedRequest(_request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -84,7 +84,7 @@ export async function DELETE(
     );
   }
 
-  const id = Number(params.id);
+  const id = Number((await params).id);
   if (!id) return NextResponse.json({ error: "Invalid id" }, { status: 400 });
 
   try {

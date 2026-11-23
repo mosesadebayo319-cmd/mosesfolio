@@ -71,3 +71,19 @@ Set `GROQ_API_KEY` as a server-only Vercel environment variable for Production a
 The `/api/assistant` endpoint uses verified portfolio content, bounds and validates conversation input, and applies a best-effort per-instance rate limit. It does not log conversations or call outbound messaging tools. Messages submitted to the conversational assistant are processed by Groq. Without a working connection, guided service choices and enquiry preparation remain available. The enquiry is reviewed locally before the visitor chooses to open WhatsApp and send it.
 
 Approved pricing ranges supplied by Moses are stored in `src/lib/assistant-pricing.ts`. The model selects valid service/tier identifiers; the server returns canonical NGN ranges and billing units, including hourly software rates and enterprise project fees. The UI renders indicative ranges, not binding offers. No authority to discount below these ranges or approve delivery/payment terms has been supplied. The server accepts `groq_api_key` as a compatibility alias for `GROQ_API_KEY`.
+
+## Hosting: Cloudflare Workers
+
+Since November 2026 the site runs on Cloudflare Workers through [OpenNext](https://opennext.js.org/cloudflare). It used to run on Vercel. Worker name: `mosesfolio`.
+
+```sh
+npm run preview   # build + run the Worker locally (http://localhost:8787)
+npm run deploy    # build + deploy to Cloudflare
+```
+
+Requires Node 22+ (or `npx -p node@22 -- npm run deploy`).
+
+Secrets live in the Cloudflare dashboard under Workers & Pages → mosesfolio → Settings → Variables and Secrets: `DATABASE_URL`, `ADMIN_SECRET`, `GROQ_API_KEY`, and optionally `GROQ_MODEL`.
+`NEXT_PUBLIC_GA_ID` and `NEXT_PUBLIC_SITE_URL` are baked in at build time, so set them in your shell or in `.env.production` before running `npm run deploy`.
+
+Images are served unoptimized (`images.unoptimized`), because the Next.js image optimizer isn't available on the Workers free plan.
