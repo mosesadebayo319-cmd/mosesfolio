@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
-import { Analytics } from '@vercel/analytics/next'
 import Navigation from '@/src/components/Navigation'
 import Footer from '@/src/components/Footer'
 import ProjectAssistant from '@/src/components/ProjectAssistant'
@@ -181,7 +180,6 @@ export default function RootLayout({
         <main id="main-content">{children}</main>
         <Footer />
         <ProjectAssistant />
-        <Analytics />
         <GoogleAnalytics />
       </body>
     </html>

@@ -13,7 +13,7 @@ import {
 
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   if (!isAuthorizedRequest(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -25,7 +25,7 @@ export async function PUT(
     );
   }
 
-  const id = Number(params.id);
+  const id = Number((await params).id);
   if (!Number.isSafeInteger(id) || id < 1)
     return NextResponse.json({ error: "Invalid id" }, { status: 400 });
 
@@ -58,7 +58,7 @@ export async function PUT(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   if (!isAuthorizedRequest(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -70,7 +70,7 @@ export async function DELETE(
     );
   }
 
-  const id = Number(params.id);
+  const id = Number((await params).id);
   if (!Number.isSafeInteger(id) || id < 1)
     return NextResponse.json({ error: "Invalid id" }, { status: 400 });
 

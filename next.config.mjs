@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    // Cloudflare Workers has no built-in Next.js image optimizer on the free plan;
+    // images are served as-is (they're already web-sized).
+    unoptimized: true,
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       { protocol: 'https', hostname: 'mecuryx.com' },
@@ -14,3 +17,6 @@ const nextConfig = {
 }
 
 export default nextConfig
+
+import { initOpenNextCloudflareForDev } from '@opennextjs/cloudflare'
+initOpenNextCloudflareForDev()

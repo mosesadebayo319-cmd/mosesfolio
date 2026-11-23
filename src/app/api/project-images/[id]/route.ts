@@ -5,9 +5,9 @@ export const dynamic = "force-dynamic";
 /** Stream stored uploads as images rather than repeating base64 in page payloads. */
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const id = Number(params.id);
+  const id = Number((await params).id);
   const missing = () =>
     new Response(null, {
       status: 404,
